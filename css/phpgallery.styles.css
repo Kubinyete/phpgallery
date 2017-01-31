@@ -19,6 +19,7 @@ a.link {
 .texto {
 	font-family: Ubuntu, Arial, sans-serif;
 	color: #ddd;
+	word-wrap: break-word;
 }
 
 .normal {
@@ -50,6 +51,7 @@ a.link {
 	padding-bottom: 20px;
 	color: #ddd;
 	background-color: #292929;
+	word-wrap: break-word;
 }
 
 .texto-descricao {
@@ -60,8 +62,18 @@ a.link {
 
 /* Efeitos */
 div.blur {
-	transition: filter .5s ease-in-out;
+	transition: filter 1s ease-in-out;
 	filter: blur(2px) !important;
+}
+
+div.blur-x2 {
+	transition: filter 1s ease-in-out;
+	filter: blur(4px) !important;
+}
+
+div.meia-opacidade {
+	transition: opacity 1s ease-in-out;
+	opacity: 0.5 !important; 
 }
 
 /* Cabeçalho */
@@ -81,22 +93,25 @@ div.cabecalho-container {
 
 div.cabecalho-centro-container {
 	display: inline-block;
+	z-index: 101;
 	width: 100%;
 	height: 75px;
-	padding-left: 10px;
 	overflow: hidden;
 	text-align: center;
 }
 
 div.cabecalho-centro-logo {
 	transition: .1s ease-in-out;
+	padding-left: 5px;
+	background-color: transparent;
 	float: left;
 }
 
 div.cabecalho-centro-logo:hover {
 	transition: .1s ease-in-out;
 	padding-right: 15px;
-	background-color: #222;
+	/*background-color: #222;*/
+	background-color: rgba(0,0,0, .2);
 }
 
 div.cabecalho-centro-logo img {
@@ -113,11 +128,13 @@ div.cabecalho-botao-container {
 
 div.cabecalho-botao-container:hover {
 	transition: .2s ease-in-out;
-	background-color: #222;
+	/*background-color: #222;*/
+	background-color: rgba(0,0,0, .2);
 }
 
 div.cabecalho-botao-container-ativado {
-	background-color: #222 !important;
+	/*background-color: #222 !important;*/
+	background-color: rgba(0,0,0, .2);
 }
 
 div.cabecalho-botao-container-ativado i {
@@ -129,6 +146,21 @@ div.cabecalho-botao-container i {
 	margin-top: 15px;
 	font-size: 45px;
 	color: white;
+}
+
+div.cabecalho-fundo {
+	z-index: -1;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	height: 75px;
+	filter: blur(0px);
+	opacity: 1;
+	background-image: unset;
+	background-size: cover;
+	background-position: center;
 }
 
 /* Menu */
@@ -186,6 +218,7 @@ div.conteudo-centro {
 	display: inline-block;
 	width: 1024px;
 	overflow: hidden;
+	text-align: center;
 	background-color: #444;
 	border-left: 1px solid #222;
 	border-right: 1px solid #222;
@@ -331,7 +364,7 @@ div.pesquisa {
 }
 input.pesquisa {
 	transition: .2s ease-in-out;
-	width: 512px;
+	width: 50%;
 	height: 25px;
 	font-size: 22px;
 	font-family: Ubuntu, Arial, sans-serif;
@@ -462,7 +495,8 @@ div.usuario-container {
 
 div.usuario-container:hover {
 	transition: .2s ease-in-out;
-	background-color: #222;
+	/*background-color: #222;*/
+	background-color: rgba(0,0,0, .2);
 	padding-left: 10px;
 }
 
@@ -486,6 +520,11 @@ div.usuario-container p {
 	color: cornflowerblue;
 	font-size: 18px;
 	margin: 5px !important;
+}
+
+#menu-botao i {
+	width: 75px;
+	height: 75px;
 }
 
 /* View */
@@ -519,6 +558,42 @@ img.usuario-imagem {
 	border-radius: 2px;
 }
 
+div.download-caixa {
+	display: inline-block;
+	transition: .2s ease-in-out;
+	width: 125px;
+	height: 15px;
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: rgba(0,0,0, .2);
+}
+
+div.download-caixa:hover {
+	transition: .2s ease-in-out;
+	background-color: rgba(0,0,0, .3);
+}
+
+div.download-caixa p {
+	margin: 0px;
+}
+
+div.download-caixa:hover p {
+	color: cornflowerblue;
+}
+
+#botao-atualiza-comentarios {
+	position: absolute;
+	width: unset;
+	height: unset;
+	font-size: 15px;
+	right: 25px;
+}
+
+#comentarios-texto-sessao {
+	position: relative;
+}
+
 /* Profile */
 div.profile-usuario-container {
 	width: 100%;
@@ -527,25 +602,29 @@ div.profile-usuario-container {
 }
 
 div.profile-usuario-placar {
+	transition: .2s ease-in-out;
 	float: left;
-	width: 20%;
+	width: 25%;
 	padding-top: 20px;
-	background-color: #373737;
+	background-color: rgba(0,0,0, .1);
 	padding-bottom: 20px;
 }
 
+div.profile-usuario-placar:hover {
+	transition: .2s ease-in-out;
+	background-color: rgba(0,0,0, .2);
+}
+
 div.profile-usuario-placar img {
-	width: 80%;
-	height: 80%;
+	width: 50%;
+	height: 50%;
 }
 
 div.profile-usuario-descricao {
 	float: right;
-	width: 80%;
+	width: 75%;
 	max-width: 80%;
 	height: 100%;
-	padding-top: 20px;
-	padding-bottom: 20px;
 }
 
 /* Upload */
@@ -564,6 +643,7 @@ div.input-imagem-container {
 	text-align: center;
 	margin: 10px;
 	padding: 10px;
+	overflow: hidden;
 	background-color: #333;
 	border-radius: 10px;
 	border: 2px dotted #222;
@@ -598,4 +678,103 @@ div.upload-sessao-container textarea {
 
 .texto-centro {
 	text-align: center;
+}
+
+/* Comentários */
+div.conteudo-comentarios {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 1024px;
+	overflow: hidden;
+	text-align: center;
+	background-color: #444;
+	display: inline-block;
+	border-left: 1px solid #222;
+	border-right: 1px solid #222;
+	border-radius: 10px;
+	box-shadow: 0px 2px 8px #222;
+}
+
+ul.comentarios-lista {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+div.comentario-container {
+	overflow: hidden;
+	background-color: #444;
+	border-bottom: 1px solid #333;
+}
+
+textarea.texto-area {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 20px;
+	width: 100%;
+	height: 100px;
+	resize: none;
+	background-color: rgba(0,0,0, .5);
+	border-radius: 5px;
+	border: 2px dotted #333;
+}
+
+div.comentario-form-container .texto-area {
+	border: none;
+	width: 99%;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 10px;
+	margin-right: .5%;
+	margin-bottom: 10px;
+	margin-left: .5%;
+}
+
+div.comentario-form-container .botao {
+	margin: 10px;
+}
+
+div.comentario-form-container {
+	display: inline-block;
+	width: 100%;
+}
+
+div.comentario-usuario-container {
+	transition: .2s ease-in-out;
+	width: 25%;
+	height: 20%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	overflow: hidden;
+	float: left;
+	text-align: center;
+	background-color: rgba(0,0,0, .1);
+}
+
+div.comentario-usuario-container:hover {
+	transition: .2s ease-in-out;
+	background-color: rgba(0,0,0, .2);
+}
+
+div.comentario-usuario-container .usuario-imagem {
+	width: 50%;
+	height: 50%;
+}
+
+div.comentario-conteudo-container {
+	width: 75%;
+	float: right;
+	text-align: center;
+	overflow: hidden;
+}
+
+div.comentario-conteudo-container p {
+	margin: 10px;
+}
+
+p.comentario-usuario-nome {
+	font-family: Ubuntu, Arial, sans-serif;
+	color: cornflowerblue;
+	font-size: 18px;
+	margin: 5px;
 }

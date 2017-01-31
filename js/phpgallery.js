@@ -22,11 +22,43 @@ function adicionarImagens(conteudo, lista) {
 	catch (Exception) { }
 }
 
+//AJAX: Adiciona comentários ao documento HTML
+function adicionarComentarios(conteudo, lista) {
+	var comentarios = conteudo["comentarios"];
+
+	$("#loading").addClass("desativado");
+
+	if (comentarios.length <= 0) {
+		$(lista).append("<p class=\"texto-descricao\">Nenhum comentário, seja o primeiro a comentar algo!</p>");
+		return;
+	}
+
+	for (var i = 0; i < comentarios.length; i++) {
+		var comentario = comentarios[i];
+		var novoComentarioDOM = $('<li><div class="comentario-container"><a class="link" href="profile.php?u=' + comentario.autor.nome + '"><div class="comentario-usuario-container"><img class="usuario-imagem" draggable="false" src="' + comentario.autor.imagemUrl + '"><p class="comentario-usuario-nome">' + comentario.autor.nome + '</div></a><div class="comentario-conteudo-container"><p class="texto-descricao comentario-data"><i class="fa fa-calendar azul"></i> Enviado em ' + comentario.dataCriacao + '</p><p class="texto normal comentario-usuario-conteudo">' + comentario.conteudo + '</p></div></div></li>');
+
+		$(lista).append(novoComentarioDOM);
+	}
+
+	//Vamos atualizar nosso conteudo dinamico pois agora o HTML mudou
+	if (conteudoAjustado && $(window).width() <= 1024) {
+		conteudoAjustado = false;
+		ajustarConteudoCentro();
+	}
+}
+
 //Atualiza as imagens recentes
 function atualizarRecentes() {
 	$("#loading").removeClass("desativado");
 	$("#sessao-recentes-lista").html('<img id="loading" src="/resources/loading.svg" draggable="false">');
 	$.post("api/getrecents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
+}
+
+//Atualiza os comentários da pagina de uma imagem
+function atualizarComentarios(imagemid) {
+	$("#loading").removeClass("desativado");
+	$("#comentarios-lista").html('<img id="loading" src="/resources/loading.svg" draggable="false">');
+	$.get("api/getcomments.php?id=" + imagemid, function(data) { adicionarComentarios(data, "#comentarios-lista"); });
 }
 
 //Realiza a pesquisa de imagens consultando a api
@@ -71,16 +103,52 @@ function obterImagensUsuario(usuario, lista) {
 //Ajusta o conteudo-centro para ajustar-se a tela
 function ajustarConteudoCentro() {
 	if (!conteudoAjustado && $(window).width() <= 1024) {
+		//Documento
 		$(".conteudo-centro").css("width", "95vw");
+		$(".conteudo-comentarios").css("width", "95vw");
+
+		//Geral
 		$(".texto-sessao").css("font-size", "4vw");
-		$(".profile-usuario-placar .usuario-nome").css("font-size", "2.4vw");
+
+		//View
+		$(".view-imagem-data").css("font-size", "2.2vw");
+		$(".view-imagem-descricao").css("font-size", "2.6vw");
+		$("#botao-atualiza-comentarios").css("font-size", "2.6vw");
+		$("#botao-atualiza-comentarios").css("bottom", "20%");
+
+		//Perfil
+		$(".profile-usuario-placar .usuario-nome").css("font-size", "2vw");
 		$(".profile-usuario-descricao p").css("font-size", "2.4vw");
+
+		//Comentários
+		$(".comentario-usuario-nome").css("font-size", "2vw");
+		$(".comentario-usuario-conteudo").css("font-size", "3vw");
+		$(".comentario-data").css("font-size", "3vw");
+		
 		conteudoAjustado = true;
 	} else if (conteudoAjustado && $(window).width() > 1024) {
+		//Documento
 		$(".conteudo-centro").css("width", "");
+		$(".conteudo-comentarios").css("width", "");
+
+		//Geral
 		$(".texto-sessao").css("font-size", "");
+
+		//View
+		$(".view-imagem-data").css("font-size", "");
+		$(".view-imagem-descricao").css("font-size", "");
+		$("#botao-atualiza-comentarios").css("font-size", "");
+		$("#botao-atualiza-comentarios").css("bottom", "");
+
+		//Perfil
 		$(".profile-usuario-placar .usuario-nome").css("font-size", "");
 		$(".profile-usuario-descricao p").css("font-size", "");
+
+		//Comentários
+		$(".comentario-usuario-nome").css("font-size", "");
+		$(".comentario-usuario-conteudo").css("font-size", "");
+		$(".comentario-data").css("font-size", "");
+		
 		conteudoAjustado = false;
 	}
 }

@@ -1,6 +1,5 @@
 <?php
-	include_once "header.php";
-	include_once "database/database.php";
+	require_once "header.php";
 ?>
 	<div class="conteudo">
 		<div class="conteudo-centro">

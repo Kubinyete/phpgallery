@@ -1,7 +1,5 @@
 <?php
-	require_once "database/database.php";
-	require_once "database/objects.php";
-	include_once "header.php";
+	require_once "header.php";
 
 	//Retorna se o campo informado é valido para efetuar login / registrar-se
 	function campo_valido($string) {

@@ -1,7 +1,5 @@
 <?php
-	include_once "database/database.php";
-	include_once "database/objects.php";
-	include_once "header.php";
+	require_once "header.php";
 
 	$erro = false;
 	$usuario = null;
@@ -36,13 +34,14 @@
 	<div class="conteudo">
 		<div class="conteudo-centro">
 			<div class="profile-usuario-container">
-				<div class="profile-usuario-placar">
-					<a class="link" href="profile.php?u=<?php echo $usuario->nome; ?>">
+				<a class="link" href="profile.php?u=<?php echo $usuario->nome; ?>">
+					<div class="profile-usuario-placar">
 						<img class="usuario-imagem" draggable="false" src="<?php echo $usuario->imagem_url(); ?>">
 						<p class="texto azul usuario-nome"><?php echo $usuario->nome; ?></p>
-					</a>
-				</div>
+					</div>
+				</a>
 				<div class="profile-usuario-descricao">
+					<p class="texto-sessao azul usuario-data"><i class="fa fa-calendar azul"></i> Membro desde <?php echo $usuario->data_registro(); ?></p>
 					<p class="texto normal usuario-descricao"><?php echo $usuario->descricao_formatada(true, true); ?></p>
 				</div>
 			</div>

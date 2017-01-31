@@ -1,11 +1,6 @@
 <?php
-	define("RESPOSTA_SEM_DESCRICAO", "Nenhuma descrição está disponível.");
-	define("RESPOSTA_SEM_TITULO", "Nenhum título está disponível.");
-	define("IMAGENS_USUARIO_ORIGEM", "/resources/profile/");
-	define("IMAGENS_USUARIO_EXT", ".jpg");
-	define("IMAGENS_ORIGEM", "/resources/image/");
-	define("IMAGENS_USUARIO_PADRAO", "/resources/profile/user-default.jpg");
-
+	require_once "C:/xampp/htdocs/phpgallery/util/util.php";
+	
 	//Classe responsável por representar um usuário
 	class Usuario {
 		public $id;
@@ -14,21 +9,22 @@
 		public $descricao;
 		public $temImagem;
 		public $imagemUrl;
+		public $dataRegistro;
 
 		//Os argumentos $senha & $descricao serão atribuidos null automaticamente
 		//devido a necessidade em alguns casos de consultar apenas o $nome do usuário
 		//Exemplo: uma busca no banco de dados para encontrar um usuário específico
 		//Pois estou procurando apenas passar objetos como parâmetros em funções de
 		//consulta em nossa classe de conexão com o banco de dados
-		public function __construct($nome, $senha=null, $descricao=null, $temImagem=false, $id=0) {
+		//$dataRegistro apenas será recebido como parâmetro quando obtido do banco de dados,
+		//Para o registro de um novo usuário, utilize o método gerar_data_registro()
+		public function __construct($nome, $senha=null, $descricao=null, $temImagem=false, $dataRegistro=null, $id=0) {
 			$this->nome = $nome;
 			$this->senha = $senha;
 			$this->descricao = $descricao;
-			if ($this->descricao !== null) {
-				$this->descricao = utf8_encode($this->descricao);
-			}
-			$this->id = $id;
+			$this->id = intval($id);
 			($temImagem === "1") ? $this->temImagem = true : $this->temImagem = false;
+			$this->dataRegistro = $dataRegistro;
 		}
 
 		//É utilizado indiretamente como o ID da imagem de perfil do usuário
@@ -81,6 +77,26 @@
 				return IMAGENS_USUARIO_PADRAO;
 			}
 		}
+
+		//Gera uma data de criação da conta do usuário
+		public function gerar_data_registro() {
+			date_default_timezone_set("America/Sao_Paulo");
+			$this->dataRegistro = date("d/m/y H:i:s");
+		}
+
+		//Ao mostrar para o usuário, apenas queremos a data de registro e não o horário
+		public function data_registro() {
+			$data = "";
+
+			for ($i = 0; $i < $this->dataRegistro; $i++) {
+				if ($i >= 8) {
+					break;
+				} else {
+					$data .= $this->dataRegistro[$i];
+				}
+			}
+			return $data;
+		}
 	}
 
 	//Classe responsável por representar uma imagem
@@ -92,20 +108,18 @@
 		public $ext;
 		public $autor;
 		public $imagemUrl;
+		public $dataCriacao;
 
-		public function __construct($titulo, $descricao=null, $privado=false, $ext=null, $autor=null, $id=0) {
+		//$dataCriacao apenas será recebido como parâmetro quando obtido do banco de dados,
+		//Para o envio de uma nova imagem, utilize o método gerar_data_criacao()
+		public function __construct($titulo, $descricao=null, $privado=false, $ext=null, $autor=null, $dataCriacao=null, $id=0) {
 			$this->titulo = $titulo;
-			if ($this->titulo !== null) {
-				$this->titulo = utf8_encode($this->titulo);
-			}
 			$this->descricao = $descricao;
-			if ($this->descricao !== null) {
-				$this->descricao = utf8_encode($this->descricao);
-			}
 			$this->privado = ($privado == "1") ? true : false;
 			$this->id = intval($id);
 			$this->ext = $ext;
 			$this->autor = $autor;
+			$this->dataCriacao = $dataCriacao;
 		}
 
 		//Retorna a hash md5 do id da imagem, é utilizado para armazenar a imagem com o nome md5
@@ -169,6 +183,86 @@
 		//Retorna o caminho inteiro da imagem
 		public function imagem_url() {
 			return IMAGENS_ORIGEM . $this->id_md5_hash() . $this->ext;
+		}
+
+		//Gera uma data de criação utilizando a hora e data atual
+		public function gerar_data_criacao() {
+			date_default_timezone_set("America/Sao_Paulo");
+			$this->dataCriacao = date("d/m/y H:i:s");
+		}
+
+		//Retorna uma versão "amigável" da nossa string $dataCricao
+		public function data_criacao() {
+			$data = "";
+			$horario = "";
+
+			for ($i = 0; $i < strlen($this->dataCriacao); $i++) {
+				if ($i < 8) {
+					$data .= $this->dataCriacao[$i];
+				} else if ($i > 8) {
+					$horario .= $this->dataCriacao[$i];
+				}
+			}
+
+			return $data . " às " . $horario;
+		}
+	}
+
+	//Classe responsável por representar um comentário
+	class Comentario {
+		public $id;
+		public $imagemId;
+		public $conteudo;
+		public $autor;
+		public $dataCriacao;
+
+		public function __construct($imagemId=0, $conteudo=null, $autor=null, $dataCriacao=null, $id=0) {
+			$this->id = intval($id);
+			$this->imagemId = intval($imagemId);
+			$this->conteudo = $conteudo;
+			$this->autor = $autor;
+			$this->dataCriacao = $dataCriacao;
+		}
+
+		//Retorna o conteúdo formatado
+		public function conteudo_formatado() {
+			$retorno = null;
+
+			if ($this->conteudo !== null) {
+					$retorno = trim($this->conteudo);
+					$retorno = htmlspecialchars($retorno);
+			} else {
+				return $this->conteudo;
+			}
+
+			return $retorno;
+		}
+
+		//API: Substitui nosso conteúdo atual por uma versão "HTML safe"
+		public function gerar_conteudo_formatado() {
+			$this->conteudo = $this->conteudo_formatado();
+		}
+
+		//Gera uma data de criação utilizando a hora e data atual
+		public function gerar_data_criacao() {
+			date_default_timezone_set("America/Sao_Paulo");
+			$this->dataCriacao = date("d/m/y H:i:s");
+		}
+
+		//Retorna uma versão "amigável" da nossa string $dataCricao
+		public function data_criacao() {
+			$data = "";
+			$horario = "";
+
+			for ($i = 0; $i < strlen($this->dataCriacao); $i++) {
+				if ($i < 8) {
+					$data .= $this->dataCriacao[$i];
+				} else if ($i > 8) {
+					$horario .= $this->dataCriacao[$i];
+				}
+			}
+
+			return $data . " às " . $horario;
 		}
 	}
 ?>

@@ -1,9 +1,5 @@
 <?php
-	include_once "database/database.php";
-	include_once "database/objects.php";
-	include_once "header.php";
-
-	define("IMAGENS_DESTINO", "?");
+	require_once "header.php";
 
 	$erro = false;
 	$loginErro = false;
@@ -12,7 +8,7 @@
 	$imagemDescricao = "";
 	$imagemPrivado = false;
 	$imagemExt = null;
-
+	
 	if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		//Primeiro vamos obter nosso autor
 		$usuario = $_SESSION["usuario"];
@@ -79,7 +75,7 @@
 					$db->finalizar();
 
 					if ($dbImagem !== null) {
-						$ok = move_uploaded_file($_FILES["imagem"]["tmp_name"], IMAGENS_DESTINO . $dbImagem->id_md5_hash() . $dbImagem->ext);
+						$ok = move_uploaded_file($_FILES["imagem"]["tmp_name"], UPLOAD_IMAGENS_DESTINO . $dbImagem->id_md5_hash() . $dbImagem->ext);
 						if ($ok) {
 							header("Refresh: 0; url=view.php?id=" . $dbImagem->id, true);
 						} else {
@@ -99,7 +95,7 @@
 	<div class="conteudo">
 		<div class="conteudo-centro">
 			<?php if (!$loginErro) { ?>
-			<h1 class="texto-sessao">Enviar uma imagem</h1>
+			<h1 class="texto-sessao"><i class="fa fa-image azul"></i> Enviar uma imagem</h1>
 			<div class="upload-sessao-container">
 				<form method="POST" action="upload.php" enctype="multipart/form-data" autocomplete="off">
 					<div class="input-imagem-container">

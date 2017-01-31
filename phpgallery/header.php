@@ -1,5 +1,4 @@
 <?php
-	require_once "database/objects.php";
 	require_once "database/database.php";
 
 	//Inicio de uma página que necessita de sessão (o objeto do usuário)
@@ -53,6 +52,8 @@
 </head>
 <body>
 	<div class="cabecalho-container">
+		<div id="cabecalho-fundo" class="cabecalho-fundo">
+		</div>
 		<div class="cabecalho-centro-container">
 			<div class="cabecalho-centro-logo">
 				<a class="link" href="home.php">
@@ -79,7 +80,7 @@
 	<div id="usr-menu-container" class="usr-menu-container">
 		<ul class="usr-menu-lista">
 			<li class="usr-menu-item">
-				<a class="link" href="login.php"><p class="usr-menu-item-texto">Login</p></a>
+				<a class="link" href="login.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-in azul"></i> Login</p></a>
 			</li>
 		</ul>
 	</div>
@@ -88,13 +89,13 @@
 	<div id="usr-menu-container" class="usr-menu-container">
 		<ul class="usr-menu-lista">
 			<li class="usr-menu-item">
-				<a class="link" href="upload.php"><p class="usr-menu-item-texto">Enviar</p></a>
+				<a class="link" href="upload.php"><p class="usr-menu-item-texto"><i class="fa fa-upload azul"></i> Enviar</p></a>
 			</li>
 			<li class="usr-menu-item">
-				<a class="link" href="profile.php"><p class="usr-menu-item-texto">Perfil</p></a>
+				<a class="link" href="profile.php"><p class="usr-menu-item-texto"><i class="fa fa-user azul"></i> Perfil</p></a>
 			</li>
 			<li class="usr-menu-item">
-				<a class="link" href="logoff.php"><p class="usr-menu-item-texto">Sair</p></a>
+				<a class="link" href="logoff.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-out azul"></i> Sair</p></a>
 			</li>
 		</ul>
 	</div>

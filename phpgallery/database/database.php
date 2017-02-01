@@ -61,7 +61,7 @@
  		public function obter_recentes() {
  			$resultados = [];
 
- 			$ok = $this->executar("SELECT TOP 50 * FROM imagens WHERE img_privado=0 ORDER BY img_id DESC");
+ 			$ok = $this->executar("SELECT TOP 20 * FROM imagens WHERE img_privado=0 ORDER BY img_id DESC");
  			if (odbc_num_rows($ok) >= 1) {
  				for ($i = 0; $i < odbc_num_rows($ok); $i++) {
  					$imagem = odbc_fetch_array($ok);
@@ -112,7 +112,7 @@
  			$resultados = [];
  			$nome = filtrar_escape_string_mssql($nome);
 
- 			$ok = $this->executar("SELECT TOP 50 * FROM imagens WHERE img_privado=0 AND img_autor='" . $nome . "'");
+ 			$ok = $this->executar("SELECT TOP 20 * FROM imagens WHERE img_privado=0 AND img_autor='" . $nome . "' ORDER BY img_id DESC");
 
  			if (odbc_num_rows($ok) >= 1) {
  				for ($i = 0; $i < odbc_num_rows($ok); $i++) {
@@ -317,6 +317,22 @@
  			$comentario->gerar_data_criacao();
 
  			$this->executar("INSERT INTO comentarios (cmt_imagem_id, cmt_conteudo, cmt_autor, cmt_datacriacao) VALUES ('" . $comentario->imagemId . "', '" . $comentario->conteudo . "', '" . $comentario->autor . "', '" . $comentario->dataCriacao . "')", true);
+ 		}
+
+ 		//Atualiza a descrição de um determinado usuário utilizando como busca seu id
+ 		public function atualizar_descricao($id, $descricao) {
+ 			if (conteudo_comentario_valido($descricao)) {
+ 				$descricao = "'" . filtrar_escape_string_mssql($descricao) . "'";
+ 			} else {
+ 				$descricao = "NULL";
+ 			}
+ 			
+ 			$this->executar("UPDATE usuarios SET usr_descricao=" . $descricao . " WHERE usr_id=" . $id, true);
+ 		}
+
+ 		//Atualiza o atributo temimagem de um usuário no banco de dados
+ 		public function atualizar_usuario_tem_imagem($id, $valor) {
+ 			$this->executar("UPDATE usuarios SET usr_temimagem=" . $valor . " WHERE usr_id=" . $id, true);
  		}
 	}
 ?>

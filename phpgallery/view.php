@@ -48,7 +48,7 @@
 
 									$comentarioTela = "O comentário foi enviado com sucesso.";
 								} else {
-									$comentarioErro = "O comentário enviado estava em um formato incorreto.";
+									$comentarioErro = "O comentário enviado estava em um formato inválido.";
 								}
 							} else {
 								$comentarioErro = "É preciso estar logado para poder adicionar comentários.";

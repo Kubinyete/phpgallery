@@ -119,6 +119,9 @@ function ajustarConteudoCentro() {
 		//Perfil
 		$(".profile-usuario-placar .usuario-nome").css("font-size", "2vw");
 		$(".profile-usuario-descricao p").css("font-size", "2.4vw");
+		$(".profile-formulario-texto").css("font-size", "2.6vw");
+		$(".input-imagem-container .input-imagem").css("font-size", "1vw");
+		$(".profile-formulario .botao").css("font-size", "2vw");
 
 		//Comentários
 		$(".comentario-usuario-nome").css("font-size", "2vw");
@@ -143,6 +146,9 @@ function ajustarConteudoCentro() {
 		//Perfil
 		$(".profile-usuario-placar .usuario-nome").css("font-size", "");
 		$(".profile-usuario-descricao p").css("font-size", "");
+		$(".profile-formulario-texto").css("font-size", "");
+		$(".input-imagem-container .input-imagem").css("font-size", "");
+		$(".profile-formulario .botao").css("font-size", "");
 
 		//Comentários
 		$(".comentario-usuario-nome").css("font-size", "");

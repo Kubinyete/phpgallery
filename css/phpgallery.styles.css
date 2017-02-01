@@ -556,6 +556,10 @@ div.view-usuario-container p {
 img.usuario-imagem {
 	border: 2px solid cornflowerblue;
 	border-radius: 2px;
+	width: 200px;
+	height: 200px;
+	max-width: 200px !important;
+	max-height: 200px !important;
 }
 
 div.download-caixa {
@@ -625,6 +629,71 @@ div.profile-usuario-descricao {
 	width: 75%;
 	max-width: 80%;
 	height: 100%;
+}
+
+/* Profile formulário */
+div.profile-formulario {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+}
+
+div.profile-formulario .botao {
+	margin: 10px;
+}
+
+div.profile-formulario-descricao .texto-area {
+	width: 95%;
+	margin-top: 0px;
+	padding-top: 0px;
+	height: 100px;
+}
+
+div.profile-formulario-botao-container {
+	width: 100%;
+	height: auto;
+	background-color: rgba(0,0,0, .2);
+	overflow: hidden;
+}
+
+div.profile-formulario-imagem {
+	width: 25%;
+	height: 25%;
+	float: left;
+	overflow: hidden;
+	background-color: rgba(0,0,0, .1);
+}
+
+div.profile-formulario-imagem .usuario-imagem {
+	width: 50%;
+	height: 50%;
+}
+
+div.profile-formulario-imagem .input-imagem {
+	width: 90%;
+	font-family: Ubuntu, Arial, sans-serif;
+	color: rgba(255,255,255, .5);
+}
+
+div.profile-formulario-imagem .input-imagem-container {
+	display: inline-block;
+	margin: 0px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 95%;
+}
+
+
+div.profile-formulario-descricao {
+	width: 75%;
+	height: 100%;
+	float: right;
+	position: relative;
+	overflow: hidden;
 }
 
 /* Upload */
@@ -721,10 +790,10 @@ textarea.texto-area {
 
 div.comentario-form-container .texto-area {
 	border: none;
-	width: 99%;
+	width: 95%;
 	margin: 0px;
 	padding: 0px;
-	margin-top: 10px;
+	margin-top: 2.5%;
 	margin-right: .5%;
 	margin-bottom: 10px;
 	margin-left: .5%;

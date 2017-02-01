@@ -16,7 +16,7 @@
 
 			if (!$imagemData) {
 				header("Status: 400", true, 400);
-				exit("Não foi possível encontrar a imagem requisistada no banco de dados.");
+				exit("Não foi possível encontrar a imagem requisistada.");
 			}
 
 			$headerExt = $imagem->ext;

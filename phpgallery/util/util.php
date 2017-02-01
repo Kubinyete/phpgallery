@@ -24,6 +24,8 @@
 	define("DOWNLOAD_HTDOCS", "C:/xampp/htdocs");
 	//Local fixo aonde as imagens serão enviadas
 	define("UPLOAD_IMAGENS_DESTINO", DOWNLOAD_HTDOCS . IMAGENS_ORIGEM);
+	//Local fixo aonde as imagens dos usuários serão enviadas
+	define("UPLOAD_USUARIO_IMAGEM_DESTINO", DOWNLOAD_HTDOCS . IMAGENS_USUARIO_ORIGEM);
 
 	//MSSQL: filtrar escape strings
 	//acrescenta uma nova ' em todas as ' da string

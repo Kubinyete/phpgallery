@@ -66,12 +66,12 @@
 			</div>
 			<?php if ($usuario !== null) { ?>
 			<!-- Informações do usuário -->
+			<a class="link" href="profile.php">
 			<div class="usuario-container">
-				<a class="link" href="profile.php">
 				<p class="usuario-nome"><?php echo $usuario->nome; ?></p>
 				<img class="usuario-imagem" src="<?php echo $usuario->imagem_url(); ?>" draggable="false">
-				</a>
 			</div>
+			</a>
 			<?php } ?>
 		</div>
 	</div>

@@ -13,6 +13,7 @@
 		//Vamos apenas modificá-lo para md5 pois o nome do arquivo de imagem é a hash md5 de seu id
 		foreach ($comentarios as $comentario) {
 			$comentario->gerar_conteudo_formatado();
+			$comentario->dataCriacao = $comentario->data_criacao();	//Modificando a dataCriacao do banco de dados por uma versão "amigável"
 			$comentario->autor = $db->obter_usuario_min($comentario->autor);
 			$comentario->autor->gerar_imagem_url();
 			unset($comentario->autor->senha);

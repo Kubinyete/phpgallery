@@ -250,6 +250,7 @@ ul.sessao-recentes-lista li {
 ul.sessao-recentes-lista li:hover {
 	transition: .2s ease-in-out;
 	background-color: #333;
+	border-radius: 5px;
 }
 
 ul.sessao-recentes-lista li:hover .imagem-titulo {
@@ -260,18 +261,20 @@ ul.sessao-recentes-lista li:hover .imagem-titulo {
 
 ul.sessao-recentes-lista li:hover i {
 	transition: .2s ease-in-out;
-	opacity: .8;
+	opacity: 1;
 }
 
 div.imagem-container {
 	position: relative;
 	height: 100%;
 	overflow: hidden;
+	box-shadow: 1px 1px 8px #222;
 }
 
 div.imagem-container img {
 	max-width: 250px;
 	max-height: 250px;
+	display: block;
 }
 
 /* Imagens texto */
@@ -293,12 +296,24 @@ div.imagem-container img {
 }
 
 div.imagem-container i {
+	display: block;
 	transition:.2s ease-in-out;
 	position: absolute;
-	top: 2.5px;
-	right: 2.5px;
+	top: 0px;
+	right: 0px;
 	opacity: 0;
 	font-size: 30px;
+	padding-top: 1.25px;
+	padding-bottom: 1.55px;
+	padding-left: 6px;
+	padding-right: 1.25px;
+	border-top-left-radius: 2.5px;
+	border-bottom-left-radius: 2.5px;
+}
+
+div.imagem-container i:hover {
+	transition:.2s ease-in-out;
+	background-color: #111;
 }
 
 /* Visualização imagem */
@@ -342,12 +357,13 @@ div.visualizacao-imagem-container {
 	position: relative;
 	opacity: 0;
 	top: -50%;
-	max-width: 80vw;
+	max-width: 90vw;
 	max-height: 80vh;
 }
 
 #visualizacao-fechar {
 	position: absolute;
+	z-index: 999;
 	top: 10px;
 	right : 30px;
 	color: white;

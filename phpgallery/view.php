@@ -7,13 +7,14 @@
 	$imgAutor = null;
 	$comentarioErro = false;
 	$conteudo = "";
-	$comentarioTela = false;
 
 	//Pedido GET com query id?
 	if (isset($_GET["id"])) {
 		try {
+			//Meio inútil, pois intval nunca irá soltar uma Exception
 			$imgId = intval($_GET["id"]);
 
+			//Porém, se intval falhar, o valor retornado será 0, então vamos soltar uma nova Exception
 			if ($imgId < 1) {
 				throw new Exception();
 			}
@@ -45,8 +46,6 @@
 								if (conteudo_comentario_valido($dbComentario->conteudo) !== false) {
 									//Vamos adicionar o comentário
 									$db->adicionar_comentario($dbComentario);
-
-									$comentarioTela = "O comentário foi enviado com sucesso.";
 								} else {
 									$comentarioErro = "O comentário enviado estava em um formato inválido.";
 								}
@@ -93,7 +92,7 @@
 			<div class="comentario-form-container">
 				<form method="POST" action="view.php?id=<?php echo $img->id; ?>" autocomplete="off">
 					<span class="texto descricao" id="chars-restantes-comentario"></span>
-					<textarea id="comentario-conteudo" maxlength="150" class="texto normal texto-area" name="conteudo"><?php if ($comentarioTela === false) { echo htmlspecialchars($conteudo); } ?></textarea>
+					<textarea placeholder="Escreva algo aqui..." id="comentario-conteudo" maxlength="150" class="texto normal texto-area" name="conteudo"></textarea>
 					<br>
 					<button class="botao" type="submit">Enviar</button>
 				</form>
@@ -105,14 +104,6 @@
 		<div class="erro">
 			<h1>Erro</h1>
 			<p class="normal"><?php echo $comentarioErro; ?></p>
-			<button onclick="desativarErro();" class="botao">Ok</button>
-		</div>
-	</div>
-	<?php } else if ($comentarioTela !== false) { ?>
-	<div class="erro-fundo">
-		<div class="erro">
-			<h1>Sucesso</h1>
-			<p class="normal"><?php echo $comentarioTela; ?></p>
 			<button onclick="desativarErro();" class="botao">Ok</button>
 		</div>
 	</div>

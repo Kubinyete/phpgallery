@@ -8,3 +8,4 @@
 		header("Refresh: 0; url=login.php", true);
 	}
 ?>
+Por favor, espere...

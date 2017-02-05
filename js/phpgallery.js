@@ -4,22 +4,19 @@ var conteudoAjustado = false;
 
 //AJAX: Adiciona as imagens ao documento HTML
 function adicionarImagens(conteudo, lista) {
-	try{
-		var imagens = conteudo["imagens"];
-		
-		if (imagens.length <= 0 ) {
-			return;
-		}
-
-		$("#loading").addClass("desativado");
-
-		for (var i = 0; i < imagens.length; i++) {
-			var imagem = imagens[i];
-			var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img src="' + imagem.imagemUrl + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
-			$(lista).append(novaImagem);
-		}
+	var imagens = conteudo["imagens"];
+	
+	if (imagens.length <= 0 ) {
+		return;
 	}
-	catch (Exception) { }
+
+	$("#loading").addClass("desativado");
+
+	for (var i = 0; i < imagens.length; i++) {
+		var imagem = imagens[i];
+		var novaImagem = $('<li><div class="imagem-container"><a class="link" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img src="' + imagem.imagemUrl + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
+		$(lista).append(novaImagem);
+	}
 }
 
 //AJAX: Adiciona comentários ao documento HTML

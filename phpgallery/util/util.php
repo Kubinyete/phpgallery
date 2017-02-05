@@ -18,13 +18,13 @@
 	//Diretório das imagens
 	define("IMAGENS_ORIGEM", "/resources/image/");
 	//Imagem padrão de um usuário
-	define("IMAGENS_USUARIO_PADRAO", "/resources/profile/user-default.jpg");
+	define("IMAGENS_USUARIO_PADRAO", IMAGENS_USUARIO_EXT . "user-default" . IMAGENS_USUARIO_EXT);
 
 	//Local fixo dos nossos documentos
 	define("DOWNLOAD_HTDOCS", "C:/xampp/htdocs");
 	//Local fixo aonde as imagens serão enviadas
 	define("UPLOAD_IMAGENS_DESTINO", DOWNLOAD_HTDOCS . IMAGENS_ORIGEM);
-	//Local fixo aonde as imagens dos usuários serão enviadas
+	//Local fixo aonde as imagens dos USUÁRIOS serão enviadas
 	define("UPLOAD_USUARIO_IMAGEM_DESTINO", DOWNLOAD_HTDOCS . IMAGENS_USUARIO_ORIGEM);
 
 	//MSSQL: filtrar escape strings
@@ -46,6 +46,8 @@
 	}
 
 	//Verifica se o conteudo do comentário é valido
+	//Pode até ser utilizado em outros locais para verificar se o conteúdo não
+	//é apenas vários espaços e new lines
 	//Retorna false se o comentário não for válido
 	function conteudo_comentario_valido($string) {
 		$val = trim($string);
@@ -54,5 +56,19 @@
 		} else {
 			return false;
 		}
+	}
+
+	//Retorna se o campo informado é valido para efetuar login / registrar-se
+	//Para conteúdos restritos (login/registrar)
+	function campo_valido($string) {
+		$retorno = true;
+
+		for ($i = 0; $i < strlen($string); $i++) {
+			if (ord($string[$i]) <= 47 || ord($string[$i]) >= 58 && ord($string[$i]) <= 64 || ord($string[$i]) >= 91 && ord($string[$i]) <= 96 || ord($string[$i]) >= 123) {
+				$retorno = false;
+			}
+		}
+
+		return $retorno;
 	}
 ?>

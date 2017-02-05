@@ -112,7 +112,7 @@
 					<br>
 					<textarea id="descricao" class="texto normal" maxlength="150" name="descricao"><?php echo htmlspecialchars($imagemDescricao); ?></textarea>
 					<br>
-					<input type="checkbox" <?php echo ($imagemPrivado) ? "checked" : ""; ?> name="privado">
+					<input title="Esta imagem não estará visível ao público, somente aqueles com o URL ou ID dessa imagem poderão visualizá-la." type="checkbox" <?php echo ($imagemPrivado) ? "checked" : ""; ?> name="privado">
 					<label class="texto normal">Imagem privada</label>
 					<div class="texto-centro">
 						<button type="submit" class="botao">Enviar</button>

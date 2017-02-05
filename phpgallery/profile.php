@@ -101,6 +101,8 @@
 						throw new Exception();
 				}
 
+				$mensagem = "A imagem foi atualizada com sucesso, talvez seja necessário esperar um tempo para que as mudanças tenham efeito.";
+
 				//Caso o usuário não tem uma imagem ainda, precisamos atualizar seu objeto no banco de dados
 				if (!$usuario->temImagem) {
 					$db = new Database();
@@ -159,7 +161,7 @@
 					</div>
 					<div class="profile-formulario-descricao">
 						<p class="texto azul profile-formulario-texto">Descrição</p>
-						<textarea name="descricao" class="texto normal texto-area"><?php echo htmlspecialchars($usuario->descricao); ?></textarea>
+						<textarea placeholder="Nenhuma descrição está disponível." name="descricao" class="texto normal texto-area"><?php echo htmlspecialchars($usuario->descricao); ?></textarea>
 					</div>
 					<div class="profile-formulario-botao-container">
 						<button class="botao" type="submit">Atualizar</button>

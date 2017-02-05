@@ -15,7 +15,7 @@
 			$imagemData = file_get_contents(DOWNLOAD_HTDOCS . $imagem->imagem_url());
 
 			if (!$imagemData) {
-				header("Status: 400", true, 400);
+				header("Status: 404", true, 404);
 				exit("Não foi possível encontrar a imagem requisistada.");
 			}
 
@@ -30,7 +30,7 @@
 			echo $imagemData;
 
 		} else {
-			header("Status: 400", true, 400);
+			header("Status: 404", true, 404);
 			exit("Não foi possível encontrar a imagem requisistada no banco de dados.");
 		}
 	}

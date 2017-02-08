@@ -1,4 +1,5 @@
 <?php
+	define("CABECALHO_TITULO", "PHPGallery - Erro");
 	require_once "header.php";
 
 	header("Status: 500", true, 500);

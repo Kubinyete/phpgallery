@@ -61,7 +61,7 @@
  		public function obter_recentes() {
  			$resultados = [];
 
- 			$ok = $this->executar("SELECT TOP 20 * FROM imagens WHERE img_privado=0 ORDER BY img_id DESC");
+ 			$ok = $this->executar("SELECT TOP 12 * FROM imagens WHERE img_privado=0 ORDER BY img_id DESC");
  			if (odbc_num_rows($ok) >= 1) {
  				for ($i = 0; $i < odbc_num_rows($ok); $i++) {
  					$imagem = odbc_fetch_array($ok);
@@ -107,12 +107,12 @@
  			return $resultados;
  		}
 
- 		//Obtem um array que contêm todas as imagens de um usuário
+ 		//Obtem um array que contêm todas as imagens recentes de um usuário
  		public function obter_imagens_usuario($nome) {
  			$resultados = [];
  			$nome = filtrar_escape_string_mssql($nome);
 
- 			$ok = $this->executar("SELECT TOP 20 * FROM imagens WHERE img_privado=0 AND img_autor='" . $nome . "' ORDER BY img_id DESC");
+ 			$ok = $this->executar("SELECT TOP 12 * FROM imagens WHERE img_privado=0 AND img_autor='" . $nome . "' ORDER BY img_id DESC");
 
  			if (odbc_num_rows($ok) >= 1) {
  				for ($i = 0; $i < odbc_num_rows($ok); $i++) {

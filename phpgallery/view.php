@@ -1,4 +1,5 @@
 <?php
+	define("CABECALHO_TITULO", "PHPGallery - Imagem");
 	require_once "header.php";
 
 	$erro = false;

@@ -1,4 +1,5 @@
 <?php
+	define("CABECALHO_TITULO", "PHPGallery - Perfil");
 	require_once "header.php";
 
 	$erro = false;
@@ -135,9 +136,9 @@
 			if ($totalImagensEnviadas < 1) {
 				$textoEnvios = "Nenhuma imagem enviada";
 			} else if ($totalImagensEnviadas == 1) {
-				$textoEnvios = $totalImagensEnviadas . " Imagem enviada";
+				$textoEnvios = "Recentes / " . $totalImagensEnviadas . " Imagem enviada";
 			} else {
-				$textoEnvios = $totalImagensEnviadas . " Imagens enviadas";
+				$textoEnvios = "Recentes / " . $totalImagensEnviadas . " Imagens enviadas";
 			}
 			?>
 			<h1 class="texto-sessao"><i class="fa fa-image azul"></i> <?php echo $textoEnvios; ?></h1>

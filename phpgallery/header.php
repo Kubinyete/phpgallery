@@ -6,6 +6,11 @@
 	session_start();
 
 	$usuario = null;
+	$titulo = "PHPGallery";
+
+	if (defined("CABECALHO_TITULO")) {
+		$titulo = CABECALHO_TITULO;
+	}
 
 	if (isset($_SESSION["usuario"])) {
 		$usuario = $_SESSION["usuario"];
@@ -44,7 +49,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PHPGallery</title>
+	<title><?php echo $titulo; ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Ubuntu+Mono" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<link href="/css/phpgallery.styles.css" rel="stylesheet">

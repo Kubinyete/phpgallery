@@ -1,4 +1,5 @@
 <?php
+	define("CABECALHO_TITULO", "PHPGallery - Início");
 	require_once "header.php";
 ?>
 	<div class="conteudo">

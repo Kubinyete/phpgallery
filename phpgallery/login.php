@@ -1,4 +1,5 @@
 <?php
+	define("CABECALHO_TITULO", "PHPGallery - Login");
 	require_once "header.php";
 
 	//Se o usuário já está registrado, volte ele para a página principal

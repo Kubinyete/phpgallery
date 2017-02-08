@@ -10,6 +10,7 @@
 
 		$db = new Database();
 		$imagem = $db->obter_imagem($id);
+		$db->finalizar();
 
 		if ($imagem !== null) {
 			$imagemDataStr = file_get_contents(UPLOAD_IMAGENS_DESTINO . $imagem->id_md5_hash() . $imagem->ext);
@@ -25,20 +26,6 @@
 				$altura = $informacoes[1];
 				$novaLargura = $largura;
 				$novaAltura = $altura;
-				$mimeTipo = "image/";
-
-				//Obtendo o mimetype para avisar ao browser em Content-Type
-				switch ($informacoes[2]) {
-					case IMAGETYPE_GIF:
-						$mimeTipo = $mimeTipo . "gif";
-						break;
-					case IMAGETYPE_JPEG:
-						$mimeTipo = $mimeTipo . "jpeg";
-						break;
-					case IMAGETYPE_PNG:
-						$mimeTipo = $mimeTipo . "png";
-						break;
-				}
 
 				//Obtendo nova altura e largura sem destruir a aspect ratio da imagem (A imagem não ficará esticada)
 				while ($novaLargura > 250 || $novaAltura > 250) {
@@ -47,10 +34,10 @@
 				}
 
 				$miniatura = imagecreatetruecolor($novaLargura, $novaAltura);
-				imagecopyresized($miniatura, $imagemData, 0, 0, 0, 0, $novaLargura, $novaAltura, $largura, $altura);
+				imagecopyresampled($miniatura, $imagemData, 0, 0, 0, 0, $novaLargura, $novaAltura, $largura, $altura);
 
-				header("Content-Type: " . $mimeTipo, true);
-				imagejpeg($miniatura);
+				header("Content-Type: image/jpeg", true);
+				imagejpeg($miniatura, null, 50);
 			}
 		} else {
 			header("Status: 404", true, 404);

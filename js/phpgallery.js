@@ -14,7 +14,7 @@ function adicionarImagens(conteudo, lista) {
 
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
-		var novaImagem = $('<li><div class="imagem-container"><a class="link" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img src="' + imagem.imagemUrl + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
+		var novaImagem = $('<li><div class="imagem-container"><a class="link" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
 		$(lista).append(novaImagem);
 	}
 }

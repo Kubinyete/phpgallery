@@ -109,6 +109,7 @@
 		public $autor;
 		public $imagemUrl;
 		public $dataCriacao;
+		public $imagemUrlMiniatura;
 
 		//$dataCriacao apenas será recebido como parâmetro quando obtido do banco de dados,
 		//Para o envio de uma nova imagem, utilize o método gerar_data_criacao()
@@ -131,6 +132,11 @@
 		//API: Gera o caminho da imagem para ser utilizado na resposta JSON
 		public function gerar_imagem_url() {
 			$this->imagemUrl = $this->imagem_url();
+		}
+
+		//API: Gera o caminho da imagem miniatura para ser utilizado na resposta JSON
+		public function gerar_imagem_url_miniatura() {
+			$this->imagemUrlMiniatura = IMAGENS_PROCESSADOR_MINIATURAS . "?id=" . $this->id;
 		}
 
 		//Retorna a descrição da imagem formatada corretamente para seu armazenamento no banco

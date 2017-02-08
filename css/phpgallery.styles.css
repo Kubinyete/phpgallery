@@ -245,12 +245,12 @@ ul.sessao-recentes-lista li {
 	display: inline-block;
 	padding: 10px;
 	margin: 5px;
+	border-radius: 5px;
 }
 
 ul.sessao-recentes-lista li:hover {
 	transition: .2s ease-in-out;
 	background-color: #333;
-	border-radius: 5px;
 }
 
 ul.sessao-recentes-lista li:hover .imagem-titulo {

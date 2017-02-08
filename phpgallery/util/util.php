@@ -20,6 +20,9 @@
 	//Imagem padrão de um usuário
 	define("IMAGENS_USUARIO_PADRAO", IMAGENS_USUARIO_EXT . "user-default" . IMAGENS_USUARIO_EXT);
 
+	//Script processador de miniaturas
+	define("IMAGENS_PROCESSADOR_MINIATURAS" , "thumbnail.php");
+
 	//Local fixo dos nossos documentos
 	define("DOWNLOAD_HTDOCS", "C:/xampp/htdocs");
 	//Local fixo aonde as imagens serão enviadas

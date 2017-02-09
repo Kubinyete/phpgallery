@@ -76,6 +76,7 @@ function visualizarImagem(url) {
 
 //Desativa o visualizador de imagens
 function desativarVisualizacaoImagem() {
+	$("#visualizacao-imagem").attr("src", "/resources/loading.svg");
 	$("#visualizacao-fundo").removeClass("visualizacao-fundo-ativado");
 	$("div.cabecalho-container").removeClass("blur");
 	$("div.conteudo").removeClass("blur");

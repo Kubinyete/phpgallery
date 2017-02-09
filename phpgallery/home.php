@@ -36,7 +36,7 @@
 			<i id="visualizacao-fechar" onclick="desativarVisualizacaoImagem();" class="fa fa-times"></i>
 		</a>
 		<div class="visualizacao-imagem-container">
-			<img id="visualizacao-imagem">
+			<img id="visualizacao-imagem" src="/resources/loading.svg">
 		</div>
 	</div>
 	<script src="/js/phpgallery.js"></script>

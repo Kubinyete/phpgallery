@@ -63,6 +63,8 @@
 							if ($imagemEAutorLogado) {
 								//Vamos remover a imagem
 								$db->remover_imagem($img, true);
+								$db->finalizar();
+								@unlink(DOWNLOAD_HTDOCS . $img->imagem_url());
 								header("Refresh: 0; url=home.php", true);
 								exit();
 							}

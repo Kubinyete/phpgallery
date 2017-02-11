@@ -19,6 +19,7 @@
 
 		$db = new Database();
 		$novoUsuario = $db->obter_usuario($usuario->nome);
+		$db->finalizar();
 
 		$invalido = false;
 		if ($novoUsuario !== null) {
@@ -39,6 +40,7 @@
 		if ($invalido) {
 			$_SESSION["usuario"] = null;
 			header("Refresh: 0; url=login.php", true);
+			exit();
 		}
 	} else {
 		$_SESSION["usuario"] = null;

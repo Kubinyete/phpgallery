@@ -8,6 +8,7 @@
 
 		if ($usuario !== null) {
 			header("Refresh: 0; url=home.php", true);
+			exit();
 		}
 	}
 
@@ -42,6 +43,7 @@
 					} else {
 						$_SESSION["usuario"] = $dbUsuario;
 						header("Refresh: 0; url=home.php", true);
+						exit();
 					}
 				}
 			} else if (isset($_POST["registrar"]) && $_POST["registrar"] === "1") {
@@ -73,8 +75,10 @@
 							$dbUsuario = $db->obter_usuario($novoUsuario->nome);
 
 							if ($dbUsuario !== null) {
+								$db->finalizar();
 								$_SESSION["usuario"] = $dbUsuario;
 								header("Refresh: 0; url=home.php", true);
+								exit();
 							} else {
 								$erro = "Ocorreu um erro ao tentar registrar o usuário.";
 							}

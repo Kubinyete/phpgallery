@@ -10,6 +10,7 @@
 
 		$db = new Database();
 		$imagem = $db->obter_imagem($id);
+		$db->finalizar();
 
 		if ($imagem !== null) {
 			$imagemData = file_get_contents(DOWNLOAD_HTDOCS . $imagem->imagem_url());

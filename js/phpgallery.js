@@ -17,6 +17,8 @@ function adicionarImagens(conteudo, lista) {
 		var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
 		$(lista).append(novaImagem);
 	}
+
+	reajustarConteudoCentro();
 }
 
 //AJAX: Adiciona comentários ao documento HTML
@@ -37,18 +39,14 @@ function adicionarComentarios(conteudo, lista) {
 		$(lista).append(novoComentarioDOM);
 	}
 
-	//Vamos atualizar nosso conteudo dinamico pois agora o HTML mudou
-	if (conteudoAjustado && $(window).width() <= 1024) {
-		conteudoAjustado = false;
-		ajustarConteudoCentro();
-	}
+	reajustarConteudoCentro();
 }
 
 //Atualiza as imagens recentes
 function atualizarRecentes() {
 	$("#loading").removeClass("desativado");
 	$("#sessao-recentes-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
-	$.post("api/getrecents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
+	$.get("api/getrecents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
 }
 
 //Atualiza os comentários da pagina de uma imagem
@@ -108,6 +106,10 @@ function ajustarConteudoCentro() {
 		//Geral
 		$(".texto-sessao").css("font-size", "4vw");
 
+		//Miniaturas
+		$(".imagem-container img").css("max-width", "40vw");
+		$(".imagem-container img").css("max-height", "40vw");
+
 		//View
 		$(".view-imagem-data").css("font-size", "2.2vw");
 		$(".view-imagem-descricao").css("font-size", "2.6vw");
@@ -135,6 +137,10 @@ function ajustarConteudoCentro() {
 		//Geral
 		$(".texto-sessao").css("font-size", "");
 
+		//Miniaturas
+		$(".imagem-container img").css("max-width", "");
+		$(".imagem-container img").css("max-height", "");
+
 		//View
 		$(".view-imagem-data").css("font-size", "");
 		$(".view-imagem-descricao").css("font-size", "");
@@ -154,6 +160,14 @@ function ajustarConteudoCentro() {
 		$(".comentario-data").css("font-size", "");
 		
 		conteudoAjustado = false;
+	}
+}
+
+function reajustarConteudoCentro() {
+	//Vamos atualizar nosso conteudo dinamico pois agora o HTML mudou
+	if (conteudoAjustado && $(window).width() <= 1024) {
+		conteudoAjustado = false;
+		ajustarConteudoCentro();
 	}
 }
 

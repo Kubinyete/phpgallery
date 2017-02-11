@@ -8,6 +8,7 @@
 	$imgAutor = null;
 	$comentarioErro = false;
 	$conteudo = "";
+	$imagemEAutorLogado = false;
 
 	//Pedido GET com query id?
 	if (isset($_GET["id"])) {
@@ -35,8 +36,13 @@
 					$img->gerar_titulo_formatado();
 					$img->gerar_descricao_formatada();
 
-					//Se o usuário enviou um pedido POST, é para adicionar um comentário
+					//Se o usuário que está visualizando a página é o próprio autor da imagem
+					if (isset($_SESSION["usuario"]) && $img !== null && $_SESSION["usuario"]->id === $imgAutor->id) {
+						$imagemEAutorLogado = true;
+					}
+
 					if ($_SERVER["REQUEST_METHOD"] === "POST") {
+						//Se o usuário enviou um pedido POST, é para adicionar um comentário
 						if (isset($_POST["conteudo"])) {
 							if ($_SESSION["usuario"] !== null) {
 								$comentarioAutor = $_SESSION["usuario"];
@@ -52,6 +58,13 @@
 								}
 							} else {
 								$comentarioErro = "É preciso estar logado para poder adicionar comentários.";
+							}
+						} else if (isset($_POST["excluir"]) && $_POST["excluir"] === "1") {
+							if ($imagemEAutorLogado) {
+								//Vamos remover a imagem
+								$db->remover_imagem($img, true);
+								header("Refresh: 0; url=home.php", true);
+								exit();
 							}
 						}
 					}
@@ -72,9 +85,19 @@
 			<p class="texto-descricao view-imagem-data"><i class="fa fa-calendar azul"></i> Enviado em <?php echo $img->data_criacao(); ?></p>
 			<a class="link" href="download.php?id=<?php echo $img->id; ?>">
 			<div class="download-caixa">
-				<p class="texto descricao"><i class="fa fa-download azul"></i> Download</p>
+				<p class="texto descricao"><i class="fa fa-download vermelho"></i> Download</p>
 			</div>
 			</a>
+			<?php if ($imagemEAutorLogado) { ?>
+			<form id="form-deletar-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
+				<a class="link" href="#/" onclick="if (confirm('Você tem certeza que deseja remover esta imagem?')) { $('#form-deletar-imagem').submit(); }">
+				<div class="download-caixa">
+					<p class="texto descricao"><i class="fa fa-trash vermelho"></i> Excluir</p>
+				</div>
+				<input type="hidden" name="excluir" value="1">
+				</a>
+			</form>
+			<?php } ?>
 			<div class="view-usuario-container">
 				<a href="profile.php?u=<?php echo $imgAutor->nome; ?>">
 					<img draggable="false" alt="A imagem de perfil do autor" class="usuario-imagem" src="<?php echo $imgAutor->imagem_url(); ?>">

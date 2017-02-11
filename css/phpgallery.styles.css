@@ -544,6 +544,10 @@ div.usuario-container p {
 }
 
 /* View */
+#form-deletar-imagem {
+	display: inline-block;
+}
+
 img.imagem-full {
 	max-width: 100%;
 }

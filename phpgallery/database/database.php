@@ -334,5 +334,13 @@
  		public function atualizar_usuario_tem_imagem($id, $valor) {
  			$this->executar("UPDATE usuarios SET usr_temimagem=" . $valor . " WHERE usr_id=" . $id, true);
  		}
+
+ 		//Remove uma imagem de um usuário
+ 		public function remover_imagem($imagem, $deletarComentarios) {
+ 			if ($deletarComentarios) {
+ 				$this->executar("DELETE FROM comentarios WHERE cmt_imagem_id='" . $imagem->id . "'");
+ 			}
+ 			$this->executar("DELETE FROM imagens WHERE img_id='" . $imagem->id . "'", true);
+ 		}
 	}
 ?>

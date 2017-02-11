@@ -87,7 +87,7 @@
 				} catch (Exception $e) { }
 			}
 		} else {
-			$erro = "É preciso estar logado para poder enviar imagens...";
+			$erro = "É preciso estar logado para poder enviar imagens.";
 		}
 	}
 ?>

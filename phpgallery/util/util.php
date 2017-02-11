@@ -14,11 +14,13 @@
 	//Diretório das imagens de perfil dos usuários
 	define("IMAGENS_USUARIO_ORIGEM", "/resources/profile/");
 	//Extensão de arquivo padrão para imagens de usuário
+	//NESSE CONTEXTO USUÁRIOS SÓ PODERÃO ENVIAR IMAGENS JPEG,
+	//PNGs SERÃO CONVERTIDOS PARA JPEG!
 	define("IMAGENS_USUARIO_EXT", ".jpg");
 	//Diretório das imagens
 	define("IMAGENS_ORIGEM", "/resources/image/");
 	//Imagem padrão de um usuário
-	define("IMAGENS_USUARIO_PADRAO", IMAGENS_USUARIO_EXT . "user-default" . IMAGENS_USUARIO_EXT);
+	define("IMAGENS_USUARIO_PADRAO", IMAGENS_USUARIO_ORIGEM . "user-default" . IMAGENS_USUARIO_EXT);
 
 	//Script processador de miniaturas
 	define("IMAGENS_PROCESSADOR_MINIATURAS" , "thumbnail.php");

@@ -3,7 +3,6 @@
 	require_once "header.php";
 
 	$erro = false;
-	$loginErro = false;
 	$imagem = null;
 	$imagemTitulo = "";
 	$imagemDescricao = "";
@@ -89,14 +88,12 @@
 			}
 		} else {
 			$erro = "É preciso estar logado para poder enviar imagens...";
-			$loginErro = true;
 		}
 	}
 ?>
 	<div class="conteudo">
 		<div class="conteudo-centro">
-			<?php if (!$loginErro) { ?>
-			<h1 class="texto-sessao"><i class="fa fa-image azul"></i> Enviar uma imagem</h1>
+			<h1 class="texto-sessao"><i class="fa fa-upload azul"></i> Enviar uma imagem</h1>
 			<div class="upload-sessao-container">
 				<form method="POST" action="upload.php" enctype="multipart/form-data" autocomplete="off">
 					<div class="input-imagem-container">
@@ -129,18 +126,13 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php } else { ?>
-			<?php header("Status: 401", true, 401); ?>
-			<h1 class="texto-sessao vermelho codigohttp">401</h1>
-			<h2 class="texto normal"><?php echo $erro; ?></p>
-			<?php } ?>
 		</div>
 	</div>
-<script src="/js/phpgallery.js"></script>
-<script>
-	//Ativando nossos contadores de carácteres
-	adicionarContadorCaracteres("#titulo", "#titulo-chars-restantes");
-	adicionarContadorCaracteres("#descricao", "#chars-restantes");
-</script>
+	<script src="/js/phpgallery.js"></script>
+	<script>
+		//Ativando nossos contadores de carácteres
+		adicionarContadorCaracteres("#titulo", "#titulo-chars-restantes");
+		adicionarContadorCaracteres("#descricao", "#chars-restantes");
+	</script>
 </body>
 </html>

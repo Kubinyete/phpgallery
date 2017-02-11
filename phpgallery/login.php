@@ -30,28 +30,18 @@
 				if (!campo_valido($nome) || !campo_valido($senha)) {
 					$erro = "O nome de usuário ou senha contêm um caráctere inválido, é permitido apenas [0-9, a-z, A-Z].";
 				} else {
-					if (strlen($nome) < 6) {
-						$erro = "O nome de usuário deve ter pelomenos 6 carácteres.";
-					} else if (strlen($senha) < 6) {
-						$erro = "A senha deve ter pelomenos 6 carácteres.";
-					} else if (strlen($nome) > 16) {
-						$erro = "O nome de usuário excede o máximo de 16 carácteres permitidos.";
-					} else if (strlen($senha) > 32) {
-						$erro = "A senha excede o máximo de 32 carácteres permitidos.";
-					} else {
-						$loginUsuario = new Usuario($nome, $senha);
-						$db = new Database();
-						$dbUsuario = $db->obter_usuario($loginUsuario->nome);
-						$db->finalizar();
+					$loginUsuario = new Usuario($nome, $senha);
+					$db = new Database();
+					$dbUsuario = $db->obter_usuario($loginUsuario->nome);
+					$db->finalizar();
 
-						if ($dbUsuario === null) {
-							$erro = "O usuário informado não existe.";
-						} else if ($dbUsuario->senha !== $loginUsuario->senha_md5_hash()) {
-							$erro = "A senha informada está incorreta.";
-						} else {
-							$_SESSION["usuario"] = $dbUsuario;
-							header("Refresh: 0; url=home.php", true);
-						}
+					if ($dbUsuario === null) {
+						$erro = "O usuário informado não existe.";
+					} else if ($dbUsuario->senha !== $loginUsuario->senha_md5_hash()) {
+						$erro = "A senha informada está incorreta.";
+					} else {
+						$_SESSION["usuario"] = $dbUsuario;
+						header("Refresh: 0; url=home.php", true);
 					}
 				}
 			} else if (isset($_POST["registrar"]) && $_POST["registrar"] === "1") {
@@ -103,7 +93,7 @@
 ?>
 	<div class="conteudo">
 		<div class="conteudo-centro">
-			<h1 class="texto-sessao">Faça login ou registre-se</h1>
+			<h1 class="texto-sessao"><i class="fa fa-sign-in azul"></i> Faça login ou registre-se</h1>
 			<div class="login-container">
 				<form method="POST" action="login.php" autocomplete="off">
 					<label class="azul">Nome</label>

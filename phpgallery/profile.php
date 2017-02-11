@@ -123,7 +123,7 @@
 			<div class="profile-usuario-container">
 				<a class="link" href="profile.php?u=<?php echo $usuario->nome; ?>">
 					<div class="profile-usuario-placar">
-						<img class="usuario-imagem" draggable="false" src="<?php echo $usuario->imagem_url(); ?>">
+						<img class="usuario-imagem" alt="Imagem de perfil do usuário" draggable="false" src="<?php echo $usuario->imagem_url(); ?>">
 						<p class="texto azul usuario-nome"><?php echo $usuario->nome; ?></p>
 					</div>
 				</a>
@@ -145,7 +145,7 @@
 			<div class="profile-sessao-envios">
 				<ul id="profile-usuario-imagens" class="sessao-recentes-lista">
 					<!-- Imagens enviadas -->
-					<img id="loading" src="/resources/loading.svg" draggable="false">
+					<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">
 				</ul>
 			</div>
 			<?php if ($mostrarForm) { ?>
@@ -172,15 +172,7 @@
 			<?php } ?>
 		</div>
 	</div>
-	<!-- Visualização de imagens -->
-	<div id="visualizacao-fundo" class="visualizacao-fundo">
-		<a href="#/">
-			<i id="visualizacao-fechar" onclick="desativarVisualizacaoImagem();" class="fa fa-times"></i>
-		</a>
-		<div class="visualizacao-imagem-container">
-			<img id="visualizacao-imagem" src="/resources/loading.svg">
-		</div>
-	</div>
+	<?php include_once "template/preview.html"; ?>
 	<?php if ($mensagem !== false) { ?>
 	<div class="erro-fundo">
 		<div class="erro">

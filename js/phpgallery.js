@@ -14,7 +14,7 @@ function adicionarImagens(conteudo, lista) {
 
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
-		var novaImagem = $('<li><div class="imagem-container"><a class="link" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
+		var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
 		$(lista).append(novaImagem);
 	}
 }
@@ -47,21 +47,21 @@ function adicionarComentarios(conteudo, lista) {
 //Atualiza as imagens recentes
 function atualizarRecentes() {
 	$("#loading").removeClass("desativado");
-	$("#sessao-recentes-lista").html('<img id="loading" src="/resources/loading.svg" draggable="false">');
+	$("#sessao-recentes-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
 	$.post("api/getrecents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
 }
 
 //Atualiza os comentários da pagina de uma imagem
 function atualizarComentarios(imagemid) {
 	$("#loading").removeClass("desativado");
-	$("#comentarios-lista").html('<img id="loading" src="/resources/loading.svg" draggable="false">');
+	$("#comentarios-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
 	$.get("api/getcomments.php?id=" + imagemid, function(data) { adicionarComentarios(data, "#comentarios-lista"); });
 }
 
 //Realiza a pesquisa de imagens consultando a api
 function pesquisar(pesquisa) {
 	$("#loading").removeClass("desativado");
-	$("#sessao-recentes-lista").html('<img id="loading" src="/resources/loading.svg" draggable="false">');
+	$("#sessao-recentes-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
 	$.get("api/search.php?s=" + pesquisa, function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
 }
 
@@ -94,7 +94,7 @@ function pesquisarBotao() {
 //Obtem todas as imagens de um usuário através de um método post
 function obterImagensUsuario(usuario, lista) {
 	$("#loading").removeClass("desativado");
-	$(lista).html('<img id="loading" src="/resources/loading.svg" draggable="false">');
+	$(lista).html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
 	$.get("api/getuserimages.php?u=" + usuario, function(data) { adicionarImagens(data, lista); });
 }
 

@@ -5,16 +5,15 @@
 	<div class="conteudo">
 		<div class="conteudo-centro">
 			<div class="sessao-recentes">
-				<h1 id="texto-sessao-recentes" class="texto-sessao">Adicionados recentemente</h1>
-					<div class="fundo-preto pesquisa">
-						<input id="pesquisa" class="pesquisa" type="search" placeholder="Pesquisar">
-						<button id="pesquisa-botao" class="pesquisa-botao" onclick="pesquisarBotao();"><i class="fa fa-paper-plane azul"></i></button>
-					</div>
-					<ul id="sessao-recentes-lista" class="sessao-recentes-lista">
-						<!-- Resultados -->
-						<img id="loading" src="/resources/loading.svg" draggable="false">
-					</ul>
-				</h1>
+				<h1 id="texto-sessao-recentes" class="texto-sessao"><i class="fa fa-image azul"></i> Adicionados recentemente</h1>
+				<div class="fundo-preto pesquisa">
+					<input id="pesquisa" class="pesquisa" type="search" placeholder="Pesquisar">
+					<button id="pesquisa-botao" class="pesquisa-botao" onclick="pesquisarBotao();"><i class="fa fa-paper-plane azul"></i></button>
+				</div>
+				<ul id="sessao-recentes-lista" class="sessao-recentes-lista">
+					<!-- Resultados -->
+					<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">
+				</ul>
 			</div>
 			<h1 class="texto-sessao"><i class="fa fa-database azul"></i> <?php
 			$db = new Database();
@@ -30,15 +29,7 @@
 			}?></h1>
 		</div>
 	</div>
-	<!-- Visualização de imagens -->
-	<div id="visualizacao-fundo" class="visualizacao-fundo">
-		<a href="#/">
-			<i id="visualizacao-fechar" onclick="desativarVisualizacaoImagem();" class="fa fa-times"></i>
-		</a>
-		<div class="visualizacao-imagem-container">
-			<img id="visualizacao-imagem" src="/resources/loading.svg">
-		</div>
-	</div>
+	<?php include_once "template/preview.html"; ?>
 	<script src="/js/phpgallery.js"></script>
 	<script>
 	//Ao apertar Enter(13), faça a pesquisa

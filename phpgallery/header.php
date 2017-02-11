@@ -56,55 +56,59 @@
 	<script src="/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-	<div class="cabecalho-container">
-		<div id="cabecalho-fundo" class="cabecalho-fundo">
-		</div>
-		<div class="cabecalho-centro-container">
-			<div class="cabecalho-centro-logo">
-				<a class="link" href="home.php">
-					<img src="/resources/phpgallery-logo.png" draggable="false">
+	<header>
+		<div class="cabecalho-container">
+			<div id="cabecalho-fundo" class="cabecalho-fundo">
+			</div>
+			<div class="cabecalho-centro-container">
+				<div class="cabecalho-centro-logo">
+					<a class="link" href="home.php">
+						<img alt="PHPGallery" title="PHPGallery" src="/resources/phpgallery-logo.png" draggable="false">
+					</a>
+				</div>
+				<!-- Menu -->
+				<div id="cabecalho-botao-container" class="cabecalho-botao-container">
+					<a id="menu-botao" class="link" href="#/"><i class="fa fa-bars"></i></a>
+				</div>
+				<?php if ($usuario !== null) { ?>
+				<!-- Informações do usuário -->
+				<a class="link" href="profile.php">
+				<div class="usuario-container">
+					<p class="usuario-nome"><?php echo $usuario->nome; ?></p>
+					<img alt="Imagem de perfil do usuário" class="usuario-imagem" src="<?php echo $usuario->imagem_url(); ?>" draggable="false">
+				</div>
 				</a>
+				<?php } ?>
 			</div>
-			<!-- Menu -->
-			<div id="cabecalho-botao-container" class="cabecalho-botao-container">
-				<a id="menu-botao" class="link" href="#/"><i class="fa fa-bars"></i></a>
-			</div>
-			<?php if ($usuario !== null) { ?>
-			<!-- Informações do usuário -->
-			<a class="link" href="profile.php">
-			<div class="usuario-container">
-				<p class="usuario-nome"><?php echo $usuario->nome; ?></p>
-				<img class="usuario-imagem" src="<?php echo $usuario->imagem_url(); ?>" draggable="false">
-			</div>
-			</a>
-			<?php } ?>
 		</div>
-	</div>
-	<?php if ($usuario === null) { ?>
-	<!-- Menu anônimo -->
-	<div id="usr-menu-container" class="usr-menu-container">
-		<ul class="usr-menu-lista">
-			<li class="usr-menu-item">
-				<a class="link" href="login.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-in azul"></i> Login</p></a>
-			</li>
-		</ul>
-	</div>
-	<?php } else { ?>
-	<!-- Menu logado -->
-	<div id="usr-menu-container" class="usr-menu-container">
-		<ul class="usr-menu-lista">
-			<li class="usr-menu-item">
-				<a class="link" href="upload.php"><p class="usr-menu-item-texto"><i class="fa fa-upload azul"></i> Enviar</p></a>
-			</li>
-			<li class="usr-menu-item">
-				<a class="link" href="profile.php"><p class="usr-menu-item-texto"><i class="fa fa-user azul"></i> Perfil</p></a>
-			</li>
-			<li class="usr-menu-item">
-				<a class="link" href="logoff.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-out azul"></i> Sair</p></a>
-			</li>
-		</ul>
-	</div>
-	<?php } ?>
+		<nav>
+			<?php if ($usuario === null) { ?>
+			<!-- Menu anônimo -->
+			<div id="usr-menu-container" class="usr-menu-container">
+				<ul class="usr-menu-lista">
+					<li class="usr-menu-item">
+						<a class="link" href="login.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-in azul"></i> Login</p></a>
+					</li>
+				</ul>
+			</div>
+			<?php } else { ?>
+			<!-- Menu logado -->
+			<div id="usr-menu-container" class="usr-menu-container">
+				<ul class="usr-menu-lista">
+					<li class="usr-menu-item">
+						<a class="link" href="upload.php"><p class="usr-menu-item-texto"><i class="fa fa-upload azul"></i> Enviar</p></a>
+					</li>
+					<li class="usr-menu-item">
+						<a class="link" href="profile.php"><p class="usr-menu-item-texto"><i class="fa fa-user azul"></i> Perfil</p></a>
+					</li>
+					<li class="usr-menu-item">
+						<a class="link" href="logoff.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-out azul"></i> Sair</p></a>
+					</li>
+				</ul>
+			</div>
+			<?php } ?>
+		</nav>
+	</header>
 	<script>
 		//Lógica de ativação de desativação do menu de opções
 		var menuAtivado = false; 

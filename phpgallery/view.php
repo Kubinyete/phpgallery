@@ -67,7 +67,7 @@
 	<div class="conteudo">
 		<div class="conteudo-centro">
 			<h1 class="texto-sessao"><i class="fa fa-image azul"></i> <?php echo $img->titulo; ?></h1>
-			<img id="imagem-full" class="imagem-full" src="<?php echo $img->imagem_url(); ?>">
+			<img id="imagem-full" alt="A imagem enviada pelo autor" class="imagem-full" src="<?php echo $img->imagem_url(); ?>">
 			<p class="texto normal view-imagem-descricao"><?php echo $img->descricao; ?></p>
 			<p class="texto-descricao view-imagem-data"><i class="fa fa-calendar azul"></i> Enviado em <?php echo $img->data_criacao(); ?></p>
 			<a class="link" href="download.php?id=<?php echo $img->id; ?>">
@@ -77,7 +77,7 @@
 			</a>
 			<div class="view-usuario-container">
 				<a href="profile.php?u=<?php echo $imgAutor->nome; ?>">
-					<img draggable="false" class="usuario-imagem" src="<?php echo $imgAutor->imagem_url(); ?>">
+					<img draggable="false" alt="A imagem de perfil do autor" class="usuario-imagem" src="<?php echo $imgAutor->imagem_url(); ?>">
 					<p class="usuario-nome"><?php echo $imgAutor->nome; ?></p>
 				</a>
 			</div>
@@ -87,7 +87,7 @@
 			<h1 id="comentarios-texto-sessao" class="texto texto-sessao">Comentários <button id="botao-atualiza-comentarios" class="botao" onclick="atualizarComentarios(<?php echo $img->id; ?>)">Atualizar</button></h1>
 			<ul id="comentarios-lista" class="comentarios-lista">
 				<!-- Comentários -->
-				<img id="loading" src="/resources/loading.svg" draggable="false">
+				<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">
 			</ul>
 			<h1 class="texto texto-sessao">Adicionar comentário</h1>
 			<div class="comentario-form-container">
@@ -118,20 +118,20 @@
 		</div>
 	</div>
 <?php } ?>
-<script src="/js/phpgallery.js"></script>
+	<script src="/js/phpgallery.js"></script>
 <?php if ($img !== null) { ?>
-<script>
-	//Animação cabeçalho
-	$("#cabecalho-fundo").css("background-image", "url(" + $("#imagem-full").attr("src") + ")");
-	$("#cabecalho-fundo").addClass("blur-x2");
-	$("#cabecalho-fundo").addClass("meia-opacidade");
+	<script>
+		//Animação cabeçalho
+		$("#cabecalho-fundo").css("background-image", "url(" + $("#imagem-full").attr("src") + ")");
+		$("#cabecalho-fundo").addClass("blur-x2");
+		$("#cabecalho-fundo").addClass("meia-opacidade");
 
-	//Comentários
-	atualizarComentarios("<?php echo $img->id; ?>");
+		//Comentários
+		atualizarComentarios("<?php echo $img->id; ?>");
 
-	//Formulário
-	adicionarContadorCaracteres("#comentario-conteudo", "#chars-restantes-comentario");
-</script>
+		//Formulário
+		adicionarContadorCaracteres("#comentario-conteudo", "#chars-restantes-comentario");
+	</script>
 <?php } ?>
 </body>
 </html>

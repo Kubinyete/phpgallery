@@ -14,7 +14,7 @@ function adicionarImagens(conteudo, lista) {
 
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
-		var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-external-link azul"></i></a></div></li>');
+		var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
 		$(lista).append(novaImagem);
 	}
 
@@ -70,6 +70,7 @@ function visualizarImagem(url) {
 	$("div.cabecalho-container").addClass("blur");
 	$("div.conteudo").addClass("blur");
 	$("div.usr-menu-container").addClass("blur");
+	$("div.conteudo-piso").addClass("blur");
 }
 
 //Desativa o visualizador de imagens
@@ -79,6 +80,7 @@ function desativarVisualizacaoImagem() {
 	$("div.cabecalho-container").removeClass("blur");
 	$("div.conteudo").removeClass("blur");
 	$("div.usr-menu-container").removeClass("blur");
+	$("div.conteudo-piso").removeClass("blur");
 }
 
 //Filtra o spam ao pressionar o botão e não inserir uma busca diferente
@@ -113,6 +115,11 @@ function ajustarConteudoCentro() {
 		$(".texto-sessao").css("font-size", "4vw");
 
 		//Miniaturas
+		$(".imagem-titulo").css("font-size", "2vw");
+		$(".imagem-container i").css("bottom", "0px");
+		$(".imagem-container i").css("top", "inherit");
+		$(".imagem-container i").css("border-top-left-radius", "2.5px");
+		$(".imagem-container i").css("border-bottom-left-radius", "0px");
 		$(".imagem-container img").css("max-width", "35vw");
 		$(".imagem-container img").css("max-height", "35vw");
 
@@ -150,6 +157,11 @@ function ajustarConteudoCentro() {
 		$(".texto-sessao").css("font-size", "");
 
 		//Miniaturas
+		$(".imagem-titulo").css("font-size", "");
+		$(".imagem-container i").css("bottom", "");
+		$(".imagem-container i").css("top", "");
+		$(".imagem-container i").css("border-top-left-radius", "");
+		$(".imagem-container i").css("border-bottom-left-radius", "");
 		$(".imagem-container img").css("max-width", "");
 		$(".imagem-container img").css("max-height", "");
 

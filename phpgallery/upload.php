@@ -129,6 +129,9 @@
 			<?php } ?>
 		</div>
 	</div>
+	<?php
+		include_once "footer.php";
+	?>
 	<script src="/js/phpgallery.js"></script>
 	<script>
 		//Ativando nossos contadores de carácteres

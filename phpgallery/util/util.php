@@ -1,4 +1,7 @@
 <?php
+	//O número da versão atual do sistema phpgallery
+	define("PHPGALLERY_VERSAO", "1.0");
+
 	//Usuário do banco de dados MSSQL
 	define("DB_USUARIO", "localhost\\Vitor");
 	//Senha do usuário do banco de dados MSSQL

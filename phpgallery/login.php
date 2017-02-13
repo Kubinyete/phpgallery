@@ -122,6 +122,9 @@
 		</div>
 	</div>
 	<?php } ?>
-<script src="/js/phpgallery.js"></script>
+	<?php
+		include_once "footer.php";
+	?>
+	<script src="/js/phpgallery.js"></script>
 </body>
 </html>

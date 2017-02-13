@@ -10,5 +10,9 @@
 			<h2 class="texto normal">Ocorreu um erro interno ao processar o seu pedido, tente novamente mais tarde... :(</h2>
 		</div>
 	</div>
+	<?php 
+		include_once "footer.php"; 
+	?>
+	<script src="/js/phpgallery.js"></script>
 </body>
 </html>

@@ -85,6 +85,9 @@
 			<img id="imagem-full" alt="A imagem enviada pelo autor" class="imagem-full" src="<?php echo $img->imagem_url(); ?>">
 			<p class="texto normal view-imagem-descricao"><?php echo $img->descricao; ?></p>
 			<p class="texto-descricao view-imagem-data"><i class="fa fa-calendar azul"></i> Enviado em <?php echo $img->data_criacao(); ?></p>
+			<?php if ($imagemEAutorLogado) { ?>
+			<div class="download-caixas-protetor">
+			<?php } ?>
 			<a class="link" href="download.php?id=<?php echo $img->id; ?>">
 			<div class="download-caixa">
 				<p class="texto descricao"><i class="fa fa-download vermelho"></i> Download</p>
@@ -99,6 +102,7 @@
 				<input type="hidden" name="excluir" value="1">
 				</a>
 			</form>
+			</div>
 			<?php } ?>
 			<div class="view-usuario-container">
 				<a href="profile.php?u=<?php echo $imgAutor->nome; ?>">
@@ -143,6 +147,9 @@
 		</div>
 	</div>
 <?php } ?>
+	<?php
+		include_once "footer.php";
+	?>
 	<script src="/js/phpgallery.js"></script>
 <?php if ($img !== null) { ?>
 	<script>
@@ -150,6 +157,9 @@
 		$("#cabecalho-fundo").css("background-image", "url(" + $("#imagem-full").attr("src") + ")");
 		$("#cabecalho-fundo").addClass("blur-x2");
 		$("#cabecalho-fundo").addClass("meia-opacidade");
+
+		//Animação piso
+		$(".footer-mensagem-fundo").css("background-image", "url(" + $("#imagem-full").attr("src") + ")");
 
 		//Comentários
 		atualizarComentarios("<?php echo $img->id; ?>");

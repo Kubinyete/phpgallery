@@ -182,6 +182,9 @@
 		</div>
 	</div>
 	<?php } ?>
+	<?php
+		include_once "footer.php";
+	?>
 	<script src="/js/phpgallery.js"></script>
 	<script>
 		obterImagensUsuario("<?php echo $usuario->nome; ?>", "#profile-usuario-imagens");
@@ -194,6 +197,9 @@
 			<h2 class="texto normal">O usuário que você estava procurando não foi encontrado... :(</h2>
 		</div>
 	</div>
+	<?php
+		include_once "footer.php";
+	?>
 	<script src="/js/phpgallery.js"></script>
 <?php } ?>
 </body>

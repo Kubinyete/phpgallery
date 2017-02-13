@@ -29,7 +29,10 @@
 			}?></h1>
 		</div>
 	</div>
-	<?php include_once "template/preview.html"; ?>
+	<?php
+		include_once "template/preview.html"; 
+		include_once "footer.php";
+	?>
 	<script src="/js/phpgallery.js"></script>
 	<script>
 	//Ao apertar Enter(13), faça a pesquisa

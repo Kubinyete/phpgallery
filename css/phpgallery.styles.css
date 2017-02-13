@@ -22,6 +22,10 @@ a.link {
 	word-wrap: break-word;
 }
 
+.redondo {
+	border-radius: 100% !important;
+}
+
 .normal {
 	color: #ddd !important;
 }
@@ -41,6 +45,11 @@ a.link {
 .fundo-preto {
 	background-color: #343434;
 	padding: 5px;
+}
+
+.invisivel {
+	transition: opacity 1s ease-in-out;
+	opacity: 0 !important;
 }
 
 .texto-sessao {
@@ -245,6 +254,20 @@ ul.sessao-recentes-lista li {
 	padding: 10px;
 	margin: 5px;
 	border-radius: 5px;
+	opacity: 1;
+}
+
+.animacao-opacidade {
+	animation: 1s ease-in opacidade;
+}
+
+@keyframes opacidade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 ul.sessao-recentes-lista li:hover {
@@ -902,7 +925,7 @@ div.footer-mensagem-fundo {
 	position: absolute;
 	width: 100%;
 	height: 100px;
-	filter: opacity(.1);
+	filter: opacity(.1) blur(4px);
 	background-position: 0%;
 	animation: ease-in-out 240s footer-fundo-balanco infinite;
 }

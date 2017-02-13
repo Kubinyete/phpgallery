@@ -1,6 +1,22 @@
 "use strict";
+var menuAtivado = false;
 var ultimaBusca = "";
 var conteudoAjustado = false;
+
+//Lógica de ativação de desativação do menu de opções
+function menu() {
+	if (!menuAtivado) {
+		$("#usr-menu-container").addClass("ativado");
+		$("#usr-menu-container").addClass("menu-ativado");
+		$("#cabecalho-botao-container").addClass("cabecalho-botao-container-ativado");
+		menuAtivado = true;
+	} else {
+		$("#usr-menu-container").removeClass("menu-ativado");
+		$("#usr-menu-container").removeClass("ativado");
+		$("#cabecalho-botao-container").removeClass("cabecalho-botao-container-ativado");
+		menuAtivado = false; 
+	}
+}
 
 //AJAX: Adiciona as imagens ao documento HTML
 function adicionarImagens(conteudo, lista) {
@@ -10,13 +26,16 @@ function adicionarImagens(conteudo, lista) {
 		return;
 	}
 
-	$("#loading").addClass("desativado");
-
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
-		var novaImagem = $('<li><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="' + imagem.imagemUrlMiniatura + '"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
+		var novaImagem = $('<li class="desativado imagem-lista-item"><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img id="miniatura' + i + '"alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="/resources/loading.svg"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
 		$(lista).append(novaImagem);
+		$("#miniatura" + i).attr("src", imagem.imagemUrlMiniatura);
 	}
+
+	$("#loading").addClass("desativado");
+	$(".imagem-lista-item").removeClass("desativado");
+	$(".imagem-lista-item").addClass("animacao-opacidade");
 
 	reajustarConteudoCentro();
 }
@@ -100,11 +119,13 @@ function obterImagensUsuario(usuario, lista) {
 
 //Ajusta o conteudo-centro para ajustar-se a tela
 function ajustarConteudoCentro() {
-	if (!conteudoAjustado && $(window).width() <= 1024) {
+	if (!conteudoAjustado && $(window).width() <= 1026) {
 		//Documento
-		$(".conteudo-centro").css("width", "95vw");
+		$(".conteudo-centro").css("width", "100%");
+		$(".conteudo-centro").css("border", "0px");
 		$(".cabecalho-centro-container").css("width", "100%");
-		$(".conteudo-comentarios").css("width", "95vw");
+		$(".conteudo-comentarios").css("width", "100%");
+		$(".conteudo-comentarios").css("border", "0px");
 		$(".usuario-container").css("display", "none");
 
 		//Menu
@@ -142,11 +163,13 @@ function ajustarConteudoCentro() {
 		$(".comentario-data").css("font-size", "3vw");
 		
 		conteudoAjustado = true;
-	} else if (conteudoAjustado && $(window).width() > 1024) {
+	} else if (conteudoAjustado && $(window).width() > 1026) {
 		//Documento
 		$(".conteudo-centro").css("width", "");
-		$(".cabecalho-centro-container").css("width", "1024px");
+		$(".conteudo-centro").css("border", "");
+		$(".cabecalho-centro-container").css("width", "1026px");
 		$(".conteudo-comentarios").css("width", "");
+		$(".conteudo-comentarios").css("border", "");
 		$(".usuario-container").css("display", "");
 
 		//Menu
@@ -187,16 +210,18 @@ function ajustarConteudoCentro() {
 	}
 }
 
+//Vamos atualizar nosso conteudo dinamico pois agora o HTML mudou
 function reajustarConteudoCentro() {
-	//Vamos atualizar nosso conteudo dinamico pois agora o HTML mudou
-	if (conteudoAjustado && $(window).width() <= 1024) {
+	if (conteudoAjustado && $(window).width() <= 1026) {
 		conteudoAjustado = false;
 		ajustarConteudoCentro();
 	}
 }
 
+//Ajusta a posição do menu em relação a direita da tela, para que no layout de desktop
+//Sua posição seja correta
 function ajustarPosicaoMenu() {
-	if ($(window).width() <= 1024) {
+	if ($(window).width() <= 1026) {
 		$("#usr-menu-container").css("right", "0px");
 	} else {
 		$("#usr-menu-container").css("right", $(window).width() - ( $("#cabecalho-botao-container").offset().left + $("#cabecalho-botao-container").width() ));
@@ -217,6 +242,14 @@ function adicionarContadorCaracteres(elementoTexto, alvoAtualizar) {
 function desativarErro() {
 	$(".erro-fundo").addClass("desativado");
 }
+
+//Ao clicar, vamos executar a ação do menu
+$("#menu-botao").click(
+	function() {
+		menu();
+		ajustarPosicaoMenu();
+	}
+);
 
 //Ativando o ajustamento de página dinâmico
 ajustarConteudoCentro();

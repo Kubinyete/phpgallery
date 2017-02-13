@@ -111,24 +111,3 @@
 			<?php } ?>
 		</nav>
 	</header>
-	<script>
-		//Lógica de ativação de desativação do menu de opções
-		var menuAtivado = false; 
-
-		function menu() {
-			if (!menuAtivado) {
-				$("#usr-menu-container").addClass("ativado");
-				$("#usr-menu-container").addClass("menu-ativado");
-				$("#cabecalho-botao-container").addClass("cabecalho-botao-container-ativado");
-				menuAtivado = true;
-			} else {
-				$("#usr-menu-container").removeClass("menu-ativado");
-				$("#usr-menu-container").removeClass("ativado");
-				$("#cabecalho-botao-container").removeClass("cabecalho-botao-container-ativado");
-				menuAtivado = false; 
-			}
-		}
-
-		//Ao clicar, vamos executar a ação do menu
-		$("#menu-botao").click(menu);
-	</script>

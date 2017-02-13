@@ -118,7 +118,7 @@
 				<!-- Comentários -->
 				<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">
 			</ul>
-			<h1 class="texto texto-sessao"><i class="fa fa-comment azul"></i> Adicionar comentário</h1>
+			<h1 class="texto texto-sessao"><i class="fa fa-commenting azul"></i> Adicionar comentário</h1>
 			<div class="comentario-form-container">
 				<form method="POST" action="view.php?id=<?php echo $img->id; ?>" autocomplete="off">
 					<span class="texto descricao" id="chars-restantes-comentario"></span>

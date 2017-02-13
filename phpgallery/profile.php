@@ -1,5 +1,5 @@
 <?php
-	define("CABECALHO_TITULO", "PHPGallery - Perfil");
+	define("CABECALHO_TITULO", "phpgallery : Perfil");
 	require_once "header.php";
 
 	$erro = false;
@@ -149,7 +149,7 @@
 				</ul>
 			</div>
 			<?php if ($mostrarForm) { ?>
-			<h1 class="texto-sessao">Suas informações</h1>
+			<h1 class="texto-sessao"><i class="fa fa-pencil azul"></i> Suas informações</h1>
 			<div class="profile-formulario">
 				<form method="POST" action="profile.php" enctype="multipart/form-data" autocomplete="off">
 					<div class="profile-formulario-imagem">

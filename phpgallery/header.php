@@ -6,7 +6,7 @@
 	session_start();
 
 	$usuario = null;
-	$titulo = "PHPGallery";
+	$titulo = "phpgallery";
 
 	if (defined("CABECALHO_TITULO")) {
 		$titulo = CABECALHO_TITULO;

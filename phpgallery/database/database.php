@@ -313,7 +313,7 @@
 
  		//Adiciona um comentário a uma imagem
  		public function adicionar_comentario($comentario) {
- 			$comentario->conteudo = filtrar_escape_string_mssql($comentario->conteudo_formatado());
+ 			$comentario->conteudo = filtrar_escape_string_mssql(trim($comentario->conteudo));
  			$comentario->gerar_data_criacao();
 
  			$this->executar("INSERT INTO comentarios (cmt_imagem_id, cmt_conteudo, cmt_autor, cmt_datacriacao) VALUES ('" . $comentario->imagemId . "', '" . $comentario->conteudo . "', '" . $comentario->autor . "', '" . $comentario->dataCriacao . "')", true);

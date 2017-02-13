@@ -1,5 +1,5 @@
 <?php
-	define("CABECALHO_TITULO", "PHPGallery - Imagem");
+	define("CABECALHO_TITULO", "phpgallery : Informações da imagem");
 	require_once "header.php";
 
 	$erro = false;
@@ -109,12 +109,12 @@
 		</div>
 		<br>
 		<div class="conteudo-comentarios">
-			<h1 id="comentarios-texto-sessao" class="texto texto-sessao">Comentários <button id="botao-atualiza-comentarios" class="botao" onclick="atualizarComentarios(<?php echo $img->id; ?>)">Atualizar</button></h1>
+			<h1 id="comentarios-texto-sessao" class="texto texto-sessao"><i class="fa fa-comment azul"></i> Comentários <button id="botao-atualiza-comentarios" class="botao" onclick="atualizarComentarios(<?php echo $img->id; ?>)">Atualizar</button></h1>
 			<ul id="comentarios-lista" class="comentarios-lista">
 				<!-- Comentários -->
 				<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">
 			</ul>
-			<h1 class="texto texto-sessao">Adicionar comentário</h1>
+			<h1 class="texto texto-sessao"><i class="fa fa-comment azul"></i> Adicionar comentário</h1>
 			<div class="comentario-form-container">
 				<form method="POST" action="view.php?id=<?php echo $img->id; ?>" autocomplete="off">
 					<span class="texto descricao" id="chars-restantes-comentario"></span>

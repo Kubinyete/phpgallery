@@ -1,5 +1,5 @@
 <?php
-	define("CABECALHO_TITULO", "PHPGallery - Erro");
+	define("CABECALHO_TITULO", "phpgallery : Erro interno");
 	require_once "header.php";
 
 	header("Status: 500", true, 500);

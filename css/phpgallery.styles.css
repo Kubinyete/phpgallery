@@ -94,7 +94,7 @@ div.cabecalho-container {
 div.cabecalho-centro-container {
 	display: inline-block;
 	z-index: 101;
-	width: 100%;
+	width: 1024px;
 	height: 75px;
 	overflow: hidden;
 	text-align: center;
@@ -166,7 +166,6 @@ div.cabecalho-fundo {
 /* Menu */
 div.usr-menu-container {
 	z-index: 99;
-	transition: .2s ease-in-out;
 	position: fixed;
 	top: -128px;
 	right: 0px;
@@ -184,6 +183,7 @@ ul.usr-menu-lista {
 li.usr-menu-item {
 	text-align: center;
 	background-color: #222;
+	margin: -.5px;
 }
 
 li.usr-menu-item:hover {
@@ -202,7 +202,6 @@ p.usr-menu-item-texto {
 }
 
 .menu-ativado {
-	transition: .2s ease-in-out;
 	top: 75px !important;
 }
 
@@ -394,14 +393,15 @@ input.pesquisa:hover {
 }
 
 button.pesquisa-botao {
-	transition: .2s ease-in-out;
-	font-size: 20px;
+	transition: .2s;
+	font-size: 15px;
 	padding: 10px;
-	width: 75px;
-	margin-left: 5px;
+	width: 100px;
+	color: cornflowerblue;
 	border-radius: 2.5px;
-	background-color: #222;
-	border: 1px solid cornflowerblue;
+	background-color: rgba(0,0,0, .2);
+	border: 1px solid transparent;
+	margin-left: 5px;
 }
 
 button.pesquisa-botao i {

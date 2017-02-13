@@ -1,5 +1,5 @@
 <?php
-	define("CABECALHO_TITULO", "PHPGallery - Enviar");
+	define("CABECALHO_TITULO", "phpgallery : Enviar uma imagem");
 	require_once "header.php";
 
 	$erro = false;
@@ -78,6 +78,7 @@
 						$ok = move_uploaded_file($_FILES["imagem"]["tmp_name"], UPLOAD_IMAGENS_DESTINO . $dbImagem->id_md5_hash() . $dbImagem->ext);
 						if ($ok) {
 							header("Refresh: 0; url=view.php?id=" . $dbImagem->id, true);
+							exit();
 						} else {
 							$erro = "Não foi possível armazenar a imagem em disco.";
 						}

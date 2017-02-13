@@ -46,14 +46,14 @@ function adicionarComentarios(conteudo, lista) {
 function atualizarRecentes() {
 	$("#loading").removeClass("desativado");
 	$("#sessao-recentes-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
-	$.get("api/getrecents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
+	$.get("api/recents.php", function(data) { adicionarImagens(data, "#sessao-recentes-lista"); });
 }
 
 //Atualiza os comentários da pagina de uma imagem
 function atualizarComentarios(imagemid) {
 	$("#loading").removeClass("desativado");
 	$("#comentarios-lista").html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
-	$.get("api/getcomments.php?id=" + imagemid, function(data) { adicionarComentarios(data, "#comentarios-lista"); });
+	$.get("api/comments.php?id=" + imagemid, function(data) { adicionarComentarios(data, "#comentarios-lista"); });
 }
 
 //Realiza a pesquisa de imagens consultando a api
@@ -93,7 +93,7 @@ function pesquisarBotao() {
 function obterImagensUsuario(usuario, lista) {
 	$("#loading").removeClass("desativado");
 	$(lista).html('<img id="loading" alt="Ícone de carregamento" src="/resources/loading.svg" draggable="false">');
-	$.get("api/getuserimages.php?u=" + usuario, function(data) { adicionarImagens(data, lista); });
+	$.get("api/images.php?u=" + usuario, function(data) { adicionarImagens(data, lista); });
 }
 
 //Ajusta o conteudo-centro para ajustar-se a tela
@@ -101,14 +101,20 @@ function ajustarConteudoCentro() {
 	if (!conteudoAjustado && $(window).width() <= 1024) {
 		//Documento
 		$(".conteudo-centro").css("width", "95vw");
+		$(".cabecalho-centro-container").css("width", "100%");
 		$(".conteudo-comentarios").css("width", "95vw");
+		$(".usuario-container").css("display", "none");
+
+		//Menu
+		$("#usr-menu-container").css("width", "100%");
+		$("#usr-menu-container i").css("float", "left");
 
 		//Geral
 		$(".texto-sessao").css("font-size", "4vw");
 
 		//Miniaturas
-		$(".imagem-container img").css("max-width", "40vw");
-		$(".imagem-container img").css("max-height", "40vw");
+		$(".imagem-container img").css("max-width", "35vw");
+		$(".imagem-container img").css("max-height", "35vw");
 
 		//View
 		$(".view-imagem-data").css("font-size", "2.2vw");
@@ -132,7 +138,13 @@ function ajustarConteudoCentro() {
 	} else if (conteudoAjustado && $(window).width() > 1024) {
 		//Documento
 		$(".conteudo-centro").css("width", "");
+		$(".cabecalho-centro-container").css("width", "1024px");
 		$(".conteudo-comentarios").css("width", "");
+		$(".usuario-container").css("display", "");
+
+		//Menu
+		$("#usr-menu-container").css("width", "256px");
+		$("#usr-menu-container i").css("float", "");
 
 		//Geral
 		$(".texto-sessao").css("font-size", "");
@@ -171,6 +183,14 @@ function reajustarConteudoCentro() {
 	}
 }
 
+function ajustarPosicaoMenu() {
+	if ($(window).width() <= 1024) {
+		$("#usr-menu-container").css("right", "0px");
+	} else {
+		$("#usr-menu-container").css("right", $(window).width() - ( $("#cabecalho-botao-container").offset().left + $("#cabecalho-botao-container").width() ));
+	}
+}
+
 //Atualiza um contador de carácteres restantes
 function adicionarContadorCaracteres(elementoTexto, alvoAtualizar) {
 	$(elementoTexto).keyup(
@@ -188,4 +208,10 @@ function desativarErro() {
 
 //Ativando o ajustamento de página dinâmico
 ajustarConteudoCentro();
-$(window).resize(ajustarConteudoCentro);
+ajustarPosicaoMenu();
+$(window).resize(
+	function() {
+		ajustarConteudoCentro();
+		ajustarPosicaoMenu();
+	}
+);

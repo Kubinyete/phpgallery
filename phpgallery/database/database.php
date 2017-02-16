@@ -8,10 +8,10 @@
 
 		//Incializa a conexão
 		public function __construct() {
-			$this->conexao = odbc_connect(DB_STRING_CONEXAO, DB_USUARIO, DB_SENHA);
+			$this->conexao = @odbc_connect(DB_STRING_CONEXAO, DB_USUARIO, DB_SENHA);
 			
 			if (!$this->conexao) {
-				$this->erro("Não foi possível estabelecer uma conexão com o banco de dados.");
+				$this->erro(0);
 			}
 		}
 
@@ -22,15 +22,15 @@
 
 		//Envia um erro e finaliza a execução do script
 		private function erro($mensagem) {
-			header("Refresh: 0; url=error.php", true, 500);
+			header("Refresh: 0; url=error.php?cod=" . $mensagem, true, 500);
 			exit();
 		}
 
 		//Executa o comando e retorna o seu objeto referência
 		public function executar($comando, $salvar=false) {
-			$ok = odbc_exec($this->conexao, $comando);
+			$ok = @odbc_exec($this->conexao, $comando);
 			if (!$ok) {
-				$this->erro("Ocorreu um erro ao realizar uma consulta no banco de dados.");
+				$this->erro(1);
 			} else {
 				if ($salvar) {
 					odbc_commit($this->conexao);
@@ -55,6 +55,42 @@
  			$retorno = odbc_fetch_array($ok)["contagem"];
 
  			return $retorno;
+ 		}
+
+ 		//Obtem o número de gosteis de uma imagem
+ 		public function obter_contagem_gosteis($id) {
+ 			$retorno = 0;
+
+ 			$ok = $this->executar("SELECT COUNT(*) AS contagem FROM imagens_gosteis WHERE gst_imagem_id='" . $id . "'");
+
+ 			$retorno = odbc_fetch_array($ok)["contagem"];
+
+ 			return $retorno;
+ 		}
+
+ 		//Verifica se o usuário já gostou de uma imagem
+ 		public function gosteis_usuario_gostou($imagemId, $usuarioId) {
+ 			$retorno = false;
+
+ 			$ok = $this->executar("SELECT COUNT(*) AS contagem FROM imagens_gosteis WHERE gst_imagem_id='" . $imagemId . "' AND gst_autor_id='" . $usuarioId . "'");
+
+ 			$contagem = odbc_fetch_array($ok)["contagem"];
+
+ 			if ($contagem > 0) {
+ 				$retorno = true;	
+ 			}
+
+ 			return $retorno;
+ 		}
+
+ 		//Adiciona um gostei a uma imagem
+ 		public function adicionar_gostei($imagemId, $usuarioId) {
+ 			$this->executar("INSERT INTO imagens_gosteis (gst_imagem_id, gst_autor_id) VALUES ('" . $imagemId . "', '" . $usuarioId . "')", true);
+ 		}
+
+ 		//Remove um gostei de uma imagem
+ 		public function remover_gostei($imagemId, $usuarioId) {
+ 			$this->executar("DELETE FROM imagens_gosteis WHERE gst_imagem_id='" . $imagemId . "' AND gst_autor_id='" . $usuarioId . "'", true);
  		}
 
  		//Obtem um array que contêm todas as imagens recentes

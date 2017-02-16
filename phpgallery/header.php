@@ -2,8 +2,7 @@
 	require_once "database/database.php";
 
 	//Inicio de uma página que necessita de sessão (o objeto do usuário)
-
-	session_start();
+	@session_start();
 
 	$usuario = null;
 	$titulo = "phpgallery";
@@ -43,14 +42,26 @@
 			exit();
 		}
 	} else {
+		session_regenerate_id();
 		$_SESSION["usuario"] = null;
 	}
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt_BR">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Informações -->
+	<meta name="description" content="Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados">
+	<meta name="keywords" content="imagens, enviar, upload, download, compartilhar, fotos, wallpapers, papéis, parede">
+	<!-- Facebook -->
+	<meta property="og:locale" content="pt_BR">
+	<meta property="og:url" content="http://kubinyete.redirectme.net/phpgallery/home.php">
+	<meta property="og:title" content="Uma galeria de imagens construída em PHP e SQLServer">
+	<meta property="og:site_name" content="phpgallery">
+	<meta property="og:description" content="Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados">
+	<meta property="og:image" content="http://kubinyete.redirectme.net/resources/phpgallery-logo-full.png">
+
 	<title><?php echo $titulo; ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Ubuntu+Mono" rel="stylesheet">
 	<link href="/css/font-awesome.min.css" rel="stylesheet">

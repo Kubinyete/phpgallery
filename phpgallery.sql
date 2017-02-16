@@ -1,10 +1,10 @@
-/* Cria o banco de dados phpgallery */
+--Cria o banco de dados phpgallery
 CREATE DATABASE phpgallery;
 GO
 
 USE phpgallery;
 
-/* Cria o modelo de objeto Usuario */
+--Cria o modelo de objeto Usuario
 CREATE TABLE usuarios
 (
 	usr_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE usuarios
 	usr_dataregistro char(17) NOT NULL
 )
 
-/* Cria o modelo de objeto Imagem */
+--Cria o modelo de objeto Imagem
 CREATE TABLE imagens
 (
 	img_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -27,7 +27,14 @@ CREATE TABLE imagens
 	img_datacriacao char(17) NOT NULL
 )
 
-/* Comentários */
+--Cria o modelo de 'gostei'
+CREATE TABLE imagens_gosteis
+(
+	gst_imagem_id bigint NOT NULL,
+	gst_autor_id bigint NOT NULL
+)
+
+--Comentários
 CREATE TABLE comentarios
 (
 	cmt_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,

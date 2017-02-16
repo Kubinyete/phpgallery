@@ -1,0 +1,1 @@
+Diretório aonde será armazenado todas as imagens enviadas pelos usuários.

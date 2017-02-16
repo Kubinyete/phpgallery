@@ -192,7 +192,7 @@ ul.usr-menu-lista {
 li.usr-menu-item {
 	text-align: center;
 	background-color: #222;
-	margin: -.5px;
+	margin: -1px;
 }
 
 li.usr-menu-item:hover {
@@ -315,6 +315,8 @@ div.imagem-container img {
 	padding: 0px;
 	padding: 5px;
 	color: #ddd;
+	max-height: 50%;
+	overflow: hidden;
 }
 
 div.imagem-container i {
@@ -444,7 +446,9 @@ button.pesquisa-botao:hover i {
 /* Login */
 div.login-container {
 	display: inline-block;
-	margin: 25px;
+	margin: 0px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 	width: 100%;
 }
 
@@ -571,6 +575,10 @@ div.usuario-container p {
 	display: inline-block;
 }
 
+#form-gostei-imagem {
+	display: inline-block;
+}
+
 img.imagem-full {
 	max-width: 100%;
 }
@@ -642,7 +650,7 @@ div.download-caixa:hover p {
 }
 
 div.download-caixas-protetor {
-	min-width: 310px;
+	min-width: 450px;
 }
 
 /* Profile */

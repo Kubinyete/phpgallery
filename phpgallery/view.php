@@ -1,7 +1,7 @@
 <?php
 	define("CABECALHO_TITULO", "phpgallery : Informações da imagem");
 	require_once "header.php";
-
+	
 	$erro = false;
 	$imgId = null;
 	$img = null;
@@ -9,6 +9,8 @@
 	$comentarioErro = false;
 	$conteudo = "";
 	$imagemEAutorLogado = false;
+	$contagemGosteis = 0;
+	$usuarioJaGostou = false;
 
 	//Pedido GET com query id?
 	if (isset($_GET["id"])) {
@@ -37,9 +39,17 @@
 					$img->gerar_descricao_formatada();
 
 					//Se o usuário que está visualizando a página é o próprio autor da imagem
-					if (isset($_SESSION["usuario"]) && $img !== null && $_SESSION["usuario"]->id === $imgAutor->id) {
-						$imagemEAutorLogado = true;
+					if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !== null) {
+						if ($_SESSION["usuario"]->id === $imgAutor->id) {
+							$imagemEAutorLogado = true;
+						}
+						if ($db->gosteis_usuario_gostou($img->id, $_SESSION["usuario"]->id)) {
+							$usuarioJaGostou = true;
+						}
 					}
+
+					//Se o usuário já gostou da imagem
+
 
 					if ($_SERVER["REQUEST_METHOD"] === "POST") {
 						//Se o usuário enviou um pedido POST, é para adicionar um comentário
@@ -68,8 +78,22 @@
 								header("Refresh: 0; url=home.php", true);
 								exit();
 							}
+						} else if (isset($_POST["gostei"]) && $_POST["gostei"] === "1") {
+							if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !== null) {
+								if (!$usuarioJaGostou) {
+									$db->adicionar_gostei($img->id, $_SESSION["usuario"]->id);
+									$usuarioJaGostou = true;
+								} else {
+									$db->remover_gostei($img->id, $_SESSION["usuario"]->id);
+									$usuarioJaGostou = false;
+								}
+							} else {
+								$comentarioErro = "É preciso estar logado para poder curtir uma imagem.";
+							}
 						}
 					}
+
+					$contagemGosteis = $db->obter_contagem_gosteis($img->id);
 				}
 
 				$db->finalizar();
@@ -88,20 +112,30 @@
 			<?php if ($imagemEAutorLogado) { ?>
 			<div class="download-caixas-protetor">
 			<?php } ?>
-			<a class="link" href="download.php?id=<?php echo $img->id; ?>">
-			<div class="download-caixa">
-				<p class="texto descricao"><i class="fa fa-download vermelho"></i> Download</p>
-			</div>
-			</a>
-			<?php if ($imagemEAutorLogado) { ?>
-			<form id="form-deletar-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
-				<a class="link" href="#/" onclick="if (confirm('Você tem certeza que deseja remover esta imagem?')) { $('#form-deletar-imagem').submit(); }">
+				<!-- Gostei -->
+				<form id="form-gostei-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
+					<a class="link" href="#/" onclick="$('#form-gostei-imagem').submit();">
+					<div class="download-caixa">
+						<p class="texto descricao"><i class="fa fa-thumbs-up <?php if ($usuarioJaGostou) { echo "azul"; } else { echo "vermelho"; } ?>"></i> <?php echo $contagemGosteis; ?> Curtiram</p>
+					</div>
+					<input type="hidden" name="gostei" value="1">
+					</a>
+				</form>
+				<!-- Download -->
+				<a class="link" href="download.php?id=<?php echo $img->id; ?>">
 				<div class="download-caixa">
-					<p class="texto descricao"><i class="fa fa-trash vermelho"></i> Excluir</p>
+					<p class="texto descricao"><i class="fa fa-download vermelho"></i> Download</p>
 				</div>
-				<input type="hidden" name="excluir" value="1">
 				</a>
-			</form>
+				<?php if ($imagemEAutorLogado) { ?>
+				<form id="form-deletar-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
+					<a class="link" href="#/" onclick="if (confirm('Você tem certeza que deseja remover esta imagem?')) { $('#form-deletar-imagem').submit(); }">
+					<div class="download-caixa">
+						<p class="texto descricao"><i class="fa fa-trash vermelho"></i> Excluir</p>
+					</div>
+					<input type="hidden" name="excluir" value="1">
+					</a>
+				</form>
 			</div>
 			<?php } ?>
 			<div class="view-usuario-container">

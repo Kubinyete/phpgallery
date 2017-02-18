@@ -11,6 +11,7 @@
 	$imagemEAutorLogado = false;
 	$contagemGosteis = 0;
 	$usuarioJaGostou = false;
+	$usuarioEstaLogado = false;
 
 	//Pedido GET com query id?
 	if (isset($_GET["id"])) {
@@ -38,18 +39,18 @@
 					$img->gerar_titulo_formatado();
 					$img->gerar_descricao_formatada();
 
-					//Se o usuário que está visualizando a página é o próprio autor da imagem
 					if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !== null) {
+						//Se o usuário que está visualizando a página é o próprio autor da imagem
 						if ($_SESSION["usuario"]->id === $imgAutor->id) {
 							$imagemEAutorLogado = true;
 						}
+						//Se o usuário já gostou da imagem
 						if ($db->gosteis_usuario_gostou($img->id, $_SESSION["usuario"]->id)) {
 							$usuarioJaGostou = true;
 						}
+
+						$usuarioEstaLogado = true;
 					}
-
-					//Se o usuário já gostou da imagem
-
 
 					if ($_SERVER["REQUEST_METHOD"] === "POST") {
 						//Se o usuário enviou um pedido POST, é para adicionar um comentário
@@ -79,7 +80,7 @@
 								exit();
 							}
 						} else if (isset($_POST["gostei"]) && $_POST["gostei"] === "1") {
-							if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !== null) {
+							if ($usuarioEstaLogado) {
 								if (!$usuarioJaGostou) {
 									$db->adicionar_gostei($img->id, $_SESSION["usuario"]->id);
 									$usuarioJaGostou = true;
@@ -115,7 +116,7 @@
 				<!-- Gostei -->
 				<form id="form-gostei-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
 					<a class="link" href="#/" onclick="$('#form-gostei-imagem').submit();">
-					<div class="download-caixa">
+					<div class="download-caixa <?php echo (($usuarioJaGostou) ? "download-caixa-ativado" : ""); ?>">
 						<p class="texto descricao"><i class="fa fa-thumbs-up <?php if ($usuarioJaGostou) { echo "azul"; } else { echo "vermelho"; } ?>"></i> <?php echo $contagemGosteis; ?> Curtiram</p>
 					</div>
 					<input type="hidden" name="gostei" value="1">

@@ -27,11 +27,28 @@
 				$novaLargura = $largura;
 				$novaAltura = $altura;
 
+				//1.1a Agilizando o processamento
+				if ($novaAltura > 250) {
+					$novaAltura = 250;
+					$novaLargura = $largura / $altura * $novaAltura;
+				}
+				if ($novaLargura > 250) {
+					$novaLargura = 250;
+					$novaAltura = $novaLargura / ($largura / $altura);
+				}
+
+				//nw = w / h * nh
+				//nh = (w / h) / nw
+				//256 x 128
+				//nh = 250 / (256 / 128)
+
+				/*
 				//Obtendo nova altura e largura sem destruir a aspect ratio da imagem (A imagem não ficará esticada)
 				while ($novaLargura > 250 || $novaAltura > 250) {
 					$novaAltura = $novaAltura - 1;
 					$novaLargura = $largura / $altura * $novaAltura;
 				}
+				*/
 
 				$miniatura = imagecreatetruecolor($novaLargura, $novaAltura);
 				imagecopyresampled($miniatura, $imagemData, 0, 0, 0, 0, $novaLargura, $novaAltura, $largura, $altura);

@@ -629,6 +629,14 @@ div.download-caixa:hover {
 	background-color: rgba(0,0,0, .3);
 }
 
+.download-caixa-ativado {
+	background-color: rgba(0,0,0, .3) !important;
+}
+
+.download-caixa-ativado p {
+	color: cornflowerblue !important;
+}
+
 div.download-caixa p {
 	margin: 0px;
 }

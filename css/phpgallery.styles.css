@@ -97,6 +97,8 @@ div.cabecalho-container {
 	height: 75px;
 	overflow: hidden;
 	text-align: center;
+	margin: 0px;
+	margin-top: -1px;
 	box-shadow: 0px 2px 6px #1c1c1c;
 }
 
@@ -482,6 +484,7 @@ button.botao {
 	font-size: 15px;
 	padding: 10px;
 	width: 100px;
+	opacity: 1;
 	color: cornflowerblue;
 	border-radius: 2.5px;
 	background-color: rgba(0,0,0, .2);
@@ -526,6 +529,34 @@ div.erro h1 {
 
 div.erro p {
 	font-family: Ubuntu Condensed, Arial, sans-serif;
+}
+
+div.erro-fechar-animacao {
+	animation: .2s ease-in-out erro-fechar-keyframes;
+}
+
+div.erro-fechar-fade {
+	animation: .2s ease-in-out erro-fechar-fade-keyframes;
+}
+
+@keyframes erro-fechar-keyframes {
+	from {
+		opacity: 1;
+		transform: translate(0px, -50%) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translate(0px, 0%) scale(.1);
+	}
+}
+
+@keyframes erro-fechar-fade-keyframes {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
 
 /* Header usuario logado */
@@ -584,7 +615,7 @@ img.imagem-full {
 }
 
 div.view-usuario-container {
-	background-color: rgba(0,0,0, .2);
+	background-color: #282828;
 	overflow: hidden;
 	padding-top: 5px; 
 }
@@ -616,33 +647,49 @@ img.usuario-imagem {
 div.download-caixa {
 	display: inline-block;
 	transition: .2s ease-in-out;
-	width: 125px;
+	/* width: 125px; */
 	height: 15px;
-	padding: 10px;
+	padding: 15px;
+	margin-bottom: -1px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	background-color: rgba(0,0,0, .2);
+	background-color: #282828;
 }
 
 div.download-caixa:hover {
 	transition: .2s ease-in-out;
-	background-color: rgba(0,0,0, .3);
+	background-color: cornflowerblue;
+	transform: scale(1.1);
+	border-radius: 10px;
 }
 
 .download-caixa-ativado {
-	background-color: rgba(0,0,0, .3) !important;
+	background-color: cornflowerblue !important;
+	transform: scale(1.1) !important;
+	border-radius: 10px !important;
 }
 
 .download-caixa-ativado p {
-	color: cornflowerblue !important;
+	
+}
+
+.download-caixa-ativado i {
+	color: white !important;
 }
 
 div.download-caixa p {
+	transition: .2s ease-in-out;
 	margin: 0px;
 }
 
 div.download-caixa:hover p {
-	color: cornflowerblue;
+	transition: .2s ease-in-out;
+	transform: translate(0px, -4px);
+}
+
+div.download-caixas-protetor {
+	min-width: 250px;
+	background-color: rgba(0,0,0,.2);
 }
 
 #botao-atualiza-comentarios {
@@ -655,10 +702,6 @@ div.download-caixa:hover p {
 
 #comentarios-texto-sessao {
 	position: relative;
-}
-
-div.download-caixas-protetor {
-	min-width: 450px;
 }
 
 /* Profile */

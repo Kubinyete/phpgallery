@@ -73,7 +73,7 @@
 						} else if (isset($_POST["excluir"]) && $_POST["excluir"] === "1") {
 							if ($imagemEAutorLogado) {
 								//Vamos remover a imagem
-								$db->remover_imagem($img, true);
+								$db->remover_imagem($img);
 								$db->finalizar();
 								@unlink(DOWNLOAD_HTDOCS . $img->imagem_url());
 								header("Refresh: 0; url=home.php", true);
@@ -117,7 +117,7 @@
 				<form id="form-gostei-imagem" method="POST" action="view.php?id=<?php echo $img->id; ?>">
 					<a class="link" href="#/" onclick="$('#form-gostei-imagem').submit();">
 					<div class="download-caixa <?php echo (($usuarioJaGostou) ? "download-caixa-ativado" : ""); ?>">
-						<p class="texto descricao"><i class="fa fa-thumbs-up <?php if ($usuarioJaGostou) { echo "azul"; } else { echo "vermelho"; } ?>"></i> <?php echo $contagemGosteis; ?> Curtiram</p>
+						<p class="texto descricao"><i class="fa fa-thumbs-up <?php if ($usuarioJaGostou) { echo "azul"; } else { echo "vermelho"; } ?>"></i> <?php echo $contagemGosteis; ?></p>
 					</div>
 					<input type="hidden" name="gostei" value="1">
 					</a>

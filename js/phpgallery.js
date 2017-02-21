@@ -26,6 +26,7 @@ function adicionarImagens(conteudo, lista) {
 		return;
 	}
 
+	/*
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
 		var novaImagem = $('<li class="desativado imagem-lista-item"><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img id="miniatura' + i + '"alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="/resources/loading.svg"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
@@ -36,6 +37,16 @@ function adicionarImagens(conteudo, lista) {
 	$("#loading").addClass("desativado");
 	$(".imagem-lista-item").removeClass("desativado");
 	$(".imagem-lista-item").addClass("animacao-opacidade");
+	*/
+
+	$("#loading").addClass("desativado");
+
+	for (var i = 0; i < imagens.length; i++) {
+		var imagem = imagens[i];
+		var novaImagem = $('<li class="imagem-lista-item animacao-opacidade"><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img id="miniatura' + i + '"alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="/resources/loading.svg"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
+		$(lista).append(novaImagem);
+		$("#miniatura" + i).attr("src", imagem.imagemUrlMiniatura);
+	}
 
 	reajustarConteudoCentro();
 }
@@ -149,6 +160,7 @@ function ajustarConteudoCentro() {
 		$(".view-imagem-descricao").css("font-size", "2.6vw");
 		$("#botao-atualiza-comentarios").css("font-size", "2.6vw");
 		$("#botao-atualiza-comentarios").css("bottom", "20%");
+		$(".download-caixa").css("padding", "2vw");
 
 		//Perfil
 		$(".profile-usuario-placar .usuario-nome").css("font-size", "2vw");
@@ -193,6 +205,7 @@ function ajustarConteudoCentro() {
 		$(".view-imagem-descricao").css("font-size", "");
 		$("#botao-atualiza-comentarios").css("font-size", "");
 		$("#botao-atualiza-comentarios").css("bottom", "");
+		$(".download-caixa").css("padding", "");
 
 		//Perfil
 		$(".profile-usuario-placar .usuario-nome").css("font-size", "");
@@ -240,7 +253,9 @@ function adicionarContadorCaracteres(elementoTexto, alvoAtualizar) {
 
 //Desativa nossa caixa de diálogo que contêm o erro atual
 function desativarErro() {
-	$(".erro-fundo").addClass("desativado");
+	$(".erro-fundo .erro").addClass("erro-fechar-animacao");
+	$(".erro-fundo").addClass("erro-fechar-fade");
+	setTimeout(function(){$(".erro-fundo").addClass("desativado");}, 190);
 }
 
 //Ao clicar, vamos executar a ação do menu

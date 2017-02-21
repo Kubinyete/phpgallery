@@ -372,9 +372,12 @@
  		}
 
  		//Remove uma imagem de um usuário
- 		public function remover_imagem($imagem, $deletarComentarios) {
+ 		public function remover_imagem($imagem, $deletarComentarios=true, $deletarGosteis=true) {
  			if ($deletarComentarios) {
  				$this->executar("DELETE FROM comentarios WHERE cmt_imagem_id='" . $imagem->id . "'");
+ 			}
+ 			if ($deletarGosteis) {
+ 				$this->executar("DELETE FROM imagens_gosteis WHERE gst_imagem_id='" . $imagem->id . "'");
  			}
  			$this->executar("DELETE FROM imagens WHERE img_id='" . $imagem->id . "'", true);
  		}

@@ -43,11 +43,12 @@ function adicionarImagens(conteudo, lista) {
 
 	for (var i = 0; i < imagens.length; i++) {
 		var imagem = imagens[i];
-		var novaImagem = $('<li class="imagem-lista-item animacao-opacidade"><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img id="miniatura' + i + '"alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="/resources/loading.svg"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
-		$(lista).append(novaImagem);
+		$(lista).append('<li class="imagem-lista-item animacao-opacidade"><div class="imagem-container"><a class="link" href="javascript:visualizarImagem(\'' + imagem.imagemUrl + '\');"><img id="miniatura' + i + '"alt="' + imagem.titulo + '" title="Enviado por ' + imagem.autor + '\n' + imagem.descricao + '" src="/resources/loading.svg"></a><h2 class="imagem-titulo">' + imagem.titulo + '</h2><a href="view.php?id=' + imagem.id + '"><i class="fa fa-caret-square-o-up normal"></i></a></div></li>');
+		//Vamos atualizar a imagem de minitura depois, para que apareca o efeito de loading do loading.svg
 		$("#miniatura" + i).attr("src", imagem.imagemUrlMiniatura);
 	}
 
+	//Reajustando o conteudo, caso o usuário tenha aberto o menu enquanto o html se ajustava
 	reajustarConteudoCentro();
 }
 
@@ -262,6 +263,7 @@ function desativarErro() {
 $("#menu-botao").click(
 	function() {
 		menu();
+		//Reajustando o conteudo, caso o usuário tenha aberto o menu enquanto o html se ajustava
 		ajustarPosicaoMenu();
 	}
 );

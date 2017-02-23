@@ -39,7 +39,7 @@
 					$img->gerar_titulo_formatado();
 					$img->gerar_descricao_formatada();
 
-					if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !== null) {
+					if (isset($_SESSION["usuario"])) {
 						//Se o usuário que está visualizando a página é o próprio autor da imagem
 						if ($_SESSION["usuario"]->id === $imgAutor->id) {
 							$imagemEAutorLogado = true;
@@ -55,7 +55,7 @@
 					if ($_SERVER["REQUEST_METHOD"] === "POST") {
 						//Se o usuário enviou um pedido POST, é para adicionar um comentário
 						if (isset($_POST["conteudo"])) {
-							if ($_SESSION["usuario"] !== null) {
+							if (isset($_SESSION["usuario"])) {
 								$comentarioAutor = $_SESSION["usuario"];
 								$conteudo = $_POST["conteudo"];
 

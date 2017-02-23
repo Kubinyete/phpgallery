@@ -3,6 +3,9 @@
 
 	//Inicio de uma página que necessita de sessão (o objeto do usuário)
 	@session_start();
+	if (!campo_valido(session_id())) {
+		session_regenerate_id();
+	}
 
 	$usuario = null;
 	$titulo = "phpgallery";
@@ -41,9 +44,6 @@
 			header("Refresh: 0; url=login.php", true);
 			exit();
 		}
-	} else {
-		session_regenerate_id();
-		$_SESSION["usuario"] = null;
 	}
 ?>
 <!DOCTYPE html>
@@ -115,7 +115,7 @@
 						<a class="link" href="profile.php"><p class="usr-menu-item-texto"><i class="fa fa-user azul"></i> Perfil</p></a>
 					</li>
 					<li class="usr-menu-item">
-						<a class="link" href="logoff.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-out azul"></i> Sair</p></a>
+						<a class="link" href="logout.php"><p class="usr-menu-item-texto"><i class="fa fa-sign-out azul"></i> Sair</p></a>
 					</li>
 				</ul>
 			</div>

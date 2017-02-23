@@ -27,12 +27,14 @@
 
 	} else {
 		//Vamos visualizar o nosso próprio perfil
-		$usuario = $_SESSION["usuario"];
 
-		if ($usuario !== null) {
+		if (isset($_SESSION["usuario"])) {
+			$usuario = $_SESSION["usuario"];
+
 			$db = new Database();
 			$totalImagensEnviadas = $db->obter_numero_imagens($usuario->nome);
 			$db->finalizar();
+			
 			$mostrarForm = true;
 		}
 	}

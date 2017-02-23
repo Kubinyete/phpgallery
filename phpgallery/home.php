@@ -7,7 +7,7 @@
 			<div class="sessao-recentes">
 				<h1 id="texto-sessao-recentes" class="texto-sessao"><i class="fa fa-image azul"></i> Adicionados recentemente</h1>
 				<div class="fundo-preto pesquisa">
-					<input id="pesquisa" class="pesquisa" type="search" placeholder="Pesquisar">
+					<input id="pesquisa" class="pesquisa" type="text" placeholder="Pesquisar">
 					<button id="pesquisa-botao" class="pesquisa-botao" onclick="pesquisarBotao();"><i class="fa fa-paper-plane azul"></i></button>
 				</div>
 				<ul id="sessao-recentes-lista" class="sessao-recentes-lista">

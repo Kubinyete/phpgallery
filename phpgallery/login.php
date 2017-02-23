@@ -4,12 +4,8 @@
 
 	//Se o usuário já está registrado, volte ele para a página principal
 	if (isset($_SESSION["usuario"])) {
-		$usuario = $_SESSION["usuario"];
-
-		if ($usuario !== null) {
-			header("Refresh: 0; url=home.php", true);
-			exit();
-		}
+		header("Refresh: 0; url=home.php", true);
+		exit();
 	}
 
 	$erro = false;
@@ -17,9 +13,6 @@
 	$senha = "";
 
 	if ($_SERVER["REQUEST_METHOD"] === "POST") {
-		$nome;
-		$senha;
-
 		if (!isset($_POST["nome"]) || !isset($_POST["senha"])) {
 			$erro = "É preciso informar o nome e a senha do usuário.";
 		} else {

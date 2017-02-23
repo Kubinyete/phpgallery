@@ -11,9 +11,9 @@
 	
 	if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		//Primeiro vamos obter nosso autor
-		$usuario = $_SESSION["usuario"];
 
-		if ($usuario !== null) {
+		if (isset($_SESSION["usuario"])) {
+			$usuario = $_SESSION["usuario"];
 			//Vamos tentar obter a imagem
 			//O usuário está usando um form que contêm imagem
 			if (!isset($_FILES["imagem"])) {

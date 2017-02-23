@@ -1,5 +1,8 @@
 <?php
-	require_once "objects.php";
+	require_once "util.php";
+	require_once "user.php";
+	require_once "image.php";
+	require_once "comment.php";
 
 	//Classe responsável por estabelecer uma conexão com o banco de dados e obter objetos
 	class Database {

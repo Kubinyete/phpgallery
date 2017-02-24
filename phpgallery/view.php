@@ -1,7 +1,11 @@
 <?php
-	define("CABECALHO_TITULO", "phpgallery : Informações da imagem");
-	require_once "header.php";
+	//define("CABECALHO_TITULO", "phpgallery : Informações da imagem");
+	//require_once "header.php";
+	require_once "database/database.php";
+	require_once "session.php";
 	
+	$titulo = "Informações da imagem";
+
 	$erro = false;
 	$imgId = null;
 	$img = null;
@@ -38,6 +42,13 @@
 					//Poderiamos ter utilizado os métodos titulo_formatado() & descricao_formatada() tambêm
 					$img->gerar_titulo_formatado();
 					$img->gerar_descricao_formatada();
+
+					$titulo = "(" . $img->id . ") " . $img->titulo;
+
+					define("OG_URL", "view.php?id=" . $img->id);
+					define("OG_TITULO", $img->titulo);
+					define("OG_DESCRICAO", $img->descricao);
+					define("OG_IMAGE", $img->imagem_url());
 
 					if (isset($_SESSION["usuario"])) {
 						//Se o usuário que está visualizando a página é o próprio autor da imagem
@@ -101,6 +112,9 @@
 			}
 		}
 	}
+
+	define("CABECALHO_TITULO", "phpgallery : " . $titulo);
+	require_once "header.php";
 ?>
 
 <?php if ($img !== null) { ?>

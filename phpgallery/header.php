@@ -1,18 +1,16 @@
 <?php
 	require_once "database/database.php";
-
-	//Inicio de uma página que necessita de sessão (o objeto do usuário)
-	@session_start();
-	if (!campo_valido(session_id())) {
-		session_regenerate_id();
-	}
+	require_once "session.php";
 
 	$usuario = null;
-	$titulo = "phpgallery";
+	$titulo = (defined("CABECALHO_TITULO")) ? CABECALHO_TITULO : "phpgallery";
 
-	if (defined("CABECALHO_TITULO")) {
-		$titulo = CABECALHO_TITULO;
-	}
+	$og = [
+		"url" => (defined("OG_URL")) ? OG_URL : "home.php",
+		"title" => (defined("OG_TITULO")) ? OG_TITULO : "Uma galeria de imagens construída em PHP e SQLServer",
+		"description" => (defined("OG_DESCRICAO")) ? OG_DESCRICAO : "Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados",
+		"image" => (defined("OG_IMAGE")) ? OG_IMAGE : "/resources/phpgallery-logo-full.jpg"
+	];
 
 	if (isset($_SESSION["usuario"])) {
 		$usuario = $_SESSION["usuario"];
@@ -56,11 +54,11 @@
 	<meta name="keywords" content="imagens, enviar, upload, download, compartilhar, fotos, wallpapers, papéis, parede">
 	<!-- Facebook -->
 	<meta property="og:locale" content="pt_BR">
-	<meta property="og:url" content="http://kubinyete.redirectme.net/phpgallery/home.php">
-	<meta property="og:title" content="Uma galeria de imagens construída em PHP e SQLServer">
+	<meta property="og:url" content="http://kubinyete.redirectme.net/phpgallery/<?php echo $og["url"]; ?>">
+	<meta property="og:title" content="<?php echo $og["title"]; ?>">
 	<meta property="og:site_name" content="phpgallery">
-	<meta property="og:description" content="Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados">
-	<meta property="og:image" content="http://kubinyete.redirectme.net/resources/phpgallery-logo-full.png">
+	<meta property="og:description" content="<?php echo $og["description"]; ?>">
+	<meta property="og:image" content="http://kubinyete.redirectme.net<?php echo $og["image"]; ?>">
 
 	<title><?php echo $titulo; ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Condensed|Ubuntu+Mono" rel="stylesheet">

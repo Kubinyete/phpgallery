@@ -1,45 +1,46 @@
---Cria o banco de dados phpgallery
-CREATE DATABASE phpgallery;
+CREATE DATABASE PHPGallery2;
+
 GO
 
-USE phpgallery;
+USE PHPGallery2;
 
---Cria o modelo de objeto Usuario
-CREATE TABLE usuarios
+GO
+
+CREATE TABLE Usuarios
 (
-	usr_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	usr_id int NOT NULL PRIMARY KEY IDENTITY(1,1),
 	usr_nome varchar(16) NOT NULL,
-	usr_senha char(32) NOT NULL,
-	usr_descricao varchar(150),
-	usr_temimagem bit NOT NULL DEFAULT 0,
-	usr_dataregistro char(17) NOT NULL
-)
+	usr_senha char(64) NOT NULL,
+	usr_descricao varchar(300) NULL,
+	usr_tem_imagem_perfil bit NOT NULL DEFAULT 0,
+	usr_data_criacao datetime NOT NULL,
+	usr_online_timestamp int NULL,
+);
 
---Cria o modelo de objeto Imagem
-CREATE TABLE imagens
+CREATE TABLE Imagens
 (
-	img_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	img_titulo varchar(64),
-	img_descricao varchar(150),
-	img_privado bit NOT NULL DEFAULT 0,
-	img_ext varchar(6) NOT NULL,
-	img_autor varchar(16) NOT NULL,
-	img_datacriacao char(17) NOT NULL
-)
+	img_id int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	--usr_id int NOT NULL FOREIGN KEY REFERENCES Usuarios(usr_id),
+	img_titulo varchar(64) NULL,
+	img_descricao varchar(300) NULL,
+	img_data_criacao datetime NOT NULL,
+	img_extensao varchar(4) NOT NULL,
+);
 
---Cria o modelo de 'gostei'
-CREATE TABLE imagens_gosteis
+CREATE TABLE Comentarios
 (
-	gst_imagem_id bigint NOT NULL,
-	gst_autor_id bigint NOT NULL
-)
+	cmt_id int NOT NULL PRIMARY KEY IDENTITY(1,1),
+	--img_id int NOT NULL FOREIGN KEY REFERENCES Imagens(img_id),
+	--usr_id int NOT NULL FOREIGN KEY REFERENCES Usuarios(usr_id),
+	cmt_conteudo varchar(300) NOT NULL,
+	cmt_data_criacao datetime NOT NULL,
+);
 
---Comentários
-CREATE TABLE comentarios
-(
-	cmt_id bigint NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	cmt_imagem_id bigint NOT NULL,
-	cmt_conteudo varchar(150) NOT NULL,
-	cmt_autor varchar(16) NOT NULL,
-	cmt_datacriacao char(17) NOT NULL
-)
+GO
+
+ALTER TABLE Imagens
+ADD usr_id int NOT NULL FOREIGN KEY REFERENCES Usuarios(usr_id);
+
+ALTER TABLE Comentarios
+ADD img_id int NOT NULL FOREIGN KEY REFERENCES Imagens(img_id),
+usr_id int NOT NULL FOREIGN KEY REFERENCES Usuarios(usr_id);

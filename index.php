@@ -36,12 +36,21 @@ switch ($pedido_pagina) {
     case "enviar":
         require_once "WebInterface/enviar.php";
         break;
+    case "procurar":
+        require_once "WebInterface/procurar.php";
+        break;
+    case "status":
+        require_once "WebInterface/status.php";
+        break;
     //404 Not Found
     default:
         require_once "WebInterface/404.php";
         break;
 }
 
+#require_once "WebInterface/rodape.php";
+
 ?>
+    </main>
 </body>
 </html>

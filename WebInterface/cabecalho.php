@@ -18,6 +18,7 @@ $html_autor = (defined("HTML_AUTOR")) ? HTML_AUTOR : Referencias::$html_autor_pa
 <html lang="pt_BR">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="<?php echo $html_descricao; ?>">
 	<meta name="keywords" content="<?php echo $html_palavras_chave; ?>">

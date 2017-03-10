@@ -22,16 +22,8 @@ $usuario_logado = Sessao::get_usuario();
 ?>
 	<header class="cabecalho">
 		<a href="<?php echo (Referencias::$script_inicial === "") ? "?v=home" : Referencias::$script_inicial; ?>" class="link">
-			<img id="cabecalho-logo" draggable="false" src="<?php echo Referencias::$caminho_logo_imagem; ?>" alt="Logo da aplicação">
+			<img id="cabecalho-logo" draggable="false" src="recursos/phpgallery/phpgallery-logo.png" alt="Logo da aplicação">
 		</a>
-		<!-- Pesquisa de imagens -->
-		<form id="cabecalho-pesquisa" method="GET" action="<?php echo Referencias::$script_procurar; ?>" autocomplete="off">
-			<?php if (Referencias::$script_procurar === "") { ?>
-			<input type="hidden" name="v" value="procurar">
-			<?php } ?>
-			<input type="text" name="s" placeholder="Pesquisar">
-			<i class="fa fa-search"></i>
-		</form>
 		<!-- Navegação principal -->
 		<nav class="cabecalho-nav">
 			<ul class="cabecalho-links-lista">
@@ -44,8 +36,19 @@ $usuario_logado = Sessao::get_usuario();
 				<li>
 					<a href="<?php echo (Referencias::$script_enviar === "") ? "?v=enviar" : Referencias::$script_enviar; ?>" class="link">Enviar</a>
 				</li>
+				<li>
+					<a href="<?php echo (Referencias::$script_status === "") ? "?v=status" : Referencias::$script_status; ?>" class="link">Status</a>
+				</li>
 			</ul>
 		</nav>
+		<!-- Pesquisa de imagens -->
+		<form id="cabecalho-pesquisa" method="GET" action="<?php echo Referencias::$script_procurar; ?>" autocomplete="off">
+			<?php if (Referencias::$script_procurar === "") { ?>
+			<input type="hidden" name="v" value="procurar">
+			<?php } ?>
+			<input type="text" name="s" placeholder="Pesquisar">
+			<i class="fa fa-search"></i>
+		</form>
 		<?php if ($usuario_logado !== null) { ?>
 
 		<!-- Usuário Container -->
@@ -66,3 +69,12 @@ $usuario_logado = Sessao::get_usuario();
 
 		<?php } ?>
 	</header>
+	<!-- Conteúdo -->
+	<main class="conteudo conteudo-margem">
+		<div class="imagem-showcase">
+			<div class="imagem-showcase-container">
+				<div class="imagem-showcase-imagem"></div>
+				<span id="imagem-showcase-titulo"><span id="azul">PHP</span>Gallery</span>
+			</div>
+			<div class="imagem-showcase-gradient"></div>
+		</div>

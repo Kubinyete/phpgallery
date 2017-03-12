@@ -1,0 +1,17 @@
+	<div class="visualizacao-fundo">
+		<div class="visualizacao-galeria-container">
+			<ul id="visualizacao-galeria-lista">
+			</ul>
+		</div>
+		<div class="visualizacao-imagem-container">
+			<img src="/static/recursos/phpgallery/carregando.svg" alt="Carregando...">
+		</div>
+		<a href="#/" class="link" onclick="phpgallery.desativarVisualizacaoImagem();"> 
+			<i class="fa fa-times visualizacao-fechar"></i>
+		</a>
+	</div>
+	<script>
+		for (var i = 0; i < phpgallery.imagens.lista.length; i++) {
+			$("#visualizacao-galeria-lista").append('<a class="link" href="#/" onclick="phpgallery.visualizarImagem(' + phpgallery.imagens.lista[i].id + ')"><li id="' + phpgallery.imagens.lista[i].id + '"><div style="background-image: url(\'' + phpgallery.imagens.lista[i].url + '\')"></div><span>' + phpgallery.imagens.lista[i].titulo + '</span></li></a>');
+		}
+	</script>

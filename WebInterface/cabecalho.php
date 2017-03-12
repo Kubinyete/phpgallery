@@ -26,7 +26,9 @@ $html_autor = (defined("HTML_AUTOR")) ? HTML_AUTOR : Referencias::$html_autor_pa
 	<title><?php echo Referencias::$html_site_titulo; echo ($html_titulo !== null) ? " - " . $html_titulo : ""; ?></title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Raleway|Source+Sans+Pro" rel="stylesheet">
-	<link href="css/phpgallery.styles.css" rel="stylesheet">
+	<link href="/static/css/phpgallery.styles.css" rel="stylesheet">
+	<link href="/favicon.ico" rel="shortcut icon">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="/static/js/phpgallery.js"></script>
 </head>
 <body>

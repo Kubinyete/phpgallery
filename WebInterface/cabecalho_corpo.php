@@ -21,31 +21,25 @@ $usuario_logado = Sessao::get_usuario();
 
 ?>
 	<header class="cabecalho">
-		<a href="<?php echo (Referencias::$script_inicial === "") ? "?v=home" : Referencias::$script_inicial; ?>" class="link">
-			<img id="cabecalho-logo" draggable="false" src="recursos/phpgallery/phpgallery-logo.png" alt="Logo da aplicação">
+		<a href="<?php echo Referencias::$script_inicial; ?>" class="link">
+			<img id="cabecalho-logo" draggable="false" src="/static/recursos/phpgallery/phpgallery-logo.png" alt="Logo da aplicação">
 		</a>
 		<!-- Navegação principal -->
 		<nav class="cabecalho-nav">
 			<ul class="cabecalho-links-lista">
 				<li>
-					<a href="<?php echo (Referencias::$script_inicial === "") ? "?v=home" : Referencias::$script_inicial; ?>" class="link">Home</a>
+					<a href="<?php echo Referencias::$script_inicial; ?>" class="link">Home</a>
 				</li>
 				<li>
-					<a href="<?php echo (Referencias::$script_perfil === "") ? "?v=perfil" : Referencias::$script_perfil; ?>" class="link">Perfil</a>
+					<a href="<?php echo Referencias::$script_perfil; ?>" class="link">Perfil</a>
 				</li>
 				<li>
-					<a href="<?php echo (Referencias::$script_enviar === "") ? "?v=enviar" : Referencias::$script_enviar; ?>" class="link">Enviar</a>
-				</li>
-				<li>
-					<a href="<?php echo (Referencias::$script_status === "") ? "?v=status" : Referencias::$script_status; ?>" class="link">Status</a>
+					<a href="<?php echo Referencias::$script_enviar; ?>" class="link">Enviar</a>
 				</li>
 			</ul>
 		</nav>
 		<!-- Pesquisa de imagens -->
 		<form id="cabecalho-pesquisa" method="GET" action="<?php echo Referencias::$script_procurar; ?>" autocomplete="off">
-			<?php if (Referencias::$script_procurar === "") { ?>
-			<input type="hidden" name="v" value="procurar">
-			<?php } ?>
 			<input type="text" name="s" placeholder="Pesquisar">
 			<i class="fa fa-search"></i>
 		</form>
@@ -69,12 +63,11 @@ $usuario_logado = Sessao::get_usuario();
 
 		<?php } ?>
 	</header>
-	<!-- Conteúdo -->
-	<main class="conteudo conteudo-margem">
-		<div class="imagem-showcase">
-			<div class="imagem-showcase-container">
-				<div class="imagem-showcase-imagem"></div>
-				<span id="imagem-showcase-titulo"><span id="azul">PHP</span>Gallery</span>
-			</div>
-			<div class="imagem-showcase-gradient"></div>
+	<!-- Segundo header físico -->
+	<div class="imagem-showcase">
+		<div class="imagem-showcase-container">
+			<div class="imagem-showcase-imagem"></div>
+			<span id="imagem-showcase-titulo"><span class="azul-negrito">PHP</span>Gallery<span class="azul-negrito versao">v<?php echo Referencias::$phpgallery_versao; ?></span></span>
 		</div>
+		<div class="imagem-showcase-gradient"></div>
+	</div>

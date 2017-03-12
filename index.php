@@ -21,36 +21,48 @@ $pedido_pagina = (isset($_GET["v"])) ? $_GET["v"] : "home";
  * Ex: meta tags html, og tags
  */
 
+/* Definido o título das páginas apartir do pedido da pagina */
+if ($pedido_pagina === "home") {
+    define("HTML_TITULO", "Home");
+}
+
 require_once "WebInterface/cabecalho.php";
 require_once "WebInterface/cabecalho_corpo.php";
 
-
-
+/* Definindo o importe necessário para tal página */
 switch ($pedido_pagina) {
     case "home":
         require_once "WebInterface/home.php";
         break;
     case "perfil":
-        require_once "WebInterface/perfil.php";
+        #require_once "WebInterface/perfil.php";
         break;
     case "enviar":
-        require_once "WebInterface/enviar.php";
+        #require_once "WebInterface/enviar.php";
         break;
     case "procurar":
-        require_once "WebInterface/procurar.php";
+        #require_once "WebInterface/procurar.php";
         break;
-    case "status":
-        require_once "WebInterface/status.php";
+    case "download":
+        #require_once "WebInterface/download.php";
         break;
-    //404 Not Found
+    case "imagem":
+        #require_once "WebInterface/imagem.php";
+        break;
     default:
         require_once "WebInterface/404.php";
         break;
 }
 
-#require_once "WebInterface/rodape.php";
+/* Definindo se tal página utilizará nossa visualizacão de imagem */
+switch ($pedido_pagina) {
+    case "home":
+        require_once "WebInterface/Templates/template_visualizacao.html";
+        break;
+}
+
+require_once "WebInterface/rodape.php";
 
 ?>
-    </main>
 </body>
 </html>

@@ -72,6 +72,24 @@ class DatabaseALUsuario extends DatabaseAL {
 		return $usuario;
 	}
 
+	// Obtêm uma contagem de todas os usuários presentes no banco de dados
+	public function obter_contagem_usuarios() {
+		$sql = "SELECT COUNT(*) as contagem FROM Usuarios;";
+
+		$this->_conexao->conectar();
+		$retorno_id = $this->executar($sql);
+
+		$contagem = 0;
+
+		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
+			$contagem = intval(odbc_fetch_array($retorno_id)["contagem"]);
+		}
+
+		$this->_conexao->desconectar();
+
+		return $contagem;
+	}
+
 	// Obtem um Usuario do banco de dados conforme sua propriedade nome ou id para uma resposta API
 	public function obter_usuario_api($valor) {
 		$int_valor = intval($valor);

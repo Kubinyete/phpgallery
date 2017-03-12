@@ -70,6 +70,24 @@ class DatabaseALComentario extends DatabaseAL {
 		return $comentario;
 	}
 
+	// Obtêm uma contagem de todas os comentários presentes no banco de dados
+	public function obter_contagem_comentarios() {
+		$sql = "SELECT COUNT(*) as contagem FROM Comentarios;";
+
+		$this->_conexao->conectar();
+		$retorno_id = $this->executar($sql);
+
+		$contagem = 0;
+
+		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
+			$contagem = intval(odbc_fetch_array($retorno_id)["contagem"]);
+		}
+
+		$this->_conexao->desconectar();
+
+		return $contagem;
+	}
+
 	// Retorna uma lista contendo todos (ou parte, dentro dos limites) os comentários de um objeto Imagem
 	public function obter_comentarios($imagem) {
 		$sql = "SELECT TOP " . self::$listar_maximo_comentarios . " * FROM Comentarios WHERE img_id=" . $imagem->get_id() . " ORDER BY cmt_id DESC;";

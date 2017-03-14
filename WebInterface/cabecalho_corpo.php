@@ -21,25 +21,26 @@ $usuario_logado = Sessao::get_usuario();
 
 ?>
 	<header class="cabecalho">
-		<a href="<?php echo Referencias::$script_inicial; ?>" class="link">
+		<a href="?v=home" class="link">
 			<img id="cabecalho-logo" draggable="false" src="/static/recursos/phpgallery/phpgallery-logo.png" alt="Logo da aplicação">
 		</a>
 		<!-- Navegação principal -->
 		<nav class="cabecalho-nav">
 			<ul class="cabecalho-links-lista">
 				<li>
-					<a href="<?php echo Referencias::$script_inicial; ?>" class="link">Home</a>
+					<a href="?v=home" class="link">Home</a>
 				</li>
 				<li>
-					<a href="<?php echo Referencias::$script_perfil; ?>" class="link">Perfil</a>
+					<a href="?v=perfil" class="link">Perfil</a>
 				</li>
 				<li>
-					<a href="<?php echo Referencias::$script_enviar; ?>" class="link">Enviar</a>
+					<a href="?v=enviar" class="link">Enviar</a>
 				</li>
 			</ul>
 		</nav>
 		<!-- Pesquisa de imagens -->
-		<form id="cabecalho-pesquisa" method="GET" action="<?php echo Referencias::$script_procurar; ?>" autocomplete="off">
+		<form id="cabecalho-pesquisa" method="GET" action="" autocomplete="off">
+			<input type="hidden" name="v" value="procurar">
 			<input type="text" name="s" placeholder="Pesquisar">
 			<i class="fa fa-search"></i>
 		</form>
@@ -60,6 +61,11 @@ $usuario_logado = Sessao::get_usuario();
 				<img class="imagem-perfil" src="<?php echo $usuario_logado->obter_imagem_url(); ?>" alt="Sua imagem de perfil">
 			</div>
 		</div>
+
+		<?php } else { ?>
+
+		<!-- Link para a página de login -->
+		<a class="link link-pagina-login" href="?v=login">Efetue login ou registre-se</a>
 
 		<?php } ?>
 	</header>

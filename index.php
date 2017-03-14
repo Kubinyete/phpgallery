@@ -22,8 +22,12 @@ $pedido_pagina = (isset($_GET["v"])) ? $_GET["v"] : "home";
  */
 
 /* Definido o título das páginas apartir do pedido da pagina */
-if ($pedido_pagina === "home") {
-    define("HTML_TITULO", "Home");
+switch ($pedido_pagina) {
+    case "home":
+        define("HTML_TITULO", "Home");
+        break;
+    case "login":
+        define("HTML_TITULO", "Área de autenticação");
 }
 
 require_once "WebInterface/cabecalho.php";
@@ -33,6 +37,9 @@ require_once "WebInterface/cabecalho_corpo.php";
 switch ($pedido_pagina) {
     case "home":
         require_once "WebInterface/home.php";
+        break;
+    case "login":
+        require_once "WebInterface/login.php";
         break;
     case "perfil":
         #require_once "WebInterface/perfil.php";
@@ -55,10 +62,8 @@ switch ($pedido_pagina) {
 }
 
 /* Definindo se tal página utilizará nossa visualizacão de imagem */
-switch ($pedido_pagina) {
-    case "home":
-        require_once "WebInterface/Templates/template_visualizacao.html";
-        break;
+if ($pedido_pagina == "home") {
+    require_once "WebInterface/Templates/template_visualizacao.html";
 }
 
 require_once "WebInterface/rodape.php";

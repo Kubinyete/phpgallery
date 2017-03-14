@@ -1,9 +1,0 @@
-RewriteEngine on
-
-RewriteRule ^procurar/?s=([a-z,0-9,A-Z,_-]+)$ index.php?v=procurar&s=$1 [NC]
-RewriteRule ^imagem/([a-z,0-9,A-Z,_-]+)/?$ index.php?v=imagem&id=$1 [NC]
-RewriteRule ^perfil/([0-9]+)/?$ index.php?v=perfil&id=$1 [NC]
-RewriteRule ^perfil/([a-z,0-9,A-Z,_-]+)/?$ index.php?v=perfil&s=$1 [NC]
-RewriteRule ^download/([a-z,0-9,A-Z,_-]+)/?$ index.php?v=download&id=$1 [NC]
-
-RewriteRule ^([a-z,0-9,A-Z,_-]+)/?$ index.php?v=$1 [NC]

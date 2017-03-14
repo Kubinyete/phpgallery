@@ -9,7 +9,7 @@ require_once "Referencias.php";
 		<ul class="rodape-links">
 			<li>
 				<a href="https://github.com/Kubinyete/phpgallery" class="link" target="_blank">
-					<img src="/recursos/phpgallery/github-icone.png" alt="Ícone GitHub">
+					<img src="/static/recursos/phpgallery/github-icone.png" alt="Ícone GitHub">
 				</a>
 				<span>GitHub</span>
 			</li>

@@ -10,13 +10,14 @@ set_include_path("..");
 
 require_once "ApiInterface/ImagemApi.php";
 require_once "DatabaseInterface/Conexao.php";
+require_once "WebInterface/Resposta.php";
 
 use PHPGallery\ApiInterface\ImagemApi;
 use PHPGallery\DatabaseInterface\Conexao;
+use PHPGallery\WebInterface\Resposta;
 
 
-
-header("Content-Type: application/json");
+Resposta::conteudo_tipo("application/json");
 
 $api = new ImagemApi(new Conexao());
 

@@ -3,6 +3,12 @@ namespace PHPGallery\ApiInterface;
 
 require_once "ApiErroDefinicoes.php";
 
+set_include_path("..");
+
+require_once "WebInterface/Resposta.php";
+
+use PHPGallery\WebInterface\Resposta;
+
 /**
  * Classe responsável por representar uma resposta JSON de um objeto
  */
@@ -25,7 +31,7 @@ class ApiResposta {
 	public function enviar_erro($err=0) {
 		// Se o erro não existir
 		if (!isset(ApiErroDefinicoes::$api_erros[$err])) {
-			header("Status: " . ApiErroDefinicoes::$api_erros[AE_DESCONHECIDO][1], true, ApiErroDefinicoes::$api_erros[AE_DESCONHECIDO][1]);
+			Resposta::status(ApiErroDefinicoes::$api_erros[AE_DESCONHECIDO][1]);
 
 			$this->resposta_objeto["dados"] = [
 				"erro_api" => true,
@@ -34,7 +40,7 @@ class ApiResposta {
 			];
 		// Se o erro existir
 		} else {
-			header("Status: " . ApiErroDefinicoes::$api_erros[$err][1], true, ApiErroDefinicoes::$api_erros[$err][1]);
+			Resposta::status(ApiErroDefinicoes::$api_erros[$err][1]);
 
 			$this->resposta_objeto["dados"] = [
 				"erro_api" => true,
@@ -42,7 +48,7 @@ class ApiResposta {
 				"erro_mensagem" => ApiErroDefinicoes::$api_erros[$err][0]
 			];
 		}
-		
+
 		echo json_encode($this->resposta_objeto, JSON_PRETTY_PRINT);
 	}
 }

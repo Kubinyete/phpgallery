@@ -39,6 +39,11 @@ class Validacao {
 		return $retorno;
 	}
 
+	// Retorna se o tamanho da cadeia de carácteres está dentro do permitido
+	public static function campo_tamanho_esta_valido($string, $limite_min, $limite_max) {
+		return (count($string) <= $limite_max) && (count($string) >= $limite_min);
+	}
+
 	// Efetua login no sistema
 	// se o usuário informado o login corretamente, retorna o objeto Usuario do banco de dados
 	// para então ser implementado na sessão atual
@@ -62,7 +67,7 @@ class Validacao {
 				true,
 				"",
 				false,
-				date("Y-m-d H:m-i"),
+				"0000-00-00 00:00:00",
 				0,
 				false
 			);
@@ -77,6 +82,48 @@ class Validacao {
 			}
 		} else {
 			throw new ValidacaoErro(VE_LOGIN_INVALIDO);
+		}
+	}
+
+	// Registra um usuário no sistema
+	public function registrar_usuario($nome, $senha, $confirma_senha) {
+		if (!self::campo_sem_caracteres_invalidos($nome)) {
+			throw new ValidacaoErro(VE_REGISTRA_NOME_INVALIDO);
+		} else if (!self::campo_sem_caracteres_invalidos($senha)) {
+			throw new ValidacaoErro(VE_REGISTRA_SENHA_INVALIDA);
+		} else if (!self::campo_tamanho_esta_valido($nome, 4, 16)) {
+			throw new ValidacaoErro(VE_REGISTRA_NOME_TAMANHO_INVALIDO);
+		} else if (!self::campo_tamanho_esta_valido($senha, 6, 32)) {
+			throw new ValidacaoErro(VE_REGISTRA_SENHA_TAMANHO_INVALIDO);
+		}
+
+		$dal = new DatabaseALUsuario($this->_conexao);
+		$database_usuario = $dal->obter_usuario($nome, true);
+
+		if ($database_usuario === null) {
+			// Registre
+			if ($senha !== $confirma_senha) {
+				throw new ValidacaoErro(VE_REGISTRA_CONFIRMA_SENHA_INVALIDA);
+			}
+
+			$usuario = new Usuario(
+				0,
+				$nome,
+				$senha,
+				true,
+				"",
+				false,
+				date("Y-m-d H:m-i"),
+				time(),
+				false
+			);
+
+			$usuario = $dal->criar_usuario($usuario);
+			Sessao::set_usuario($usuario);
+			Resposta::redirecionar("?v=home");
+		} else {
+			// O usuário já existe
+			throw new ValidacaoErro(VE_REGISTRA_JA_EXISTE);
 		}
 	}
 }

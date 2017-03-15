@@ -4,19 +4,20 @@
  * Retorna usuários
  */
 
-namespace PHPGallery\api;
+namespace PHPGallery\Api;
 
 set_include_path("..");
 
 require_once "ApiInterface/UsuarioApi.php";
 require_once "DatabaseInterface/Conexao.php";
+require_once "WebInterface/Resposta.php";
 
 use PHPGallery\ApiInterface\UsuarioApi;
 use PHPGallery\DatabaseInterface\Conexao;
+use PHPGallery\WebInterface\Resposta;
 
 
-
-header("Content-Type: application/json");
+Resposta::conteudo_tipo("application/json");
 
 $api = new UsuarioApi(new Conexao());
 

@@ -11,6 +11,7 @@
 namespace PHPGallery;
 
 require_once "WebInterface/cabecalho_sessao.php";
+require_once "WebInterface/online_status.php";
 require_once "WebInterface/Pedido.php";
 
 use PHPGallery\WebInterface\Pedido;

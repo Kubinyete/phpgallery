@@ -11,14 +11,15 @@ set_include_path("..");
 
 require_once "ApiInterface/ApiResposta.php";
 require_once "DatabaseInterface/DatabaseErroDefinicoes.php";
+require_once "WebInterface/Resposta.php";
 
 use PHPGallery\ApiInterface\ApiResposta;
 use PHPGallery\DatabaseInterface\DatabaseErroDefinicoes;
+use PHPGallery\WebInterface\Resposta;
 
 
-
-header("Status: 500", true, 500);
-header("Content-Type: application/json");
+Resposta::status(500);
+Resposta::conteudo_tipo("application/json");
 
 $codigo = 0;
 

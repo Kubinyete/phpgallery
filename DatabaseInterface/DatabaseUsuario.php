@@ -21,22 +21,22 @@ class DatabaseALUsuario extends DatabaseAL {
 
 	// Insere no banco de dados um novo objeto Usuario
 	public function criar_usuario($usuario) {
-		$sql = "INSERT INTO Usuarios (usr_nome, usr_senha, usr_data_criacao) VALUES ('" . $usuario->get_nome() . "', '" . $usuario->get_senha() . "', '" . $usuario->get_data_criacao() . "');";
+		$sql = "INSERT INTO Usuarios (usr_nome, usr_senha, usr_data_criacao, usr_online_timestamp) VALUES ('" . $usuario->get_nome() . "', '" . $usuario->get_senha() . "', '" . $usuario->get_data_criacao() . "', " . $usuario->get_online_timestamp() . ");";
 
 		$this->_conexao->conectar();
 		$this->executar($sql, true);
 		$novo_usuario = $this->obter_usuario($usuario->get_nome());
-		
+
 		$this->_conexao->desconectar();
 
 		return $novo_usuario;
 	}
 
 	// Obtem um Usuario do banco de dados conforme sua propriedade nome ou id
-	// $paraLogin -> se esta consulta é para obter um Usuario para login, não permita tentar selecionar
-	// o Usuario pelo seu id
-	public function obter_usuario($valor, $paraLogin=false) {
-		if (!$paraLogin) {
+	// $restrito -> se esta consulta é para obter um Usuario pelo nome, não permita tentar selecionar
+	// o Usuario pelo seu id se a string passada for possível converter para int
+	public function obter_usuario($valor, $restrito=false) {
+		if (!$restrito) {
 			$int_valor = intval($valor);
 			$sql = "";
 			if ($int_valor > 0) {
@@ -138,7 +138,7 @@ class DatabaseALUsuario extends DatabaseAL {
 		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
 			for ($i = 0; $i < odbc_num_rows($retorno_id); $i++) {
 				$array = odbc_fetch_array($retorno_id);
-				array_push($usuarios, 
+				array_push($usuarios,
 					new Usuario(
 						$array["usr_id"],
 						$array["usr_nome"],
@@ -171,7 +171,7 @@ class DatabaseALUsuario extends DatabaseAL {
 		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
 			for ($i = 0; $i < odbc_num_rows($retorno_id); $i++) {
 				$array = odbc_fetch_array($retorno_id);
-				array_push($usuarios, 
+				array_push($usuarios,
 					new Usuario(
 						$array["usr_id"],
 						$array["usr_nome"],
@@ -194,11 +194,10 @@ class DatabaseALUsuario extends DatabaseAL {
 
 	// Atualiza o estado de um objeto no banco de dados conforme suas mudanças no objeto do sistema
 	public function atualizar_usuario($usuario) {
-		$this->_conexao->conectar();
 		$db_usuario = $this->obter_usuario($usuario->get_id());
 
 		if (!$db_usuario) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
 		$local_descricao = trim($usuario->get_descricao());
@@ -229,9 +228,10 @@ class DatabaseALUsuario extends DatabaseAL {
 		}
 
 		if ($sql_tam_ini == strlen($sql)) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
+		$this->_conexao->conectar();
 		$this->executar($sql . $sql_end, true);
 		$novo_usuario = $this->obter_usuario($usuario->get_id());
 		$this->_conexao->desconectar();
@@ -246,7 +246,7 @@ class DatabaseALUsuario extends DatabaseAL {
 		$this->_conexao->conectar();
 		$this->executar($sql, true);
 		$this->_conexao->desconectar();
-	}	
+	}
 }
 
 ?>

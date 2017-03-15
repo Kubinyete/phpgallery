@@ -45,11 +45,11 @@ class DatabaseALImagem extends DatabaseAL {
 	// Obtem um objeto Imagem a partir de seu $id
 	public function obter_imagem($id) {
 		$int_id = intval($id);
-		
+
 		if ($int_id <= 0) {
 			return;
 		}
-		
+
 		$sql = "SELECT TOP 1 * FROM Imagens WHERE img_id=" . $id . ";";
 
 		$this->_conexao->conectar();
@@ -88,7 +88,7 @@ class DatabaseALImagem extends DatabaseAL {
 		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
 			for ($i = 0; $i < odbc_num_rows($retorno_id); $i++) {
 				$array = odbc_fetch_array($retorno_id);
-				array_push($imagens, 
+				array_push($imagens,
 					new Imagem(
 						$array["img_id"],
 						$array["usr_id"],
@@ -136,7 +136,7 @@ class DatabaseALImagem extends DatabaseAL {
 		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
 			for ($i = 0; $i < odbc_num_rows($retorno_id); $i++) {
 				$array = odbc_fetch_array($retorno_id);
-				array_push($imagens, 
+				array_push($imagens,
 					new Imagem(
 						$array["img_id"],
 						$array["usr_id"],
@@ -156,11 +156,10 @@ class DatabaseALImagem extends DatabaseAL {
 
 	// Atualiza uma imagem no banco de dados conforme suas mudanças no objeto Imagem
 	public function atualizar_imagem($imagem) {
-		$this->_conexao->conectar();
 		$db_imagem = $this->obter_imagem($imagem->get_id());
 
 		if (!$db_imagem) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
 		$local_titulo = trim($imagem->get_titulo());
@@ -176,13 +175,14 @@ class DatabaseALImagem extends DatabaseAL {
 		}
 
 		if ($local_descricao !== $db_imagem->get_descricao()) {
-			$sql .= " img_descricao=" . ( (strlen($local_descricao) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_descricao) . "'"); 
+			$sql .= " img_descricao=" . ( (strlen($local_descricao) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_descricao) . "'");
 		}
 
 		if ($sql_tam_ini == strlen($sql)) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
+		$this->_conexao->conectar();
 		$this->executar($sql . $sql_end, true);
 		$nova_imagem = $this->obter_imagem($imagem->get_id());
 		$this->_conexao->desconectar();
@@ -197,7 +197,7 @@ class DatabaseALImagem extends DatabaseAL {
 		$this->_conexao->conectar();
 		$this->executar($sql, true);
 		$this->_conexao->desconectar();
-	}	
+	}
 }
 
 ?>

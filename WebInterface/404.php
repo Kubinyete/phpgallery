@@ -1,7 +1,9 @@
 <?php
 namespace PHPGallery\WebInterface;
 
-header("Status: 404", true, 404);
+require_once "Resposta.php";
+
+Resposta::status(404);
 
 ?>
 	<main class="erro-notfound">

@@ -10,13 +10,14 @@ set_include_path("..");
 
 require_once "ApiInterface/ComentarioApi.php";
 require_once "DatabaseInterface/Conexao.php";
+require_once "WebInterface/Resposta.php";
 
 use PHPGallery\ApiInterface\ComentarioApi;
 use PHPGallery\DatabaseInterface\Conexao;
+use PHPGallery\WebInterface\Resposta;
 
 
-
-header("Content-Type: application/json");
+Resposta::conteudo_tipo("application/json");
 
 $api = new ComentarioApi(new Conexao());
 

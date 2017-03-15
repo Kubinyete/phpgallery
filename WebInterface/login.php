@@ -26,19 +26,26 @@ if (Sessao::get_usuario() !== null) {
 }
 
 $loginErro = false;
+$registraErro = false;
 
 // Login
 if (Pedido::obter("r", "POST") === "0") {
     try {
         $val = new Validacao(new Conexao());
-        $val->efetuar_login(Pedido::obter("u", "POST"), Pedido::obter("s"), "POST");
+        $val->efetuar_login(Pedido::obter("u", "POST"), Pedido::obter("s", "POST"));
         exit();
     } catch (ValidacaoErro $e) {
         $loginErro = $e->getMessage();
     }
 // Registrar
 } else if (Pedido::obter("r", "POST") === "1") {
-
+    try {
+        $val = new Validacao(new Conexao());
+        $val->registrar_usuario(Pedido::obter("u", "POST"), Pedido::obter("s", "POST"), Pedido::obter("s2", "POST"));
+        exit();
+    } catch (ValidacaoErro $e) {
+        $registraErro = $e->getMessage();
+    }
 }
 
 ?>
@@ -48,11 +55,6 @@ if (Pedido::obter("r", "POST") === "0") {
             <h1>Efetuar login</h1>
         </div>
         <div class="conteudo conteudo-centro">
-            <?php if ($loginErro !== false) { ?>
-            <script>
-                phpgallery.loginErro = true;
-            </script>
-            <?php } ?>
             <form id="login-formulario" class="formulario" method="POST" autocomplete="off">
                 <input type="hidden" name="v" value="login">
                 <input type="hidden" name="r" value="0">
@@ -67,15 +69,13 @@ if (Pedido::obter("r", "POST") === "0") {
                 <?php if ($loginErro !== false) { ?>
                 <span><?php echo $loginErro; ?></span>
                 <script>
-                    if (phpgallery.loginErro) {
-                        $("#login-nome, #login-senha").keypress(
-                            function() {
-                                $("#login-formulario i").remove();
-                                $("#login-formulario span").remove();
-                                $("#login-nome, #login-senha").off();
-                            }
-                        );
-                    }
+                    $("#login-nome, #login-senha").keypress(
+                        function() {
+                            $("#login-formulario i").remove();
+                            $("#login-formulario span").remove();
+                            $("#login-nome, #login-senha").off();
+                        }
+                    );
                 </script>
                 <?php } ?>
                 <br>
@@ -86,16 +86,33 @@ if (Pedido::obter("r", "POST") === "0") {
             <i class="conteudo-divisao-icone fa fa-user-o"></i>
             <h1>Registrar</h1>
         </div>
-        <div id="registra-formulario" class="conteudo conteudo-centro">
-            <form class="formulario" method="POST" autocomplete="off">
+        <div class="conteudo conteudo-centro">
+            <form id="registra-formulario" class="formulario" method="POST" autocomplete="off">
                 <input type="hidden" name="v" value="login">
                 <input type="hidden" name="r" value="1">
                 <label for="registra-nome">Nome</label>
-                <input id="registra-nome" maxlength="16" type="text" name="u" placeholder="Nome do usuário" required><br>
+                <input id="registra-nome" maxlength="16" type="text" name="u" placeholder="Nome do usuário" required>
+                <?php if ($registraErro !== false) { ?>
+                <i class="fa fa-warning"></i>
+                <?php } ?>
+                <br>
                 <label for="registra-senha">Senha</label>
                 <input id="registra-senha" maxlength="32" type="password" name="s" placeholder="Senha" required><br>
                 <label for="registra-confirma-senha">Confirme sua senha</label>
-                <input id="registra-confirma-senha" maxlength="32" type="password" name="s2" placeholder="Senha" required><br>
+                <input id="registra-confirma-senha" maxlength="32" type="password" name="s2" placeholder="Senha" required>
+                <?php if ($registraErro !== false) { ?>
+                <span><?php echo $registraErro; ?></span>
+                <script>
+                    $("#registra-nome, #registra-senha, #registra-confirma-senha").keypress(
+                        function() {
+                            $("#registra-formulario i").remove();
+                            $("#registra-formulario span").remove();
+                            $("#registra-nome, #registra-senha, #registra-confirma-senha").off();
+                        }
+                    );
+                </script>
+                <?php } ?>
+                <br>
                 <button type="submit">Registrar</button>
             </form>
         </div>

@@ -100,7 +100,7 @@ class DatabaseALComentario extends DatabaseAL {
 		if ($retorno_id && odbc_num_rows($retorno_id) >= 1) {
 			for ($i = 0; $i < odbc_num_rows($retorno_id); $i++) {
 				$array = odbc_fetch_array($retorno_id);
-				array_push($comentarios, 
+				array_push($comentarios,
 					new Comentario(
 						$array["cmt_id"],
 						$array["img_id"],
@@ -119,11 +119,10 @@ class DatabaseALComentario extends DatabaseAL {
 
 	// Atualiza o estado de um objeto Comentario no banco de dados a partir de um objeto no sistema
 	public function atualizar_comentario($comentario) {
-		$this->_conexao->conectar();
 		$db_comentario = $this->obter_comentario($comentario->get_id());
 
 		if (!$db_comentario) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
 		$local_conteudo = trim($comentario->get_conteudo());
@@ -138,9 +137,10 @@ class DatabaseALComentario extends DatabaseAL {
 		}
 
 		if ($sql_tam_ini == strlen($sql)) {
-			return $this->_conexao->desconectar();
+			return;
 		}
 
+		$this->_conexao->conectar();
 		$this->executar($sql . $sql_end, true);
 		$novo_comentario = $this->obter_comentario($comentario->get_id());
 		$this->_conexao->desconectar();

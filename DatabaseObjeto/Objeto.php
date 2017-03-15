@@ -11,6 +11,11 @@ class Objeto {
 	public function __construct($id=0, $data_criacao) {
 		$this->set_id($id);
 		$this->set_data_criacao($data_criacao);
+
+		$tm = "America/Sao_Paulo";
+		if (date_default_timezone_get() !== $tm) {
+			date_default_timezone_set($tm);
+		}
 	}
 
 	public function get_id() {
@@ -37,7 +42,7 @@ class Objeto {
 	}
 
 	protected function obter_data_criacao_formatada() {
-		return substr($this->_data_criacao, 8, 2) . "/" . substr($this->_data_criacao, 5, 2) . "/" . substr($this->_data_criacao, 0, 4) . " ás " . substr($this->_data_criacao, 11, 8); 
+		return substr($this->_data_criacao, 8, 2) . "/" . substr($this->_data_criacao, 5, 2) . "/" . substr($this->_data_criacao, 0, 4) . " ás " . substr($this->_data_criacao, 11, 8);
 	}
 }
 

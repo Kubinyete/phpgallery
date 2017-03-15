@@ -2,6 +2,7 @@
 
 this.phpgallery = {
 	visualizacaoImagemSelecionada: 0,
+	usuarioMenuAtivado: false,
 
 	imagens: {
 		lista: [],
@@ -40,5 +41,17 @@ this.phpgallery = {
 
 	desativarVisualizacaoImagem: function() {
 		$(".visualizacao-fundo").removeClass("visualizacao-fundo-ativado");
+	},
+
+	menuUsuario: function() {
+		if (!this.usuarioMenuAtivado) {
+			$(".usuario-menu").addClass("usuario-menu-ativado");
+			$(".cabecalho-usuario-btnopcoes-container").addClass("cabecalho-usuario-btnopcoes-container-ativado");
+			this.usuarioMenuAtivado = true;
+		} else {
+			$(".usuario-menu").removeClass("usuario-menu-ativado");
+			$(".cabecalho-usuario-btnopcoes-container").removeClass("cabecalho-usuario-btnopcoes-container-ativado");
+			this.usuarioMenuAtivado = false;
+		}
 	}
 };

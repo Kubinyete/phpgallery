@@ -3,6 +3,7 @@ namespace PHPGallery\WebInterface;
 
 require_once "ValidacaoErro.php";
 require_once "ValidacaoErroDefinicoes.php";
+require_once "Resposta.php";
 
 set_include_path("..");
 
@@ -24,6 +25,10 @@ class Validacao {
 
 	// Retorna false se o campo atual contêm algum caráctere inválido
 	public static function campo_sem_caracteres_invalidos($string) {
+		if ($string === null) {
+			return false;
+		}
+
 		$retorno = true;
 		for ($i = 0; $i < strlen($string); $i++) {
 			if (ord($string[$i]) <= 47 || ord($string[$i]) >= 58 && ord($string[$i]) <= 64 || ord($string[$i]) >= 91 && ord($string[$i]) <= 96 || ord($string[$i]) >= 123) {
@@ -57,14 +62,15 @@ class Validacao {
 				true,
 				"",
 				false,
-				"",
+				date("Y-m-d H:m-i"),
 				0,
 				false
 			);
 
 			if ($usuario->get_senha() === $database_usuario->get_senha()) {
 				// O login é válido
-				return $database_usuario;
+				Sessao::set_usuario($database_usuario);
+				Resposta::redirecionar("?v=home");
 			} else {
 				// O login é inválido
 				throw new ValidacaoErro(VE_LOGIN_INVALIDO);

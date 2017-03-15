@@ -166,6 +166,92 @@ header.cabecalho nav.cabecalho-nav ul.cabecalho-links-lista li a:hover {
     color: #ff0033;
 }
 
+/* Usuário logado crachá */
+
+header.cabecalho div.cabecalho-usuario-container {
+    float: right;
+}
+
+header.cabecalho div.cabecalho-usuario-container div {
+    height: 50px;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+    overflow: hidden;
+    float: right;
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-nome-container {
+    transition: .2s ease-in-out;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-nome-container:hover {
+    transition: .2s ease-in-out;
+    background-color: #222;
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container {
+    transition: .2s ease-in-out;
+    cursor: pointer;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container:hover {
+    transition: .2s ease-in-out;
+    background-color: #222;
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container-ativado {
+    transition: .2s ease-in-out;
+    background-color: #222 !important;
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container-ativado i {
+    transition: .2s ease-in-out;
+    transform: translate(0px, 15px) !important;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container:hover i {
+    transition: .2s ease-in-out;
+    transform: translate(0px, 15px);
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+header.cabecalho div.cabecalho-usuario-container div span {
+    display: inline-block;
+    font-family: Lato, Arial, sans-serif;
+    font-size: 20px;
+    color: cornflowerblue;
+    transform: translate(0px, 15px);
+}
+
+header.cabecalho div.cabecalho-usuario-container div.cabecalho-usuario-btnopcoes-container i {
+    transition: .2s ease-in-out;
+    font-size: 20px;
+    color: white;
+    border-radius: 50%;
+    background-color: #ff0033;
+    padding: 2.5px;
+    transform: translate(0px, 12.5px);
+}
+
+header.cabecalho div.cabecalho-usuario-container img {
+    width: 48px;
+    height: 48px;
+    border: 1px solid cornflowerblue;
+    float: right;
+}
+
+img.imagem-perfil {
+    border: 1px solid #333;
+}
+
+img.imagem-perfil-online {
+    border: 1px solid cornflowerblue;
+}
+
 /* Segundo header físico / Imagem showcase */
 
 div.imagem-showcase {
@@ -253,8 +339,21 @@ main {
 /* Conteúdo */
 
 div.conteudo {
+    position: relative;
     background-color: #333;
     /*min-height: 512px;*/
+}
+
+div.conteudo-centro {
+    text-align: center;
+}
+
+div.conteudo-direita {
+    text-align: right;
+}
+
+div.conteudo-esquerda {
+    text-align: left;
 }
 
 /* Conteudo divisão */
@@ -341,6 +440,10 @@ ul.lista-imagens li:hover {
     background-color: rgba(0,0,0, .2);
 }
 
+div.lista-opcoes-container form {
+    display: inline;
+}
+
 ul.lista-imagens li:hover div.lista-opcoes-container button.lista-opcoes-botao {
     visibility: visible;
 }
@@ -421,9 +524,8 @@ ul.lista-imagens li div.lista-opcoes-container button.lista-opcoes-botao {
 }
 
 ul.lista-imagens li div.lista-opcoes-container button.lista-opcoes-botao:hover {
-    font-size: 15px;
-    background-color: #ee0022;
-    box-shadow: 0px 2px 6px rgba(0,0,0, .4);
+    background-color: #cc0011;
+    box-shadow: 0px 2px 8px rgba(0,0,0, .8);
 }
 
 ul.lista-imagens li div.lista-imagem-gradient {
@@ -515,6 +617,7 @@ div.visualizacao-galeria-container ul li:hover {
 
 div.visualizacao-galeria-container ul li span {
     position: absolute;
+    text-indent: 5px;
     display: inline-block;
     top: 50%;
     right: 0px;
@@ -572,7 +675,7 @@ footer.rodape p {
     margin: 0px;
     padding: 0px;
     font-family: Lato, Arial, sans-serif;
-    color: white;
+    color: rgba(255, 255, 255, .6);
     font-size: 20px;
     text-align: center;
     word-wrap: break-word;
@@ -700,4 +803,143 @@ div.conteudo-erro-notfound span.erro-descricao {
     margin-bottom: 50px;
     word-wrap: break-word;
     text-overflow: hidden;
+}
+
+/* Login */
+
+form.formulario {
+    position: relative;
+    display: inline-block;
+    min-width: 256px;
+    margin: 25px auto;
+}
+
+form.formulario label {
+    padding-left: 5px;
+    font-family: Raleway, Arial, sans-serif;
+    font-size: 20px;
+    color: cornflowerblue;
+}
+
+form.formulario input[type=text], input[type=password] {
+    transition: .2s ease-in-out;
+    font-family: Raleway, Arial, sans-serif;
+    text-indent: 5px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, .6);
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    border-bottom: 1px solid cornflowerblue;
+    background-color: transparent;
+}
+
+form.formulario input[type=text]:hover, input[type=password]:hover {
+    transition: .2s ease-in-out;
+    font-family: Raleway, Arial, sans-serif;
+    text-indent: 5px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, .6);
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    border-bottom: 1px solid cornflowerblue;
+    background-color: transparent;
+}
+
+form.formulario input[type=text]:focus, input[type=password]:focus {
+    transition: .2s ease-in-out;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+form.formulario button {
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 20px;
+    margin-top: 10px;
+    padding-right: 20px;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    background-color: #ff0033;
+    cursor: pointer;
+}
+
+form.formulario button:hover {
+    background-color: #cc0011;
+    box-shadow: 0px 2px 8px rgba(0,0,0, .8);
+}
+
+form.formulario i {
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+    color: yellow;
+}
+
+form.formulario span {
+    transition: .1s ease-in-out;
+    position: absolute;
+    font-family: Raleway, Arial, sans-serif;
+    font-size: 15px;
+    left: 0px;
+    transform: translate(0px, 40px);
+    opacity: 0;
+    visibility: hidden;
+    color: white;
+    background-color: rgba(0,0,0, .6);
+}
+
+form.formulario:hover span {
+    transition: .1s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0px, 30px);
+}
+
+/* Menu do usuário */
+
+div.usuario-menu {
+    position: relative;
+    display: inline-block;
+    transition: .1s ease-in-out;
+    transform: translate(0px, -200%);
+    z-index: 998;
+    border: 1px solid rgba(0,0,0, .2);
+    position: fixed;
+    top: 50px;
+    right: 0px;
+    width: 254px;
+    background-color: #222;
+    box-shadow: 0px 2px 6px rgba(0,0,0, .4);
+    visibility: hidden;
+    overflow: hidden;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+div.usuario-menu-ativado {
+    transition: .1s ease-in-out;
+    visibility: visible;
+    transform: translate(0px, 0%);
+}
+
+div.usuario-menu ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+div.usuario-menu ul li {
+    font-size: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-family: Lato, Arial, sans-serif;
+    color: rgba(255,255,255, .8);
+    text-align: center;
+}
+
+div.usuario-menu ul li:hover {
+    color: #ff0033;
 }

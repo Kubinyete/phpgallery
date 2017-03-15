@@ -11,8 +11,11 @@
 namespace PHPGallery;
 
 require_once "WebInterface/cabecalho_sessao.php";
+require_once "WebInterface/Pedido.php";
 
-$pedido_pagina = (isset($_GET["v"])) ? $_GET["v"] : "home";
+use PHPGallery\WebInterface\Pedido;
+
+$pedido_pagina = (Pedido::existe("v", "GET")) ? Pedido::obter("v", "GET") : "home";
 
 /**
  * Se for preciso atualizar alguma coisa no cabeçalho do documento e no cabeçalho do corpo

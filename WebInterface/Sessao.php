@@ -3,8 +3,10 @@ namespace PHPGallery\WebInterface;
 
 set_include_path("..");
 
+require_once "DatabaseInterface/Conexao.php";
 require_once "DatabaseInterface/DatabaseUsuario.php";
 
+use PHPGallery\DatabaseInterface\Conexao;
 use PHPGallery\DatabaseInterface\DatabaseALUsuario;
 
 /**

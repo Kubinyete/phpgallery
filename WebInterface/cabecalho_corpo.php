@@ -11,7 +11,10 @@ require_once "cabecalho_sessao.php";
 require_once "Referencias.php";
 
 $usuario_logado = Sessao::get_usuario();
-
+$usuario_esta_online = false;
+if ($usuario_logado !== null) {
+	$usuario_esta_online = $usuario_logado->esta_online();
+}
 /**
  * v -> Visualização da página atual
  * Ex: ?v=usuario, ?v=procurar_imagem, ?v=sobre
@@ -39,7 +42,7 @@ $usuario_logado = Sessao::get_usuario();
 			</ul>
 		</nav>
 		<!-- Pesquisa de imagens -->
-		<form id="cabecalho-pesquisa" method="GET" action="" autocomplete="off">
+		<form id="cabecalho-pesquisa" method="GET" autocomplete="off">
 			<input type="hidden" name="v" value="procurar">
 			<input type="text" name="s" placeholder="Pesquisar">
 			<i class="fa fa-search"></i>
@@ -48,18 +51,20 @@ $usuario_logado = Sessao::get_usuario();
 
 		<!-- Usuário Container -->
 		<div class="cabecalho-usuario-container">
-			<div class="cabecalho-usuario-btnopcoes-container">
-				<!-- Botão para abrir o menu de opções do usuário -->
-				<i class="fa fa-arrow-down"></i>
-			</div>
-			<div class="cabecalho-usuario-nome-container">
-				<!-- Nome do usuário logado -->
-				<span><?php echo $usuario_logado->get_nome(); ?></span>
-			</div>
-			<div class="cabecalho-usuario-imagem-container">
-				<!-- Imagem de perfil do usuário logado -->
-				<img class="imagem-perfil" src="<?php echo $usuario_logado->obter_imagem_url(); ?>" alt="Sua imagem de perfil">
-			</div>
+			<!-- Imagem de perfil do usuário logado -->
+			<a href="?v=perfil" class="link">
+				<img class="imagem-perfil" draggable="false" src="<?php echo $usuario_logado->obter_imagem_url(); ?>" alt="Sua imagem de perfil">
+				<div class="cabecalho-usuario-nome-container">
+					<!-- Nome do usuário logado -->
+					<span><?php echo $usuario_logado->get_nome(); ?></span>
+				</div>
+			</a>
+			<a href="#/" class="link" onclick="phpgallery.menuUsuario();">
+				<div class="cabecalho-usuario-btnopcoes-container">
+					<!-- Botão para abrir o menu de opções do usuário -->
+					<i class="fa fa-arrow-down"></i>
+				</div>
+			</a>
 		</div>
 
 		<?php } else { ?>
@@ -69,6 +74,15 @@ $usuario_logado = Sessao::get_usuario();
 
 		<?php } ?>
 	</header>
+	<?php if ($usuario_logado !== null) { ?>
+	<div class="usuario-menu">
+		<ul>
+			<a class="link" href="?v=login&amp;l=1">
+				<li><i class="fa fa-sign-out"></i> Sair</li>
+			</a>
+		</ul>
+	</div>
+	<?php } ?>
 	<!-- Segundo header físico -->
 	<div class="imagem-showcase">
 		<div class="imagem-showcase-container">

@@ -99,7 +99,7 @@ class Usuario extends Objeto {
 		if ($this->get_tem_imagem_perfil()) {
 			return Referencias::$caminho_imagens_perfil . md5($this->get_id()) . self::$imagem_extensao;
 		} else {
-			return Referencias::$imagem_perfil_padrao;
+			return Referencias::$caminho_imagem_perfil_padrao;
 		}
 	}
 

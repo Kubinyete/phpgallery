@@ -63,18 +63,20 @@ $database_total_comentarios = $dal->obter_contagem_comentarios();
 									</div>
 								</a>
 								<div class="lista-opcoes-container">
-									<a class="link" href="?v=download&id=<?php echo $imagem->get_id(); ?>">
-										<button class="lista-opcoes-botao baixar">
+									<form method="GET">
+										<input type="hidden" name="v" value="download">
+										<input type="hidden" name="id" value="<?php echo $imagem->get_id(); ?>">
+										<button type="submit" class="lista-opcoes-botao baixar">
 											<i class="fa fa-download"></i>
 										</button>
-									</a>
+									</form>
 									<button class="lista-opcoes-botao visualizar" onclick="phpgallery.visualizarImagem(<?php echo $imagem->get_id(); ?>);">
 										<i class="fa fa-arrows-alt"></i>
 									</button>
 								</div>
 								<span class="lista-imagem-caixa-descricao">Descrição: <?php echo $imagem->get_descricao(true); ?><br>Extensão: <span class="extensao"><?php echo $imagem->get_extensao(true); ?></span><br>Autor: <a class="link" href="?v=perfil&u=<?php echo $imagem->autor->get_nome(); ?>"><span class="autor"><?php echo $imagem->autor->get_nome(); ?></span></a></span>
 							</li>
-							<?php 
+							<?php
 						}
 					} else {
 				?>
@@ -87,8 +89,8 @@ $database_total_comentarios = $dal->obter_contagem_comentarios();
 			<h1>Status</h1>
 		</div>
 		<div class="conteudo">
-			<p class="status"><span style="<?php if ($database_total_imagens <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_imagens; ?></span> <?php if ($database_total_imagens == 1) { echo "Imagem adicionada..."; } else { echo "Imagens adicionadas..."; } ?></p> 
-			<p class="status"><span style="<?php if ($database_total_usuarios <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_usuarios; ?></span> <?php if ($database_total_usuarios == 1) { echo "Usuário registrado..."; } else { echo "Usuários registrados..."; } ?></p> 
-			<p class="status"><span style="<?php if ($database_total_comentarios <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_comentarios; ?></span> <?php if ($database_total_comentarios == 1) { echo "Comentário criado..."; } else { echo "Comentários criados..."; } ?></p> 
+			<p class="status"><span style="<?php if ($database_total_imagens <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_imagens; ?></span> <?php if ($database_total_imagens == 1) { echo "Imagem adicionada..."; } else { echo "Imagens adicionadas..."; } ?></p>
+			<p class="status"><span style="<?php if ($database_total_usuarios <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_usuarios; ?></span> <?php if ($database_total_usuarios == 1) { echo "Usuário registrado..."; } else { echo "Usuários registrados..."; } ?></p>
+			<p class="status"><span style="<?php if ($database_total_comentarios <= 0) echo 'color: #ff0033'; ?>"><?php echo $database_total_comentarios; ?></span> <?php if ($database_total_comentarios == 1) { echo "Comentário criado..."; } else { echo "Comentários criados..."; } ?></p>
 		</div>
 	</main>

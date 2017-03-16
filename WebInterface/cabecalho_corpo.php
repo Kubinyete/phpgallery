@@ -24,25 +24,25 @@ if ($usuario_logado !== null) {
 
 ?>
 	<header class="cabecalho">
-		<a href="?v=home" class="link">
+		<a href="/" class="link">
 			<img id="cabecalho-logo" draggable="false" src="/static/recursos/phpgallery/phpgallery-logo.png" alt="Logo da aplicação">
 		</a>
 		<!-- Navegação principal -->
 		<nav class="cabecalho-nav">
 			<ul class="cabecalho-links-lista">
 				<li>
-					<a href="?v=home" class="link">Home</a>
+					<a href="/" class="link">Home</a>
 				</li>
 				<li>
-					<a href="?v=perfil" class="link">Perfil</a>
+					<a href="/?v=perfil" class="link">Perfil</a>
 				</li>
 				<li>
-					<a href="?v=enviar" class="link">Enviar</a>
+					<a href="/?v=enviar" class="link">Enviar</a>
 				</li>
 			</ul>
 		</nav>
 		<!-- Pesquisa de imagens -->
-		<form id="cabecalho-pesquisa" method="GET" autocomplete="off">
+		<form id="cabecalho-pesquisa" method="GET" action="/" autocomplete="off">
 			<input type="hidden" name="v" value="procurar">
 			<input type="text" name="s" placeholder="Pesquisar">
 			<i class="fa fa-search"></i>
@@ -52,7 +52,7 @@ if ($usuario_logado !== null) {
 		<!-- Usuário Container -->
 		<div class="cabecalho-usuario-container">
 			<!-- Imagem de perfil do usuário logado -->
-			<a href="?v=perfil" class="link">
+			<a href="/?v=perfil" class="link">
 				<img class="imagem-perfil" draggable="false" src="<?php echo $usuario_logado->obter_imagem_url(); ?>" alt="Sua imagem de perfil">
 				<div class="cabecalho-usuario-nome-container">
 					<!-- Nome do usuário logado -->
@@ -70,14 +70,14 @@ if ($usuario_logado !== null) {
 		<?php } else { ?>
 
 		<!-- Link para a página de login -->
-		<a class="link link-pagina-login" href="?v=login">Efetue login ou registre-se</a>
+		<a class="link link-pagina-login" href="/?v=login">Efetue login ou registre-se</a>
 
 		<?php } ?>
 	</header>
 	<?php if ($usuario_logado !== null) { ?>
 	<div class="usuario-menu">
 		<ul>
-			<a class="link" href="?v=login&amp;l=1">
+			<a class="link" href="/?v=login&amp;l=1">
 				<li><i class="fa fa-sign-out"></i> Sair</li>
 			</a>
 		</ul>

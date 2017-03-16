@@ -5,8 +5,6 @@
 
 namespace PHPGallery\WebInterface;
 
-require_once "Referencias.php";
-
 set_include_path("..");
 require_once "DatabaseInterface/Conexao.php";
 require_once "DatabaseInterface/DatabaseImagem.php";
@@ -54,7 +52,7 @@ $database_total_comentarios = $dal->obter_contagem_comentarios();
 								phpgallery.imagens.adicionarImagem(<?php echo $imagem->get_id(); ?>, '<?php echo $imagem->obter_imagem_url(); ?>', '<?php echo $imagem->get_titulo(true) ?>');
 							</script>
 							<li>
-								<a class="link" href="?v=imagem&id=<?php echo $imagem->get_id(); ?>">
+								<a class="link" href="/?v=imagem&amp;id=<?php echo $imagem->get_id(); ?>">
 									<div class="lista-imagem-container">
 										<div class="lista-imagem-imagem" style="background-image: url(<?php echo $imagem->obter_imagem_url(); ?>)"></div>
 										<div class="lista-imagem-gradient">
@@ -63,7 +61,7 @@ $database_total_comentarios = $dal->obter_contagem_comentarios();
 									</div>
 								</a>
 								<div class="lista-opcoes-container">
-									<form method="GET">
+									<form method="GET" action="/">
 										<input type="hidden" name="v" value="download">
 										<input type="hidden" name="id" value="<?php echo $imagem->get_id(); ?>">
 										<button type="submit" class="lista-opcoes-botao baixar">
@@ -74,7 +72,7 @@ $database_total_comentarios = $dal->obter_contagem_comentarios();
 										<i class="fa fa-arrows-alt"></i>
 									</button>
 								</div>
-								<span class="lista-imagem-caixa-descricao">Descrição: <?php echo $imagem->get_descricao(true); ?><br>Extensão: <span class="extensao"><?php echo $imagem->get_extensao(true); ?></span><br>Autor: <a class="link" href="?v=perfil&u=<?php echo $imagem->autor->get_nome(); ?>"><span class="autor"><?php echo $imagem->autor->get_nome(); ?></span></a></span>
+								<span class="lista-imagem-caixa-descricao">Descrição: <?php echo $imagem->get_descricao(true); ?><br>Extensão: <span class="extensao"><?php echo $imagem->get_extensao(true); ?></span><br>Autor: <a class="link" href="/?v=perfil&amp;u=<?php echo $imagem->autor->get_nome(); ?>"><span class="autor"><?php echo $imagem->autor->get_nome(); ?></span></a></span>
 							</li>
 							<?php
 						}

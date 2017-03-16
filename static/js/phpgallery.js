@@ -5,13 +5,16 @@ this.phpgallery = {
 	usuarioMenuAtivado: false,
 
 	imagens: {
+		// Das imagens mais recentes até as mais antigas
+		// id -> decrescente
 		lista: [],
 
-		adicionarImagem: function(aid, aurl, atitulo) {
-			this.lista.push({id: aid, url: aurl, titulo: atitulo});
+		adicionarImagem: function(id, url, titulo) {
+			this.lista.push({id: id, url: url, titulo: titulo});
 		},
 
 		obterImagem: function(id) {
+			/*
 			for (var i = 0; i < this.lista.length; i++) {
 				if (this.lista[i].id == id) {
 					return this.lista[i];
@@ -20,6 +23,36 @@ this.phpgallery = {
 			}
 
 			return;
+			*/
+		
+			var inicio = 0;
+			var fim = this.lista.length - 1;
+			var imagem = null;
+
+			/**
+			 * [ 5 , 4 , 3 , 2 , 1 , 0]
+			 */
+
+			while (inicio <= fim) {
+				var i = Math.round((inicio + fim) / 2);
+
+				if (this.lista[i].id == id) {
+					imagem = this.lista[i];
+					break;
+				} else {
+					if (inicio >= fim) {
+						break;
+					} else {
+						if (this.lista[i].id < id) {
+							fim = Math.round((inicio + fim) / 2) - 1;
+						} else {
+							inicio = Math.round((inicio + fim) / 2) + 1;
+						}
+					}
+				}
+			}
+
+			return imagem;
 		}
 	},
 

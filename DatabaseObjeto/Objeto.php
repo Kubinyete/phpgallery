@@ -11,11 +11,6 @@ class Objeto {
 	public function __construct($id=0, $data_criacao) {
 		$this->set_id($id);
 		$this->set_data_criacao($data_criacao);
-
-		$tm = "America/Sao_Paulo";
-		if (date_default_timezone_get() !== $tm) {
-			date_default_timezone_set($tm);
-		}
 	}
 
 	public function get_id() {
@@ -28,6 +23,10 @@ class Objeto {
 
 	public function get_data_criacao($formatar=false) {
 		return ($formatar) ? $this->obter_data_criacao_formatada() : $this->_data_criacao;
+	}
+
+	public function get_data_criacao_inserir() {
+		return str_replace("-", "", $this->_data_criacao);
 	}
 
 	public function set_data_criacao($valor) {

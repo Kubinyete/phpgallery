@@ -10,6 +10,15 @@
 
 namespace PHPGallery;
 
+/**
+ * Setando a timezone para America/Sao_Paulo
+ */
+
+$tm = "America/Sao_Paulo";
+if (date_default_timezone_get() !== $tm) {
+    date_default_timezone_set($tm);
+}
+
 require_once "WebInterface/cabecalho_sessao.php";
 require_once "WebInterface/online_status.php";
 require_once "WebInterface/Pedido.php";
@@ -32,6 +41,11 @@ switch ($pedido_pagina) {
         break;
     case "login":
         define("HTML_TITULO", "Área de autenticação");
+        break;
+    // TODO: Modifcar o título HTML para o título da imagem
+    case "imagem";
+        define("HTML_TITULO", "Imagem");
+        break;
 }
 
 require_once "WebInterface/cabecalho.php";
@@ -45,6 +59,9 @@ switch ($pedido_pagina) {
     case "login":
         require_once "WebInterface/login.php";
         break;
+    case "imagem":
+        require_once "WebInterface/imagem.php";
+        break;
     case "perfil":
         #require_once "WebInterface/perfil.php";
         break;
@@ -56,9 +73,6 @@ switch ($pedido_pagina) {
         break;
     case "download":
         #require_once "WebInterface/download.php";
-        break;
-    case "imagem":
-        #require_once "WebInterface/imagem.php";
         break;
     default:
         require_once "WebInterface/404.php";

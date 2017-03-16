@@ -21,11 +21,11 @@ class DatabaseALUsuario extends DatabaseAL {
 
 	// Insere no banco de dados um novo objeto Usuario
 	public function criar_usuario($usuario) {
-		$sql = "INSERT INTO Usuarios (usr_nome, usr_senha, usr_data_criacao, usr_online_timestamp) VALUES ('" . $usuario->get_nome() . "', '" . $usuario->get_senha() . "', '" . $usuario->get_data_criacao() . "', " . $usuario->get_online_timestamp() . ");";
+		$sql = "INSERT INTO Usuarios (usr_nome, usr_senha, usr_data_criacao, usr_online_timestamp) VALUES ('" . $usuario->get_nome() . "', '" . $usuario->get_senha() . "', '" . $usuario->get_data_criacao_inserir() . "', " . $usuario->get_online_timestamp() . ");";
 
 		$this->_conexao->conectar();
 		$this->executar($sql, true);
-		$novo_usuario = $this->obter_usuario($usuario->get_nome());
+		$novo_usuario = $this->obter_usuario($usuario->get_nome(), true);
 
 		$this->_conexao->desconectar();
 

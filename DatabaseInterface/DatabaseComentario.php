@@ -22,7 +22,7 @@ class DatabaseALComentario extends DatabaseAL {
 	public function criar_comentario($comentario) {
 		$local_conteudo = trim($comentario->get_conteudo());
 
-		$sql = "INSERT INTO Comentarios (img_id, usr_id, cmt_conteudo, cmt_data_criacao) VALUES (" . $comentario->get_img_id() . ", " . $comentario->get_usr_id() . ", '" . $local_conteudo . "', '" . $comentario->get_data_criacao() . "'); SELECT @@IDENTITY AS identidade;";
+		$sql = "INSERT INTO Comentarios (img_id, usr_id, cmt_conteudo, cmt_data_criacao) VALUES (" . $comentario->get_img_id() . ", " . $comentario->get_usr_id() . ", '" . $local_conteudo . "', '" . $comentario->get_data_criacao_inserir() . "'); SELECT @@IDENTITY AS identidade;";
 
 		$this->_conexao->conectar();
 		$resultado_id = $this->executar($sql, true);

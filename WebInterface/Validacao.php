@@ -19,6 +19,12 @@ use PHPGallery\DatabaseObjeto\Usuario;
 class Validacao {
 	protected $_conexao;
 
+	public static $min_caracteres_nome = 4;
+	public static $max_caracteres_nome = 16;
+
+	public static $min_caracteres_senha = 6;
+	public static $max_caracteres_senha = 32;
+
 	public function __construct($conexao) {
 		$this->_conexao = $conexao;
 	}
@@ -40,8 +46,18 @@ class Validacao {
 	}
 
 	// Retorna se o tamanho da cadeia de carácteres está dentro do permitido
-	public static function campo_tamanho_esta_valido($string, $limite_min, $limite_max) {
-		return (count($string) <= $limite_max) && (count($string) >= $limite_min);
+	// $nome_ou_senha => (true) nome
+	// $nome_ou_senha => (false) senha
+	public static function campo_tamanho_esta_valido($string, $nome_ou_senha) {
+		if ($string === null) {
+			return false;
+		}
+
+		if ($nome_ou_senha) {
+			return ((strlen($string) <= self::$max_caracteres_nome) && (strlen($string) >= self::$min_caracteres_nome));
+		} else {
+			return ((strlen($string) <= self::$max_caracteres_senha) && (strlen($string) >= self::$min_caracteres_senha));
+		}
 	}
 
 	// Efetua login no sistema
@@ -91,9 +107,9 @@ class Validacao {
 			throw new ValidacaoErro(VE_REGISTRA_NOME_INVALIDO);
 		} else if (!self::campo_sem_caracteres_invalidos($senha)) {
 			throw new ValidacaoErro(VE_REGISTRA_SENHA_INVALIDA);
-		} else if (!self::campo_tamanho_esta_valido($nome, 4, 16)) {
+		} else if (!self::campo_tamanho_esta_valido($nome, true)) {
 			throw new ValidacaoErro(VE_REGISTRA_NOME_TAMANHO_INVALIDO);
-		} else if (!self::campo_tamanho_esta_valido($senha, 6, 32)) {
+		} else if (!self::campo_tamanho_esta_valido($senha, false)) {
 			throw new ValidacaoErro(VE_REGISTRA_SENHA_TAMANHO_INVALIDO);
 		}
 
@@ -113,7 +129,8 @@ class Validacao {
 				true,
 				"",
 				false,
-				date("Y-m-d H:m-i"),
+				// Para inserir, o SQLServer só aceita YYYYMMDD HH:MM:SS
+				date("Y-m-d H:m:i"),
 				time(),
 				false
 			);

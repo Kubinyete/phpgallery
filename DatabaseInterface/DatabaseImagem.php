@@ -25,7 +25,7 @@ class DatabaseALImagem extends DatabaseAL {
 		$local_titulo = trim($imagem->get_titulo());
 		$local_descricao = trim($imagem->get_descricao());
 
-		$sql = "INSERT INTO Imagens (usr_id, img_titulo, img_descricao, img_data_criacao, img_extensao) VALUES (" . $imagem->get_usr_id() . ", " . ( (strlen($local_titulo) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_titulo) . "'") . ", " . ( (strlen($local_descricao) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_descricao) . "'") . ", '" . $imagem->get_data_criacao() . "', '" . $imagem->get_extensao() . "'); SELECT @@IDENTITY AS identidade;";
+		$sql = "INSERT INTO Imagens (usr_id, img_titulo, img_descricao, img_data_criacao, img_extensao) VALUES (" . $imagem->get_usr_id() . ", " . ( (strlen($local_titulo) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_titulo) . "'") . ", " . ( (strlen($local_descricao) < 1) ? "NULL" : "'" . DatabaseAL::filtrar_escape_string_mssql($local_descricao) . "'") . ", '" . $imagem->get_data_criacao_inserir() . "', '" . $imagem->get_extensao() . "'); SELECT @@IDENTITY AS identidade;";
 
 		$this->_conexao->conectar();
 		$resultado_id = $this->executar($sql, true);

@@ -25,11 +25,11 @@ class DatabaseAL {
 
 		// Salvar modificações?
 		if ($salvar) {
-			$ok = odbc_commit($this->_conexao->get_conexao());
+			$ok = @odbc_commit($this->_conexao->get_conexao());
 
 			if (!$ok) {
 				DatabaseErroRedirecionador::enviar_erro(DE_FALHA_SALVAR);
-			} 
+			}
 		}
 
 		return $resultado_id;

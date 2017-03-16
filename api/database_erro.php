@@ -12,20 +12,18 @@ set_include_path("..");
 require_once "ApiInterface/ApiResposta.php";
 require_once "DatabaseInterface/DatabaseErroDefinicoes.php";
 require_once "WebInterface/Resposta.php";
+require_once "WebInterface/Pedido.php";
 
 use PHPGallery\ApiInterface\ApiResposta;
 use PHPGallery\DatabaseInterface\DatabaseErroDefinicoes;
 use PHPGallery\WebInterface\Resposta;
+use PHPGallery\WebInterface\Pedido;
 
 
 Resposta::status(500);
 Resposta::conteudo_tipo("application/json");
 
-$codigo = 0;
-
-if (isset($_GET["err"])) {
-	$codigo = intval($_GET["err"]);
-}
+$codigo = intval(Pedido::obter("err", "GET"));
 
 $resposta = [
 	"erro_database" => true,

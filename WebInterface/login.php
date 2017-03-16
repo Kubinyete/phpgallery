@@ -56,7 +56,6 @@ if (Pedido::obter("r", "POST") === "0") {
         </div>
         <div class="conteudo conteudo-centro">
             <form id="login-formulario" class="formulario" method="POST" autocomplete="off">
-                <input type="hidden" name="v" value="login">
                 <input type="hidden" name="r" value="0">
                 <label for="login-nome">Nome</label>
                 <input id="login-nome" maxlength="16" type="text" name="u" placeholder="Nome do usuário" required>
@@ -88,7 +87,6 @@ if (Pedido::obter("r", "POST") === "0") {
         </div>
         <div class="conteudo conteudo-centro">
             <form id="registra-formulario" class="formulario" method="POST" autocomplete="off">
-                <input type="hidden" name="v" value="login">
                 <input type="hidden" name="r" value="1">
                 <label for="registra-nome">Nome</label>
                 <input id="registra-nome" maxlength="16" type="text" name="u" placeholder="Nome do usuário" required>

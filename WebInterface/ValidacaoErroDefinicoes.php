@@ -1,6 +1,8 @@
 <?php
 namespace PHPGallery\WebInterface;
 
+require_once "Validacao.php";
+
 define("VE_DESCONHECIDO", 0);
 define("VE_LOGIN_INVALIDO", 1);
 define("VE_REGISTRA_NOME_INVALIDO", 2);
@@ -21,7 +23,8 @@ class ValidacaoErroDefinicoes {
 		VE_REGISTRA_SENHA_INVALIDA => "A senha informada contêm carácteres inválidos, somente [a-z, A-Z, 0-9] são permitidos.",
 		VE_REGISTRA_CONFIRMA_SENHA_INVALIDA => "A confirmação da senha não está de acordo com a senha informada.",
 		VE_REGISTRA_JA_EXISTE => "O nome do usuário informado já existe.",
-		VE_REGISTRA_NOME_TAMANHO_INVALIDO => "O tamanho do nome de usuário informado está inválido."
+		VE_REGISTRA_NOME_TAMANHO_INVALIDO => ("O tamanho do nome de usuário informado está inválido (mínimo de 4 carácteres e máximo de 16 carácteres)."),
+		VE_REGISTRA_SENHA_TAMANHO_INVALIDO => ("O tamanho da senha informada está inválida (mínimo de 6 carácteres e máximo de 32 carácteres).")
 	];
 }
 

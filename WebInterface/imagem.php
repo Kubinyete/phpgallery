@@ -42,6 +42,13 @@ if ($id > 0) {
             <i class="conteudo-divisao-icone fa fa-photo"></i>
             <h1><?php echo $imagem->get_titulo(true); ?></h1>
         </div>
+        <script>
+            $(document).ready(
+                function() {
+                    phpgallery.irPara(".conteudo-divisao", -50, false);
+                }
+            );
+        </script>
         <div class="conteudo">
             <div class="imagem-container">
                 <img src="<?php echo $imagem->obter_imagem_url(); ?>" alt="<?php echo $imagem->get_titulo(true); ?>">

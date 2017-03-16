@@ -3,6 +3,8 @@
 this.phpgallery = {
 	visualizacaoImagemSelecionada: 0,
 	usuarioMenuAtivado: false,
+	IE: window.navigator.userAgent.indexOf(".NET") != -1,
+	FIREFOX: window.navigator.userAgent.indexOf("Firefox") != -1,
 
 	imagens: {
 		// Das imagens mais recentes até as mais antigas
@@ -24,7 +26,7 @@ this.phpgallery = {
 
 			return;
 			*/
-		
+
 			var inicio = 0;
 			var fim = this.lista.length - 1;
 			var imagem = null;
@@ -85,6 +87,30 @@ this.phpgallery = {
 			$(".usuario-menu").removeClass("usuario-menu-ativado");
 			$(".cabecalho-usuario-btnopcoes-container").removeClass("cabecalho-usuario-btnopcoes-container-ativado");
 			this.usuarioMenuAtivado = false;
+		}
+	},
+
+	irPara: function(elemento, offset, animar=true, delay=1000) {
+		if ($(document).scrollTop() >= $(elemento).offset().top) {
+			return;
+		}
+
+		if (!animar) {
+			$(document).scrollTop($(elemento).offset().top + offset);
+		} else {
+			if (this.IE || this.FIREFOX) {
+				$("html").animate(
+					{
+						scrollTop: $(elemento).offset().top + offset
+					}, delay
+				);
+			} else {
+				$("body").animate(
+					{
+						scrollTop: $(elemento).offset().top + offset
+					}, delay
+				);
+			}
 		}
 	}
 };

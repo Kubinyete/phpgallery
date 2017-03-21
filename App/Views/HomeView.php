@@ -10,6 +10,7 @@ use Config\ViewConfig;
 
 class HomeView extends View {
 	private $imagens;
+	private $contagemImagens;
 
 	private $templates = [
 		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
@@ -19,8 +20,9 @@ class HomeView extends View {
 		"rodape" => ViewConfig::TEMPLATE_RODAPE
 	];
 
-	public function __construct($imagens) {
+	public function __construct($imagens, $contagemImagens) {
 		$this->imagens = $imagens;
+		$this->contagemImagens = $contagemImagens;
 	}
 
 	public function renderizar() {
@@ -36,6 +38,7 @@ class HomeView extends View {
 		$phpgalleryVersao = ViewConfig::PHPGALLERY_VERSAO;
 
 		$imagens = &$this->imagens;
+		$contagemImagens = &$this->contagemImagens;
 
 		foreach ($this->templates as $templateNome => $templateArquivo) {
 			include dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;

@@ -21,6 +21,11 @@
 			</li><!-- 
 			<?php } ?>
 		--></ul>
+		<h1>Estatísticas</h1>
+		<p><span id="contagemImagens"><?php echo $contagemImagens; ?></span> <?php echo ($contagemImagens == 1) ? " Imagem enviada" : " Imagens enviadas" ?></p>
+		<script>
+			phpgallery.animarContagem("#contagemImagens", 1000);
+		</script>	
 		<?php } else { ?>
 		<p class="erro">Nenhuma imagem encontrada no banco de dados :(.</p>
 		<?php } ?>

@@ -155,6 +155,22 @@ class DalImagem extends Dal {
 		return $imagens;
 	}
 
+	// Obtem a contagem de todas as imagens no banco de dados
+	public function contagemImagens() {
+		$sql = new SqlComando();
+		$sql->select("COUNT(*)")->as("contagem")->from("Imagens");
+
+		$resultado = $this->executar($sql);
+
+		$contagem = 0;
+
+		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
+			$contagem = intval(odbc_fetch_array($resultado)["contagem"]);
+		}
+
+		return$contagem;
+	}
+
 	// Atualiza o estado de um objeto no banco de dados de acordo com sua representação passada pelo argumento
 	public function atualizarImagem($imagem) {
 		$sql = new SqlComando();

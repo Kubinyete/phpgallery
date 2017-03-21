@@ -199,7 +199,6 @@ div.logo-showcase div.logo-showcase-imagem {
 main {
 	width: 100%;
 	height: auto;
-	overflow: hidden;
 	background-color: #f0f0f0;
 }
 
@@ -303,7 +302,7 @@ footer ul li span {
  */
 
 ul.imagens-lista {
-	margin: 2em 0em;
+	padding: 2em 0em;
 }
 
 ul.imagens-lista li {

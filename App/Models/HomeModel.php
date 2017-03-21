@@ -19,7 +19,8 @@ class HomeModel extends Model {
 	public function index() {
 		$dal = new DalImagem($this->conexao);
 		$imagens = $dal->listarRecentes();
-		return new HomeView($imagens);
+		$contagemImagens = $dal->contagemImagens();
+		return new HomeView($imagens, $contagemImagens);
 	}
 }
 

@@ -22,7 +22,7 @@ class Erro {
 		self::DBERRO_DESCONHECIDO => "Ocorreu um erro desconhecido ao tentar consultar o banco de dados.",
 		self::DBERRO_FALHA_CONEXAO => "Não foi possível estabelecer uma conexão com o banco de dados.",
 		self::DBERRO_FALHA_COMANDO => "Ocorreu um erro ao tentar interagir com o banco de dados.",
-		self::DEERRO_FALHA_SALVAR => "Não foi possível armazenar as modificações feitas até o momento no banco de dados."
+		self::DBERRO_FALHA_SALVAR => "Não foi possível armazenar as modificações feitas até o momento no banco de dados."
 	];
 }
 

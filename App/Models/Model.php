@@ -8,16 +8,16 @@ namespace App\Models;
 abstract class Model {
 	// Necessário a conexão pois o Model acessa a nossa Dal e retorna informações importantes para
 	// um objeto View, que então irá renderizar a página retornando o HTML para o usuário
-	protected $dal;
+	protected $conexao;
 
-	public function __construct($dal) {
-		$this->dal = $dal;
+	public function __construct($conexao) {
+		$this->conexao = $conexao;
 	}
 
 	// Mostrará a página do modelo atual
 	// retorna a View desta página para que então
 	// 'renderizá-la'
-	public abstract function index();
+	#public abstract function index();
 }
 
 ?>

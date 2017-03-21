@@ -26,6 +26,24 @@ a {
 	text-decoration: none;
 }
 
+a.link-efeito {
+	color: lightskyblue;
+}
+
+a.link-efeito:hover {
+	color: cornflowerblue;
+}
+
+@keyframes cair {
+	from {
+		opacity: 0;
+		transform: translate(0em, -1em);
+	} to {
+		opacity: 1;
+		transform: translate(0em, 0em);
+	}
+}
+
 /**
  * Cabeçalho
  */
@@ -40,34 +58,17 @@ header {
 	width: 100%;
 	height: 5em;
 	overflow: hidden;
-
-	background-color: rgba(0,0,0, .4);
-	box-shadow: none;
-	transform: translate(0, 0);
 }
 
 header.ativado {
 	position: fixed;
 	transition: .3s ease-in-out;
-	animation: headerFlutuanteAnim .3s ease-in-out;
 	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
-	background-color: #333;
+	background-color: rgba(0,0,0, .4);
 }
 
-@keyframes headerFlutuanteAnim {
-	0% {
-		background-color: rgba(0,0,0, .4);
-		box-shadow: none;
-		transform: translate(0, 0);
-	} 50% {
-		background-color: rgba(0,0,0, .4);
-		box-shadow: none;
-		transform: translate(0, -5em);
-	} 100% {
-		background-color: rgba(0,0,0, .4);
-		box-shadow: 0px 0px 8px rgba(0,0,0, .4);
-		background-color: #333;
-	}
+header.ativado nav ul li a {
+	color: rgba(255,255,255, .8);
 }
 
 header div.centro {
@@ -88,7 +89,7 @@ header img:hover {
 }
 
 /**
- * Cabeçalho navegação
+ * Navegação do cabeçalho
  */
 
 header nav {
@@ -104,13 +105,8 @@ header nav li a {
 	display: inline-block;
 	font-size: 2em;
 	text-transform: uppercase;
-	color: rgba(255,255,255, .8);
+	color: rgba(0,0,0, .4);
 	padding: .65em .65em;
-	border-left: .05em solid rgba(255,255,255, .8);
-}
-
-header nav li a.ultimo {
-	border-right: .05em solid rgba(255,255,255, .8);
 }
 
 header nav li a:hover {
@@ -129,7 +125,6 @@ div.logo-showcase {
     /**
     * Colocando 50px de margin, pois nosso header está flutuando com posicionamento fixed ou absolute
      */
-    /*margin-top: .625em;*/
     width: 100%;
     height: 5em;
     font-size: 8em;
@@ -173,7 +168,7 @@ div.logo-showcase div.logo-showcase-gradient {
     /* Para navegadores que não suportam linear-gradient */
     background-image: url("/static/resources/gradient-150.png");
 
-    background-image: linear-gradient(transparent, transparent, transparent, transparent, #000);
+    background-image: linear-gradient(transparent, transparent, transparent, transparent, #efefef);
     background-repeat: repeat-x;
     background-position: bottom;
 }
@@ -191,41 +186,34 @@ div.logo-showcase div.logo-showcase-imagem {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
     filter: blur(2px);
     padding: 0 4px;
     margin: 0 -4px;
 }
 
 /**
- * Home - main
+ * Main
  */
 
 main {
+	position: relative;
 	max-width: 1024px;
+	min-height: 50em;
 	margin: 0 auto;
 	text-align: center;
 }
 
 main h1 {
-	animation: cairTransicao .4s ease-in-out;
+	animation: cair .4s ease-in-out;
 	font-family: Raleway, Arial, sans-serif;
 	font-size: 5em;
-	margin: .4em 0em;
+	margin: 0em 0em;
+	padding: .5em 0em;
 	color: rgba(0,0,0, .6);
 }
 
-@keyframes cairTransicao {
-	from {
-		opacity: 0;
-		transform: translate(0, -.5em);
-	} to {
-		opacity: 1;
-		transform: translate(0, 0);
-	}
-}
-
 main p {
-	animation: cairTransicao .4s ease-in-out;
 	font-family: Source Sans Pro, Arial, sans-serif;
 	font-size: 2em;
 	margin: 0em 0em;
@@ -233,7 +221,167 @@ main p {
 }
 
 main p.erro {
-	animation: cairTransicao .4s ease-in-out;
 	margin: .4em 0em;
 	color: #ff0033;
+}
+
+/**
+ * Rodapé
+ */
+
+footer {
+	width: 100%;
+	min-height: 15em;
+	background-color: #333;
+}
+
+footer p {
+	text-align: center;
+	font-size: 2em;
+	font-family: Raleway, Arial, sans-serif;
+	color: rgba(255,255,255, .8);
+	margin: 0em 0em;
+	padding: .5em 0em;
+}
+
+footer ul {
+	width: 100%;
+	text-align: center;
+}
+
+footer ul li {
+	position: relative;
+	display: inline-block;
+}
+
+footer ul li:hover img {
+	transition: .1s ease-in-out;
+	box-shadow: 0px 0px 6px white;
+}
+
+footer ul li:hover span {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0px,0px);
+}
+
+footer ul li img {
+	transition: .1s ease-in-out;
+	border-radius: 100%;
+	max-width: 5em;
+	max-height: 5em;
+}
+
+footer ul li span {
+	transition: .1s ease-in-out;
+	position: absolute;
+	font-size: 1.5em;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	color: rgba(255,255,255, .8);
+	visibility: hidden;
+	opacity: 0;
+	transform: translate(0px, -10px);
+	background-color: rgba(0,0,0, .4);
+	padding: 0.375em;
+	left: 0;
+}
+
+/**
+ * Lista de imagens
+ */
+
+ul.imagens-lista {
+	margin: 2em 0em;
+}
+
+ul.imagens-lista li {
+	animation: cair .4s ease-in-out;
+	position: relative;
+	display: inline-block;
+}
+
+ul.imagens-lista li:hover div.imagem-container div.imagem-gradient {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: .75;
+}
+
+ul.imagens-lista li:hover span.imagem-titulo {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0px, 0px);
+}
+
+ul.imagens-lista li:hover span.imagem-descricao {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0px, 0px) scale(1);
+}
+
+ul.imagens-lista li span.imagem-titulo {
+	transition: .1s ease-in-out;
+	position: absolute;
+	word-wrap: break-word;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 90%;
+	padding: 0 5%;
+	height: 18%;
+	color: white;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	font-size: 1.5em;
+	visibility: hidden;
+	opacity: 0;
+	transform: translate(0px, 1em);
+	text-shadow: 0px 0px 6px rgba(0,0,0, .4);
+}
+
+ul.imagens-lista li span.imagem-descricao {
+	z-index: 998;
+	transition: .1s ease-in-out;
+	width: 90%;
+	position: absolute;
+	word-wrap: break-word;
+	padding: 1em 5%;
+	background-color: #333;
+	left: 0;
+	color: white;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	visibility: hidden;
+	opacity: 0;
+	box-shadow: 0px 0px 6px rgba(0,0,0, .4);
+	transform: translate(0px, -1em) scale(0.75);
+}
+
+ul.imagens-lista li div.imagem-container div.imagem {
+	width: 252px;
+	height: 140px;
+	border: 2px solid rgba(0,0,0, .2);
+	background-color: white;
+	background-size: cover;
+	background-position: center;
+}
+
+ul.imagens-lista li div.imagem-container div.imagem-gradient {
+	transition: .1s ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+	width: 256px;
+	height: 144px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-repeat: repeat-x;
+	background-position: bottom;
+	background-image: url("/static/resources/gradient-100.png");
+	background-image: linear-gradient(transparent, transparent, transparent, transparent, #000);
 }

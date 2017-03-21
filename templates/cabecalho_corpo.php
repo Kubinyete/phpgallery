@@ -5,11 +5,11 @@
 		</a>
 		<!-- -->
 		<nav id="headerNavegacao">
-			<ul>
-				<li>
-					<a href="/?v=home" class="ultimo">Home</a>
-				</li>
-			</ul>
+			<ul><!--
+				--><li>
+					<a href="/?v=home">Home</a>
+				</li><!--
+			--></ul>
 		</nav>
 	</div>
 </header>

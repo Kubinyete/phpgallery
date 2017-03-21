@@ -1,13 +1,13 @@
 <?php
 /**
- * Controlador da página inicial, aonde estará disponível as imagens recentes
+ * Controlador da página de erro 404
  */
 
 namespace App\Controllers;
 
 use App\Controllers\Controller;
 
-class HomeController extends Controller {
+class NotFoundController extends Controller {
 	// $model
 	
 	public function rodar() {

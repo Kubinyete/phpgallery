@@ -36,7 +36,7 @@ class DalImagem extends Dal {
 		$id = null;
 
 		if ($resultadoId != false && odbc_num_rows($resultadoId) >= 1) {
-			$id = itnval(odbc_fetch_array($resultadoId)["id"]);
+			$id = intval(odbc_fetch_array($resultadoId)["id"]);
 		}
 
 		$this->conexao->desconectar();
@@ -168,7 +168,7 @@ class DalImagem extends Dal {
 			$contagem = intval(odbc_fetch_array($resultado)["contagem"]);
 		}
 
-		return$contagem;
+		return $contagem;
 	}
 
 	// Atualiza o estado de um objeto no banco de dados de acordo com sua representação passada pelo argumento

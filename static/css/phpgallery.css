@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background-color: #444;
+	background-color: #f0f0f0;
 	font-family: Lato, Arial, sans-serif;
 	font-size: 62.5%;
 	word-wrap: break-word;
@@ -56,7 +56,7 @@ header {
 	top: 0;
 	right: 0;
 	width: 100%;
-	height: 5em;
+	height: 50px;
 	overflow: hidden;
 }
 
@@ -74,12 +74,13 @@ header.ativado nav ul li a {
 header div.centro {
 	max-width: 1024px;
 	margin: 0em auto;
-	height: 5em;
+	height: 50px;
 }
 
 header img {
+	display: inline-block;
 	transition: background-color .1s ease-in-out;
-	height: 5em;
+	height: 50px;
 	padding: 0 .5em;
 }
 
@@ -231,7 +232,8 @@ main p {
 }
 
 main p.erro {
-	margin: .4em 0em;
+	margin: 0em 0em;
+	padding: .4em 0em;
 	color: #ff0033;
 }
 
@@ -405,4 +407,59 @@ ul.imagens-lista li div.imagem-container div.imagem-gradient {
 	background-position: bottom;
 	background-image: url("/static/resources/gradient-100.png");
 	background-image: linear-gradient(transparent, transparent, transparent, transparent, #000);
+}
+
+/**
+ * Imagem
+ */
+
+article img.imagem {
+	display: block;
+	max-width: 100%;
+	max-height: 100vh;
+	margin: 0em auto;
+	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
+}
+
+article p.descricao {
+	padding: 1em 1em;
+}
+
+article p.data-criacao {
+	color: cornflowerblue;
+	padding-bottom: 1em;
+}
+
+article div.usuario-container {
+	overflow: hidden;
+	position: relative;
+	width: 98%;
+	height: 100px;
+	padding: 10px 1%;
+	border-radius: 10px;
+	background-color: rgba(0,0,0, .05);
+}
+
+article div.usuario-container img.usuario-imagem {
+	float: right;
+	width: 98px;
+	height: 98px;
+	border: 1px solid #777;
+	border-radius: 5px;
+}
+
+article div.usuario-container span.usuario-nome {
+	float: right;
+	font-size: 20px;
+	color: #777;
+	transform: translate(-10px, 40px);
+}
+
+article div.usuario-container-online img.usuario-imagem {
+	border-color: cornflowerblue;
+	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
+}
+
+article div.usuario-container-online span.usuario-nome {
+	color: cornflowerblue;
 }

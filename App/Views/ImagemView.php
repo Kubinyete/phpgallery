@@ -1,6 +1,6 @@
 <?php
 /**
- * Representa a visualização da página 404
+ * Representa a visualização da página de imagem
  */
 
 namespace App\Views;
@@ -8,17 +8,21 @@ namespace App\Views;
 use App\Views\View;
 use Config\ViewConfig;
 
-class NotFoundView extends View {
+class ImagemView extends View {
+	private $imagem;
+	private $autor;
 	private $usuarioLogado;
 	private $templates = [
 		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
 		"cabecalho_corpo" => "cabecalho_corpo",
 		"logo_showcase" => "logo_showcase",
-		"erro" => "erro",
+		"imagem" => "imagem",
 		"rodape" => ViewConfig::TEMPLATE_RODAPE
 	];
 
-	public function __construct($usuarioLogado) {
+	public function __construct($usuarioLogado, $imagem, $autor) {
+		$this->imagem = $imagem;
+		$this->autor = $autor;
 		$this->usuarioLogado = $usuarioLogado;
 	}
 
@@ -34,10 +38,8 @@ class NotFoundView extends View {
 		$caminhoRecursos = ViewConfig::CAMINHO_RECURSOS_PADRAO;
 		$phpgalleryVersao = ViewConfig::PHPGALLERY_VERSAO;
 
-		$erroTitulo = "Aparentemente algo deu muito errado por aqui :(";
-		$erroDescricao = "A página que você está procurando não existe.";
-		$erroAbrev = "HTTP 404 Not Found";
-
+		$imagem = &$this->imagem;
+		$autor = &$this->autor;
 		$usuarioLogado = &$this->usuarioLogado;
 
 		foreach ($this->templates as $templateNome => $templateArquivo) {

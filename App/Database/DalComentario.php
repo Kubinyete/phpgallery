@@ -34,7 +34,7 @@ class DalComentario extends Dal {
 		$id = null;
 
 		if ($resultadoId != false && odbc_num_rows($resultadoId) >= 1) {
-			$id = itnval(odbc_fetch_array($resultadoId)["id"]);
+			$id = intval(odbc_fetch_array($resultadoId)["id"]);
 		}
 
 		$this->conexao->desconectar();

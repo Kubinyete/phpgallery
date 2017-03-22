@@ -21,7 +21,7 @@ class ApiUsuario extends Api {
 		}
 
 		$dal = new DalUsuario($this->conexao);
-		$usuario = $dal->obterUsuario($nome, true);
+		$usuario = $dal->obterUsuario(false, $nome, true);
 		
 		$resposta = new ApiResposta($usuario);
 

@@ -5,7 +5,7 @@
 			<a href="https://github.com/Kubinyete/phpgallery/" target="_blank">
 				<img src="<?php echo $caminhoRecursos; ?>github-icon.png" alt="GitHub" draggable="false">
 			</a>
-			<span>GitHub</spam>
+			<span>GitHub</span>
 		</li>
 	</ul>
 </footer>

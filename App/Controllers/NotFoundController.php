@@ -10,11 +10,11 @@ use App\Controllers\Controller;
 class NotFoundController extends Controller {
 	// $model
 	
-	public function rodar() {
+	public function rodar($usuarioLogado) {
 		// Não precisaremos processar nenhum parâmetro
 		// para listar as imagens recentes
 		// retornará uma HomeView para que o script acima possa renderizá-la
-		return $this->model->index();
+		return $this->model->index($usuarioLogado);
 	}
 }
 

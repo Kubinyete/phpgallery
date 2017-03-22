@@ -10,14 +10,14 @@ use App\Views\ErroView;
 use App\Database\Erro;
 
 class ErroModel extends Model {
-	public function index($codigo) {
+	public function index($usuarioLogado, $codigo) {
 		if (isset(Erro::DEFINICOES[$codigo])) {
 			$mensagem = Erro::DEFINICOES[$codigo];
 		} else {
 			$mensagem = Erro::DEFINICOES[Erro::DBERRO_DESCONHECIDO];
 		}
 
-		return new ErroView($mensagem);
+		return new ErroView($usuarioLogado, $mensagem);
 	}
 }
 

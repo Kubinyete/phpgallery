@@ -37,10 +37,16 @@ class DalUsuario extends Dal {
 
 	// Obtem um objeto Usuario de acordo com o id passado
 	// paraApi: retorna um objeto Usuario pronto para ser utilizado pela api
-	public function obterUsuario($nome, $paraApi=false) {
+	public function obterUsuario($utilizarId, $valor, $paraApi=false) {
 		$sql = new SqlComando();
 
-		$sql->select("TOP 1 *")->from("Usuarios")->where("usr_nome", "=", $nome);
+		$sql->select("TOP 1 *")->from("Usuarios");
+
+		if ($utilizarId) {
+			$sql->where("usr_id", "=", $valor);
+		} else {
+			$sql->where("usr_nome", "=", $valor);
+		}
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);

@@ -29,7 +29,7 @@ class Imagem extends Objeto {
 			unset($this->privada);
 			$this->titulo = $this->getTitulo(true);
 			$this->descricao = $this->getDescricao(true);
-			$this["imagemUrl"] = $this->getImagemUrl();
+			$this->imagemUrl = $this->getImagemUrl();
 		}
 	}
 

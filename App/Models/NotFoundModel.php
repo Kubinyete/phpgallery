@@ -9,8 +9,8 @@ use App\Models\Model;
 use App\Views\NotFoundView;
 
 class NotFoundModel extends Model {
-	public function index() {
-		return new NotFoundView();
+	public function index($usuarioLogado) {
+		return new NotFoundView($usuarioLogado);
 	}
 }
 

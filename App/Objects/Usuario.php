@@ -28,8 +28,8 @@ class Usuario extends Objeto {
 		} else {
 			unset($this->senha);
 			$this->descricao = $this->getDescricao(true);
-			$this["estaOnline"] = $this->estaOnline();
-			$this["imagemUrl"] = $this->getImagemUrl();
+			$this->estaOnline = $this->estaOnline();
+			$this->imagemUrl = $this->getImagemUrl();
 		}
 	}
 
@@ -86,7 +86,7 @@ class Usuario extends Objeto {
 	}
 
 	public function estaOnline() {
-		return ($this->getOnlineTimestamp + UsuarioConfig::PERIODO_ONLINE >= time());
+		return ($this->getOnlineTimestamp() + UsuarioConfig::PERIODO_ONLINE >= time());
 	}
 
 	public function getImagemUrl() {
@@ -117,6 +117,10 @@ class Usuario extends Objeto {
 		}
 
 		return $retorno;
+	}
+
+	public function getLink() {
+		return str_replace("%", $this->getNome(), UsuarioConfig::LINK_USUARIO);
 	}
 }
 

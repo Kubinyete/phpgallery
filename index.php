@@ -7,17 +7,24 @@ require_once __DIR__.DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autolo
 
 use App\Http\Pedido;
 use App\Http\Resposta;
+use App\Session\Sessao;
 use App\Controllers\HomeController;
 use App\Controllers\NotFoundController;
 use App\Controllers\ErroController;
+use App\Controllers\ImagemController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
+use App\Models\ImagemModel;
 use App\Database\Conexao;
 
 Resposta::conteudoTipo("text/html; charset=utf-8");
 Resposta::header("Content-Language", "pt-BR");
 date_default_timezone_set("America/Sao_Paulo");
+
+Sessao::iniciar();
+Sessao::validar();
+Sessao::validarUsuario();
 
 $requisicao = Pedido::obter("v", "GET");
 
@@ -27,25 +34,36 @@ if ($requisicao === null) {
 
 switch ($requisicao) {
 	case "home":
-		$conexao = new Conexao();
-		$modelo = new HomeModel($conexao);
+		$modelo = new HomeModel(new Conexao());
 		$controlador = new HomeController($modelo);
-		$controlador->rodar()->renderizar();
+		$usuarioLogado = Sessao::getUsuario();
+		$controlador->rodar($usuarioLogado)->renderizar();
+		break;
+	case "imagem":
+		$id = Pedido::obter("id", "GET");
+
+		$modelo = new ImagemModel(new Conexao());
+		$controlador = new ImagemController($modelo);
+		$usuarioLogado = Sessao::getUsuario();
+		$controlador->rodar($usuarioLogado, $id)->renderizar();
 		break;
 	case "erro":
 		$erroCodigo = Pedido::obter("c", "GET");
+
 		$modelo = new ErroModel(null);
 		$controlador = new ErroController($modelo);
+		$usuarioLogado = Sessao::getUsuario();
 
 		Resposta::status(500);
-		$controlador->rodar($erroCodigo)->renderizar();
+		$controlador->rodar($usuarioLogado ,$erroCodigo)->renderizar();
 		break;
 	default:
 		$modelo = new NotFoundModel(null);
 		$controlador = new NotFoundController($modelo);
+		$usuarioLogado = Sessao::getUsuario();
 
 		Resposta::status(404);
-		$controlador->rodar()->renderizar();
+		$controlador->rodar($usuarioLogado)->renderizar();
 		break;
 }
 

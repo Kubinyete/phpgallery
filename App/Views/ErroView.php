@@ -10,6 +10,7 @@ use Config\ViewConfig;
 
 class ErroView extends View {
 	private $mensagem;
+	private $usuarioLogado;
 	private $templates = [
 		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
 		"cabecalho_corpo" => "cabecalho_corpo",
@@ -18,8 +19,9 @@ class ErroView extends View {
 		"rodape" => ViewConfig::TEMPLATE_RODAPE
 	];
 
-	public function __construct($mensagem) {
+	public function __construct($usuarioLogado, $mensagem) {
 		$this->mensagem = $mensagem;
+		$this->usuarioLogado = $usuarioLogado;
 	}
 
 	public function renderizar() {
@@ -37,6 +39,8 @@ class ErroView extends View {
 		$erroTitulo = "Aparentemente algo deu muito errado por aqui :(";
 		$erroDescricao = &$this->mensagem;
 		$erroAbrev = "DBERRO_ERRO";
+
+		$usuarioLogado = &$this->usuarioLogado;
 
 		foreach ($this->templates as $templateNome => $templateArquivo) {
 			include dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;

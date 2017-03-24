@@ -12,6 +12,7 @@ class ImagemView extends View {
 	private $imagem;
 	private $autor;
 	private $usuarioLogado;
+	private $comentarios;
 	private $templates = [
 		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
 		"cabecalho_corpo" => "cabecalho_corpo",
@@ -20,10 +21,11 @@ class ImagemView extends View {
 		"rodape" => ViewConfig::TEMPLATE_RODAPE
 	];
 
-	public function __construct($usuarioLogado, $imagem, $autor) {
+	public function __construct($usuarioLogado, $imagem, $autor, $comentarios) {
 		$this->imagem = $imagem;
 		$this->autor = $autor;
 		$this->usuarioLogado = $usuarioLogado;
+		$this->comentarios = $comentarios;
 	}
 
 	public function renderizar() {
@@ -41,6 +43,7 @@ class ImagemView extends View {
 		$imagem = &$this->imagem;
 		$autor = &$this->autor;
 		$usuarioLogado = &$this->usuarioLogado;
+		$comentarios = &$this->comentarios;
 
 		foreach ($this->templates as $templateNome => $templateArquivo) {
 			include dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;

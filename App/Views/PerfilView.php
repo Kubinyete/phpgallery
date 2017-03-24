@@ -1,6 +1,6 @@
 <?php
 /**
- * Representa a visualização da página inicial Home
+ * Representa a visualização da página de perfil de um usuário
  */
 
 namespace App\Views;
@@ -8,19 +8,20 @@ namespace App\Views;
 use App\Views\View;
 use Config\ViewConfig;
 
-class HomeView extends View {
+class PerfilView extends View {
+	private $usuario;
 	private $imagens;
 	private $usuarioLogado;
-
 	private $templates = [
 		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
 		"cabecalho_corpo" => "cabecalho_corpo",
 		"logo_showcase" => "logo_showcase",
-		"home" => "home",
+		"perfil" => "perfil",
 		"rodape" => ViewConfig::TEMPLATE_RODAPE
 	];
 
-	public function __construct($usuarioLogado, $imagens) {
+	public function __construct($usuarioLogado, $usuario, $imagens) {
+		$this->usuario = $usuario;
 		$this->imagens = $imagens;
 		$this->usuarioLogado = $usuarioLogado;
 	}
@@ -38,6 +39,7 @@ class HomeView extends View {
 		$phpgalleryVersao = ViewConfig::PHPGALLERY_VERSAO;
 
 		$imagens = &$this->imagens;
+		$usuario = &$this->usuario;
 		$usuarioLogado = &$this->usuarioLogado;
 		$processadorListagemImagens = "lista_imagens".ViewConfig::EXTENSAO_TEMPLATES;
 

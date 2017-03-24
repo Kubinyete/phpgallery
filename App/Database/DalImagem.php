@@ -116,6 +116,47 @@ class DalImagem extends Dal {
 		return $imagens;
 	}
 
+	// Obtem uma lista de objetos Imagem de um autor
+	public function listarImagensUsuario($usuarioId, $paraApi=false) {
+		$sql = new SqlComando();
+
+		if (DalImagemConfig::LISTAR_IMAGENS_LIMITE > 0) {
+			$sql->select("TOP ".DalImagemConfig::LISTAR_IMAGENS_LIMITE." *");
+		} else {
+			$sql->select();
+		}
+
+		$sql->from("Imagens")->where("usr_id", "=", $usuarioId);
+
+		$this->conexao->conectar();
+		$resultado = $this->executar($sql);
+
+		$imagens = [];
+
+		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
+			for ($i = 0; $i < odbc_num_rows($resultado); $i++) {
+				$array = odbc_fetch_array($resultado);
+
+				$imagem = new Imagem(
+					$array["img_id"],
+					$array["img_data_criacao"],
+					$array["usr_id"],
+					$array["img_titulo"],
+					$array["img_descricao"],
+					$array["img_extensao"],
+					$array["img_privada"],
+					$paraApi
+				);
+
+				array_push($imagens, $imagem);
+			}
+		}
+
+		$this->conexao->desconectar();
+
+		return $imagens;
+	}
+
 	// Obtem uma lista de objetos Imagem recentes
 	public function listarRecentes($paraApi=false) {
 		$sql = new SqlComando();

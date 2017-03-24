@@ -12,10 +12,12 @@ use App\Controllers\HomeController;
 use App\Controllers\NotFoundController;
 use App\Controllers\ErroController;
 use App\Controllers\ImagemController;
+use App\Controllers\PerfilController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
 use App\Models\ImagemModel;
+use App\Models\PerfilModel;
 use App\Database\Conexao;
 
 Resposta::conteudoTipo("text/html; charset=utf-8");
@@ -46,6 +48,14 @@ switch ($requisicao) {
 		$controlador = new ImagemController($modelo);
 		$usuarioLogado = Sessao::getUsuario();
 		$controlador->rodar($usuarioLogado, $id)->renderizar();
+		break;
+	case "perfil":
+		$nome = Pedido::obter("u", "GET");
+
+		$modelo = new PerfilModel(new Conexao());
+		$controlador = new PerfilController($modelo);
+		$usuarioLogado = Sessao::getUsuario();
+		$controlador->rodar($usuarioLogado, $nome)->renderizar();
 		break;
 	case "erro":
 		$erroCodigo = Pedido::obter("c", "GET");

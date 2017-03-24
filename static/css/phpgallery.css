@@ -44,6 +44,10 @@ a.link-efeito:hover {
 	}
 }
 
+.bolder {
+	font-weight: bold;
+}
+
 /**
  * Cabeçalho
  */
@@ -256,8 +260,14 @@ footer p {
 	padding: .5em 0em;
 }
 
+footer p:nth-child(1) {
+	background-color: rgba(0, 0, 0, .2);
+	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
+}
+
 footer ul {
 	width: 100%;
+	padding: 1em 0em;
 	text-align: center;
 }
 
@@ -461,5 +471,36 @@ article div.usuario-container-online img.usuario-imagem {
 }
 
 article div.usuario-container-online span.usuario-nome {
+	color: cornflowerblue;
+}
+
+/**
+ * Perfil
+ */
+
+article div.perfil-container {
+	background-color: rgba(0,0,0, .05);
+	width: 98%;
+	padding: 10px 1%;
+	border-radius: 10px;
+}
+
+article div.perfil-container img.imagem-perfil {
+	width: 198px;
+	height: 198px;
+	border: 1px solid #777;
+	border-radius: 5px;
+}
+
+article div.perfil-container-online h1.usuario-nome {
+	color: cornflowerblue;
+}
+
+article div.perfil-container-online img.imagem-perfil {
+	border-color: cornflowerblue;
+	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
+}
+
+article div.perfil-container-online p.status-perfil {
 	color: cornflowerblue;
 }

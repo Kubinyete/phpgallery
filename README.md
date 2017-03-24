@@ -3,4 +3,4 @@
 
 ### Requerimentos
 * PHP >= 7.1.1
-* Microsoft SQL Server 2012 ou equivalente
+* Microsoft SQL Server 2014 ou equivalente

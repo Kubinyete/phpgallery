@@ -6,8 +6,10 @@
 		<?php if ($usuarioLogado !== null) { ?>
 		<!-- -->
 		<div class="usuario-container">
-			<span class="usuario-nome"><?php echo $usuarioLogado->getNome(); ?></span>
-			<img src="<?php echo $usuarioLogado->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+			<a href="<?php echo $usuarioLogado->getLink(); ?>">
+				<img src="<?php echo $usuarioLogado->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+				<span class="usuario-nome"><?php echo $usuarioLogado->getNome(); ?></span>
+			</a>
 		</div>
 		<?php } ?>
 		<!-- -->
@@ -16,6 +18,15 @@
 				--><li>
 					<a href="/?v=home">Home</a>
 				</li><!--
+			<?php if ($usuarioLogado !== null) { ?>
+			--><li>
+					<a href="/?v=perfil">Perfil</a>
+				</li><!--
+			<?php } else { ?>
+			--><li>
+					<a href="/?v=login">Login</a>
+				</li><!--
+			<?php } ?>
 			--></ul>
 		</nav>
 	</div>

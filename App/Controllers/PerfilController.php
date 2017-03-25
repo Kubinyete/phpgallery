@@ -13,7 +13,7 @@ class PerfilController extends Controller {
 	public function rodar($usuarioLogado, $usuarioNome) {
 		if (strlen(trim($usuarioNome)) <= 0) {
 			if ($usuarioLogado !== null) {
-				return $this->model->index($usuarioLogado, $usuarioLogado);
+				return $this->model->index($usuarioLogado, $usuarioLogado->getNome());
 			} else {
 				return $this->model->notFound($usuarioLogado);
 			}

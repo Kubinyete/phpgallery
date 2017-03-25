@@ -7,7 +7,7 @@
 
 namespace App\Database;
 
-class Erro {
+abstract class Erro {
 	const DBERRO_DESCONHECIDO = 0;
 	const DBERRO_FALHA_CONEXAO = 1;
 	const DBERRO_FALHA_COMANDO = 2;

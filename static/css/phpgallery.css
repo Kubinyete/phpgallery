@@ -75,6 +75,16 @@ header.ativado nav ul li a {
 	color: rgba(255,255,255, .8);
 }
 
+header.ativado div.usuario-container {
+	transition: .1s ease-in-out;
+	background-color: rgba(0,0,0, .2);
+}
+
+header.ativado div.usuario-container span.usuario-nome {
+	transition: .1s ease-in-out;
+	color: rgba(255,255,255, .75);
+}
+
 header div.centro {
 	max-width: 1024px;
 	margin: 0em auto;
@@ -107,7 +117,7 @@ header nav li {
 
 header nav li a {
 	transition: .1s ease-in-out;
-	display: inline-block;
+	display: block;
 	font-size: 2em;
 	text-transform: uppercase;
 	color: rgba(0,0,0, .4);
@@ -117,8 +127,31 @@ header nav li a {
 header nav li a:hover {
 	transition: .1s ease-in-out;
 	background-color: rgba(0,0,0, .2);
-	padding-top: .55em;
-	padding-bottom: .75em;
+}
+
+/**
+ * Header usuário container
+ */
+
+header div.usuario-container {
+	transition: .1s ease-in-out;
+	position: relative;
+	padding: 0 10px;
+	float: right;
+	height: 100%;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+header div.usuario-container span.usuario-nome {
+	float: right;
+	font-size: 16px;
+	color: rgba(0,0,0, .4);
+	transform: translate(0, 14px);
+}
+
+header div.usuario-container img {
+	float: right;
 }
 
 /**
@@ -212,6 +245,14 @@ main {
  */
 
 article {
+	position: relative;
+	max-width: 1024px;
+	min-height: 50em;
+	margin: 0 auto;
+	text-align: center;
+}
+
+div.conteudo-container {
 	position: relative;
 	max-width: 1024px;
 	min-height: 50em;
@@ -340,7 +381,7 @@ ul.imagens-lista li:hover span.imagem-descricao {
 	transition: .1s ease-in-out;
 	visibility: visible;
 	opacity: 1;
-	transform: translate(0px, 1em) scale(1);
+	transform: translate(0px, 1em);
 }
 
 ul.imagens-lista li span.imagem-titulo {
@@ -379,8 +420,9 @@ ul.imagens-lista li span.imagem-descricao {
 	font-family: Source Sans Pro, Arial, sans-serif;
 	visibility: hidden;
 	opacity: 0;
+	border-radius: 5px;
 	box-shadow: 0px 0px 6px rgba(0,0,0, .4);
-	transform: translate(0px, -2em) scale(0.75);
+	transform: translate(0px, 2em);
 }
 
 ul.imagens-lista li span.imagem-descricao::before {
@@ -503,4 +545,98 @@ article div.perfil-container-online img.imagem-perfil {
 
 article div.perfil-container-online p.status-perfil {
 	color: cornflowerblue;
+}
+
+/**
+ * Login
+ */
+
+form.aut-formulario {
+	display: inline-block;
+	position: relative;
+	padding: 1em 0;
+	font-size: 2em;
+}
+
+form.aut-formulario * {
+	outline: none;
+}
+
+form.aut-formulario label {
+	color: cornflowerblue;
+	font-weight: 500;
+}
+
+form.aut-formulario input {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-bottom: 1px solid cornflowerblue;
+	color: rgba(0,0,0, .4);
+	font-size: .9em;
+	background-color: transparent;
+}
+
+form.aut-formulario button {
+	transition: .2s ease-in-out;
+	margin: 0;
+	margin-top: .5em;
+	padding: 0;
+	border: 0;
+	color: cornflowerblue;
+	font-size: .75em;
+	cursor: pointer;
+	padding: .5em;
+	border-radius: 5px;
+	background-color: transparent;
+}
+
+form.aut-formulario button:hover {
+	transition: .2s ease-in-out;
+	color: white;
+	padding: .5em 1em;
+	background-color: cornflowerblue;
+	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
+}
+
+form.aut-formulario span.caixaerro {
+	transition: .1s ease-in-out;
+	z-index: 998;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	background-color: #333;
+	padding: .2em;
+	border-radius: 5px;
+	font-size: .75em;
+	color: rgba(255,255,255, .75);
+	visibility: hidden;
+	opacity: 0;
+	transform: translate(0em, -1em);
+	box-shadow: 0px 0px 6px rgba(0,0,0, .4);
+}
+
+form.aut-formulario span.caixaerro::before {
+	z-index: -1;
+	position: absolute;
+	content: "....";
+	color: transparent;
+	left: 50%;
+	background-color: #333;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	top: -.5em;
+	transform: translate(-.5em) rotate(45deg);
+}
+
+form.aut-formulario:hover span.caixaerro {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0em, 0em);
+}
+
+form.aut-formulario i.fa-warning {
+	position: absolute;
+	right: 0;
+	color: #ff0033;
 }

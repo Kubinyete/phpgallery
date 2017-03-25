@@ -6,7 +6,7 @@
 
 namespace App\Objects;
 
-class Objeto {
+abstract class Objeto {
 	public $id;
 	public $dataCriacao;
 

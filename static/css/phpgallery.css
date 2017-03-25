@@ -139,8 +139,29 @@ header div.usuario-container {
 	padding: 0 10px;
 	float: right;
 	height: 100%;
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
+}
+
+header div.usuario-container #usuarioMenuBtn {
+	outline: none;
+	float: right;
+	font-size: 16px;
+	color: rgba(255,255,255, .4);
+	transform: translate(0, 15px);
+	background-color: transparent;
+	border-radius: 16px;
+	margin: 0;
+	cursor: pointer;
+	border: none;
+}
+
+header div.usuario-container #usuarioMenuBtn:hover {
+	color: white;
+	background-color: rgba(0,0,0, .4);
+}
+
+header div.usuario-container #usuarioMenuBtn.ativado {
+	color: white;
+	background-color: rgba(0,0,0, .4);
 }
 
 header div.usuario-container span.usuario-nome {
@@ -152,6 +173,58 @@ header div.usuario-container span.usuario-nome {
 
 header div.usuario-container img {
 	float: right;
+}
+
+/**
+ * Usuário menu
+ */
+
+nav#usuarioMenu {
+	transition: .1s ease-in-out;
+	z-index: 998;
+	position: fixed;
+	visibility: hidden;
+	opacity: 0;
+	background-color: #333;
+	width: 128px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 6px rgba(0,0,0, .4);
+	transform: translate(0, -.5em);
+}
+
+nav#usuarioMenu.ativado {
+	transition: .1s ease-in-out;
+	visibility: visible;
+	opacity: 1;
+	transform: translate(0, .5em);
+}
+
+nav#usuarioMenu::before {
+	position: absolute;
+	content: "....";
+	color: transparent;
+	font-size: .5em;
+	right: 1%;
+	background-color: #333;
+	top: -.35em;
+	transform: translate(-.5em) rotate(45deg);
+}
+
+nav#usuarioMenu ul li {
+	text-align: center;
+}
+
+nav#usuarioMenu ul li a {
+	display: inline-block;
+	font-size: 1.6em;
+	text-transform: uppercase;
+	padding: .2em 0;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	color: rgba(255,255,255, .75);
+}
+
+nav#usuarioMenu ul li a:hover {
+	color: rgba(255,255,255, 1);
 }
 
 /**

@@ -60,27 +60,26 @@ switch ($requisicao) {
 		break;
 	case "login":
 		$acao = Pedido::obter("a", "POST");
+		$logoff = Pedido::obter("l", "GET");
+
+		if ($usuarioLogado !== null) {
+			if ($logoff === "1") {
+				Sessao::setUsuario(null);
+				Resposta::redirecionar("/?v=login", true);
+			} else {
+				Resposta::redirecionar("/?v=home", true);
+			}
+		}
 
 		switch ($acao) {
 			case "l":
 				break;
 			case "r":
 				break;
-			case "q":
-				break;
 			case null:
 			default:
 				$acao = "i";
 				break;
-		}
-
-		if ($usuarioLogado !== null) {
-			if ($acao === "q") {
-				Sessao::setUsuario(null);
-				Resposta::redirecionar("/?v=login", true);
-			} else {
-				Resposta::redirecionar("/?v=home", true);
-			}
 		}
 
 		$usuarioNome = Pedido::obter("nom", "POST");

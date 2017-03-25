@@ -6,6 +6,10 @@
 		<?php if ($usuarioLogado !== null) { ?>
 		<!-- -->
 		<div class="usuario-container">
+			<button id="usuarioMenuBtn"><i class="fa fa-caret-down"></i></button>
+			<script>
+				$("#usuarioMenuBtn").click(phpgallery.usuarioMenu);
+			</script>
 			<a href="<?php echo $usuarioLogado->getLink(); ?>">
 				<img src="<?php echo $usuarioLogado->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
 				<span class="usuario-nome"><?php echo $usuarioLogado->getNome(); ?></span>
@@ -46,3 +50,21 @@
 		}
 	);
 </script>
+<?php if ($usuarioLogado !== null) { ?>
+<nav id="usuarioMenu">
+	<ul>
+		<li>
+			<a href="/?v=login&l=1">Sair</a>
+		</li>
+	</ul>
+</nav>
+<script>
+	$(window).resize(
+		function() {
+			if (phpgallery.usuarioMenuAtivado) {
+				phpgallery.ajustarPosUsuarioMenu();
+			}
+		}
+	);
+</script>
+<?php } ?>

@@ -39,7 +39,7 @@ abstract class Objeto {
 			// necessário pois os dados de tipo datetime retornam YYYY-MM-DD HH:MM:SS
 			// sendo que para inserir é necessário informar YYYYMMDD HH:MM:SS
 			case 2:
-				return str_replace("-", "", $this->_data_criacao);
+				return str_replace("-", "", $this->dataCriacao);
 				break;
 			default:
 				return $this->dataCriacao;

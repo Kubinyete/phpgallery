@@ -34,7 +34,7 @@ class LoginController extends Controller {
 	// Retorna se o tamanho da cadeia de carácteres está dentro do permitido
 	// $paraNome => (true) nome
 	// $paraNome => (false) senha
-	public static function tamanhoValido($string, $paraNome) {
+	private static function tamanhoValido($string, $paraNome) {
 		if ($string === null) {
 			return false;
 		}

@@ -14,10 +14,17 @@
 		</section>
 		<section>
 			<?php if ($usuarioLogado !== null) { ?>
-			<form method="POST" autocomplete="off">
-				<textarea name="cmt_c"></textarea>
-				<button type="submit">Enviar</button>
-			</form>
+			<div class="comentario-form-container">
+				<div class="esquerda-container">
+					<img src="<?php echo $usuarioLogado->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+				</div>
+				<div class="direita-container">
+					<form method="POST" autocomplete="off">
+						<textarea name="cmtcon" maxlength="300" placeholder="Escreva sua mensagem..."></textarea>
+						<button type="submit">Enviar</button>
+					</form>
+				</div>
+			</div>
 			<?php } ?>
 			<?php if (count($comentarios) > 0) { ?>
 			<ul class="comentario-container">

@@ -4,7 +4,6 @@
  */
 namespace App\Session;
 
-use App\Database\Conexao;
 use App\Database\DalUsuario;
 
 class Sessao {
@@ -63,12 +62,12 @@ class Sessao {
 	}
 
 	// Valida o estado de nosso usuário atual em sessão armazenado em comparação com o do banco de dados
-	public static function validarUsuario() {
+	public static function validarUsuario($conexao) {
 		$usuarioArmazenado = self::getUsuario();
 
 		if ($usuarioArmazenado !== null) {
-			$dal = new DalUsuario(new Conexao());
-			$novoUsuario = $dal->obterUsuario(true, $usuarioArmazenado->getId());
+			$dal = new DalUsuario($conexao);
+			$novoUsuario = $dal->obterUsuario(false, $usuarioArmazenado->getNome());
 
 			if ($novoUsuario !== null) {
 				if (!$usuarioArmazenado->igualA($novoUsuario)) {

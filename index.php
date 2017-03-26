@@ -8,6 +8,7 @@ require_once __DIR__.DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autolo
 use App\Http\Pedido;
 use App\Http\Resposta;
 use App\Session\Sessao;
+use App\Status\Status;
 use App\Controllers\HomeController;
 use App\Controllers\NotFoundController;
 use App\Controllers\ErroController;
@@ -22,41 +23,62 @@ use App\Models\PerfilModel;
 use App\Models\LoginModel;
 use App\Database\Conexao;
 
+
 Resposta::conteudoTipo("text/html; charset=utf-8");
 Resposta::header("Content-Language", "pt-BR");
 date_default_timezone_set("America/Sao_Paulo");
 
+
+$conexao = new Conexao();
+
+
 Sessao::iniciar();
 Sessao::validar();
-Sessao::validarUsuario();
+
 
 $usuarioLogado = Sessao::getUsuario();
+if ($usuarioLogado !== null) {
+	
+	$usuarioLogadoStatus = new Status($conexao, $usuarioLogado);
+	
+	if (!$usuarioLogadoStatus->estaOnline()) {
+		$usuarioLogadoStatus->heartbeat();
+	}
+}
+
+
+Sessao::validarUsuario($conexao);
+
 
 $requisicao = Pedido::obter("v", "GET");
-
 if ($requisicao === null) {
 	$requisicao = "home";
 }
 
+
+
 switch ($requisicao) {
 	case "home":
-		$modelo = new HomeModel(new Conexao());
+		$modelo = new HomeModel($conexao);
 		$controlador = new HomeController($modelo);
 		$controlador->rodar($usuarioLogado)->renderizar();
+
 		break;
 	case "imagem":
 		$id = Pedido::obter("id", "GET");
 
-		$modelo = new ImagemModel(new Conexao());
+		$modelo = new ImagemModel($conexao);
 		$controlador = new ImagemController($modelo);
 		$controlador->rodar($usuarioLogado, $id)->renderizar();
+		
 		break;
 	case "perfil":
 		$nome = Pedido::obter("u", "GET");
 
-		$modelo = new PerfilModel(new Conexao());
+		$modelo = new PerfilModel($conexao);
 		$controlador = new PerfilController($modelo);
 		$controlador->rodar($usuarioLogado, $nome)->renderizar();
+		
 		break;
 	case "login":
 		$acao = Pedido::obter("a", "POST");
@@ -65,6 +87,7 @@ switch ($requisicao) {
 		if ($usuarioLogado !== null) {
 			if ($logoff === "1") {
 				Sessao::setUsuario(null);
+				$usuarioLogadoStatus->offline();
 				Resposta::redirecionar("/?v=login", true);
 			} else {
 				Resposta::redirecionar("/?v=home", true);
@@ -86,14 +109,13 @@ switch ($requisicao) {
 		$usuarioSenha = Pedido::obter("sen", "POST");
 		$usuarioConSenha = Pedido::obter("consen", "POST");
 
-		$modelo = new LoginModel(new Conexao());
+		$modelo = new LoginModel($conexao);
 		$controlador = new LoginController($modelo);
 
 		$retornoArray = $controlador->rodar($usuarioLogado, $acao, $usuarioNome, $usuarioSenha, $usuarioConSenha);
 		
 		if ($retornoArray["retorno"] === "view") {
 			$retornoArray["retorno_obj"]->renderizar();
-
 		} else if ($retornoArray["retorno"] === "usuario") {
 			Sessao::setUsuario($retornoArray["retorno_obj"]);
 			Resposta::redirecionar("/?v=home", true);
@@ -108,6 +130,7 @@ switch ($requisicao) {
 
 		Resposta::status(500);
 		$controlador->rodar($usuarioLogado ,$erroCodigo)->renderizar();
+		
 		break;
 	default:
 		$modelo = new NotFoundModel(null);
@@ -115,6 +138,7 @@ switch ($requisicao) {
 
 		Resposta::status(404);
 		$controlador->rodar($usuarioLogado)->renderizar();
+		
 		break;
 }
 

@@ -35,7 +35,7 @@ class ViewConfig {
 	const HTML_AUTOR_PADRAO = "Vitor Kubinyete";
 
 	// Número da versão da aplicação, para se mostrada em uma visualização
-	const PHPGALLERY_VERSAO = "2.0";
+	const PHPGALLERY_VERSAO = "2.0.0";
 }
 
 ?>

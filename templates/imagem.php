@@ -2,9 +2,13 @@
 	<article class="imagem">
 		<section>
 			<h1><?php echo $imagem->getTitulo(true); ?></h1>
-			<img class="imagem" alt="A imagem a ser exibida" src="<?php echo $imagem->getImagemUrl(); ?>">
-			<p class="descricao"><?php echo $imagem->getDescricao(true); ?></p>
-			<p class="data-criacao">Adicionado em <?php echo $imagem->getDataCriacao(1); ?></p>
+			<div class="imagem-back">
+				<img class="imagem" alt="A imagem a ser exibida" src="<?php echo $imagem->getImagemUrl(); ?>">
+			</div>
+			<div class="info-container">
+				<p class="descricao"><?php echo $imagem->getDescricao(true); ?></p>
+				<p class="data-criacao">Adicionado em <?php echo $imagem->getDataCriacao(1); ?></p>
+			</div>
 			<div class="usuario-container<?php if ($autor->estaOnline()) { echo " usuario-container-online"; } ?>">
 				<a class="link-efeito" href="<?php echo $autor->getLink(); ?>">
 					<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?php echo $autor->getImagemUrl(); ?>" draggable="false">
@@ -20,7 +24,7 @@
 				</div>
 				<div class="direita-container">
 					<form method="POST" autocomplete="off">
-						<textarea name="cmtcon" maxlength="300" placeholder="Escreva sua mensagem..."></textarea>
+						<textarea name="cmtcon" maxlength="300" placeholder="Escreva aqui seu comentário..."></textarea>
 						<button type="submit">Enviar</button>
 					</form>
 				</div>

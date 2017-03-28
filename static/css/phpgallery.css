@@ -438,6 +438,28 @@ ul.imagens-lista li {
 	display: inline-block;
 }
 
+ul.imagens-lista li:hover {
+	transition: .1s ease-in-out;
+	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
+}
+
+ul.imagens-lista li:hover div.imagem-container div.imagem {
+	animation: scrollarImagem 10s ease-in-out infinite;
+	animation-delay: .5s;
+}
+
+@keyframes scrollarImagem {
+	0% {
+		background-position: center center;
+	} 25% {
+		background-position: center 100%;
+	} 75% {
+		background-position: center 0%;
+	} 100% {
+		background-position: center center;
+	}
+}
+
 ul.imagens-lista li:hover div.imagem-container div.imagem-gradient {
 	transition: .1s ease-in-out;
 	visibility: visible;
@@ -445,7 +467,7 @@ ul.imagens-lista li:hover div.imagem-container div.imagem-gradient {
 }
 
 ul.imagens-lista li:hover span.imagem-titulo {
-	transition: .1s ease-in-out;
+	transition: .25s ease-in-out;
 	visibility: visible;
 	opacity: 1;
 	transform: translate(0px, 0px);
@@ -453,6 +475,7 @@ ul.imagens-lista li:hover span.imagem-titulo {
 
 ul.imagens-lista li:hover span.imagem-descricao {
 	transition: .1s ease-in-out;
+	transition-delay: .5s;
 	visibility: visible;
 	opacity: 1;
 	transform: translate(0px, 1em);
@@ -512,7 +535,7 @@ ul.imagens-lista li span.imagem-descricao::before {
 ul.imagens-lista li div.imagem-container div.imagem {
 	width: 252px;
 	height: 140px;
-	border: 2px solid rgba(0,0,0, .2);
+	border: 2px solid #CCC;
 	background-color: white;
 	background-size: cover;
 	background-position: center;
@@ -547,7 +570,18 @@ article img.imagem {
 	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
 }
 
+article div.info-container {
+	background-color: rgba(0,0,0, .05);
+}
+
+article div.imagem-back {
+	padding-top: 20px;
+	border-radius: 10px 10px 0 0;
+	background-color: rgba(0,0,0, .05);
+}
+
 article p.descricao {
+	color: rgba(0,0,0, .5);
 	padding: 1em 1em;
 }
 
@@ -562,9 +596,9 @@ article div.usuario-container {
 	width: 98%;
 	height: 100px;
 	padding: 10px 1%;
-	border-radius: 10px;
-	box-shadow: 0px 0px 6px rgba(0,0,0, .4);
-	background-color: rgba(0,0,0, .05);
+	border-radius: 0 0 10px 10px;
+	/*box-shadow: 0px 0px 6px rgba(0,0,0, .4);*/
+	background-color: rgba(0,0,0, .75);
 }
 
 article div.usuario-container img.usuario-imagem {
@@ -597,14 +631,19 @@ article div.comentario-form-container {
 	width: 98%;
 	height: 150px;
 	padding: 10px 1%;
+	margin-top: 25px;
 	border-radius: 10px;
-	background-color: rgba(0,0,0, .025);
+	background-color: rgba(0,0,0, .75);
 }
 
 article div.comentario-form-container div.esquerda-container {
+	text-align: center;
 	overflow: hidden;
 	float: left;
 	width: 15%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: rgba(0,0,0, .2);
 }
 
 article div.comentario-form-container div.direita-container {
@@ -623,18 +662,23 @@ article div.comentario-form-container textarea {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	width: 100%;
-	height: 70%;
+	width: 95%;
+	height: 75%;
+	border: 1px dashed rgba(255,255,255, .2);
 	font-size: 2em;
 	font-family: Source Sans Pro, Arial, sans-serif;
 	float: right;
 	border-radius: 5px;
+	color: rgba(255,255,255, .5);
+	background-color: rgba(0,0,0, .2);
 }
 
-article div.comentario-form-container img {
-	float: left;
-	width: 98px;
-	height: 98px;
+article div.comentario-form-container div.esquerda-container img {
+	position: relative;
+	display: inline-block;
+	width: 85%;
+	margin-top: 50%;
+	transform: translate(0, -50%);
 	border: 1px solid cornflowerblue;
 	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
 	border-radius: 5px;
@@ -652,6 +696,7 @@ article div.comentario-form-container button {
 	padding: .5em;
 	border-radius: 5px;
 	background-color: transparent;
+	float: right;
 }
 
 article div.comentario-form-container button:hover {
@@ -667,10 +712,14 @@ article div.comentario-form-container button:hover {
  */
 
 article div.perfil-container {
-	background-color: rgba(0,0,0, .05);
+	background-color: rgba(0,0,0, .75);
 	width: 98%;
 	padding: 10px 1%;
 	border-radius: 10px;
+}
+
+article div.perfil-container p.descricao, h1.usuario-nome, p.status-perfil {
+	color: rgba(255,255,255, .5);
 }
 
 article div.perfil-container img.imagem-perfil {
@@ -681,7 +730,7 @@ article div.perfil-container img.imagem-perfil {
 }
 
 article div.perfil-container-online h1.usuario-nome {
-	color: cornflowerblue;
+	color: cornflowerblue !important;
 }
 
 article div.perfil-container-online img.imagem-perfil {
@@ -690,7 +739,7 @@ article div.perfil-container-online img.imagem-perfil {
 }
 
 article div.perfil-container-online p.status-perfil {
-	color: cornflowerblue;
+	color: cornflowerblue !important;
 }
 
 /**

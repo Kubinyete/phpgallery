@@ -321,7 +321,8 @@ article {
 	position: relative;
 	max-width: 1024px;
 	min-height: 50em;
-	margin: 2em auto;
+	margin: 0 auto;
+	padding: 2em 0;
 	text-align: center;
 }
 
@@ -571,22 +572,29 @@ article img.imagem {
 }
 
 article div.info-container {
-	background-color: rgba(0,0,0, .05);
+	background-color: rgba(0,0,0, .8);
 }
 
 article div.imagem-back {
 	padding-top: 20px;
 	border-radius: 10px 10px 0 0;
-	background-color: rgba(0,0,0, .05);
+	background-color: rgba(0,0,0, .8);
+}
+
+article div.imagem-back h1 {
+	color: rgba(255,255,255, .8);
 }
 
 article p.descricao {
-	color: rgba(0,0,0, .5);
+	color: rgba(255,255,255, .5);
 	padding: 1em 1em;
 }
 
 article p.data-criacao {
 	color: cornflowerblue;
+	text-align: center;
+	font-size: 1.2em;
+	margin: 0 1em;
 	padding-bottom: 1em;
 }
 
@@ -657,6 +665,7 @@ article div.comentario-form-container div.direita-container form {
 
 article div.comentario-form-container textarea {
 	resize: none;
+	bv
 	margin: 0;
 	padding: 0;
 	border: 0;

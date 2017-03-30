@@ -9,41 +9,15 @@ use App\Views\View;
 use Config\ViewConfig;
 
 class HomeView extends View {
-	private $imagens;
-	private $usuarioLogado;
-
-	private $templates = [
-		"cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
-		"cabecalho_corpo" => "cabecalho_corpo",
-		"logo_showcase" => "logo_showcase",
-		"home" => "home",
-		"rodape" => ViewConfig::TEMPLATE_RODAPE
-	];
-
+	// $templates
+	// $itens
+	
 	public function __construct($usuarioLogado, $imagens) {
-		$this->imagens = $imagens;
-		$this->usuarioLogado = $usuarioLogado;
-	}
+		parent::__construct($usuarioLogado);
 
-	public function renderizar() {
-		$htmlTitulo = ViewConfig::HTML_TITULO_PADRAO;
-		$htmlDescricao = ViewConfig::HTML_DESCRICAO_PADRAO;
-		$htmlPalavrasChave = ViewConfig::HTML_PALAVRAS_CHAVE_PADRAO;
-		$htmlAutor = ViewConfig::HTML_AUTOR_PADRAO;
-
-		$htmlStylesheet = ViewConfig::CAMINHO_CSS_PADRAO;
-		$htmlJavascript = ViewConfig::CAMINHO_JS_PADRAO;
-
-		$caminhoRecursos = ViewConfig::CAMINHO_RECURSOS_PADRAO;
-		$phpgalleryVersao = ViewConfig::PHPGALLERY_VERSAO;
-
-		$imagens = &$this->imagens;
-		$usuarioLogado = &$this->usuarioLogado;
-		$processadorListagemImagens = "lista_imagens".ViewConfig::EXTENSAO_TEMPLATES;
-
-		foreach ($this->templates as $templateNome => $templateArquivo) {
-			include dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;
-		}
+		$this->templates["view"] = "home";
+		$this->itens["imagens"] = $imagens;
+		$this->itens["proc_imagens_lista"] = "lista_imagens".ViewConfig::EXTENSAO_TEMPLATES;
 	}
 }
 

@@ -1,6 +1,6 @@
-<?php if (count($imagens) >= 1) { ?>
+<?php if (count($itens["imagens"]) >= 1) { ?>
 <ul class="imagens-lista"><!--
-	<?php foreach ($imagens as $imagem) { ?>
+	<?php foreach ($itens["imagens"] as $imagem) { ?>
 	--><li>
 		<a href="<?php echo $imagem->getLink(); ?>">
 			<div class="imagem-container">

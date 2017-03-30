@@ -126,7 +126,7 @@ class DalImagem extends Dal {
 			$sql->select();
 		}
 
-		$sql->from("Imagens")->where("usr_id", "=", $usuarioId);
+		$sql->from("Imagens")->where("usr_id", "=", $usuarioId)->and()->expressao("img_privada", "=", "0");
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);

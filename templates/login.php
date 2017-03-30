@@ -6,7 +6,7 @@
 			<input type="hidden" name="a" value="l">
 				<label for="loginNome">Nome</label>
 				<input id="loginNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="16">
-				<?php if ($acao === "l" && $erroMensagem !== null) { ?>
+				<?php if ($itens["login_acao"] === "l" && $itens["login_erro_mensagem"] !== null) { ?>
 				<i class="fa fa-warning"></i>
 				<?php } ?>
 				<br>
@@ -14,9 +14,9 @@
 				<input id="loginSenha" type="password" name="sen" placeholder="Senha do usuário" maxlength="32">
 				<br>
 				<button type="submit">Enviar</button>
-				<?php if ($acao === "l" && $erroMensagem !== null) { ?>
+				<?php if ($itens["login_acao"] === "l" && $itens["login_erro_mensagem"] !== null) { ?>
 				<span class="caixaerro">
-					<?php echo $erroMensagem; ?>
+					<?php echo $itens["login_erro_mensagem"]; ?>
 				</span>
 				<script>
 					$("#login-form input").keypress(
@@ -34,7 +34,7 @@
 				<input type="hidden" name="a" value="r">
 				<label for="registraNome">Nome</label>
 				<input id="registraNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="16">
-				<?php if ($acao === "r" && $erroMensagem !== null) { ?>
+				<?php if ($itens["login_acao"] === "r" && $itens["login_erro_mensagem"] !== null) { ?>
 				<i class="fa fa-warning"></i>
 				<?php } ?>
 				<br>
@@ -45,9 +45,9 @@
 				<input id="registraConfirmaSenha" type="password" name="consen" placeholder="Senha do usuário" maxlength="32">
 				<br>
 				<button type="submit">Registrar</button>
-				<?php if ($acao === "r" && $erroMensagem !== null) { ?>
+				<?php if ($itens["login_acao"] === "r" && $itens["login_erro_mensagem"] !== null) { ?>
 				<span class="caixaerro">
-					<?php echo $erroMensagem; ?>
+					<?php echo $itens["login_erro_mensagem"]; ?>
 				</span>
 				<script>
 					$("#registrar-form input").keypress(

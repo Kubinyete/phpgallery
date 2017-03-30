@@ -1,18 +1,18 @@
 <header>
 	<div class="centro">
 		<a href="/?v=home">
-			<img src="<?php echo $caminhoRecursos; ?>phpgallery-logo.png" alt="Logo" draggable="false">
+			<img src="<?php echo $itens["recursos"]; ?>phpgallery-logo.png" alt="Logo" draggable="false">
 		</a>
-		<?php if ($usuarioLogado !== null) { ?>
+		<?php if ($itens["usr_logado"] !== null) { ?>
 		<!-- -->
 		<div class="usuario-container">
 			<button id="usuarioMenuBtn"><i class="fa fa-caret-down"></i></button>
 			<script>
 				$("#usuarioMenuBtn").click(phpgallery.usuarioMenu);
 			</script>
-			<a href="<?php echo $usuarioLogado->getLink(); ?>">
-				<img src="<?php echo $usuarioLogado->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
-				<span class="usuario-nome"><?php echo $usuarioLogado->getNome(); ?></span>
+			<a href="<?php echo $itens["usr_logado"]->getLink(); ?>">
+				<img src="<?php echo $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+				<span class="usuario-nome"><?php echo $itens["usr_logado"]->getNome(); ?></span>
 			</a>
 		</div>
 		<?php } ?>
@@ -22,7 +22,7 @@
 				--><li>
 					<a href="/?v=home">Home</a>
 				</li><!--
-			<?php if ($usuarioLogado !== null) { ?>
+			<?php if ($itens["usr_logado"] !== null) { ?>
 			--><li>
 					<a href="/?v=perfil">Perfil</a>
 				</li><!--
@@ -50,7 +50,7 @@
 		}
 	);
 </script>
-<?php if ($usuarioLogado !== null) { ?>
+<?php if ($itens["usr_logado"] !== null) { ?>
 <nav id="usuarioMenu">
 	<ul>
 		<li>

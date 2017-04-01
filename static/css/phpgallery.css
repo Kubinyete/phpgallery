@@ -48,6 +48,13 @@ a.link-efeito:hover {
 	font-weight: bold;
 }
 
+.dashed-container {
+	border-radius: 5px;
+	background-color: #333;
+	width: 95%;
+	border: 1px dashed #777;
+}
+
 /**
  * Cabeçalho
  */
@@ -665,7 +672,6 @@ article div.comentario-form-container div.direita-container form {
 
 article div.comentario-form-container textarea {
 	resize: none;
-	bv
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -841,4 +847,99 @@ form.aut-formulario i.fa-warning {
 	position: absolute;
 	right: 0;
 	color: #ff0033;
+}
+
+/**
+ * Enviar
+ */
+
+#enviarForm {
+	position: relative;
+	overflow: hidden;
+}
+
+#enviarForm input[type=file], #enviarForm input[type=text], #enviarForm textarea {
+	color: rgba(255,255,255, .5) !important;
+	font-family: Source Sans Pro, Arial, sans-serif !important;
+}
+
+#enviarForm input[name=imgti] {
+	width: 80%;
+}
+
+#enviarForm textarea {
+	resize: vertical;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 95%;
+	max-height: 50vh;
+	min-height: 128px;
+	border: 1px dashed rgba(255,255,255, .2);
+	border-radius: 5px;
+	color: rgba(255,255,255, .5);
+	background-color: rgba(0,0,0, .2);
+}
+
+/**
+ * Enviar erro
+ */
+
+.erro-dialogo-fundo {
+	z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0,0,0, .8);
+}
+
+.erro-dialogo-fundo .erro-dialogo {
+	text-align: center;
+	position: relative;
+	margin: 50vh auto 0 auto;
+	transform: translate(0, -50%);
+	max-width: 512px;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.erro-dialogo-fundo .erro-dialogo h1 {
+	margin: 0;
+	padding: .5em 0;
+	color: #ff0033;
+	font-size: 4em;
+	font-family: Lato, Arial, sans-serif;
+}
+
+.erro-dialogo-fundo .erro-dialogo p {
+	margin: 0;
+	padding: .5em 0;
+	color: rgba(0,0,0, .7);
+	font-size: 2em;
+	font-family: Source Sans Pro, Arial, sans-serif;
+}
+
+.erro-dialogo-fundo .erro-dialogo button {
+	transition: .2s ease-in-out;
+	margin: .5em;
+	padding: 0;
+	border: 0;
+	color: #ff0033;
+	font-size: 1.4em;
+	cursor: pointer;
+	padding: .5em;
+	border-radius: 5px;
+	background-color: transparent;
+}
+
+.erro-dialogo-fundo .erro-dialogo button:hover {
+	transition: .2s ease-in-out;
+	color: white;
+	padding: .5em 1em;
+	background-color: #ff0033;
+	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
 }

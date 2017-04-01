@@ -28,10 +28,15 @@ class DalImagem extends Dal {
 				"img_extensao" => $imagem->getExtensao(),
 				"img_privada" => ($imagem->getPrivada()) ? "1" : "0"
 			]
-		)->semicolon()->select("@@IDENTITY")->as("id");
+		);
 
 		$this->conexao->conectar();
-		$resultadoId = $this->executar($sql, true);
+		$this->executar($sql, true);
+
+		$sql = new SqlComando();
+		$sql->select("TOP 1 img_id")->as("id")->from("Imagens")->order("img_id", "DESC");
+
+		$resultadoId = $this->executar($sql);
 
 		$id = null;
 
@@ -126,7 +131,7 @@ class DalImagem extends Dal {
 			$sql->select();
 		}
 
-		$sql->from("Imagens")->where("usr_id", "=", $usuarioId)->and()->expressao("img_privada", "=", "0");
+		$sql->from("Imagens")->where("usr_id", "=", $usuarioId)->and()->expressao("img_privada", "=", "0")->order("img_id", "DESC");
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);

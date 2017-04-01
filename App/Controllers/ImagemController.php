@@ -10,7 +10,7 @@ use App\Controllers\Controller;
 class ImagemController extends Controller {
 	// $model
 	
-	public function rodar($usuarioLogado, $id) {
+	public function rodar($usuarioLogado, $id=0) {
 		$id = intval($id);
 
 		if ($id <= 0) {

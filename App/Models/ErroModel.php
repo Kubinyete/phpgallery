@@ -10,7 +10,7 @@ use App\Views\ErroView;
 use App\Database\Erro;
 
 class ErroModel extends Model {
-	public function index($usuarioLogado, $codigo) {
+	public function index($usuarioLogado, $codigo=0) {
 		if (isset(Erro::DEFINICOES[$codigo])) {
 			$mensagem = Erro::DEFINICOES[$codigo];
 		} else {

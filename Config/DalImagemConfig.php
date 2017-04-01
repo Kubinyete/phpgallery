@@ -6,7 +6,7 @@
 
 namespace Config;
 
-class DalImagemConfig {
+abstract class DalImagemConfig {
 	// O máximo de objetos que uma procura de imagens pode retornar,
 	// se o valor informado for 0 ou menor, a procura retornará todos
 	const LISTAR_IMAGENS_LIMITE = 100;

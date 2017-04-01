@@ -6,7 +6,7 @@
 
 namespace Config;
 
-class DalUsuarioConfig {
+abstract class DalUsuarioConfig {
 	// O máximo de objetos que uma procura de usuários pode retornar,
 	// se o valor informado for 0 ou menor, a procura retornará todos
 	const LISTAR_USUARIOS_LIMITE = 100;

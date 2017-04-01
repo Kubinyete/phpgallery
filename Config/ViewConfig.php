@@ -5,7 +5,7 @@
 
 namespace Config;
 
-class ViewConfig {
+abstract class ViewConfig {
 	// Nome do diretório aonde as templates são armazenadas
 	// na pasta raiz
 	const DIRETORIO_TEMPLATES = "templates";

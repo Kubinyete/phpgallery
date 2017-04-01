@@ -6,7 +6,7 @@
 
 namespace Config;
 
-class UsuarioConfig {
+abstract class UsuarioConfig {
 	// Descrição padrão de um usuário caso não tenha escrito nada
 	const DESCRICAO_PADRAO = "Nenhuma descrição está disponível para este usuário.";
 	// Algoritimo utilizado para salvar senhas

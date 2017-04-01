@@ -10,7 +10,7 @@ use App\Controllers\Controller;
 class PerfilController extends Controller {
 	// $model
 	
-	public function rodar($usuarioLogado, $usuarioNome) {
+	public function rodar($usuarioLogado, $usuarioNome="") {
 		if (strlen(trim($usuarioNome)) <= 0) {
 			if ($usuarioLogado !== null) {
 				return $this->model->index($usuarioLogado, $usuarioLogado->getNome());

@@ -26,6 +26,9 @@
 			--><li>
 					<a href="/?v=perfil">Perfil</a>
 				</li><!--
+				--><li>
+					<a href="/?v=enviar">Enviar</a>
+				</li><!--
 			<?php } else { ?>
 			--><li>
 					<a href="/?v=login">Login</a>

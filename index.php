@@ -15,12 +15,14 @@ use App\Controllers\ErroController;
 use App\Controllers\ImagemController;
 use App\Controllers\PerfilController;
 use App\Controllers\LoginController;
+use App\Controllers\EnviarController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
 use App\Models\ImagemModel;
 use App\Models\PerfilModel;
 use App\Models\LoginModel;
+use App\Models\EnviarModel;
 use App\Database\Conexao;
 
 
@@ -119,6 +121,35 @@ switch ($requisicao) {
 		} else if ($retornoArray["retorno"] === "usuario") {
 			Sessao::setUsuario($retornoArray["retorno_obj"]);
 			Resposta::redirecionar("/?v=home", true);
+		}
+
+		break;
+	case "enviar":
+		$acao = Pedido::obter("a", "POST");
+
+		switch ($acao) {
+			case "r":
+				break;
+			case "i":
+			default:
+				$acao = "i";
+				break;
+		}
+
+		$imagem = Pedido::obterArquivo("img");
+		$imagemTitulo = Pedido::obter("imgti", "POST");
+		$imagemDescricao = Pedido::obter("imgde", "POST");
+		$imagemPrivada = Pedido::obter("imgpr", "POST");
+
+		$modelo = new EnviarModel($conexao);
+		$controlador = new EnviarController($modelo);
+
+		$retornoArray = $controlador->rodar($usuarioLogado, $acao, $imagem, $imagemTitulo, $imagemDescricao, $imagemPrivada);
+
+		if ($retornoArray["retorno"] === "view") {
+			$retornoArray["retorno_obj"]->renderizar();
+		} else if ($retornoArray["retorno"] === "imagem") {
+			Resposta::redirecionar($retornoArray["retorno_obj"]->getLink(), true);
 		}
 
 		break;

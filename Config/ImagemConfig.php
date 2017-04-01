@@ -5,7 +5,7 @@
 
 namespace Config;
 
-class ImagemConfig {
+abstract class ImagemConfig {
 	// Caminho para o local aonde as imagens são armazenadas pela nossa aplicação
 	const CAMINHO_IMAGENS = "static/resources/image/";
 	// Título padrão, caso o usuário não informe nada

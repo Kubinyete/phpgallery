@@ -6,7 +6,7 @@
 
 namespace Config;
 
-class ConexaoConfig {
+abstract class ConexaoConfig {
 	// Impede o redirecionamento do pedido se ocorrer um erro na consulta
 	// tambêm permite a visualização do erro odbc na página atual e
 	// informa a comandoString dos objetos SqlComando

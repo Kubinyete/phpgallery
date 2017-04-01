@@ -17,7 +17,7 @@ abstract class Model {
 	// Mostrará a página do modelo atual
 	// retorna a View desta página para que então
 	// 'renderizá-la'
-	#public abstract function index();
+	public abstract function index($usuarioLogado);
 }
 
 ?>

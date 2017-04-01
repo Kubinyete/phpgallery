@@ -12,7 +12,7 @@ use App\Views\PerfilView;
 use App\Views\NotFoundView;
 
 class PerfilModel extends Model {
-	public function index($usuarioLogado, $usuarioNome) {
+	public function index($usuarioLogado, $usuarioNome="") {
 		$dal = new DalUsuario($this->conexao);
 		$usuario = $dal->obterUsuario(false, $usuarioNome);
 		

@@ -1,3 +1,6 @@
 *.bat
 *.pdn
 *.sublime-workspace
+static/resources/image/*
+static/resources/profile/*
+

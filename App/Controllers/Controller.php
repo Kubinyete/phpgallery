@@ -15,7 +15,7 @@ abstract class Controller {
 
 	// De acordo com nossos parâmetros, chame um Model e atualize as informações necessárias
 	// e por fim envie a página completa
-	#public abstract function rodar();
+	public abstract function rodar($usuarioLogado);
 }
 
 ?>

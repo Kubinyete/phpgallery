@@ -13,7 +13,7 @@ use App\Views\ImagemView;
 use App\Views\NotFoundView;
 
 class ImagemModel extends Model {
-	public function index($usuarioLogado, $id) {
+	public function index($usuarioLogado, $id=0) {
 		$dal = new DalImagem($this->conexao);
 		$imagem = $dal->obterImagem($id);
 		

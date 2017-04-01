@@ -39,5 +39,12 @@ class Pedido {
             
         }
     }
+
+    // Retorna um array de informações do arquivo
+    public static function obterArquivo($name) {
+        if (isset($_FILES["img"])) {
+            return $_FILES["img"];
+        }
+    }
 }
 ?>

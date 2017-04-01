@@ -9,7 +9,7 @@ use App\Models\Model;
 use App\Database\DalUsuario;
 use App\Objects\Usuario;
 use App\Views\LoginView;
-use App\Controllers\LoginErro;
+use App\MvcErrors\LoginErro;
 
 class LoginModel extends Model {
 	// $conexao
@@ -53,7 +53,7 @@ class LoginModel extends Model {
 			$dbUsuario = $dal->obterUsuario(false, $usuarioNome);
 
 			if ($dbUsuario === null) {
-				$usuario = new Usuario(0, date("Y-m-d H:m:i"), $usuarioNome, $usuarioSenha, true, "", false, time());
+				$usuario = new Usuario(0, date("Y-m-d H:i:s"), $usuarioNome, $usuarioSenha, true, "", false, time());
 				
 				$dal->criarUsuario($usuario);
 

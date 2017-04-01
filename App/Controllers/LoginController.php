@@ -6,7 +6,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use App\Controllers\LoginErro;
+use App\MvcErrors\LoginErro;
 
 class LoginController extends Controller {
 	// $model
@@ -46,7 +46,7 @@ class LoginController extends Controller {
 		}
 	}
 
-	public function rodar($usuarioLogado, $acao, $usuarioNome, $usuarioSenha, $usuarioConSenha) {
+	public function rodar($usuarioLogado, $acao="i", $usuarioNome="", $usuarioSenha="", $usuarioConSenha="") {
 		$errosLista = [];
 
 		if ($acao === "r" || $acao === "l") {

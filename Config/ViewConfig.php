@@ -34,6 +34,21 @@ abstract class ViewConfig {
 	// HTML: Tag meta author padrão
 	const HTML_AUTOR_PADRAO = "Vitor Kubinyete";
 
+	// OG: Url
+	const OG_URL_PADRAO = "http://kubinyete.redirectme.net";
+	// OG: Tipo
+	const OG_TIPO_PADRAO = "website";
+	// OG: Título
+	const OG_TITULO_PADRAO = "PHPGallery";
+	// OG: Descrição
+	const OG_DESCRICAO_PADRAO = self::HTML_DESCRICAO_PADRAO;
+	// OG: Imagem
+	const OG_IMAGEM_PADRAO = self::OG_URL_PADRAO.self::CAMINHO_RECURSOS_PADRAO."phpgallery-logo-full.jpg";
+	// OG: Nome do site
+	const OG_NOME_SITE_PADRAO = "PHPGallery";
+	// OG: Localização (idioma)
+	const OG_IDIOMA_PADRAO = "pt_BR";
+
 	// Número da versão da aplicação, para se mostrada em uma visualização
 	const PHPGALLERY_VERSAO = "2.0.0";
 }

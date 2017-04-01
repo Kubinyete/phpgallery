@@ -89,11 +89,13 @@ class Usuario extends Objeto {
 		return ($this->getOnlineTimestamp() + UsuarioConfig::PERIODO_ONLINE >= time());
 	}
 
-	public function getImagemUrl() {
+	public function getImagemUrl($adicionarSeparador=false) {
+		$sep = ($adicionarSeparador) ? "/" : "";
+
 		if ($this->getTemImagemPerfil()) {
-			return UsuarioConfig::CAMINHO_IMAGENS_PERFIL.hash(UsuarioConfig::HASH_NOME_IMAGEM_PERFIL, $this->getId()).".".UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
+			return $sep.UsuarioConfig::CAMINHO_IMAGENS_PERFIL.hash(UsuarioConfig::HASH_NOME_IMAGEM_PERFIL, $this->getId()).".".UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
 		} else {
-			return UsuarioConfig::CAMINHO_IMAGEM_PERFIL_PADRAO;
+			return $sep.UsuarioConfig::CAMINHO_IMAGEM_PERFIL_PADRAO;
 		}
 	}
 

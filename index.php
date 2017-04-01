@@ -28,6 +28,7 @@ use App\Database\Conexao;
 
 Resposta::conteudoTipo("text/html; charset=utf-8");
 Resposta::header("Content-Language", "pt-BR");
+Resposta::header("X-UA-Compatible", "IE=Edge");
 date_default_timezone_set("America/Sao_Paulo");
 
 

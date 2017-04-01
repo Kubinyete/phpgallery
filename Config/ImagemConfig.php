@@ -18,6 +18,10 @@ abstract class ImagemConfig {
 	const LINK_IMAGEM = "/?v=imagem&id=%";
 	// O arquivo que processará as miniaturas
 	const PROCESSADOR_MINIATURAS = "/proc/thumbnail.php?id=%";
+	// Tamanho máximo do título
+	const MAX_TAMANHO_TITULO = 64;
+	// Tamanho máximo da descrição
+	const MAX_TAMANHO_DESCRICAO = 300;
 }
 
 ?>

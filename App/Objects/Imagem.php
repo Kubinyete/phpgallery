@@ -89,8 +89,8 @@ class Imagem extends Objeto {
 		$this->privada = boolval($valor);
 	}
 
-	public function getImagemUrl() {
-		return ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getId()).$this->getExtensao(true);
+	public function getImagemUrl($adicionarSeparador=false) {
+		return (($adicionarSeparador) ? "/" : "").ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getId()).$this->getExtensao(true);
 	}
 
 	public function getMiniaturaUrl() {

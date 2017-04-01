@@ -66,12 +66,21 @@ class EnviarModel extends Model {
 							break;
 					}
 
+					$imagemTitulo = trim($imagemTitulo);
+					$imagemDescricao = trim($imagemDescricao);
+
+					if (strlen($imagemTitulo) > ImagemConfig::MAX_TAMANHO_TITULO) {
+						throw new Exception(EnviarErro::IMAGEM_TITULO_EXCEDE_LIMITE);
+					} else if (strlen($imagemDescricao) > ImagemConfig::MAX_TAMANHO_DESCRICAO) {
+						throw new Exception(EnviarErro::IMAGEM_DESCRICAO_EXCEDE_LIMITE);
+					}
+
 					$novaImagem = new Imagem(
 						0,
 						date("Y-m-d H:i:s"),
 						$usuarioLogado->getId(),
-						trim($imagemTitulo),
-						trim($imagemDescricao),
+						$imagemTitulo,
+						$imagemDescricao,
 						$imgExtensao,
 						$imagemPrivada
 					);

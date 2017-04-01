@@ -50,7 +50,7 @@ a.link-efeito:hover {
 
 .dashed-container {
 	border-radius: 5px;
-	background-color: #333;
+	background-color: rgba(0,0,0, .7);
 	width: 95%;
 	border: 1px dashed #777;
 }
@@ -63,13 +63,13 @@ header {
 	z-index: 999;
 	position: absolute;
 	transition: .3s ease-in-out;
-	transform: translate(0, -100%);
 	left: 0;
 	top: 0;
 	right: 0;
 	width: 100%;
 	height: 50px;
 	overflow: hidden;
+	background-color: rgba(255,255,255, .4);
 }
 
 header.ativado {
@@ -91,7 +91,7 @@ header.ativado div.usuario-container {
 
 header.ativado div.usuario-container span.usuario-nome {
 	transition: .1s ease-in-out;
-	color: rgba(255,255,255, .75);
+	color: rgba(255,255,255, .5);
 }
 
 header div.centro {

@@ -4,7 +4,7 @@
 	--><li>
 		<a href="<?php echo $imagem->getLink(); ?>">
 			<div class="imagem-container">
-				<div style="background-image: url('<?php echo $imagem->getImagemUrl(); ?>')" class="imagem"></div>
+				<div style="background-image: url('<?php echo $imagem->getMiniaturaUrl(); ?>')" class="imagem"></div>
 				<div class="imagem-gradient"></div>
 			</div>
 			<span class="imagem-titulo">

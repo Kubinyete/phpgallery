@@ -10,6 +10,7 @@
 		</section>
 		<section>
 			<h1>Imagens enviadas</h1>
+			<p>Estas são as ultimas imagens adicionadas por <?php echo $itens["usr_usuario"]->getNome(); ?></p> 
 			<?php include $itens["proc_imagens_lista"]; ?>
 		</section>
 	</article>

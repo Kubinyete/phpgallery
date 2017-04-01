@@ -16,6 +16,8 @@ abstract class ImagemConfig {
 	const HASH_NOME_IMAGEM = "md5";
 	// O do link para visualizar a imagem
 	const LINK_IMAGEM = "/?v=imagem&id=%";
+	// O arquivo que processará as miniaturas
+	const PROCESSADOR_MINIATURAS = "/proc/thumbnail.php?id=%";
 }
 
 ?>

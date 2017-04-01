@@ -1,14 +1,10 @@
 <main>
 	<article class="imagem">
 		<section>
-			<div class="imagem-back">
-				<h1><?php echo $itens["img_imagem"]->getTitulo(true); ?></h1>
-				<img class="imagem" alt="A imagem a ser exibida" src="<?php echo $itens["img_imagem"]->getImagemUrl(); ?>">
-			</div>
-			<div class="info-container">
-				<p class="descricao"><?php echo $itens["img_imagem"]->getDescricao(true); ?></p>
-				<p class="data-criacao">Adicionado em <?php echo $itens["img_imagem"]->getDataCriacao(1); ?></p>
-			</div>
+			<h1><?php echo $itens["img_imagem"]->getTitulo(true); ?></h1>
+			<img class="imagem" alt="A imagem a ser exibida" src="<?php echo $itens["img_imagem"]->getImagemUrl(); ?>">
+			<p class="descricao"><?php echo $itens["img_imagem"]->getDescricao(true); ?></p>
+			<p class="data-criacao">Adicionado em <?php echo $itens["img_imagem"]->getDataCriacao(1); ?></p>
 			<div class="usuario-container<?php if ($itens["img_autor"]->estaOnline()) { echo " usuario-container-online"; } ?>">
 				<a class="link-efeito" href="<?php echo $itens["img_autor"]->getLink(); ?>">
 					<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?php echo $itens["img_autor"]->getImagemUrl(); ?>" draggable="false">
@@ -36,8 +32,6 @@
 
 				<?php } ?>
 			</ul>
-			<?php } else if ($itens["usr_logado"] !== null) { ?>
-				<p class="erro">Esta imagem não possui comentários, seja o primeiro a comentar algo!</p>
 			<?php } ?>
 		</section>
 	</article>

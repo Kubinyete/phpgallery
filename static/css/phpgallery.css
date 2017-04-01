@@ -63,6 +63,7 @@ header {
 	z-index: 999;
 	position: absolute;
 	transition: .3s ease-in-out;
+	transform: translate(0, -100%);
 	left: 0;
 	top: 0;
 	right: 0;
@@ -74,8 +75,9 @@ header {
 header.ativado {
 	position: fixed;
 	transition: .3s ease-in-out;
+	transform: translate(0, 0%);
 	box-shadow: 0px 0px 8px rgba(0,0,0, .4);
-	background-color: rgba(0,0,0, .4);
+	background-color: rgba(0,0,0, .7);
 }
 
 header.ativado nav ul li a {
@@ -304,10 +306,21 @@ div.logo-showcase div.logo-showcase-imagem {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
-    filter: blur(2px);
-    padding: 0 4px;
-    margin: 0 -4px;
+    background-attachment: scroll;
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
+    filter: blur(4px);
+    filter: scale(1.1);
+    animation: 30s zoomInOut ease-in-out infinite;
+}
+
+@keyframes zoomInOut {
+	0% {
+		transform: scale(1.1) rotate(0deg);
+	} 50% {
+		transform: scale(1.2) rotate(1.6deg);
+	} 100% {
+		transform: scale(1.1) rotate(0deg);
+	}
 }
 
 /**
@@ -593,7 +606,7 @@ article div.imagem-back h1 {
 }
 
 article p.descricao {
-	color: rgba(255,255,255, .5);
+	color: rgba(0,0,0, .5);
 	padding: 1em 1em;
 }
 
@@ -611,9 +624,9 @@ article div.usuario-container {
 	width: 98%;
 	height: 100px;
 	padding: 10px 1%;
-	border-radius: 0 0 10px 10px;
+	border-radius: 10px;
 	/*box-shadow: 0px 0px 6px rgba(0,0,0, .4);*/
-	background-color: rgba(0,0,0, .75);
+	background-color: rgba(0,0,0, .7);
 }
 
 article div.usuario-container img.usuario-imagem {
@@ -647,8 +660,8 @@ article div.comentario-form-container {
 	height: 150px;
 	padding: 10px 1%;
 	margin-top: 25px;
-	border-radius: 10px;
-	background-color: rgba(0,0,0, .75);
+	border-radius: 5px;
+	background-color: rgba(0,0,0, .7);
 }
 
 article div.comentario-form-container div.esquerda-container {

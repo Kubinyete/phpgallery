@@ -93,6 +93,10 @@ class Imagem extends Objeto {
 		return ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getId()).$this->getExtensao(true);
 	}
 
+	public function getMiniaturaUrl() {
+		return str_replace("%", $this->getId(), ImagemConfig::PROCESSADOR_MINIATURAS);
+	}
+
 	public function getLink() {
 		return str_replace("%", $this->getId(), ImagemConfig::LINK_IMAGEM);
 	}

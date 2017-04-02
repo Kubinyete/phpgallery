@@ -11,10 +11,8 @@ use App\Database\DalComentario;
 use App\Api\ApiResposta;
 
 class ApiComentario extends Api {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
-
+	// $conexao
+	
 	public function obterComentario($id) {
 		if (intval($id) <= 0) {
 			return parent::erro("É preciso informar corretamente o id do comentário para obter suas informações.");

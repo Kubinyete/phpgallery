@@ -6,7 +6,7 @@
 namespace App\Database;
 
 class SqlComando {
-	protected $comandoString;
+	private $comandoString;
 
 	public function __construct($comandoString="") {
 		$this->comandoString = $comandoString;
@@ -21,7 +21,7 @@ class SqlComando {
 	}
 
 	// Utilizado para filtrar todas as escape strings de uma string
-	protected static function filtrarEscapeStringSql($string) {
+	private static function filtrarEscapeStringSql($string) {
 		return str_replace("'", "''", strval($string));
 	}
 

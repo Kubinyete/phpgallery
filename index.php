@@ -54,12 +54,12 @@ Sessao::validarUsuario($conexao);
 
 
 $requisicao = Pedido::obter("v", "GET");
+// Se não for informado querystring, apenas assuma que o usuário requistiou: "/" -> "/?v=home"
 if ($requisicao === null) {
 	$requisicao = "home";
 }
 
-
-
+// Nosso roteador baseado na requisição GET da querystring 'v'
 switch ($requisicao) {
 	case "home":
 		$modelo = new HomeModel($conexao);

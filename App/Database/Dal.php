@@ -13,7 +13,7 @@ use Config\ConexaoConfig;
 abstract class Dal {
 	protected $conexao;
 
-	protected function __construct($conexao) {
+	public function __construct($conexao) {
 		$this->conexao = $conexao;
 	}
 
@@ -33,14 +33,18 @@ abstract class Dal {
 			$resultadoId = odbc_exec($this->conexao->getConexao(), $sqlComando->getComandoString());
 		}
 		
+		// Se ocorreu alguma falha ao tentar executar o comando
 		if (!$resultadoId) {
+			// Desconecte imediatamente
 			$this->conexao->desconectar();
 
+			// Se não estivermos em modo DEBUG, redirecione para uma página de erro
 			if (!ConexaoConfig::MODO_DEBUG) {
 				Resposta::erro(Erro::DBERRO_FALHA_COMANDO, true);
 			}
 		}
 
+		// Se estamos alterando os registros e queremos salvar essas modifcações
 		if ($salvarModificacoes) {
 			if (!ConexaoConfig::MODO_DEBUG) {
 				$estaOk = @odbc_commit($this->conexao->getConexao());
@@ -48,6 +52,7 @@ abstract class Dal {
 				$estaOk = odbc_commit($this->conexao->getConexao());
 			}
 
+			// Se não foi possível salvar as alterações, desconecte imediatamente e envie um erro
 			if (!$estaOk) {
 				$this->conexao->desconectar();
 

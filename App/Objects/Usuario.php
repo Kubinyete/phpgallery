@@ -9,8 +9,10 @@ use App\Objects\Objeto;
 use Config\UsuarioConfig;
 
 class Usuario extends Objeto {
+	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
 	public $nome;
-	protected $senha;
+	// Não queremos de jeito nenhum vazar a senha do usuário em uma resposta Api
+	private $senha;
 	public $descricao;
 	public $temImagemPerfil;
 	public $onlineTimestamp;
@@ -23,9 +25,11 @@ class Usuario extends Objeto {
 		$this->setTemImagemPerfil($temImagemPerfil);
 		$this->setOnlineTimestamp($onlineTimestamp);
 
+		// Se não estamos lidando com Api
 		if (!$paraApi) {
 			$this->setSenha($senha, $encriptografarSenha);
 		} else {
+			// Retire o atributo de senha, pois será desnecessário e formate seus atributos
 			unset($this->senha);
 			$this->descricao = $this->getDescricao(true);
 			$this->estaOnline = $this->estaOnline();

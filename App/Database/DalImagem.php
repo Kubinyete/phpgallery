@@ -11,10 +11,6 @@ use App\Database\SqlComando;
 use Config\DalImagemConfig;
 
 class DalImagem extends Dal {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
-
 	// Cria uma imagem no banco de dados de acordo com o objeto Imagem passado como argumento
 	public function criarImagem($imagem) {
 		$sql = new SqlComando();

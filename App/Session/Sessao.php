@@ -6,7 +6,7 @@ namespace App\Session;
 
 use App\Database\DalUsuario;
 
-class Sessao {
+abstract class Sessao {
 	public static function iniciar() {
 		@session_start();
 	}

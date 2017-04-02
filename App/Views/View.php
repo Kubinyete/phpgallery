@@ -40,6 +40,7 @@ abstract class View {
 		];
 	}
 
+	// Importa todas as templates da nossa View e passa para cada uma uma coleção de itens
 	public function renderizar() {
 		$itens = &$this->itens; 
 		

@@ -11,9 +11,7 @@ use App\Database\DalUsuario;
 use App\Api\ApiResposta;
 
 class ApiUsuario extends Api {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
+	// $conexao
 
 	public function obterUsuario($nome) {
 		if ($nome === null || strlen(trim($nome)) <= 0) {

@@ -7,7 +7,7 @@ namespace App\Http;
 
 use App\Database\Erro;
 
-class Resposta {
+abstract class Resposta {
 	public static function header($chave, $valor) {
 		header($chave.": ".$valor);
 	}

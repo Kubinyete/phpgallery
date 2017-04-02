@@ -11,10 +11,6 @@ use App\Database\SqlComando;
 use Config\DalComentarioConfig;
 
 class DalComentario extends Dal {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
-
 	// Cria um comentário no banco de dados de acordo com o objeto Comentario passado como argumento
 	public function criarComentario($comentario) {
 		$sql = new SqlComando();
@@ -26,10 +22,15 @@ class DalComentario extends Dal {
 				"cmt_conteudo" => $comentario->getConteudo(),
 				"cmt_data_criacao" => $comentario->getDataCriacao(2),
 			]
-		)->semicolon()->select("@@IDENTITY")->as("id");
+		);
 
 		$this->conexao->conectar();
-		$resultadoId = $this->executar($sql, true);
+		$this->executar($sql, true);
+
+		$sql = new SqlComando();
+		$sql->select("TOP 1 cmt_id")->as->("id")->from("Comentarios")->order("cmt_id", "DESC");
+
+		$resultadoId = $this->executar($sql);
 
 		$id = null;
 

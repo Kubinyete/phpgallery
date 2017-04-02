@@ -11,7 +11,7 @@ abstract class DalImagemConfig {
 	// se o valor informado for 0 ou menor, a procura retornará todos
 	const LISTAR_IMAGENS_LIMITE = 100;
 	// O máximo de objetos que uma listagem de recentes retornará
-	const LISTAR_RECENTES_LIMITE = 40;
+	const LISTAR_RECENTES_LIMITE = 32;
 }
 
 ?>

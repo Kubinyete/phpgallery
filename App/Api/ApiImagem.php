@@ -11,9 +11,7 @@ use App\Database\DalImagem;
 use App\Api\ApiResposta;
 
 class ApiImagem extends Api {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
+	// $conexao
 
 	public function obterImagem($id) {
 		if (intval($id) <= 0) {

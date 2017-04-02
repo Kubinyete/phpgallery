@@ -7,6 +7,7 @@
 namespace App\Objects;
 
 abstract class Objeto {
+	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
 	public $id;
 	public $dataCriacao;
 
@@ -51,6 +52,7 @@ abstract class Objeto {
 		$this->dataCriacao = strval($valor);
 	}
 
+	// Para testes
 	public function toString() {
 		var_dump($this);
 	}

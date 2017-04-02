@@ -15,7 +15,7 @@ abstract class UsuarioConfig {
 	// utilizar o número de id puro ficaria estranho
 	const HASH_NOME_IMAGEM_PERFIL = "md5";
 	// Período limite em segundos que um usuário será constado como online
-	const PERIODO_ONLINE = 60;
+	const PERIODO_ONLINE = 30;
 
 	// O caminho padrão para as imagens de perfil
 	const CAMINHO_IMAGENS_PERFIL = "static/resources/profile/";

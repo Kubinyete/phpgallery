@@ -6,7 +6,7 @@
 
 namespace App\Http;
 
-class Pedido {
+abstract class Pedido {
     // Retorna se tal chave existe no nosso pedido GET / POST
     public static function existe($chave, $metodo) {
         if (strtoupper($metodo) === "POST") {
@@ -47,4 +47,5 @@ class Pedido {
         }
     }
 }
+
 ?>

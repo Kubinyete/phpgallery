@@ -12,12 +12,16 @@ class PerfilController extends Controller {
 	
 	public function rodar($usuarioLogado, $usuarioNome="") {
 		if (strlen(trim($usuarioNome)) <= 0) {
+			// Se não recebemos nenhum nome de usuário, significa que o usuário logado está solicitando
+			// a página de perfil
 			if ($usuarioLogado !== null) {
 				return $this->model->index($usuarioLogado, $usuarioLogado->getNome());
 			} else {
+				// 404 Not Found
 				return $this->model->notFound($usuarioLogado);
 			}
 		} else {
+			// Tente obter a página de perfil deste usuário
 			return $this->model->index($usuarioLogado, $usuarioNome);
 		}
 	}

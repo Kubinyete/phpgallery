@@ -11,9 +11,11 @@ class EnviarController extends Controller {
 	// $model
 	
 	public function rodar($usuarioLogado, $acao="i", $imagem=[], $imagemTitulo="", $imagemDescricao="", $imagemPrivada="0") {
+		// Se a ação for igual a REGISTRAR
 		if ($acao === "r") {
 			return $this->model->enviar($usuarioLogado, $imagem, $imagemTitulo, $imagemDescricao, ($imagemPrivada === "1") ? true : false);
 		} else {
+			// Retorne o 'index'
 			return $this->model->index($usuarioLogado);
 		}
 	}

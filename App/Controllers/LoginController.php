@@ -10,9 +10,14 @@ use App\MvcErrors\LoginErro;
 
 class LoginController extends Controller {
 	// $model
+	
+	// Número máximo de carácteres permitidos em um nome
 	const MAX_CARACTERES_NOME = 16;
+	// Número mínimo de carácteres permitidos em um nome
 	const MIN_CARACTERES_NOME = 4;
+	// Número máximo de carácteres permitidos em uma senha
 	const MAX_CARACTERES_SENHA = 32;
+	// Número mínimo de carácteres permitidos em uma senha
 	const MIN_CARACTERES_SENHA = 6;
 	
 	// Valida a string e retorna se ela está de acordo para registrar um usuário / senha
@@ -66,16 +71,20 @@ class LoginController extends Controller {
 				array_push($errosLista, LoginErro::SENHA_TAMANHO_INVALIDO);
 			}
 
+			// Apenas tente verificar isso se estamos registrando
 			if ($acao === "r" && $usuarioSenha !== $usuarioConSenha) {
 				array_push($errosLista, LoginErro::REGISTRAR_CONFIRMA_SENHA_INVALIDA);
 			}
 		}
 
 		if ($acao === "i") {
+			// Index
 			return $this->model->index($usuarioLogado);
 		} else if ($acao === "r") {
+			// Registrar
 			return $this->model->registrar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
 		} else {
+			// Logar
 			return $this->model->logar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
 		}
 	}

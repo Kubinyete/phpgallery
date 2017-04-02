@@ -10,7 +10,7 @@ use App\Api\ApiResposta;
 abstract class Api {
 	protected $conexao;
 
-	protected function __construct($conexao) {
+	public function __construct($conexao) {
 		$this->conexao = $conexao;
 	}
 

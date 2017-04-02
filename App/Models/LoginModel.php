@@ -21,6 +21,7 @@ class LoginModel extends Model {
 		];
 	}
 
+	// Efetua login
 	public function logar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha) {
 		if (count($errosLista) <= 0) {
 			$dal = new DalUsuario($this->conexao);
@@ -47,6 +48,7 @@ class LoginModel extends Model {
 		}
 	}
 
+	// Registra um usuário
 	public function registrar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha) {
 		if (count($errosLista) <= 0) {
 			$dal = new DalUsuario($this->conexao);
@@ -72,6 +74,8 @@ class LoginModel extends Model {
 		}
 	}
 
+	// Retorna uma LoginView com uma string de erro
+	// de acordo com a lista de erros informados
 	public function erro($usuarioLogado, $acao, $errosLista) {
 		$mensagem = "";
 		$separador = "<br>\n";

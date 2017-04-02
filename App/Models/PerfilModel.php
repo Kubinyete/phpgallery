@@ -12,19 +12,24 @@ use App\Views\PerfilView;
 use App\Views\NotFoundView;
 
 class PerfilModel extends Model {
+	// $conexao
+	
 	public function index($usuarioLogado, $usuarioNome="") {
 		$dal = new DalUsuario($this->conexao);
 		$usuario = $dal->obterUsuario(false, $usuarioNome);
 		
+		// Se o usuário existe	
 		if ($usuario !== null) {
 			$dal = new DalImagem($this->conexao);
 			$imagens = $dal->listarImagensUsuario($usuario->getId());
 			return new PerfilView($usuarioLogado, $usuario, $imagens);
 		} else {
+			// 404 Not Found
 			return $this->notFound($usuarioLogado);
 		}
 	}
 
+	// Utiliza a NotFoundView já pronta
 	public function notFound($usuarioLogado) {
 		return new NotFoundView($usuarioLogado);
 	}

@@ -11,10 +11,6 @@ use App\Database\SqlComando;
 use Config\DalUsuarioConfig;
 
 class DalUsuario extends Dal {
-	public function __construct($conexao) {
-		parent::__construct($conexao);
-	}
-
 	// Cria um usuário no banco de dados de acordo com o objeto Usuario passado como argumento
 	public function criarUsuario($usuario) {
 		$sql = new SqlComando();

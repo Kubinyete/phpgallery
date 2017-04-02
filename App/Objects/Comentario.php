@@ -6,6 +6,7 @@
 namespace App\Objects;
 
 class Comentario extends Objeto {
+	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
 	public $imagemId;
 	public $usuarioId;
 	public $conteudo;
@@ -17,6 +18,7 @@ class Comentario extends Objeto {
 		$this->setUsuarioId($usuarioId);
 		$this->setConteudo($conteudo);
 
+		// Se vamos utilizar esse objeto como uma resposta Api, formate o conteûdo
 		if ($paraApi) {
 			$this->conteudo = $this->getConteudo(true);
 		}

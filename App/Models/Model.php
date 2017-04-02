@@ -14,9 +14,8 @@ abstract class Model {
 		$this->conexao = $conexao;
 	}
 
-	// Mostrará a página do modelo atual
-	// retorna a View desta página para que então
-	// 'renderizá-la'
+	// Todo modelo terá sua implementação do index que retornará uma View
+	// o jeito que ele é chamado depende do modelo
 	public abstract function index($usuarioLogado);
 }
 

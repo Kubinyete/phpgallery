@@ -17,18 +17,21 @@ class Status {
 		$this->usuario = $usuario;
 	}
 
+	// Realiza um 'batimento' no status do usuário (sua timestamp)
 	public function heartbeat() {
 		$dal = new DalUsuario($this->conexao);
 		$this->usuario->setOnlineTimestamp(time());
 		$dal->atualizarUsuario($this->usuario);
 	}
 
+	// Altera o status do usuário para offline
 	public function offline() {
 		$dal = new DalUsuario($this->conexao);
 		$this->usuario->setOnlineTimestamp($this->usuario->getOnlineTimestamp() - UsuarioConfig::PERIODO_ONLINE);
 		$dal->atualizarUsuario($this->usuario);
 	}
 
+	// Retorna se o usuário encapsulado está online
 	public function estaOnline() {
 		return $this->usuario->estaOnline();
 	}

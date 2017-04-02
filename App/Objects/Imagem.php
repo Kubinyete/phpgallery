@@ -9,6 +9,7 @@ use App\Objects\Objeto;
 use Config\ImagemConfig;
 
 class Imagem extends Objeto {
+	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
 	public $usuarioId;
 	public $titulo;
 	public $descricao;
@@ -23,9 +24,12 @@ class Imagem extends Objeto {
 		$this->setDescricao($descricao);
 		$this->setExtensao($extensao);
 
+		// Se não estamos utilizando esse objeto para respostas Api
+		// atualize a informação privada
 		if (!$paraApi) {
 			$this->setPrivada($privada);
 		} else {
+			// Se estamos usando para Api, retire informações privadas do objeto e formate alguns atributos
 			unset($this->privada);
 			$this->titulo = $this->getTitulo(true);
 			$this->descricao = $this->getDescricao(true);

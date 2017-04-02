@@ -11,11 +11,10 @@ use App\Views\HomeView;
 use App\Database\DalImagem;
 
 class HomeModel extends Model {
-	// $conexao;
+	// $conexao
 	
 	// Não vamos receber nada do controlador
 	// pois mostrar as imagens recentes não precisará de um parâmetro
-	// (por enquanto)
 	public function index($usuarioLogado) {
 		$dal = new DalImagem($this->conexao);
 		$imagens = $dal->listarRecentes();

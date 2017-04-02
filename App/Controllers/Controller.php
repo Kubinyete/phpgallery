@@ -13,8 +13,7 @@ abstract class Controller {
 		$this->model = $model;
 	}
 
-	// De acordo com nossos parâmetros, chame um Model e atualize as informações necessárias
-	// e por fim envie a página completa
+	// Todo Controller derivado terá sua própria implementação da função rodar()
 	public abstract function rodar($usuarioLogado);
 }
 

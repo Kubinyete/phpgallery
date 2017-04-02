@@ -28,7 +28,7 @@ class DalComentario extends Dal {
 		$this->executar($sql, true);
 
 		$sql = new SqlComando();
-		$sql->select("TOP 1 cmt_id")->as->("id")->from("Comentarios")->order("cmt_id", "DESC");
+		$sql->select("TOP 1 cmt_id")->as("id")->from("Comentarios")->order("cmt_id", "DESC");
 
 		$resultadoId = $this->executar($sql);
 

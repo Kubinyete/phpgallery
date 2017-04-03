@@ -42,6 +42,8 @@ class DalImagem extends Dal {
 
 		$this->conexao->desconectar();
 
+		$imagem->setId($id);
+
 		return $id;
 	}
 

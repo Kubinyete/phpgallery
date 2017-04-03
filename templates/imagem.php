@@ -20,11 +20,16 @@
 				</div>
 				<div class="direita-container">
 					<form method="POST" autocomplete="off">
-						<textarea name="cmtcon" maxlength="300" placeholder="Escreva aqui seu comentário..."></textarea>
+						<textarea name="cmtcon" maxlength="300" placeholder="Escreva aqui seu comentário..."><?php echo ($itens["cmt_conteudo"] !== null) ? $itens["cmt_conteudo"] : ""; ?></textarea>
 						<button type="submit">Enviar</button>
 					</form>
 				</div>
 			</div>
+			<?php } ?>
+			<?php if (strlen($itens["cmt_erro_mensagem"])) { ?>
+			<script>
+				phpgallery.erroDialogo('Falha', '<?php echo $itens["cmt_erro_mensagem"]; ?>');
+			</script>
 			<?php } ?>
 			<?php if (count($itens["img_comentarios"]) > 0) { ?>
 			<ul class="comentario-container">

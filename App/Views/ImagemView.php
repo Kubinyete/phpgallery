@@ -12,7 +12,7 @@ class ImagemView extends View {
 	// $templates
 	// $itens
 	
-	public function __construct($usuarioLogado, $imagem, $autor, $comentarios) {
+	public function __construct($usuarioLogado, $imagem, $autor, $comentarios, $comentarioConteudo=null, $comentarioErro="") {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "imagem";
@@ -24,6 +24,8 @@ class ImagemView extends View {
 		$this->itens["og_titulo"] = $this->itens["html_titulo"];
 		$this->itens["og_descricao"] = $imagem->getDescricao(true);
 		$this->itens["og_imagem"] = ViewConfig::OG_URL_PADRAO.$imagem->getImagemUrl(true);
+		$this->itens["cmt_conteudo"] = $comentarioConteudo;
+		$this->itens["cmt_erro_mensagem"] = $comentarioErro;
 	}
 }
 

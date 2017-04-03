@@ -86,7 +86,7 @@ class EnviarModel extends Model {
 					);
 
 					$dal = new DalImagem($this->conexao);
-					$novaImagem->setId($dal->criarImagem($novaImagem));
+					$dal->criarImagem($novaImagem);
 
 					if ($novaImagem->getId() <= 0) {
 						throw new Exception(EnviarErro::DESCONHECIDO);

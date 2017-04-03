@@ -40,6 +40,8 @@ class DalComentario extends Dal {
 
 		$this->conexao->desconectar();
 
+		$comentario->setId($id);
+
 		return $id;
 	}
 

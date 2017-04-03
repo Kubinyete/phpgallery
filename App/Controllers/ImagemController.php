@@ -16,7 +16,6 @@ class ImagemController extends Controller {
 	public function rodar($usuarioLogado, $id=0, $comentarioConteudo=null) {
 		// Se for passado um valor inválido ou nulo, o $id receberá 0 em caso de falha na conversão
 		$id = intval($id);
-		$comentarioConteudo = strval($comentarioConteudo);
 
 		// Se o id não for passaado ou é inválido, envie logo uma página 404
 		if ($id <= 0) {
@@ -31,7 +30,7 @@ class ImagemController extends Controller {
 				try {
 					// Validação do estado do comentário
 					if (strlen($comentarioConteudo) <= 0) {
-						throw new Exception(ImagemErro::COMENTARIO_TAMANHO_INVALIDO)
+						throw new Exception(ImagemErro::COMENTARIO_TAMANHO_INVALIDO);
 					} else if (strlen($comentarioConteudo) > ComentarioConfig::MAX_TAMANHO_COMENTARIO) {
 						throw new Exception(ImagemErro::MAX_TAMANHO_COMENTARIO);
 					} else if ($usuarioLogado === null) {

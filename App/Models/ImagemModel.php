@@ -30,13 +30,13 @@ class ImagemModel extends Model {
 			// Se não recebemos nenhum erro do Controller
 
 			$comentarioErro = "";
-			if (count($comentarioErros) <= 0) {
+			if (count($comentarioErros) <= 0 && $usuarioLogado !== null) {
 				$cmt = new Comentario(
 					0,
 					date("Y-m-d H:i:s"),
 					$id,
 					$usuarioLogado->getId(),
-					$comentarioConteudo,
+					$comentarioConteudo
 				);
 
 				$dal->criarComentario($cmt);
@@ -44,7 +44,7 @@ class ImagemModel extends Model {
 				$comentarioConteudo = null;
 
 			} else {
-				foreach ($comentariosErros as $erro) {
+				foreach ($comentarioErros as $erro) {
 					if (isset(ImagemErro::DEFINICOES[$erro])) {
 						$comentarioErro = ImagemErro::DEFINICOES[$erro];
 					}

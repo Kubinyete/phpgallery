@@ -1,7 +1,6 @@
 this.phpgallery = {
 	cabecalhoAnimAtivado: false,
 	usuarioMenuAtivado: false,
-	erroDialogoAtivado: false,
 
 	// Abrir / fechar menu do usuário
 	usuarioMenu: function() {
@@ -18,6 +17,7 @@ this.phpgallery = {
 		}
 	},
 
+	// Ajusta a posição do menu
 	ajustarPosUsuarioMenu: function() {
 		$("#usuarioMenu").css({
 			top: $("header").height(),
@@ -26,22 +26,10 @@ this.phpgallery = {
 	},
 
 	erroDialogo: function(titulo, erro) {
-		if (!phpgallery.erroDialogoAtivado) {
-			$("body").append(
-				"<div class='erro-dialogo-fundo'><div class='erro-dialogo'><h1>"+titulo+"</h1><p>"+erro+"</p><button id='erro-dialogo-ok'>Ok</button></div></div>"
-			);
-
-			phpgallery.erroDialogoAtivado = true;
-			
-			$("#erro-dialogo-ok").click(
-				phpgallery.desativarErroDialogo
-			);
-		}
+		$(".erro-dialogo-fundo").addClass("erro-dialogo-fundo-ativado");
 	},
 
 	desativarErroDialogo: function() {
-		$("#erro-dialogo-ok").off();
-		$(".erro-dialogo-fundo").remove();
-		phpgallery.erroDialogoAtivado = false;
+		$(".erro-dialogo-fundo-ativado").removeClass("erro-dialogo-fundo-ativado");
 	}
 };

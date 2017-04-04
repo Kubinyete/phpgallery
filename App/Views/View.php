@@ -17,6 +17,7 @@ abstract class View {
 			"temp_cabecalho_corpo" => "cabecalho_corpo",
 			"temp_logo_showcase" => "logo_showcase",
 			"view" => "",
+			"erro_dialogo" => "erro_dialogo",
 			"temp_rodape" => ViewConfig::TEMPLATE_RODAPE
 		];
 
@@ -36,7 +37,8 @@ abstract class View {
 			"js" => ViewConfig::CAMINHO_JS_PADRAO,
 			"recursos" => ViewConfig::CAMINHO_RECURSOS_PADRAO,
 			"versao" => ViewConfig::PHPGALLERY_VERSAO,
-			"usr_logado" => $usuarioLogado
+			"usr_logado" => $usuarioLogado,
+			"erro_dialogo" => ""
 		];
 	}
 

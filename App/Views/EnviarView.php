@@ -19,7 +19,7 @@ class EnviarView extends View {
 		$this->itens["img_titulo"] = $imagemTitulo;
 		$this->itens["img_descricao"] = $imagemDescricao;
 		$this->itens["img_privada"] = $imagemPrivada;
-		$this->itens["img_erro_mensagem"] = $erroMensagem;
+		$this->itens["erro_dialogo"] = $erroMensagem;
 		$this->itens["imgti_maxlength"] = ImagemConfig::MAX_TAMANHO_TITULO;
 		$this->itens["imgde_maxlength"] = ImagemConfig::MAX_TAMANHO_DESCRICAO;
 	}

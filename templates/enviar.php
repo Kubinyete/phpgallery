@@ -23,8 +23,3 @@
 		</form>
 	</article>
 </main>
-<?php if (strlen($itens["img_erro_mensagem"]) > 0) { ?>
-<script>
-	phpgallery.erroDialogo("Erro", '<?php echo $itens["img_erro_mensagem"]; ?>');
-</script>
-<?php } ?>

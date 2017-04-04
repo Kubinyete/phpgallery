@@ -26,11 +26,6 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if (strlen($itens["cmt_erro_mensagem"])) { ?>
-			<script>
-				phpgallery.erroDialogo('Erro', '<?php echo $itens["cmt_erro_mensagem"]; ?>');
-			</script>
-			<?php } ?>
 			<?php if (count($itens["img_comentarios"]) > 0) { ?>
 			<ul class="comentario-container">
 				<?php foreach ($itens["img_comentarios"] as $comentario) { ?>

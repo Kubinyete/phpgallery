@@ -30,7 +30,7 @@ class ImagemModel extends Model {
 			// Se não recebemos nenhum erro do Controller
 
 			$comentarioErro = "";
-			if (count($comentarioErros) <= 0 && $usuarioLogado !== null) {
+			if ($comentarioConteudo !== null && count($comentarioErros) <= 0) {
 				$cmt = new Comentario(
 					0,
 					date("Y-m-d H:i:s"),
@@ -52,7 +52,19 @@ class ImagemModel extends Model {
 			}
 
 			$comentarios = $dal->listarComentarios($imagem->getId());
-			return new ImagemView($usuarioLogado, $imagem, $usuario, $comentarios, $comentarioConteudo, $comentarioErro);
+			$comentariosArray = [];
+
+			$dal = new DalUsuario($this->conexao);
+
+			foreach ($comentarios as $cmt) {
+				array_push($comentariosArray, [
+						"comentario" => $cmt,
+						"autor" => $dal->obterUsuario(true, $cmt->getUsuarioId())
+					]
+				);
+			}
+
+			return new ImagemView($usuarioLogado, $imagem, $usuario, $comentariosArray, $comentarioConteudo, $comentarioErro);
 		} else {
 			// 404 Not Found
 			return $this->notFound($usuarioLogado);

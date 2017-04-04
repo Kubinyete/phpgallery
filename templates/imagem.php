@@ -28,13 +28,27 @@
 			<?php } ?>
 			<?php if (strlen($itens["cmt_erro_mensagem"])) { ?>
 			<script>
-				phpgallery.erroDialogo('Falha', '<?php echo $itens["cmt_erro_mensagem"]; ?>');
+				phpgallery.erroDialogo('Erro', '<?php echo $itens["cmt_erro_mensagem"]; ?>');
 			</script>
 			<?php } ?>
 			<?php if (count($itens["img_comentarios"]) > 0) { ?>
 			<ul class="comentario-container">
 				<?php foreach ($itens["img_comentarios"] as $comentario) { ?>
-
+					<li>
+						<div class="comentario-form-container comentario-norm-container <?php echo (!$comentario["autor"]->estaOnline()) ? "comentario-offline-container" : ""; ?>">
+							<div class="esquerda-container">
+								<a href="<?php echo $comentario["autor"]->getLink(); ?>">
+									<img src="<?php echo $comentario["autor"]->getImagemUrl(); ?>" alt="<?php echo $comentario["autor"]->getNome(); ?>"><!--
+									--><br><!--
+									--><span class="usuario-nome"><?php echo $comentario["autor"]->getNome(); ?></span>
+								</a>
+							</div>
+							<div class="direita-container">
+								<p><?php echo $comentario["comentario"]->getConteudo(true); ?></p>
+								<span class="data-criacao">Adicionado em <?php echo $comentario["comentario"]->getDataCriacao(1); ?></span>
+							</div>
+						</div>
+					</li>
 				<?php } ?>
 			</ul>
 			<?php } ?>

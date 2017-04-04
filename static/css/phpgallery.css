@@ -383,7 +383,7 @@ main p.erro {
 
 footer {
 	width: 100%;
-	min-height: 15em;
+	min-height: 19em;
 	background-color: #3c3c3c;
 }
 
@@ -398,7 +398,6 @@ footer p {
 
 footer p:nth-child(1) {
 	background-color: rgba(0, 0, 0, .2);
-	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
 }
 
 footer ul {
@@ -663,6 +662,52 @@ article div.comentario-form-container {
 	margin-top: 25px;
 	border-radius: 5px;
 	background-color: rgba(0,0,0, .7);
+}
+
+article div.comentario-norm-container {
+	background-color: rgba(0,0,0, .05) !important;
+	/*margin: .5em 0;*/
+	margin: 0 !important;
+	border-bottom: 1px solid rgba(0,0,0, .15) !important;
+	height: unset !important;
+	min-height: 150px !important;
+}
+
+article div.comentario-offline-container div.esquerda-container img {
+	border: 1px solid #777 !important;
+	box-shadow: unset !important;
+}
+
+article div.comentario-offline-container div.esquerda-container span.usuario-nome {
+	color: #777 !important;
+}
+
+article div.comentario-norm-container div.esquerda-container {
+	width: 20% !important;
+}
+
+article div.comentario-norm-container div.direita-container {
+	width: 77.5% !important;
+	padding-left: 1% !important;
+	min-height: 150px !important;
+	border-left: 1px solid rgba(0,0,0, .15) !important;
+}
+
+article div.comentario-norm-container div.direita-container span.data-criacao {
+	color: cornflowerblue !important;
+	font-size: 1.2em;
+}
+
+article div.comentario-norm-container div.esquerda-container img {
+	width: 45% !important;
+	margin-top: 0 !important;
+	transform: translate(0, 0%) !important;
+}
+
+article div.comentario-norm-container div.esquerda-container span.usuario-nome {
+	font-family: Lato, Arial, sans-serif;
+	font-size: 1.6em;
+	color: cornflowerblue;
 }
 
 article div.comentario-form-container div.esquerda-container {

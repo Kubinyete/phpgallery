@@ -69,10 +69,11 @@ switch ($requisicao) {
 		break;
 	case "imagem":
 		$id = Pedido::obter("id", "GET");
+		$cmtConteudo = Pedido::obter("cmtcon", "POST");
 
 		$modelo = new ImagemModel($conexao);
 		$controlador = new ImagemController($modelo);
-		$controlador->rodar($usuarioLogado, $id)->renderizar();
+		$controlador->rodar($usuarioLogado, $id, $cmtConteudo)->renderizar();
 		
 		break;
 	case "perfil":

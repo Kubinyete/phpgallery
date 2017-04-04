@@ -6,7 +6,7 @@
 namespace App\Views;
 
 use App\Views\View;
-use App\UsuarioConfig;
+use Config\UsuarioConfig;
 
 class LoginView extends View {
 	// $templates
@@ -20,8 +20,8 @@ class LoginView extends View {
 		$this->itens["login_erro_mensagem"] = $erroMensagem;
 		$this->itens["loginNome_maxlength"] = UsuarioConfig::MAX_CARACTERES_NOME;
 		$this->itens["loginSenha_maxlength"] = UsuarioConfig::MAX_CARACTERES_SENHA;
-		$this->itens["registraNome_maxlength"] = $this->itens["loginNome_maxlength"]
-		$this->itens["registraSenha_maxlength"] = $this->itens["loginSenha_maxlength"]
+		$this->itens["registraNome_maxlength"] = $this->itens["loginNome_maxlength"];
+		$this->itens["registraSenha_maxlength"] = $this->itens["loginSenha_maxlength"];
 	}
 }
 

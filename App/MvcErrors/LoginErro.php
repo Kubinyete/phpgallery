@@ -5,7 +5,7 @@
 
 namespace App\MvcErrors;
 
-use App\Controllers\LoginController;
+use Config\UsuarioConfig;
 
 abstract class LoginErro {
 	const NOME_INVALIDO = 0;
@@ -21,8 +21,8 @@ abstract class LoginErro {
 	const DEFINICOES = [
 		self::NOME_INVALIDO => "O nome informado contêm um ou mais carácteres inválidos.",
 		self::SENHA_INVALIDA => "A senha informada contêm um ou mais carácteres inválidos.",
-		self::NOME_TAMANHO_INVALIDO => "O tamanho do nome informado está inválido, mínimo de ".LoginController::MIN_CARACTERES_NOME." e máximo de ".LoginController::MAX_CARACTERES_NOME." carácteres.",
-		self::SENHA_TAMANHO_INVALIDO => "O tamanho da senha informada está inválida, mínimo de ".LoginController::MIN_CARACTERES_SENHA." e máximo de ".LoginController::MAX_CARACTERES_SENHA." carácteres.",
+		self::NOME_TAMANHO_INVALIDO => "O tamanho do nome informado está inválido, mínimo de ".UsuarioConfig::MIN_CARACTERES_NOME." e máximo de ".UsuarioConfig::MAX_CARACTERES_NOME." carácteres.",
+		self::SENHA_TAMANHO_INVALIDO => "O tamanho da senha informada está inválida, mínimo de ".UsuarioConfig::MIN_CARACTERES_SENHA." e máximo de ".UsuarioConfig::MAX_CARACTERES_SENHA." carácteres.",
 		self::LOGIN_USUARIO_NAO_EXISTE => "O nome de usuário ou senha está incorreto.",
 		self::LOGIN_SENHA_ERRADA => "O nome de usuário ou senha está incorreto.",
 		self::REGISTRAR_USUARIO_JA_EXISTE => "O nome de usuário informado já existe.",

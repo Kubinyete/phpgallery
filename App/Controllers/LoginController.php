@@ -7,18 +7,10 @@ namespace App\Controllers;
 
 use App\Controllers\Controller;
 use App\MvcErrors\LoginErro;
+use Config\UsuarioConfig;
 
 class LoginController extends Controller {
 	// $model
-	
-	// Número máximo de carácteres permitidos em um nome
-	const MAX_CARACTERES_NOME = 16;
-	// Número mínimo de carácteres permitidos em um nome
-	const MIN_CARACTERES_NOME = 4;
-	// Número máximo de carácteres permitidos em uma senha
-	const MAX_CARACTERES_SENHA = 32;
-	// Número mínimo de carácteres permitidos em uma senha
-	const MIN_CARACTERES_SENHA = 6;
 	
 	// Valida a string e retorna se ela está de acordo para registrar um usuário / senha
 	private static function stringValida($string) {
@@ -45,9 +37,9 @@ class LoginController extends Controller {
 		}
 
 		if ($paraNome) {
-			return ((strlen($string) <= self::MAX_CARACTERES_NOME) && (strlen($string) >= self::MIN_CARACTERES_NOME));
+			return ((strlen($string) <= UsuarioConfig::MAX_CARACTERES_NOME) && (strlen($string) >= UsuarioConfig::MIN_CARACTERES_NOME));
 		} else {
-			return ((strlen($string) <= self::MAX_CARACTERES_SENHA) && (strlen($string) >= self::MIN_CARACTERES_SENHA));
+			return ((strlen($string) <= UsuarioConfig::MAX_CARACTERES_SENHA) && (strlen($string) >= UsuarioConfig::MIN_CARACTERES_SENHA));
 		}
 	}
 

@@ -29,6 +29,15 @@ abstract class UsuarioConfig {
 
 	// O link para acessar a página de um usuário
 	const LINK_USUARIO = "/?v=perfil&u=%";
+
+	// Número máximo de carácteres permitidos em um nome
+	const MAX_CARACTERES_NOME = 16;
+	// Número mínimo de carácteres permitidos em um nome
+	const MIN_CARACTERES_NOME = 4;
+	// Número máximo de carácteres permitidos em uma senha
+	const MAX_CARACTERES_SENHA = 32;
+	// Número mínimo de carácteres permitidos em uma senha
+	const MIN_CARACTERES_SENHA = 6;
 }
 
 ?>

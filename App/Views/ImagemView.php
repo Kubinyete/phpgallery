@@ -7,6 +7,7 @@ namespace App\Views;
 
 use App\Views\View;
 use Config\ViewConfig;
+use Config\ComentarioConfig;
 
 class ImagemView extends View {
 	// $templates
@@ -26,6 +27,7 @@ class ImagemView extends View {
 		$this->itens["og_imagem"] = ViewConfig::OG_URL_PADRAO.$imagem->getImagemUrl(true);
 		$this->itens["cmt_conteudo"] = $comentarioConteudo;
 		$this->itens["cmt_erro_mensagem"] = $comentarioErro;
+		$this->itens["cmtcon_maxlength"] = ComentarioConfig::MAX_TAMANHO_COMENTARIO;
 	}
 }
 

@@ -20,7 +20,7 @@
 				</div>
 				<div class="direita-container">
 					<form method="POST" autocomplete="off">
-						<textarea name="cmtcon" maxlength="300" placeholder="Escreva aqui seu comentário..."><?php echo ($itens["cmt_conteudo"] !== null) ? $itens["cmt_conteudo"] : ""; ?></textarea>
+						<textarea name="cmtcon" maxlength="<?php echo $itens["cmtcon_maxlength"]; ?>" placeholder="Escreva aqui seu comentário..."><?php echo ($itens["cmt_conteudo"] !== null) ? $itens["cmt_conteudo"] : ""; ?></textarea>
 						<button type="submit">Enviar</button>
 					</form>
 				</div>

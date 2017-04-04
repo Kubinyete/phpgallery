@@ -5,13 +5,13 @@
 			<form id="login-form" class="aut-formulario" method="POST" autocomplete="off">
 			<input type="hidden" name="a" value="l">
 				<label for="loginNome">Nome</label>
-				<input id="loginNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="16">
+				<input id="loginNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="<?php echo $itens["loginNome_maxlength"]; ?>">
 				<?php if ($itens["login_acao"] === "l" && $itens["login_erro_mensagem"] !== null) { ?>
 				<i class="fa fa-warning"></i>
 				<?php } ?>
 				<br>
 				<label for="loginSenha">Senha</label>
-				<input id="loginSenha" type="password" name="sen" placeholder="Senha do usuário" maxlength="32">
+				<input id="loginSenha" type="password" name="sen" placeholder="Senha do usuário" maxlength="<?php echo $itens["loginSenha_maxlength"]; ?>">
 				<br>
 				<button type="submit">Enviar</button>
 				<?php if ($itens["login_acao"] === "l" && $itens["login_erro_mensagem"] !== null) { ?>
@@ -33,16 +33,16 @@
 			<form id="registrar-form" class="aut-formulario" method="POST" autocomplete="off">
 				<input type="hidden" name="a" value="r">
 				<label for="registraNome">Nome</label>
-				<input id="registraNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="16">
+				<input id="registraNome" type="text" name="nom" placeholder="Nome do usuário" maxlength="<?php echo $itens["registraNome_maxlength"]; ?>">
 				<?php if ($itens["login_acao"] === "r" && $itens["login_erro_mensagem"] !== null) { ?>
 				<i class="fa fa-warning"></i>
 				<?php } ?>
 				<br>
 				<label for="registraSenha">Senha</label>
-				<input id="registraSenha" type="password" name="sen" placeholder="Senha do usuário" maxlength="32">
+				<input id="registraSenha" type="password" name="sen" placeholder="Senha do usuário" maxlength="<?php echo $itens["registraSenha_maxlength"]; ?>">
 				<br>
 				<label for="registraConfirmaSenha">Confirmar senha</label>
-				<input id="registraConfirmaSenha" type="password" name="consen" placeholder="Senha do usuário" maxlength="32">
+				<input id="registraConfirmaSenha" type="password" name="consen" placeholder="Senha do usuário" maxlength="<?php echo $itens["registraSenha_maxlength"]; ?>">
 				<br>
 				<button type="submit">Registrar</button>
 				<?php if ($itens["login_acao"] === "r" && $itens["login_erro_mensagem"] !== null) { ?>

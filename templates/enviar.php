@@ -9,12 +9,12 @@
 			<br>
 			<br>
 			<label for="imgti">Título</label>
-			<input id="imgti" type="text" name="imgti" maxlength="64" placeholder="O título da imagem...">
+			<input id="imgti" type="text" name="imgti" maxlength="<?php echo $itens["imgti_maxlength"]; ?>" placeholder="O título da imagem...">
 			<br>
 			<br>
 			<label for="imgde">Descrição</label>
 			<br>
-			<textarea id="imgde" name="imgde" maxlength="300" placeholder="Informações adicionais..."></textarea>
+			<textarea id="imgde" name="imgde" maxlength="<?php echo $itens["imgde_maxlength"]; ?>" placeholder="Informações adicionais..."></textarea>
 			<br>
 			<input id="imgpr" type="checkbox" name="imgpr" value="1">
 			<label for="imgpr">Imagem privada</label>

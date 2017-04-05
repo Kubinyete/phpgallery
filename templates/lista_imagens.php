@@ -1,7 +1,8 @@
 <?php if (count($itens["imagens"]) >= 1) { ?>
 <ul class="imagens-lista"><!--
 	<?php foreach ($itens["imagens"] as $imagem) { ?>
-	--><li>
+	--><li >
+		<button onclick="phpgallery.visualizacao.ativar('<?php echo $imagem->getImagemUrl(); ?>', '<?php echo $imagem->getTitulo(true, true); ?>', '<?php echo $imagem->getDescricao(true, true); ?>');"><i class="fa fa-arrows-alt"></i></button>
 		<a href="<?php echo $imagem->getLink(); ?>">
 			<div class="imagem-container">
 				<div style="background-image: url('<?php echo $imagem->getMiniaturaUrl(); ?>')" class="imagem"></div>

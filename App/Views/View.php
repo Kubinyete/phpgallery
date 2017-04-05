@@ -16,8 +16,9 @@ abstract class View {
 			"temp_cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
 			"temp_cabecalho_corpo" => "cabecalho_corpo",
 			"temp_logo_showcase" => "logo_showcase",
-			"view" => "",
+			"view" => "", // Deverá ser modificado pelas visualizações filhas desta
 			"erro_dialogo" => "erro_dialogo",
+			"visualizacao_imagem" => "", // <-- Opcional, visualização JavaScript de imagens
 			"temp_rodape" => ViewConfig::TEMPLATE_RODAPE
 		];
 
@@ -47,7 +48,11 @@ abstract class View {
 		$itens = &$this->itens; 
 		
 		foreach ($this->templates as $templateArquivo) {
-			include dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;
+			$arquivo = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;
+
+			if (file_exists($arquivo)) {
+				include $arquivo;
+			}
 		}
 	}
 }

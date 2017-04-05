@@ -16,6 +16,7 @@ class HomeView extends View {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "home";
+		$this->templates["visualizacao_imagem"] = "visualizacao_imagem";
 		$this->itens["imagens"] = $imagens;
 		$this->itens["proc_imagens_lista"] = "lista_imagens".ViewConfig::EXTENSAO_TEMPLATES;
 	}

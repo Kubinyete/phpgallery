@@ -6,10 +6,7 @@
 		<?php if ($itens["usr_logado"] !== null) { ?>
 		<!-- -->
 		<div class="usuario-container">
-			<button id="usuarioMenuBtn"><i class="fa fa-caret-down"></i></button>
-			<script>
-				$("#usuarioMenuBtn").click(phpgallery.usuarioMenu);
-			</script>
+			<button id="usuarioMenuBtn" onclick="phpgallery.usuarioMenu.gerenciar();"><i class="fa fa-caret-down"></i></button>
 			<a href="<?php echo $itens["usr_logado"]->getLink(); ?>">
 				<img src="<?php echo $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
 				<span class="usuario-nome"><?php echo $itens["usr_logado"]->getNome(); ?></span>
@@ -43,12 +40,12 @@
 		function() {
 			var scrollVertical = $(window).scrollTop();
 
-			if (scrollVertical > 0 && !phpgallery.cabecalhoAnimAtivado) {
+			if (scrollVertical > 0 && !phpgallery.cabecalho.animAtivada) {
 				$("header").addClass("ativado");
-				phpgallery.cabecalhoAnimAtivado = true;
-			} else if (scrollVertical <= 0 && phpgallery.cabecalhoAnimAtivado) {
+				phpgallery.cabecalho.animAtivada = true;
+			} else if (scrollVertical <= 0 && phpgallery.cabecalho.animAtivada) {
 				$("header").removeClass("ativado");
-				phpgallery.cabecalhoAnimAtivado = false;
+				phpgallery.cabecalho.animAtivada = false;
 			}
 		}
 	);
@@ -64,8 +61,8 @@
 <script>
 	$(window).resize(
 		function() {
-			if (phpgallery.usuarioMenuAtivado) {
-				phpgallery.ajustarPosUsuarioMenu();
+			if (phpgallery.usuarioMenu.ativado) {
+				phpgallery.usuarioMenu.ajustarPos();
 			}
 		}
 	);

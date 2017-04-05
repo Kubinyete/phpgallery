@@ -3,12 +3,12 @@
 	<div class='erro-dialogo'>
 		<h1>Erro</h1>
 		<p><?php echo $itens["erro_dialogo"]; ?></p>
-		<button onclick="phpgallery.desativarErroDialogo();">Ok</button>
+		<button onclick="phpgallery.erroDialogo.desativar();">Ok</button>
 	</div>
 </div>
 <script>
 	$(document).ready(
-		phpgallery.erroDialogo
+		phpgallery.erroDialogo.ativar
 	);
 </script>
 <?php } ?>

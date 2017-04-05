@@ -5,6 +5,8 @@
 
 namespace App\Objects;
 
+use App\Utils\Utils;
+
 class Comentario extends Objeto {
 	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
 	public $imagemId;
@@ -40,8 +42,12 @@ class Comentario extends Objeto {
 		$this->usuarioId = intval($valor);
 	}
 
-	public function getConteudo($formatar=false) {
-		return ($formatar) ? htmlspecialchars($this->conteudo) : $this->conteudo;
+	public function getConteudo($formatar=false, $filtrarAspas=false) {
+		$conteudo = $this->conteudo;
+		if ($filtrarAspas) {
+			$conteudo = Utils::filtrarAspasJs($conteudo);
+		}
+		return ($formatar) ? htmlentities($conteudo, ENT_QUOTES) : $this->conteudo;
 	}
 
 	public function setConteudo($valor) {

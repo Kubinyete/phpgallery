@@ -58,6 +58,7 @@ switch ($alvo) {
 	case "img":
 		$id = Pedido::obter("id");
 		$procuraString = Pedido::obter("s");
+		$recentes = Pedido::obter("r");
 
 		if ($id !== null) {
 			$api = new ApiImagem(new Conexao());
@@ -66,6 +67,10 @@ switch ($alvo) {
 		} else if ($procuraString !== null) {
 			$api = new ApiImagem(new Conexao());
 			$resposta = $api->listarImagens($procuraString);
+			$resposta->enviar();
+		else if ($recentes === "1") {
+			$api = new ApiImagem(new Conexao());
+			$resposta = $api->listarRecentes();
 			$resposta->enviar();
 		} else {
 			Api::erro("Para obter uma imagem ou uma lista de imagens, é necessário informar sua id ou uma string de busca.")->enviar();

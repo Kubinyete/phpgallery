@@ -7,6 +7,7 @@ namespace App\Objects;
 
 use App\Objects\Objeto;
 use Config\ImagemConfig;
+use App\Utils\Utils;
 
 class Imagem extends Objeto {
 	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
@@ -45,12 +46,16 @@ class Imagem extends Objeto {
 		$this->usuarioId = intval($valor);
 	}
 
-	public function getTitulo($formatar=false) {
+	public function getTitulo($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->titulo) < 1) {
 				return ImagemConfig::TITULO_PADRAO;
 			} else {
-				return htmlspecialchars($this->titulo);
+				$titulo = $this->titulo;
+				if ($filtrarAspas) {
+					$titulo = Utils::filtrarAspasJs($titulo);
+				}
+				return htmlentities($titulo, ENT_QUOTES);
 			}
 		} else {
 			return $this->titulo;
@@ -61,12 +66,16 @@ class Imagem extends Objeto {
 		$this->titulo = strval($valor);
 	}
 
-	public function getDescricao($formatar=false) {
+	public function getDescricao($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->descricao) < 1) {
 				return ImagemConfig::DESCRICAO_PADRAO;
 			} else {
-				return htmlspecialchars($this->descricao);
+				$descricao = $this->descricao;
+				if ($filtrarAspas) {
+					$descricao = Utils::filtrarAspasJs($descricao);
+				}
+				return htmlentities($descricao, ENT_QUOTES);
 			}
 		} else {
 			return $this->descricao;

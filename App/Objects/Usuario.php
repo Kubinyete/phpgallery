@@ -7,6 +7,7 @@ namespace App\Objects;
 
 use App\Objects\Objeto;
 use Config\UsuarioConfig;
+use App\Utils\Utils;
 
 class Usuario extends Objeto {
 	// Os atributos precisam ser públicos para que nossa Api leia e retorne uma string JSON
@@ -57,12 +58,16 @@ class Usuario extends Objeto {
 		}
 	}
 
-	public function getDescricao($formatar=false) {
+	public function getDescricao($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->descricao) < 1) {
 				return UsuarioConfig::DESCRICAO_PADRAO;
 			} else {
-				return htmlspecialchars($this->descricao);
+				$descricao = $this->descricao;
+				if ($filtrarAspas) {
+					$descricao = Utils::filtrarAspasJs($descricao);
+				}
+				return htmlentities($descricao, ENT_QUOTES);
 			}
 		} else {
 			return $this->descricao;

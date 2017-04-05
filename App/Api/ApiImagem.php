@@ -34,6 +34,15 @@ class ApiImagem extends Api {
 
 		return $resposta;
 	}
+
+	public function listarRecentes() {
+		$dal = new DalImagem($this->conexao);
+		$imagens = $dal->listarRecentes(true);
+
+		$resposta = new ApiResposta($imagens);
+
+		return $resposta;
+	}
 }
 
 ?>

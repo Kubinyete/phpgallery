@@ -18,7 +18,7 @@
 				<span class="caixaerro">
 					<?php echo $itens["login_erro_mensagem"]; ?>
 				</span>
-				<script>
+				<script type="text/javascript">
 					$("#login-form input").keypress(
 						function() {
 							$("#login-form i.fa-warning, span.caixaerro").remove();
@@ -49,7 +49,7 @@
 				<span class="caixaerro">
 					<?php echo $itens["login_erro_mensagem"]; ?>
 				</span>
-				<script>
+				<script type="text/javascript">
 					$("#registrar-form input").keypress(
 						function() {
 							$("#registrar-form i.fa-warning, span.caixaerro").remove();

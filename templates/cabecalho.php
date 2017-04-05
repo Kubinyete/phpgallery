@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
 	<title><?php echo $itens["html_titulo"]; ?></title>
 	<!-- Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
 	<link href="<?php echo $itens["css"]; ?>" rel="stylesheet">
 	<link href="/favicon.ico" rel="shortcut icon">
 	<!-- Scripts -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="<?php echo $itens["js"]; ?>"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php echo $itens["js"]; ?>"></script>
 </head>
 <body>

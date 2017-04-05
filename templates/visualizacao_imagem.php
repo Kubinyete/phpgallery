@@ -16,13 +16,13 @@
 			<span>Carregando...</span>
 		</div>
 		<div class="visualizacao-imagem-container">
-			<img src="<?php echo $itens["recursos"]; ?>carregando.svg" alt="Carregando...">
-			<script>
-				phpgallery.visualizacao.iconeCarregando = $(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-container img").attr("src");
-			</script>
+			<img src="<?php echo $itens["recursos"]; ?>carregando.gif" alt="Carregando...">
 		</div>
 		<div class="visualizacao-imagem-descricao">
 			<span>Carregando...</span>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	phpgallery.visualizacao.iconeCarregando = "<?php echo $itens["recursos"]; ?>carregando.gif";
+</script>

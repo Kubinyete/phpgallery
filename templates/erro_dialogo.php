@@ -6,7 +6,7 @@
 		<button onclick="phpgallery.erroDialogo.desativar();">Ok</button>
 	</div>
 </div>
-<script>
+<script type="text/javascript">
 	$(document).ready(
 		phpgallery.erroDialogo.ativar
 	);

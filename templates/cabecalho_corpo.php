@@ -35,7 +35,7 @@
 		</nav>
 	</div>
 </header>
-<script>
+<script type="text/javascript">
 	$(window).scroll(
 		function() {
 			var scrollVertical = $(window).scrollTop();
@@ -58,7 +58,7 @@
 		</li>
 	</ul>
 </nav>
-<script>
+<script type="text/javascript">
 	$(window).resize(
 		function() {
 			if (phpgallery.usuarioMenu.ativado) {

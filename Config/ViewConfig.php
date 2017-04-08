@@ -50,7 +50,7 @@ abstract class ViewConfig {
 	const OG_IDIOMA_PADRAO = "pt_BR";
 
 	// Número da versão da aplicação, para se mostrada em uma visualização
-	const PHPGALLERY_VERSAO = "2.0.0";
+	const PHPGALLERY_VERSAO = "2.1.0";
 }
 
 ?>

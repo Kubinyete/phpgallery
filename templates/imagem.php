@@ -4,19 +4,38 @@
 			<h1><?= $itens["img_imagem"]->getTitulo(true); ?></h1>
 			<img class="imagem" alt="A imagem a ser exibida" src="<?= $itens["img_imagem"]->getImagemUrl(); ?>">
 			<p class="descricao"><?= $itens["img_imagem"]->getDescricao(true); ?></p>
+			<p class="data-criacao info-detalhada">Formato <?= strtoupper($itens["img_imagem"]->getExtensao()); ?> - Dimensões: <?= $itens["img_imagem"]->getLargura(); ?>x<?= $itens["img_imagem"]->getAltura(); ?></p>
 			<p class="data-criacao">Adicionado em <?= $itens["img_imagem"]->getDataCriacao(1); ?></p>
-			<div class="usuario-container<?php if ($itens["img_autor"]->estaOnline()): echo " usuario-container-online"; endif; ?>">
-				<a class="link-efeito" href="<?= $itens["img_autor"]->getLink(); ?>">
-					<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?= $itens["img_autor"]->getImagemUrl(); ?>" draggable="false">
-					<span class="usuario-nome"><?= $itens["img_autor"]->getNome(); ?></span>
-				</a>
+			<div class="usuario-container<?php if ($itens["img_autor"]->estaOnline()): echo " usuario-container-online"; endif; ?>" style="background-image: url('<?= $itens["img_autor"]->getImagemFundoUrl(); ?>');">
+				<div class="btns-container">
+					<div class="btn-container">
+						<a class="btn" href="/?v=download&id=<?= $itens["img_imagem"]->getId(); ?>"><i class="fa fa-download"></i></a>
+						<span class="tooltip">Efetuar download da imagem</span>
+					</div>
+					<?php if ($itens["usr_logado"] !== null && ($itens["usr_logado"]->getNome() === $itens["img_autor"]->getNome() || $itens["usr_logado"]->getAdmin())): ?>
+					<div class="btn-container">
+						<a class="btn" href="/?v=imagem-edit&id=<?= $itens["img_imagem"]->getId(); ?>"><i class="fa fa-edit"></i></a>
+						<span class="tooltip">Editar as informações dessa imagem</span>
+					</div>
+					<?php endif; ?>
+				</div>
+				<div class="usuario-fundo">
+					<?php if ($itens["img_autor"]->getAdmin()): ?>
+					<img class="admin-icon" draggable="false" src="<?= $itens["recursos"]; ?>admin-icon.png">
+					<?php endif; ?>
+					<a class="link-efeito" href="<?= $itens["img_autor"]->getLink(); ?>">
+						<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?= $itens["img_autor"]->getImagemUrl(); ?>" draggable="false">
+						<span class="usuario-nome"><?= $itens["img_autor"]->getNome(); ?></span>
+					</a>
+					<div class="cfix"></div>
+				</div>
 			</div>
 		</section>
 		<section>
 			<?php if ($itens["usr_logado"] !== null): ?>
 			<div class="comentario-form-container">
 				<div class="esquerda-container">
-					<img src="<?= $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+					<img class="cmt-usuario-imagem" src="<?= $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
 				</div>
 				<div class="direita-container">
 					<form method="POST" autocomplete="off">
@@ -32,8 +51,11 @@
 					<li>
 						<div class="comentario-form-container comentario-norm-container <?= (!$comentario["autor"]->estaOnline()) ? "comentario-offline-container" : ""; ?>">
 							<div class="esquerda-container">
+								<?php if ($comentario["autor"]->getAdmin()): ?>
+								<img class="admin-icone" src="<?= $itens["recursos"]; ?>admin-icon.png" draggable="false" alt="<?= $comentario["autor"]->getNome(); ?> é um administrador.">
+								<?php endif; ?>
 								<a href="<?= $comentario["autor"]->getLink(); ?>">
-									<img src="<?= $comentario["autor"]->getImagemUrl(); ?>" alt="<?= $comentario["autor"]->getNome(); ?>"><!--
+									<img class="cmt-usuario-imagem" src="<?= $comentario["autor"]->getImagemUrl(); ?>" alt="<?= $comentario["autor"]->getNome(); ?>"><!--
 									--><br><!--
 									--><span class="usuario-nome"><?= $comentario["autor"]->getNome(); ?></span>
 								</a>

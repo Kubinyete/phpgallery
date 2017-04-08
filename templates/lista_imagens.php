@@ -13,6 +13,12 @@
 			</span>
 		</a>
 		<span class="imagem-descricao">
+			<b>
+			<?= $imagem->getExtensao(true); ?>
+			<br>
+			<?= $imagem->getLargura(); ?>x<?= $imagem->getAltura(); ?>
+			</b>
+			<br>
 			<?= $imagem->getDescricao(true); ?>
 		</span>
 	</li><!-- 

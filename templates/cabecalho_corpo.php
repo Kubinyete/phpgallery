@@ -54,6 +54,9 @@
 <nav id="usuarioMenu">
 	<ul>
 		<li>
+			<a href="/?v=perfil-edit">Editar perfil</a>
+		</li>
+		<li>
 			<a href="/?v=login&l=1">Sair</a>
 		</li>
 	</ul>

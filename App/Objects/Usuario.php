@@ -158,7 +158,7 @@ class Usuario extends Objeto {
 		if ($this->getImgFundo() > 0) {
 			return $sep.ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getImgFundo()).".".$this->getImgFundoExt();
 		} else {
-			return $sep.UsuarioConfig::CAMINHO_IMAGEM_FUNDO_PADRAO.'.'.UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
+			return $sep.UsuarioConfig::CAMINHO_IMAGEM_FUNDO_PADRAO;
 		}
 	}
 
@@ -178,6 +178,12 @@ class Usuario extends Objeto {
 			$retorno = false;
 
 		} else if ($this->getOnlineTimestamp() !== $usuario->getOnlineTimestamp()) {
+			$retorno = false;
+		} else if ($this->getImgFundo() !== $usuario->getImgFundo()) {
+			$retorno = false;
+		} else if ($this->getAdmin() !== $usuario->getAdmin()) {
+			$retorno = false;
+		} else if ($this->getRep() !== $usuario->getRep()) {
 			$retorno = false;
 		}
 

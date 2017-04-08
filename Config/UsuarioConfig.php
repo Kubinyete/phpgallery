@@ -29,6 +29,9 @@ abstract class UsuarioConfig {
 	// O caminho completo para a imagem de perfil padrão
 	const CAMINHO_IMAGEM_PERFIL_PADRAO = self::CAMINHO_IMAGENS_PERFIL.self::IMAGEM_PERFIL_PADRAO.".".self::IMAGEM_EXTENSAO_PADRAO;
 
+	// O caminho completo para a imagem de fundo padrão
+	const CAMINHO_IMAGEM_FUNDO_PADRAO = self::CAMINHO_IMAGENS_PERFIL.self::IMAGEM_FUNDO_PADRAO.".".self::IMAGEM_EXTENSAO_PADRAO;
+
 	// O link para acessar a página de um usuário
 	const LINK_USUARIO = "/?v=perfil&u=%";
 

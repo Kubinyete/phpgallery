@@ -23,6 +23,3 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	phpgallery.visualizacao.iconeCarregando = "<?php echo $itens["recursos"]; ?>carregando.gif";
-</script>

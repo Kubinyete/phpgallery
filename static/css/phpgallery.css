@@ -1054,7 +1054,7 @@ form.aut-formulario i.fa-warning {
  */
 
 .visualizacao-imagem-fundo {
-	transition: opacity .3s ease-in-out;
+	transition: .3s ease-out;
 	z-index: 1000;
 	position: fixed;
 	top: 0;
@@ -1067,6 +1067,12 @@ form.aut-formulario i.fa-warning {
 	overflow: hidden;
 	opacity: 0;
 	background-color: rgba(0,0,0, .8);
+}
+
+.visualizacao-imagem-fundo-ativado {
+	transition: .3s ease-in;
+	opacity: 1;
+	visibility: visible;
 }
 
 .visualizacao-imagem-fundo .direita-container button {
@@ -1090,19 +1096,23 @@ form.aut-formulario i.fa-warning {
 	background-color: #ff0033;
 }
 
-.visualizacao-imagem-fundo-ativado {
-	transition: opacity .3s ease-in-out;
-	visibility: visible !important;
-	opacity: 1 !important;
-}
-
 .visualizacao-imagem-fundo .esquerda-container {
+	transition: .2s ease-in;
+	position: relative;
 	float: left;
 	width: 25%;
 	height: 100%;
 	overflow: hidden;
 	overflow-y: scroll;
+	transform: translate(0, -30%);
+	opacity: 0;
 	background-color: rgba(0,0,0, .5);
+}
+
+.visualizacao-imagem-fundo-ativado .esquerda-container {
+	transition: .2s ease-out;
+	transform: translate(0, 0%);
+	opacity: 1;
 }
 
 .visualizacao-imagem-fundo .esquerda-container ul li {
@@ -1114,6 +1124,11 @@ form.aut-formulario i.fa-warning {
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 75px;
+}
+
+.visualizacao-imagem-fundo .esquerda-container ul li:hover {
+	transition: .1s ease-in-out;
+	padding: 1em 0;
 }
 
 .visualizacao-imagem-fundo .esquerda-container ul li:hover .metade-container {

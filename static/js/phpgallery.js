@@ -1,3 +1,4 @@
+"use strict";
 // phpgallery.js
 
 window.phpgallery = {
@@ -41,9 +42,6 @@ window.phpgallery = {
 	},
 
 	visualizacao: {
-		iconeCarregando: "",
-		carregandoMensagem: "Carregando...",
-
 		ativar: function(url, titulo, descricao) {
 			if (typeof url != "undefined" && typeof titulo != "undefined" && typeof descricao != "undefined") {
 				window.phpgallery.visualizacao.mudarImagem(url, titulo, descricao);
@@ -57,9 +55,6 @@ window.phpgallery = {
 		},
 
 		mudarImagem: function(url, titulo, descricao, domobj) {
-			$(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-container img").attr("src", window.phpgallery.visualizacao.iconeCarregando);
-			$(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-container img").attr("alt", window.phpgallery.visualizacao.carregandoMensagem);
-
 			$(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-container img").attr("src", url);
 			$(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-container img").attr("alt", titulo);
 			$(".visualizacao-imagem-fundo .direita-container .visualizacao-imagem-titulo span").text(titulo);

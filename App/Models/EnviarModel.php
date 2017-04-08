@@ -82,7 +82,9 @@ class EnviarModel extends Model {
 						$imagemTitulo,
 						$imagemDescricao,
 						$imgExtensao,
-						$imagemPrivada
+						$imagemPrivada,
+						$info[0],	// width - largura
+						$info[1]	// height - altura
 					);
 
 					$dal = new DalImagem($this->conexao);

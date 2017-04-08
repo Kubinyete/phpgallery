@@ -1,36 +1,36 @@
 <header>
 	<div class="centro">
 		<a href="/?v=home">
-			<img src="<?php echo $itens["recursos"]; ?>phpgallery-logo.png" alt="Logo" draggable="false">
+			<img src="<?= $itens["recursos"]; ?>phpgallery-logo.png" alt="Logo" draggable="false">
 		</a>
-		<?php if ($itens["usr_logado"] !== null) { ?>
+		<?php if ($itens["usr_logado"] !== null): ?>
 		<!-- -->
 		<div class="usuario-container">
 			<button id="usuarioMenuBtn" onclick="phpgallery.usuarioMenu.gerenciar();"><i class="fa fa-caret-down"></i></button>
-			<a href="<?php echo $itens["usr_logado"]->getLink(); ?>">
-				<img src="<?php echo $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
-				<span class="usuario-nome"><?php echo $itens["usr_logado"]->getNome(); ?></span>
+			<a href="<?= $itens["usr_logado"]->getLink(); ?>">
+				<img src="<?= $itens["usr_logado"]->getImagemUrl(); ?>" alt="Sua imagem de perfil" draggable="false">
+				<span class="usuario-nome"><?= $itens["usr_logado"]->getNome(); ?></span>
 			</a>
 		</div>
-		<?php } ?>
+		<?php endif; ?>
 		<!-- -->
 		<nav id="headerNavegacao">
 			<ul><!--
 				--><li>
 					<a href="/?v=home">Home</a>
 				</li><!--
-			<?php if ($itens["usr_logado"] !== null) { ?>
+			<?php if ($itens["usr_logado"] !== null): ?>
 			--><li>
 					<a href="/?v=perfil">Perfil</a>
 				</li><!--
 				--><li>
 					<a href="/?v=enviar">Enviar</a>
 				</li><!--
-			<?php } else { ?>
+			<?php else: ?>
 			--><li>
 					<a href="/?v=login">Login</a>
 				</li><!--
-			<?php } ?>
+			<?php endif; ?>
 			--></ul>
 		</nav>
 	</div>
@@ -50,7 +50,7 @@
 		}
 	);
 </script>
-<?php if ($itens["usr_logado"] !== null) { ?>
+<?php if ($itens["usr_logado"] !== null): ?>
 <nav id="usuarioMenu">
 	<ul>
 		<li>
@@ -67,4 +67,4 @@
 		}
 	);
 </script>
-<?php } ?>
+<?php endif; ?>

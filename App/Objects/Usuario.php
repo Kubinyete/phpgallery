@@ -7,6 +7,7 @@ namespace App\Objects;
 
 use App\Objects\Objeto;
 use Config\UsuarioConfig;
+use Config\ImagemConfig;
 use App\Utils\Utils;
 
 class Usuario extends Objeto {
@@ -17,24 +18,35 @@ class Usuario extends Objeto {
 	public $descricao;
 	public $temImagemPerfil;
 	public $onlineTimestamp;
+	private $admin;
+	private $imgFundo;
+	private $imgFundoExt;
+	public $rep;
 
-	public function __construct($id, $dataCriacao, $nome, $senha, $encriptografarSenha, $descricao, $temImagemPerfil, $onlineTimestamp, $paraApi=false) {
+	public function __construct($id, $dataCriacao, $nome, $senha, $encriptografarSenha, $descricao, $temImagemPerfil, $onlineTimestamp, $admin, $imgFundo, $rep, $paraApi=false) {
 		parent::__construct($id, $dataCriacao);
 		
 		$this->setNome($nome);
 		$this->setDescricao($descricao);
 		$this->setTemImagemPerfil($temImagemPerfil);
 		$this->setOnlineTimestamp($onlineTimestamp);
+		$this->setRep($rep);
 
 		// Se não estamos lidando com Api
 		if (!$paraApi) {
 			$this->setSenha($senha, $encriptografarSenha);
+			$this->setAdmin($admin);
+			$this->setImgFundo($imgFundo);
 		} else {
 			// Retire o atributo de senha, pois será desnecessário e formate seus atributos
 			unset($this->senha);
+			unset($this->admin);
+			unset($this->imgFundo);
+			unset($this->imgFundoExt);
 			$this->descricao = $this->getDescricao(true);
 			$this->estaOnline = $this->estaOnline();
 			$this->imagemUrl = $this->getImagemUrl();
+			$this->imagemFundoUrl = $this->getImagemFundoUrl();
 		}
 	}
 
@@ -98,6 +110,38 @@ class Usuario extends Objeto {
 		return ($this->getOnlineTimestamp() + UsuarioConfig::PERIODO_ONLINE >= time());
 	}
 
+	public function getAdmin() {
+		return $this->admin;
+	}
+
+	public function setAdmin($valor) {
+		$this->admin = ($valor === '1') ? true : false;
+	}
+
+	public function getImgFundo() {
+		return $this->imgFundo;
+	}
+
+	public function setImgFundo($valor) {
+		$this->imgFundo = intval($valor);
+	}
+
+	public function getImgFundoExt() {
+		return $this->imgFundoExt;
+	}
+
+	public function setImgFundoExt($valor) {
+		$this->imgFundoExt = strval($valor);
+	}
+
+	public function getRep() {
+		return $this->rep;
+	}
+
+	public function setRep($valor) {
+		$this->rep = intval($valor);
+	}
+
 	public function getImagemUrl($adicionarSeparador=false) {
 		$sep = ($adicionarSeparador) ? "/" : "";
 
@@ -105,6 +149,16 @@ class Usuario extends Objeto {
 			return $sep.UsuarioConfig::CAMINHO_IMAGENS_PERFIL.hash(UsuarioConfig::HASH_NOME_IMAGEM_PERFIL, $this->getId()).".".UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
 		} else {
 			return $sep.UsuarioConfig::CAMINHO_IMAGEM_PERFIL_PADRAO;
+		}
+	}
+
+	public function getImagemFundoUrl($adicionarSeparador=false) {
+		$sep = ($adicionarSeparador) ? "/" : "";
+
+		if ($this->getImgFundo() > 0) {
+			return $sep.ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getImgFundo()).".".$this->getImgFundoExt();
+		} else {
+			return $sep.UsuarioConfig::CAMINHO_IMAGEM_FUNDO_PADRAO.'.'.UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
 		}
 	}
 

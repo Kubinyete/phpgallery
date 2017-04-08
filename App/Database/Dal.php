@@ -41,6 +41,8 @@ abstract class Dal {
 			// Se não estivermos em modo DEBUG, redirecione para uma página de erro
 			if (!ConexaoConfig::MODO_DEBUG) {
 				Resposta::erro(Erro::DBERRO_FALHA_COMANDO, true);
+			} else {
+				exit();
 			}
 		}
 
@@ -58,6 +60,8 @@ abstract class Dal {
 
 				if (!ConexaoConfig::MODO_DEBUG) {
 					Resposta::erro(Erro::DBERRO_FALHA_SALVAR, true);
+				} else {
+					exit();
 				}
 			}
 		}

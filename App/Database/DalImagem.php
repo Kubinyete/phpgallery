@@ -22,7 +22,9 @@ class DalImagem extends Dal {
 				"img_descricao" => $imagem->getDescricao(),
 				"img_data_criacao" => $imagem->getDataCriacao(2),
 				"img_extensao" => $imagem->getExtensao(),
-				"img_privada" => ($imagem->getPrivada()) ? "1" : "0"
+				"img_privada" => ($imagem->getPrivada()) ? "1" : "0",
+				"img_largura" => $imagem->getLargura(),
+				"img_altura" => $imagem->getAltura()
 			]
 		);
 
@@ -69,6 +71,8 @@ class DalImagem extends Dal {
 				$array["img_descricao"],
 				$array["img_extensao"],
 				$array["img_privada"],
+				$array["img_largura"],
+				$array["img_altura"],
 				$paraApi
 			);
 		}
@@ -107,6 +111,8 @@ class DalImagem extends Dal {
 					$array["img_descricao"],
 					$array["img_extensao"],
 					$array["img_privada"],
+					$array["img_largura"],
+					$array["img_altura"],
 					$paraApi
 				);
 
@@ -148,6 +154,8 @@ class DalImagem extends Dal {
 					$array["img_descricao"],
 					$array["img_extensao"],
 					$array["img_privada"],
+					$array["img_largura"],
+					$array["img_altura"],
 					$paraApi
 				);
 
@@ -189,6 +197,8 @@ class DalImagem extends Dal {
 					$array["img_descricao"],
 					$array["img_extensao"],
 					$array["img_privada"],
+					$array["img_largura"],
+					$array["img_altura"],
 					$paraApi
 				);
 
@@ -223,7 +233,9 @@ class DalImagem extends Dal {
 			[
 				"img_titulo" => $imagem->getTitulo(),
 				"img_descricao" => $imagem->getDescricao(),
-				"img_privada" => ($imagem->getPrivada) ? "1" : "0"
+				"img_privada" => ($imagem->getPrivada) ? "1" : "0",
+				"img_largura" => $imagem->getLargura(),
+				"img_altura" => $imagem->getAltura()
 			]
 		)->where("img_id", "=", $imagem->getId());
 

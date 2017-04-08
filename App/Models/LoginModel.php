@@ -55,7 +55,7 @@ class LoginModel extends Model {
 			$dbUsuario = $dal->obterUsuario(false, $usuarioNome);
 
 			if ($dbUsuario === null) {
-				$usuario = new Usuario(0, date("Y-m-d H:i:s"), $usuarioNome, $usuarioSenha, true, "", false, time());
+				$usuario = new Usuario(0, date("Y-m-d H:i:s"), $usuarioNome, $usuarioSenha, true, "", false, time(), false, 0, 0);
 				
 				$dal->criarUsuario($usuario);
 

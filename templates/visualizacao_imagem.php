@@ -1,13 +1,13 @@
 <div class="visualizacao-imagem-fundo">
 	<div class="esquerda-container">
 		<ul>
-			<?php foreach ($itens["imagens"] as $imagem) { ?>
-			<li style="background-image: url(<?php echo $imagem->getMiniaturaUrl(); ?>);" onclick="phpgallery.visualizacao.mudarImagem('<?php echo $imagem->getImagemUrl(); ?>', '<?php echo $imagem->getTitulo(true, true); ?>', '<?php echo $imagem->getDescricao(true, true); ?>', this);">
+			<?php foreach ($itens["imagens"] as $imagem): ?>
+			<li style="background-image: url(<?= $imagem->getMiniaturaUrl(); ?>);" onclick="phpgallery.visualizacao.mudarImagem('<?= $imagem->getImagemUrl(); ?>', '<?= $imagem->getTitulo(true, true); ?>', '<?= $imagem->getDescricao(true, true); ?>', this);">
 				<div class="metade-container">
-					<span><?php echo $imagem->getTitulo(true); ?></span>
+					<span><?= $imagem->getTitulo(true); ?></span>
 				</div>
 			</li>
-			<?php } ?>
+			<?php endforeach; ?>
 		</ul>
 	</div>
 	<div class="direita-container">
@@ -16,7 +16,7 @@
 			<span>Carregando...</span>
 		</div>
 		<div class="visualizacao-imagem-container">
-			<img src="<?php echo $itens["recursos"]; ?>carregando.gif" alt="Carregando...">
+			<img src="<?= $itens["recursos"]; ?>carregando.gif" alt="Carregando...">
 		</div>
 		<div class="visualizacao-imagem-descricao">
 			<span>Carregando...</span>

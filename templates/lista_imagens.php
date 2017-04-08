@@ -1,23 +1,23 @@
-<?php if (count($itens["imagens"]) >= 1) { ?>
+<?php if (count($itens["imagens"]) >= 1): ?>
 <ul class="imagens-lista"><!--
-	<?php foreach ($itens["imagens"] as $imagem) { ?>
+	<?php foreach ($itens["imagens"] as $imagem): ?>
 	--><li >
-		<button onclick="phpgallery.visualizacao.ativar('<?php echo $imagem->getImagemUrl(); ?>', '<?php echo $imagem->getTitulo(true, true); ?>', '<?php echo $imagem->getDescricao(true, true); ?>');"><i class="fa fa-arrows-alt"></i></button>
-		<a href="<?php echo $imagem->getLink(); ?>">
+		<button onclick="phpgallery.visualizacao.ativar('<?= $imagem->getImagemUrl(); ?>', '<?= $imagem->getTitulo(true, true); ?>', '<?= $imagem->getDescricao(true, true); ?>');"><i class="fa fa-arrows-alt"></i></button>
+		<a href="<?= $imagem->getLink(); ?>">
 			<div class="imagem-container">
-				<div style="background-image: url('<?php echo $imagem->getMiniaturaUrl(); ?>')" class="imagem"></div>
+				<div style="background-image: url('<?= $imagem->getMiniaturaUrl(); ?>')" class="imagem"></div>
 				<div class="imagem-gradient"></div>
 			</div>
 			<span class="imagem-titulo">
-				<?php echo $imagem->getTitulo(true); ?>
+				<?= $imagem->getTitulo(true); ?>
 			</span>
 		</a>
 		<span class="imagem-descricao">
-			<?php echo $imagem->getDescricao(true); ?>
+			<?= $imagem->getDescricao(true); ?>
 		</span>
 	</li><!-- 
-	<?php } ?>
+	<?php endforeach; ?>
 --></ul>
-<?php } else { ?>
+<?php else: ?>
 <p class="erro">Nenhuma imagem encontrada :(.</p>
-<?php } ?>
+<?php endif; ?>

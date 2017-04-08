@@ -16,14 +16,18 @@ class Imagem extends Objeto {
 	public $descricao;
 	public $extensao;
 	public $privada;
+	public $largura;
+	public $altura;
 
-	public function __construct($id, $dataCriacao, $usuarioId, $titulo, $descricao, $extensao, $privada, $paraApi=false) {
+	public function __construct($id, $dataCriacao, $usuarioId, $titulo, $descricao, $extensao, $privada, $largura, $altura, $paraApi=false) {
 		parent::__construct($id, $dataCriacao);
 
 		$this->setUsuarioId($usuarioId);
 		$this->setTitulo($titulo);
 		$this->setDescricao($descricao);
 		$this->setExtensao($extensao);
+		$this->setLargura($largura);
+		$this->setAltura($altura);
 
 		// Se não estamos utilizando esse objeto para respostas Api
 		// atualize a informação privada
@@ -100,6 +104,22 @@ class Imagem extends Objeto {
 
 	public function setPrivada($valor) {
 		$this->privada = boolval($valor);
+	}
+
+	public function getLargura() {
+		return $this->largura;
+	}
+
+	public function setLargura($valor) {
+		$this->largura = intval($valor);
+	}
+
+	public function getAltura() {
+		return $this->altura;
+	}
+
+	public function setAltura($valor) {
+		$this->altura = intval($valor);
 	}
 
 	public function getImagemUrl($adicionarSeparador=false) {

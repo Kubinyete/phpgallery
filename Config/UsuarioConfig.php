@@ -23,6 +23,8 @@ abstract class UsuarioConfig {
 	const IMAGEM_EXTENSAO_PADRAO = "jpg";
 	// A imagem de perfil padrão caso o usuário ainda não enviou nenhuma imagem de perfil
 	const IMAGEM_PERFIL_PADRAO = "default";
+	// Imagem de fundo padrão
+	const IMAGEM_FUNDO_PADRAO = "default-background";
 
 	// O caminho completo para a imagem de perfil padrão
 	const CAMINHO_IMAGEM_PERFIL_PADRAO = self::CAMINHO_IMAGENS_PERFIL.self::IMAGEM_PERFIL_PADRAO.".".self::IMAGEM_EXTENSAO_PADRAO;

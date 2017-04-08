@@ -68,7 +68,7 @@ switch ($alvo) {
 			$api = new ApiImagem(new Conexao());
 			$resposta = $api->listarImagens($procuraString);
 			$resposta->enviar();
-		else if ($recentes === "1") {
+		} else if ($recentes === "1") {
 			$api = new ApiImagem(new Conexao());
 			$resposta = $api->listarRecentes();
 			$resposta->enviar();

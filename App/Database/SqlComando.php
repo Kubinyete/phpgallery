@@ -21,7 +21,7 @@ class SqlComando {
 	}
 
 	// Utilizado para filtrar todas as escape strings de uma string
-	private static function filtrarEscapeStringSql($string) {
+	public static function filtrarEscapeStringSql($string) {
 		return str_replace("'", "''", strval($string));
 	}
 
@@ -68,8 +68,12 @@ class SqlComando {
 		$primeiro = true;
 
 		foreach ($arrayAtributosValores as $atributo => $valor) {
-			$atualValor = (($filtrarValores) ? "'".self::filtrarEscapeStringSql($valor)."'" : $valor);
-
+			if ($valor === null) {
+				$atualValor = "NULL";
+			} else {
+				$atualValor = (($filtrarValores) ? "'".self::filtrarEscapeStringSql($valor)."'" : $valor);
+			}
+			
 			if ($primeiro) {
 				$atributosString .= $atributo;
 				$valoresString .= $atualValor;
@@ -92,7 +96,11 @@ class SqlComando {
 		$primeiro = true;
 
 		foreach ($arrayAtributosValores as $atributo => $valor) {
-			$localValor = (($filtrarValores) ? "'".self::filtrarEscapeStringSql($valor)."'" : $valor);
+			if ($valor === null) {
+				$localValor = "NULL";
+			} else {
+				$localValor = (($filtrarValores) ? "'".self::filtrarEscapeStringSql($valor)."'" : $valor);
+			}
 
 			if ($primeiro) {
 				$setString .= $atributo."=".$localValor;

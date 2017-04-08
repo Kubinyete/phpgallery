@@ -6,6 +6,7 @@
 namespace App\Database;
 
 use App\Database\Dal;
+use App\Database\DalImagem;
 use App\Objects\Usuario;
 use App\Database\SqlComando;
 use Config\DalUsuarioConfig;
@@ -22,7 +23,10 @@ class DalUsuario extends Dal {
 				"usr_descricao" => $usuario->getDescricao(),
 				"usr_tem_imagem_perfil" => ($usuario->getTemImagemPerfil()) ? "1" : "0",
 				"usr_data_criacao" => $usuario->getDataCriacao(2),
-				"usr_online_timestamp" => $usuario->getOnlineTimestamp()
+				"usr_online_timestamp" => $usuario->getOnlineTimestamp(),
+				"usr_admin" => ($usuario->getAdmin()) ? "1" : "0",
+				"usr_img_fundo" => ($usuario->getImgFundo() > 0) ? $usuario->getImgFundo() : null,
+				"usr_rep" => $usuario->getRep()
 			]
 		);
 
@@ -61,11 +65,22 @@ class DalUsuario extends Dal {
 				$array["usr_descricao"],
 				$array["usr_tem_imagem_perfil"],
 				$array["usr_online_timestamp"],
+				$array["usr_admin"],
+				$array["usr_img_fundo"],
+				$array["usr_rep"],
 				$paraApi
 			);
 		}
 
 		$this->conexao->desconectar();
+
+		if ($usuario !== null && $usuario->getImgFundo() > 0) {
+			$subdal = new DalImagem($this->conexao);
+			$imgFundo = $subdal->obterImagem($usuario->getImgFundo());
+			if ($imgFundo !== null) {
+				$usuario->setImgFundoExt($imgFundo->getExtensao());
+			}
+		}
 
 		return $usuario;
 	}
@@ -101,6 +116,9 @@ class DalUsuario extends Dal {
 					$array["usr_descricao"],
 					$array["usr_tem_imagem_perfil"],
 					$array["usr_online_timestamp"],
+					$array["usr_admin"],
+					$array["usr_img_fundo"],
+					$array["usr_rep"],
 					$paraApi
 				);
 
@@ -121,7 +139,10 @@ class DalUsuario extends Dal {
 			[
 				"usr_descricao" => $usuario->getDescricao(),
 				"usr_tem_imagem_perfil" => ($usuario->getTemImagemPerfil()) ? "1" : "0",
-				"usr_online_timestamp" => $usuario->getOnlineTimestamp()
+				"usr_online_timestamp" => $usuario->getOnlineTimestamp(),
+				"usr_admin" => ($usuario->getAdmin()) ? "1" : "0",
+				"usr_img_fundo" => ($usuario->getImgFundo() > 0) ? $usuario->getImgFundo() : null,
+				"usr_rep" => $usuario->getRep()
 			]
 		)->where("usr_id", "=", $usuario->getId());
 

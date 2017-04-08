@@ -28,7 +28,7 @@ class LoginModel extends Model {
 			$dbUsuario = $dal->obterUsuario(false, $usuarioNome);
 
 			if ($dbUsuario !== null) {
-				$usuario = new Usuario(0, "", "", $usuarioSenha, true, "", false, 0);
+				$usuario = new Usuario(0, "", "", $usuarioSenha, true, "", false, 0, 0, 0, 0);
 				if ($dbUsuario->getSenha() === $usuario->getSenha()) {
 					return [
 						"retorno" => "usuario",

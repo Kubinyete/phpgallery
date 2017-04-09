@@ -3,18 +3,21 @@
  * Nosso processador de miniaturas
  */
 
-require_once dirname(__DIR__).DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
+require dirname(__DIR__).DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
 
 use App\Database\Conexao;
 use App\Database\DalImagem;
 use App\Http\Pedido;
 use App\Http\Resposta;
+use Config\Config;
 
 const MAX_LARGURA = 256;
 const MAX_ALTURA = 256;
 const UTILIZAR_RESAMPLING = true;
 const SAIDA = IMAGETYPE_JPEG;
 const SAIDA_QUALIDADE = 100;
+
+Config::carregar(dirname(__DIR__).DIRECTORY_SEPARATOR.'config.json');
 
 $id = intval(Pedido::obter("id"));
 

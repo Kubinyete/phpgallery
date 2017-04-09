@@ -27,6 +27,10 @@ class ApiComentario extends Api {
 	}
 
 	public function listarComentarios($imgId) {
+		if (intval($imgId) <= 0) {
+			return parent::erro("É preciso informar corretamente o id da imagem para obter os comentários.");
+		}
+		
 		$dal = new DalComentario($this->conexao);
 		$comentarios = $dal->listarComentarios($imgId, true);
 		

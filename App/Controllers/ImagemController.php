@@ -6,8 +6,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use Config\ComentarioConfig;
-use App\MvcErrors\ImagemErro;
+use Config\Config;
 use Exception;
 
 class ImagemController extends Controller {
@@ -30,11 +29,11 @@ class ImagemController extends Controller {
 				try {
 					// Validação do estado do comentário
 					if (strlen($comentarioConteudo) <= 0) {
-						throw new Exception(ImagemErro::COMENTARIO_TAMANHO_INVALIDO);
-					} else if (strlen($comentarioConteudo) > ComentarioConfig::MAX_TAMANHO_COMENTARIO) {
-						throw new Exception(ImagemErro::MAX_TAMANHO_COMENTARIO);
+						throw new Exception(Config::obter("MvcErrors.Imagem.COMENTARIO_TAMANHO_INVALIDO"));
+					} else if (strlen($comentarioConteudo) > Config::obter("Comentarios.max_tamanho")) {
+						throw new Exception(Config::obter("MvcErrors.Imagem.COMENTARIO_TAMANHO_LIMITE"));
 					} else if ($usuarioLogado === null) {
-						throw new Exception(ImagemErro::NECESSITA_LOGAR);
+						throw new Exception(Config::obter("MvcErrors.Imagem.COMENTARIO_NECESSITA_LOGAR"));
 					}
 
 				} catch (Exception $e) {

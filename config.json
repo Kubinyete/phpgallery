@@ -1,0 +1,149 @@
+{
+	"VERSAO": "2.1.1",
+
+	"Database": {
+		"debug": false,
+		"server": "localhost\\SQLEXPRESS",
+		"database": "phpgallery",
+		"usuario": "",
+		"senha": "",
+		"usar_autenticacao_windows": true,
+
+		"Erro": {
+			"requisicao": "/erro/%/",
+
+			"DESCONHECIDO": 0,
+			"FALHA_CONEXAO": 1,
+			"FALHA_COMANDO": 2,
+			"FALHA_SALVAR": 3,
+
+			"Definicoes": [
+				"Ocorreu um erro desconhecido ao tentar consultar o banco de dados.",
+				"Não foi possível estabelecer uma conexão com o banco de dados.",
+				"Ocorreu um erro ao tentar interagir com o banco de dados.",
+				"Não foi possível armazenar as modificações feitas até o momento no banco de dados."
+			]
+		}
+	},
+
+	"Usuarios": {
+		"max_caracteres_nome": 16,
+		"min_caracteres_nome": 4,
+		"max_caracteres_senha": 32,
+		"min_caracteres_senha": 6,
+		"periodo_online_segundos": 30,
+
+		"hash_senha": "sha256",
+		"hash_nome_imagem_perfil": "md5", 
+
+		"descricao_padrao": "Nenhuma descrição está disponível para este usuário.",
+		"imagem_perfil_extensao": "jpg",
+		"imagem_perfil_padrao": "default",
+		"imagem_fundo_extensao": "jpg",
+		"imagem_fundo_padrao": "default-background",
+
+		"caminho_imagens_perfil": "/static/resources/profile/",
+		"link_perfil": "/perfil/%/", 
+
+		"listar_limite": 100
+	},
+
+	"Imagens": {
+		"max_tamanho_titulo": 64,
+		"max_tamanho_descricao": 300,
+
+		"titulo_padrao": "Nenhum título está disponível.",
+		"descricao_padrao": "Nenhuma descrição está disponível.",
+
+		"hash_nome": "md5",
+
+		"caminho_imagens": "/static/resources/image/",
+		"link_imagem": "/imagem/%/",
+		"processador_miniaturas": "/thumbnail/%/",
+
+		"listar_limite": 100,
+		"listar_recentes_limite": 32,
+		"listar_usuarios_limite": 32
+	},
+
+	"Comentarios": {
+		"max_tamanho": 300,
+
+		"listar_limite": 50
+	},
+
+	"MvcErrors": {
+		"Imagem": {
+			"COMENTARIO_TAMANHO_INVALIDO": 0,
+			"COMENTARIO_TAMANHO_LIMITE": 1,
+			"COMENTARIO_NECESSITA_LOGAR": 2,
+
+			"Definicoes": [
+				"O comentário não pode estar vazio.",
+				"O comentário excede o limite de 300 carácteres.",
+				"É preciso estar logado para poder enviar comentários."
+			]
+		},
+
+		"Login": {
+			"NOME_CARACTERES_INVALIDOS": 0,
+			"SENHA_CARACTERES_INVALIDOS": 1,
+			"NOME_TAMANHO_INVALIDO": 2,
+			"SENHA_TAMANHO_INVALIDO": 3,
+
+			"LOGIN_USUARIO_INEXISTENTE": 4,
+			"LOGIN_SENHA_ERRADA": 5,
+			"REGISTRAR_USUARIO_EXISTENTE": 6,
+			"REGISTRAR_CONFIRMACAO_INVALIDA": 7,
+
+			"Definicoes": [
+				"O nome informado contêm um ou mais carácteres inválidos.",
+				"A senha informada contêm um ou mais carácteres inválidos.",
+				"O tamanho do nome informado está inválido, mínimo de 4 e máximo de 16 carácteres.",
+				"O tamanho da senha informada está inválida, mínimo de 6 e máximo de 32 carácteres.",
+				"O nome de usuário ou senha está incorreto.",
+				"O nome de usuário ou senha está incorreto.",
+				"O nome de usuário informado já existe.",
+				"A confirmação de senha não bate com a senha informada."
+			]
+		},
+
+		"Enviar": {
+			"DESCONHECIDO": 0,
+			"NENHUMA_IMAGEM": 1,
+			"EXCEDE_TAMANHO_LIMITE": 2,
+			"FORMATO_NAO_SUPORTADO": 3,
+			"NECESSITA_LOGAR": 4,
+			"TITULO_EXCEDE_LIMITE": 5,
+			"DESCRICAO_EXCEDE_LIMITE": 6,
+
+			"Definicoes": [
+				"Ocorreu um erro ao tentar armazenar a imagem, tente novamente mais tarde.",
+				"É preciso enviar uma imagem.",
+				"A imagem excede o tamanho limite de envio (4 megabytes).",
+				"O formato da imagem enviada não é suportado.",
+				"É preciso estar logado para poder enviar imagens.",
+				"O título da imagem excede o limite de 64 carácteres.",
+				"A descrição da imagem excede o limite de 300 carácteres."
+			]
+		}
+	},
+
+	"Views": {
+		"diretorio_templates": "templates",
+		"templates_extensao": "php",
+
+		"html_titulo_padrao": "PHPGallery",
+		"html_descricao_padrao": "Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados.",
+		"html_palavras_chave_padrao": "galeria, imagens, envio, upload, wallpaper, php, captura de tela, widescreen, papel de parede",
+		"html_autor_padrao": "Vitor Kubinyete",
+
+		"og_url_padrao": "http://localhost",
+		"og_tipo_padrao": "website",
+		"og_titulo_padrao": "PHPGallery",
+		"og_descricao_padrao": "Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados.",
+		"og_imagem_padrao": "http://localhost/static/resources/phpgallery-logo-full.jpg",
+		"og_nome_site_padrao": "PHPGallery",
+		"og_idioma_padrao": "pt_BR"
+	}
+}

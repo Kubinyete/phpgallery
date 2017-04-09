@@ -9,12 +9,12 @@
 			<div class="usuario-container<?php if ($itens["img_autor"]->estaOnline()): echo " usuario-container-online"; endif; ?>" style="background-image: url('<?= $itens["img_autor"]->getImagemFundoUrl(); ?>');">
 				<div class="btns-container">
 					<div class="btn-container">
-						<a class="btn" href="/?v=download&id=<?= $itens["img_imagem"]->getId(); ?>"><i class="fa fa-download"></i></a>
+						<a class="btn" href="/download/<?= $itens["img_imagem"]->getId(); ?>/"><i class="fa fa-download"></i></a>
 						<span class="tooltip">Efetuar download da imagem</span>
 					</div>
 					<?php if ($itens["usr_logado"] !== null && ($itens["usr_logado"]->getNome() === $itens["img_autor"]->getNome() || $itens["usr_logado"]->getAdmin())): ?>
 					<div class="btn-container">
-						<a class="btn" href="/?v=imagem-edit&id=<?= $itens["img_imagem"]->getId(); ?>"><i class="fa fa-edit"></i></a>
+						<a class="btn" href="/imagem-edit/<?= $itens["img_imagem"]->getId(); ?>/"><i class="fa fa-edit"></i></a>
 						<span class="tooltip">Editar as informações dessa imagem</span>
 					</div>
 					<?php endif; ?>

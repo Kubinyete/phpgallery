@@ -7,10 +7,9 @@ namespace App\Models;
 
 use App\Models\Model;
 use App\Views\EnviarView;
-use App\MvcErrors\EnviarErro;
 use App\Objects\Imagem;
-use Config\ImagemConfig;
 use App\Database\DalImagem;
+use Config\Config;
 use Exception;
 
 class EnviarModel extends Model {
@@ -30,17 +29,17 @@ class EnviarModel extends Model {
 
 		try {
 			if ($usuarioLogado === null) {
-				throw new Exception(EnviarErro::USUARIO_NAO_LOGADO);
+				throw new Exception(Config::obter("MvcErrors.Enviar.NECESSITA_LOGAR"));
 			} else {
 				// Ocorreu um erro
 				if ($imagem["tmp_name"] === "") {
 					// Que erro?
 					if ($imagem["name"] === "") {
-						throw new Exception(EnviarErro::NENHUMA_IMAGEM);
+						throw new Exception(Config::obter("MvcErrors.Enviar.NENHUMA_IMAGEM"));
 					} else if ($imagem["error"] == 1) {
-						throw new Exception(EnviarErro::IMAGEM_EXCEDE_LIMITE);
+						throw new Exception(Config::obter("MvcErrors.Enviar.EXCEDE_TAMANHO_LIMITE"));
 					} else {
-						throw new Exception(EnviarErro::DESCONHECIDO);
+						throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 					}
 				}
 
@@ -49,7 +48,7 @@ class EnviarModel extends Model {
 				// Se nem recebemos informações do tipo (formato)
 				// o arquivo enviado então não é uma imagem
 				if (!$info[2]) {
-					throw new Exception(EnviarErro::IMAGEM_FORMATO_NAO_SUPORTADO);
+					throw new Exception(Config::obter("MvcErrors.Enviar.FORMATO_NAO_SUPORTADO"));
 				} else {
 					switch ($info[2]) {
 						case IMAGETYPE_GIF:
@@ -62,17 +61,17 @@ class EnviarModel extends Model {
 							$imgExtensao = "jpg";
 							break;
 						default:
-							throw new Exception(EnviarErro::IMAGEM_FORMATO_NAO_SUPORTADO);
+							throw new Exception(Config::obter("MvcErrors.Enviar.FORMATO_NAO_SUPORTADO"));
 							break;
 					}
 
 					$imagemTitulo = trim($imagemTitulo);
 					$imagemDescricao = trim($imagemDescricao);
 
-					if (strlen($imagemTitulo) > ImagemConfig::MAX_TAMANHO_TITULO) {
-						throw new Exception(EnviarErro::IMAGEM_TITULO_EXCEDE_LIMITE);
-					} else if (strlen($imagemDescricao) > ImagemConfig::MAX_TAMANHO_DESCRICAO) {
-						throw new Exception(EnviarErro::IMAGEM_DESCRICAO_EXCEDE_LIMITE);
+					if (strlen($imagemTitulo) > Config::obter("Imagens.max_tamanho_titulo")) {
+						throw new Exception(Config::obter("MvcErrors.Enviar.TITULO_EXCEDE_LIMITE"));
+					} else if (strlen($imagemDescricao) > Config::obter("Imagens.max_tamanho_descricao")) {
+						throw new Exception(Config::obter("MvcErrors.Enviar.DESCRICAO_EXCEDE_LIMITE"));
 					}
 
 					$novaImagem = new Imagem(
@@ -91,11 +90,11 @@ class EnviarModel extends Model {
 					$dal->criarImagem($novaImagem);
 
 					if ($novaImagem->getId() <= 0) {
-						throw new Exception(EnviarErro::DESCONHECIDO);
+						throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 					} else {
 						if (!move_uploaded_file($imagem["tmp_name"], dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getImagemUrl())) {
 							$dal->deletarImagem($novaImagem->getId());
-							throw new Exception(EnviarErro::DESCONHECIDO);
+							throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 						} else {
 							return [
 								"retorno" => "imagem",
@@ -106,7 +105,7 @@ class EnviarModel extends Model {
 				}
 			}
 		} catch (Exception $e) {
-			$msg = EnviarErro::DEFINICOES[$e->getMessage()];
+			$msg = Config::obter("MvcErrors.Enviar.Definicoes")[$e->getMessage()];
 			
 			if ($msg) {
 				$erroMensagem .= $msg;

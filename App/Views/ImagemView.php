@@ -6,8 +6,7 @@
 namespace App\Views;
 
 use App\Views\View;
-use Config\ViewConfig;
-use Config\ComentarioConfig;
+use Config\Config;
 
 class ImagemView extends View {
 	// $templates
@@ -24,10 +23,10 @@ class ImagemView extends View {
 		$this->itens["og_url"] .= $imagem->getLink();
 		$this->itens["og_titulo"] = $this->itens["html_titulo"];
 		$this->itens["og_descricao"] = $imagem->getDescricao(true);
-		$this->itens["og_imagem"] = ViewConfig::OG_URL_PADRAO.$imagem->getImagemUrl(true);
+		$this->itens["og_imagem"] = Config::obter("Views.og_url_padrao").$imagem->getImagemUrl(true);
 		$this->itens["cmt_conteudo"] = $comentarioConteudo;
 		$this->itens["erro_dialogo"] = $comentarioErro;
-		$this->itens["cmtcon_maxlength"] = ComentarioConfig::MAX_TAMANHO_COMENTARIO;
+		$this->itens["cmtcon_maxlength"] = Config::obter("Comentarios.max_tamanho");
 	}
 }
 

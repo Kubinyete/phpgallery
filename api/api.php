@@ -4,8 +4,6 @@
  * retornando objetos JSON de acordo com os parâmetros passados via query string
  */
 
-require_once dirname(__DIR__).DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
-
 /**
  * Alvos
  * usr -> Usuários
@@ -20,6 +18,8 @@ require_once dirname(__DIR__).DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATO
  * o processador dará prioridade à sua identificação primária (id / u)
  */
 
+require dirname(__DIR__).DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
+
 use App\Api\Api;
 use App\Api\ApiResposta;
 use App\Api\ApiUsuario;
@@ -28,10 +28,12 @@ use App\Api\ApiComentario;
 use App\Database\Conexao;
 use App\Http\Pedido;
 use App\Http\Resposta;
-use Config\ConexaoConfig;
+use Config\Config;
+
+Config::carregar(dirname(__DIR__).DIRECTORY_SEPARATOR.'config.json');
 
 // Para debug, desative o tipo de conteúdo JSON para que a formatação HTML dos erros funcionem
-if (!ConexaoConfig::MODO_DEBUG) {
+if (Config::obter("Database.debug") !== true) {
 	Resposta::conteudoTipo("application/json");
 }
 
@@ -53,7 +55,6 @@ switch ($alvo) {
 		} else {
 			Api::erro("Para obter um usuário ou uma lista de usuários, é necessário informar seu id ou uma string de busca.")->enviar();
 		}
-
 		break;
 	case "img":
 		$id = Pedido::obter("id");
@@ -75,7 +76,6 @@ switch ($alvo) {
 		} else {
 			Api::erro("Para obter uma imagem ou uma lista de imagens, é necessário informar sua id ou uma string de busca.")->enviar();
 		} 
-		
 		break;
 	case "cmt":
 		$id = Pedido::obter("id");
@@ -92,11 +92,9 @@ switch ($alvo) {
 		} else {
 			Api::erro("Para obter um comentário ou uma lista de comentários, é necessário informar seu id ou o id da imagem.")->enviar();
 		}
-
 		break;
 	default:
 		Api::erro("O parâmetro de alvo não foi informado corretamente.")->enviar();
-
 		break;
 }
 

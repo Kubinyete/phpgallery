@@ -6,8 +6,7 @@
 namespace App\Controllers;
 
 use App\Controllers\Controller;
-use App\MvcErrors\LoginErro;
-use Config\UsuarioConfig;
+use Config\Config;
 
 class LoginController extends Controller {
 	// $model
@@ -37,9 +36,9 @@ class LoginController extends Controller {
 		}
 
 		if ($paraNome) {
-			return ((strlen($string) <= UsuarioConfig::MAX_CARACTERES_NOME) && (strlen($string) >= UsuarioConfig::MIN_CARACTERES_NOME));
+			return ((strlen($string) <= Config::obter("Usuarios.max_caracteres_nome")) && (strlen($string) >= Config::obter("Usuarios.min_caracteres_nome")));
 		} else {
-			return ((strlen($string) <= UsuarioConfig::MAX_CARACTERES_SENHA) && (strlen($string) >= UsuarioConfig::MIN_CARACTERES_SENHA));
+			return ((strlen($string) <= Config::obter("Usuarios.max_caracteres_senha")) && (strlen($string) >= Config::obter("Usuarios.min_caracteres_senha")));
 		}
 	}
 
@@ -48,24 +47,24 @@ class LoginController extends Controller {
 
 		if ($acao === "r" || $acao === "l") {
 			if (!self::stringValida($usuarioNome)) {
-				array_push($errosLista, LoginErro::NOME_INVALIDO);
+				array_push($errosLista, Config::obter("MvcErrors.Login.NOME_CARACTERES_INVALIDOS"));
 			}
 
 			if (!self::tamanhoValido($usuarioNome, true)) {
-				array_push($errosLista, LoginErro::NOME_TAMANHO_INVALIDO);
+				array_push($errosLista, Config::obter("MvcErrors.Login.NOME_TAMANHO_INVALIDO"));
 			}
 
 			if (!self::stringValida($usuarioSenha)) {
-				array_push($errosLista, LoginErro::SENHA_INVALIDA);
+				array_push($errosLista, Config::obter("MvcErrors.Login.SENHA_CARACTERES_INVALIDOS"));
 			}
 
 			if (!self::tamanhoValido($usuarioSenha, false)) {
-				array_push($errosLista, LoginErro::SENHA_TAMANHO_INVALIDO);
+				array_push($errosLista, Config::obter("MvcErrors.Login.SENHA_TAMANHO_INVALIDO"));
 			}
 
 			// Apenas tente verificar isso se estamos registrando
 			if ($acao === "r" && $usuarioSenha !== $usuarioConSenha) {
-				array_push($errosLista, LoginErro::REGISTRAR_CONFIRMA_SENHA_INVALIDA);
+				array_push($errosLista, Config::obter("MvcErrors.Login.REGISTRAR_CONFIRMACAO_INVALIDA"));
 			}
 		}
 

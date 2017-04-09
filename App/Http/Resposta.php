@@ -5,7 +5,7 @@
 
 namespace App\Http;
 
-use App\Database\Erro;
+use Config\Config;
 
 abstract class Resposta {
 	public static function header($chave, $valor) {
@@ -32,9 +32,9 @@ abstract class Resposta {
 		}
 	}
 
-	public static function erro($codigo=Erro::DBERRO_DESCONHECIDO, $pararExecucao=false) {
+	public static function erro($codigo=0, $pararExecucao=false) {
 		self::status(500);
-		self::redirecionar(str_replace("%", $codigo, Erro::SCRIPT_ERRO), $pararExecucao);
+		self::redirecionar(str_replace("%", $codigo, Config::obter("Database.Erro.requisicao")), $pararExecucao);
 	}
 }
 

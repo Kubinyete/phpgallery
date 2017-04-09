@@ -9,7 +9,7 @@ use App\Database\Dal;
 use App\Database\DalImagem;
 use App\Objects\Usuario;
 use App\Database\SqlComando;
-use Config\DalUsuarioConfig;
+use Config\Config;
 
 class DalUsuario extends Dal {
 	// Cria um usuário no banco de dados de acordo com o objeto Usuario passado como argumento
@@ -90,8 +90,8 @@ class DalUsuario extends Dal {
 	public function listarUsuarios($procura, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (DalUsuarioConfig::LISTAR_USUARIOS_LIMITE > 0) {
-			$sql->select("TOP ".DalUsuarioConfig::LISTAR_USUARIOS_LIMITE." *");
+		if (Config::obter("Usuarios.listar_limite") > 0) {
+			$sql->select("TOP ".Config::obter("Usuarios.listar_limite")." *");
 		} else {
 			$sql->select();
 		}

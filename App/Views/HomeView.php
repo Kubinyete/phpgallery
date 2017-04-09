@@ -6,7 +6,7 @@
 namespace App\Views;
 
 use App\Views\View;
-use Config\ViewConfig;
+use Config\Config;
 
 class HomeView extends View {
 	// $templates
@@ -18,7 +18,7 @@ class HomeView extends View {
 		$this->templates["view"] = "home";
 		$this->templates["visualizacao_imagem"] = "visualizacao_imagem";
 		$this->itens["imagens"] = $imagens;
-		$this->itens["proc_imagens_lista"] = "lista_imagens".ViewConfig::EXTENSAO_TEMPLATES;
+		$this->itens["proc_imagens_lista"] = "lista_imagens".'.'.Config::obter("Views.templates_extensao");
 	}
 }
 

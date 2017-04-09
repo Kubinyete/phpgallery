@@ -12,7 +12,7 @@ use App\Database\DalComentario;
 use App\Objects\Comentario;
 use App\Views\ImagemView;
 use App\Views\NotFoundView;
-use App\MvcErrors\ImagemErro;
+use Config\Config;
 
 class ImagemModel extends Model {
 	// $conexao
@@ -45,8 +45,8 @@ class ImagemModel extends Model {
 
 			} else {
 				foreach ($comentarioErros as $erro) {
-					if (isset(ImagemErro::DEFINICOES[$erro])) {
-						$comentarioErro = ImagemErro::DEFINICOES[$erro];
+					if (isset(Config::obter("MvcErrors.Imagem.Definicoes")[$erro])) {
+						$comentarioErro = Config::obter("MvcErrors.Imagem.Definicoes")[$erro];
 					}
 				}
 			}

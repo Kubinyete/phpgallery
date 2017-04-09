@@ -14,7 +14,7 @@ class ApiUsuario extends Api {
 	// $conexao
 
 	public function obterUsuario($nome) {
-		if ($nome === null || strlen(trim($nome)) <= 0) {
+		if (strlen(trim($nome)) <= 0) {
 			return parent::erro("É preciso informar o nome do usuário para obter suas informações.");
 		}
 

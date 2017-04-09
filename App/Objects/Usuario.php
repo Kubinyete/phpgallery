@@ -6,8 +6,7 @@
 namespace App\Objects;
 
 use App\Objects\Objeto;
-use Config\UsuarioConfig;
-use Config\ImagemConfig;
+use Config\Config;
 use App\Utils\Utils;
 
 class Usuario extends Objeto {
@@ -64,7 +63,7 @@ class Usuario extends Objeto {
 
 	public function setSenha($valor, $encriptografarSenha) {
 		if ($encriptografarSenha) {
-			$this->senha = hash(UsuarioConfig::HASH_ALGORITIMO, strval($valor));
+			$this->senha = hash(Config::obter("Usuarios.hash_senha"), strval($valor));
 		} else {
 			$this->senha = strval($valor);
 		}
@@ -73,7 +72,7 @@ class Usuario extends Objeto {
 	public function getDescricao($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->descricao) < 1) {
-				return UsuarioConfig::DESCRICAO_PADRAO;
+				return Config::obter("Usuarios.descricao_padrao");
 			} else {
 				$descricao = $this->descricao;
 				if ($filtrarAspas) {
@@ -107,7 +106,7 @@ class Usuario extends Objeto {
 	}
 
 	public function estaOnline() {
-		return ($this->getOnlineTimestamp() + UsuarioConfig::PERIODO_ONLINE >= time());
+		return ($this->getOnlineTimestamp() + Config::obter("Usuarios.periodo_online_segundos") >= time());
 	}
 
 	public function getAdmin() {
@@ -146,9 +145,9 @@ class Usuario extends Objeto {
 		$sep = ($adicionarSeparador) ? "/" : "";
 
 		if ($this->getTemImagemPerfil()) {
-			return $sep.UsuarioConfig::CAMINHO_IMAGENS_PERFIL.hash(UsuarioConfig::HASH_NOME_IMAGEM_PERFIL, $this->getId()).".".UsuarioConfig::IMAGEM_EXTENSAO_PADRAO;
+			return $sep.Config::obter("Usuarios.caminho_imagens_perfil").hash(Config::obter("Usuarios.hash_nome_imagem_perfil"), $this->getId()).".".Config::obter("Usuarios.imagem_perfil_extensao");
 		} else {
-			return $sep.UsuarioConfig::CAMINHO_IMAGEM_PERFIL_PADRAO;
+			return $sep.Config::obter("Usuarios.caminho_imagens_perfil").Config::obter("Usuarios.imagem_perfil_padrao").'.'.Config::obter("Usuarios.imagem_perfil_extensao");
 		}
 	}
 
@@ -156,9 +155,9 @@ class Usuario extends Objeto {
 		$sep = ($adicionarSeparador) ? "/" : "";
 
 		if ($this->getImgFundo() > 0) {
-			return $sep.ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getImgFundo()).".".$this->getImgFundoExt();
+			return $sep.Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getImgFundo()).".".$this->getImgFundoExt();
 		} else {
-			return $sep.UsuarioConfig::CAMINHO_IMAGEM_FUNDO_PADRAO;
+			return $sep.Config::obter("Imagens.caminho_imagens").Config::obter("Usuarios.imagem_fundo_padrao").'.'.Config::obter("Usuarios.imagem_fundo_extensao");
 		}
 	}
 
@@ -191,7 +190,7 @@ class Usuario extends Objeto {
 	}
 
 	public function getLink() {
-		return str_replace("%", $this->getNome(), UsuarioConfig::LINK_USUARIO);
+		return str_replace("%", $this->getNome(), Config::obter("Usuarios.link_perfil"));
 	}
 }
 

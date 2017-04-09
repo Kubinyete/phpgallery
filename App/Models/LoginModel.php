@@ -9,7 +9,7 @@ use App\Models\Model;
 use App\Database\DalUsuario;
 use App\Objects\Usuario;
 use App\Views\LoginView;
-use App\MvcErrors\LoginErro;
+use Config\Config;
 
 class LoginModel extends Model {
 	// $conexao
@@ -35,11 +35,11 @@ class LoginModel extends Model {
 						"retorno_obj" => $dbUsuario
 					];
 				} else {
-					array_push($errosLista, LoginErro::LOGIN_SENHA_ERRADA);
+					array_push($errosLista, Config::obter("MvcErrors.Login.LOGIN_SENHA_ERRADA"));
 					return $this->erro($usuarioLogado, $acao, $errosLista);
 				}
 			} else {
-				array_push($errosLista, LoginErro::LOGIN_USUARIO_NAO_EXISTE);
+				array_push($errosLista, Config::obter("MvcErrors.Login.LOGIN_USUARIO_INEXISTENTE"));
 				return $this->erro($usuarioLogado, $acao, $errosLista);
 			}
 		// Já ocorreu erros na camadada Controller acima, apenas retorne esses erros
@@ -65,7 +65,7 @@ class LoginModel extends Model {
 				];
 
 			} else {
-				array_push($errosLista, LoginErro::REGISTRAR_USUARIO_JA_EXISTE);
+				array_push($errosLista, Config::obter("MvcErrors.Login.REGISTRAR_USUARIO_EXISTENTE"));
 				return $this->erro($usuarioLogado, $acao, $errosLista);
 			}
 		// Já ocorreu erros na camadada Controller acima, apenas retorne esses erros
@@ -81,8 +81,8 @@ class LoginModel extends Model {
 		$separador = "<br>\n";
 
 		foreach ($errosLista as $codigo) {
-			if (isset(LoginErro::DEFINICOES[$codigo])) {
-				$mensagem .= LoginErro::DEFINICOES[$codigo].$separador;
+			if (isset(Config::obter("MvcErrors.Login.Definicoes")[$codigo])) {
+				$mensagem .= Config::obter("MvcErrors.Login.Definicoes")[$codigo].$separador;
 			}
 		}
 

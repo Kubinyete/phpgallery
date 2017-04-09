@@ -7,16 +7,16 @@ namespace App\Models;
 
 use App\Models\Model;
 use App\Views\ErroView;
-use App\Database\Erro;
+use Config\Config;
 
 class ErroModel extends Model {
 	// $conexao
 	
 	public function index($usuarioLogado, $codigo=0) {
-		if (isset(Erro::DEFINICOES[$codigo])) {
-			$mensagem = Erro::DEFINICOES[$codigo];
+		if (isset(Config::obter("Database.Erro.Definicoes")[$codigo])) {
+			$mensagem = Config::obter("Database.Erro.Definicoes")[$codigo];
 		} else {
-			$mensagem = Erro::DEFINICOES[Erro::DBERRO_DESCONHECIDO];
+			$mensagem = Config::obter("Database.Erro.Definicoes")[Config::obter("Database.Erro.DESCONHECIDO")];
 		}
 
 		return new ErroView($usuarioLogado, $mensagem);

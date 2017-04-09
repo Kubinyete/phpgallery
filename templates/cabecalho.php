@@ -18,10 +18,11 @@
 	<meta property="og:site_name" content="<?= $itens["og_nome_site"]; ?>">
 	<meta property="og:locale" content="<?= $itens["og_idioma"]; ?>">
 	<!-- Links -->
-	<link href="https://fonts.googleapis.com/css?family=Lato%7CRaleway%7CSource+Sans+Pro%7CUbuntu%7CUbuntu+Mono" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="<?= $itens["css"]; ?>" rel="stylesheet">
-	<link href="/favicon.ico" rel="shortcut icon">
+	<link type="text/css" href="https://fonts.googleapis.com/css?family=Lato%7CRaleway%7CSource+Sans+Pro%7CUbuntu%7CUbuntu+Mono" rel="stylesheet">
+	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link type="text/css" href="<?= $itens["css"]; ?>" rel="stylesheet">
+	<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+	<link type="image/x-icon" href="favicon.ico" rel="icon">
 	<!-- Scripts -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= $itens["js"]; ?>"></script>

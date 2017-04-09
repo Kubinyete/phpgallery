@@ -8,7 +8,7 @@ namespace App\Database;
 use App\Database\Dal;
 use App\Objects\Imagem;
 use App\Database\SqlComando;
-use Config\DalImagemConfig;
+use Config\Config;
 
 class DalImagem extends Dal {
 	// Cria uma imagem no banco de dados de acordo com o objeto Imagem passado como argumento
@@ -86,8 +86,8 @@ class DalImagem extends Dal {
 	public function listarImagens($procura, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (DalImagemConfig::LISTAR_IMAGENS_LIMITE > 0) {
-			$sql->select("TOP ".DalImagemConfig::LISTAR_IMAGENS_LIMITE." *");
+		if (Config::obter("Imagens.listar_limite") > 0) {
+			$sql->select("TOP ".Config::obter("Imagens.listar_limite")." *");
 		} else {
 			$sql->select();
 		}
@@ -129,8 +129,8 @@ class DalImagem extends Dal {
 	public function listarImagensUsuario($usuarioId, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (DalImagemConfig::LISTAR_IMAGENS_LIMITE > 0) {
-			$sql->select("TOP ".DalImagemConfig::LISTAR_IMAGENS_LIMITE." *");
+		if (Config::obter("Imagens.listar_usuarios_limite") > 0) {
+			$sql->select("TOP ".Config::obter("Imagens.listar_usuarios_limite")." *");
 		} else {
 			$sql->select();
 		}
@@ -172,8 +172,8 @@ class DalImagem extends Dal {
 	public function listarRecentes($paraApi=false) {
 		$sql = new SqlComando();
 
-		if (DalImagemConfig::LISTAR_RECENTES_LIMITE > 0) {
-			$sql->select("TOP ".DalImagemConfig::LISTAR_RECENTES_LIMITE." *");
+		if (Config::obter("Imagens.listar_recentes_limite") > 0) {
+			$sql->select("TOP ".Config::obter("Imagens.listar_recentes_limite")." *");
 		} else {
 			$sql->select();
 		}
@@ -212,7 +212,7 @@ class DalImagem extends Dal {
 	// Obtem a contagem de todas as imagens no banco de dados
 	public function contagemImagens() {
 		$sql = new SqlComando();
-		$sql->select("COUNT(*)")->as("contagem")->from("Imagens");
+		$sql->select("COUNT(img_id)")->as("contagem")->from("Imagens");
 
 		$resultado = $this->executar($sql);
 

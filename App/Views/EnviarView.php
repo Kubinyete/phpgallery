@@ -6,7 +6,7 @@
 namespace App\Views;
 
 use App\Views\View;
-use Config\ImagemConfig;
+use Config\Config;
 
 class EnviarView extends View {
 	// $templates
@@ -20,8 +20,8 @@ class EnviarView extends View {
 		$this->itens["img_descricao"] = $imagemDescricao;
 		$this->itens["img_privada"] = $imagemPrivada;
 		$this->itens["erro_dialogo"] = $erroMensagem;
-		$this->itens["imgti_maxlength"] = ImagemConfig::MAX_TAMANHO_TITULO;
-		$this->itens["imgde_maxlength"] = ImagemConfig::MAX_TAMANHO_DESCRICAO;
+		$this->itens["imgti_maxlength"] = Config::obter("Imagens.max_tamanho_titulo");
+		$this->itens["imgde_maxlength"] = Config::obter("Imagens.max_tamanho_descricao");
 	}
 }
 

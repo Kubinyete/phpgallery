@@ -55,7 +55,7 @@ class Roteador {
 				$controlador->rodar($this->getUsuarioLogado())->renderizar();
 				break;
 			case "imagem":
-				$id = Pedido::obter("id", "GET");
+				$id = Pedido::obter("i", "GET");
 				$cmtConteudo = Pedido::obter("cmtcon", "POST");
 
 				$modelo = new ImagemModel($this->getConexao());
@@ -63,7 +63,7 @@ class Roteador {
 				$controlador->rodar($this->getUsuarioLogado(), $id, $cmtConteudo)->renderizar();
 				break;
 			case "perfil":
-				$nome = Pedido::obter("u", "GET");
+				$nome = Pedido::obter("i", "GET");
 
 				$modelo = new PerfilModel($this->getConexao());
 				$controlador = new PerfilController($modelo);
@@ -71,15 +71,15 @@ class Roteador {
 				break;
 			case "login":
 				$acao = Pedido::obter("a", "POST");
-				$logoff = Pedido::obter("l", "GET");
+				$logoff = Pedido::obter("i", "GET");
 
 				if ($this->getUsuarioLogado() !== null) {
 					if ($logoff === "1") {
 						Sessao::setUsuario(null);
 						$this->getUsuarioLogadoStatusGerenciador()->offline();
-						Resposta::redirecionar("/?v=login", true);
+						Resposta::redirecionar("?v=login", true);
 					} else {
-						Resposta::redirecionar("/?v=home", true);
+						Resposta::redirecionar("?v=home", true);
 					}
 				}
 
@@ -107,7 +107,7 @@ class Roteador {
 					$retornoArray["retorno_obj"]->renderizar();
 				} else if ($retornoArray["retorno"] === "usuario") {
 					Sessao::setUsuario($retornoArray["retorno_obj"]);
-					Resposta::redirecionar("/?v=home", true);
+					Resposta::redirecionar("?v=home", true);
 				}
 				break;
 			case "enviar":
@@ -139,7 +139,7 @@ class Roteador {
 				}
 				break;
 			case "erro":
-				$erroCodigo = Pedido::obter("c", "GET");
+				$erroCodigo = Pedido::obter("i", "GET");
 
 				$modelo = new ErroModel(null);
 				$controlador = new ErroController($modelo);

@@ -3,7 +3,7 @@
  * Script principal que processará todos os pedidos e requisições de URL
  */
 
-require_once __DIR__.DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
+require __DIR__.DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."autoload.php";
 
 use App\Http\Pedido;
 use App\Http\Resposta;
@@ -11,17 +11,25 @@ use App\Session\Sessao;
 use App\Status\Status;
 use App\Database\Conexao;
 use App\Http\Roteador;
+use Config\Config;
+
+/**
+ * Configurações iniciais
+ */
 
 date_default_timezone_set("America/Sao_Paulo");
+
 Resposta::conteudoTipo("text/html; charset=utf-8");
 Resposta::header("Content-Language", "pt-BR");
 Resposta::header("X-UA-Compatible", "IE=Edge");
 
-$conexao = new Conexao();
+Config::carregar(__DIR__.DIRECTORY_SEPARATOR.'config.json');
 
 /**
  * Sessão & Status (requer Conexao)
  */
+
+$conexao = new Conexao();
 
 Sessao::iniciar();
 Sessao::validar();

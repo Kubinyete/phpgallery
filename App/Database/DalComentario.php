@@ -8,7 +8,7 @@ namespace App\Database;
 use App\Database\Dal;
 use App\Objects\Comentario;
 use App\Database\SqlComando;
-use Config\DalComentarioConfig;
+use Config\Config;
 
 class DalComentario extends Dal {
 	// Cria um comentário no banco de dados de acordo com o objeto Comentario passado como argumento
@@ -78,8 +78,8 @@ class DalComentario extends Dal {
 	public function listarComentarios($imgId, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (DalComentarioConfig::LISTAR_COMENTARIOS_LIMITE > 0) {
-			$sql->select("TOP ".DalComentarioConfig::LISTAR_COMENTARIOS_LIMITE." *");
+		if (Config::obter("Comentarios.listar_limite") > 0) {
+			$sql->select("TOP ".Config::obter("Comentarios.listar_limite")." *");
 		} else {
 			$sql->select();
 		}

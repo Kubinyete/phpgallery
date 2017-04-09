@@ -6,7 +6,7 @@
 namespace App\Objects;
 
 use App\Objects\Objeto;
-use Config\ImagemConfig;
+use Config\Config;
 use App\Utils\Utils;
 
 class Imagem extends Objeto {
@@ -53,7 +53,7 @@ class Imagem extends Objeto {
 	public function getTitulo($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->titulo) < 1) {
-				return ImagemConfig::TITULO_PADRAO;
+				return Config::obter("Imagens.titulo_padrao");
 			} else {
 				$titulo = $this->titulo;
 				if ($filtrarAspas) {
@@ -73,7 +73,7 @@ class Imagem extends Objeto {
 	public function getDescricao($formatar=false, $filtrarAspas=false) {
 		if ($formatar) {
 			if (strlen($this->descricao) < 1) {
-				return ImagemConfig::DESCRICAO_PADRAO;
+				return Config::obter("Imagens.descricao_padrao");
 			} else {
 				$descricao = $this->descricao;
 				if ($filtrarAspas) {
@@ -123,15 +123,15 @@ class Imagem extends Objeto {
 	}
 
 	public function getImagemUrl($adicionarSeparador=false) {
-		return (($adicionarSeparador) ? "/" : "").ImagemConfig::CAMINHO_IMAGENS.hash(ImagemConfig::HASH_NOME_IMAGEM, $this->getId()).$this->getExtensao(true);
+		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getId()).$this->getExtensao(true);
 	}
 
 	public function getMiniaturaUrl() {
-		return str_replace("%", $this->getId(), ImagemConfig::PROCESSADOR_MINIATURAS);
+		return str_replace("%", $this->getId(), Config::obter("Imagens.processador_miniaturas"));
 	}
 
 	public function getLink() {
-		return str_replace("%", $this->getId(), ImagemConfig::LINK_IMAGEM);
+		return str_replace("%", $this->getId(), Config::obter("Imagens.link_imagem"));
 	}
 }
 

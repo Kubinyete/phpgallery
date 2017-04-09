@@ -1,6 +1,6 @@
 <header>
 	<div class="centro">
-		<a href="/?v=home">
+		<a href="/">
 			<img src="<?= $itens["recursos"]; ?>phpgallery-logo.png" alt="Logo" draggable="false">
 		</a>
 		<?php if ($itens["usr_logado"] !== null): ?>
@@ -17,18 +17,18 @@
 		<nav id="headerNavegacao">
 			<ul><!--
 				--><li>
-					<a href="/?v=home">Home</a>
+					<a href="/">Home</a>
 				</li><!--
 			<?php if ($itens["usr_logado"] !== null): ?>
 			--><li>
-					<a href="/?v=perfil">Perfil</a>
+					<a href="/perfil/">Perfil</a>
 				</li><!--
 				--><li>
-					<a href="/?v=enviar">Enviar</a>
+					<a href="/enviar/">Enviar</a>
 				</li><!--
 			<?php else: ?>
 			--><li>
-					<a href="/?v=login">Login</a>
+					<a href="/login/">Login</a>
 				</li><!--
 			<?php endif; ?>
 			--></ul>
@@ -54,10 +54,10 @@
 <nav id="usuarioMenu">
 	<ul>
 		<li>
-			<a href="/?v=perfil-edit">Editar perfil</a>
+			<a href="/perfil-edit/">Editar perfil</a>
 		</li>
 		<li>
-			<a href="/?v=login&l=1">Sair</a>
+			<a href="/login/1/">Sair</a>
 		</li>
 	</ul>
 </nav>

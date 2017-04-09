@@ -5,7 +5,7 @@
 
 namespace App\Views;
 
-use Config\ViewConfig;
+use Config\Config;
 
 abstract class View {
 	protected $templates;
@@ -13,33 +13,33 @@ abstract class View {
 
 	public function __construct($usuarioLogado) {
 		$this->templates = [
-			"temp_cabecalho" => ViewConfig::TEMPLATE_CABECALHO,
+			"temp_cabecalho" => "cabecalho",
 			"temp_cabecalho_corpo" => "cabecalho_corpo",
 			"temp_logo_showcase" => "logo_showcase",
 			"view" => "", // Deverá ser modificado pelas visualizações filhas desta
 			"erro_dialogo" => "erro_dialogo",
 			"visualizacao_imagem" => "", // <-- Opcional, visualização JavaScript de imagens
-			"temp_rodape" => ViewConfig::TEMPLATE_RODAPE
+			"temp_rodape" => "rodape"
 		];
 
 		$this->itens = [
-			"html_titulo" => ViewConfig::HTML_TITULO_PADRAO,
-			"html_descricao" => ViewConfig::HTML_DESCRICAO_PADRAO,
-			"html_palavras_chave" => ViewConfig::HTML_PALAVRAS_CHAVE_PADRAO,
-			"html_autor" => ViewConfig::HTML_AUTOR_PADRAO,
-			"og_url" => ViewConfig::OG_URL_PADRAO,
-			"og_tipo" => ViewConfig::OG_TIPO_PADRAO,
-			"og_titulo" => ViewConfig::OG_TITULO_PADRAO,
-			"og_descricao" => ViewConfig::OG_DESCRICAO_PADRAO,
-			"og_imagem" => ViewConfig::OG_IMAGEM_PADRAO,
-			"og_nome_site" => ViewConfig::OG_NOME_SITE_PADRAO,
-			"og_idioma" => ViewConfig::OG_IDIOMA_PADRAO,
-			"css" => ViewConfig::CAMINHO_CSS_PADRAO,
-			"js" => ViewConfig::CAMINHO_JS_PADRAO,
-			"recursos" => ViewConfig::CAMINHO_RECURSOS_PADRAO,
-			"versao" => ViewConfig::PHPGALLERY_VERSAO,
+			"html_titulo" => Config::obter("Views.html_titulo_padrao"),
+			"html_descricao" => Config::obter("Views.html_descricao_padrao"),
+			"html_palavras_chave" => Config::obter("Views.html_palavras_chave_padrao"),
+			"html_autor" => Config::obter("Views.html_autor_padrao"),
+			"og_url" => Config::obter("Views.og_url_padrao"),
+			"og_tipo" => Config::obter("Views.og_tipo_padrao"),
+			"og_titulo" => Config::obter("Views.og_titulo_padrao"),
+			"og_descricao" => Config::obter("Views.og_descricao_padrao"),
+			"og_imagem" => Config::obter("Views.og_imagem_padrao"),
+			"og_nome_site" => Config::obter("Views.og_nome_site_padrao"),
+			"og_idioma" => Config::obter("Views.og_idioma_padrao"),
+			"css" => "/static/css/phpgallery.css",
+			"js" => "/static/js/phpgallery.js",
+			"recursos" => "/static/resources/",
+			"versao" => Config::obter("VERSAO"),
 			"usr_logado" => $usuarioLogado,
-			"erro_dialogo" => ""
+			"erro_dialogo" => "" // <-- Opcional, inclui uma visualização de erro e ativa automaticamente
 		];
 	}
 
@@ -48,7 +48,7 @@ abstract class View {
 		$itens = &$this->itens; 
 		
 		foreach ($this->templates as $templateArquivo) {
-			$arquivo = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.ViewConfig::DIRETORIO_TEMPLATES.DIRECTORY_SEPARATOR.$templateArquivo.ViewConfig::EXTENSAO_TEMPLATES;
+			$arquivo = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.Config::obter("Views.diretorio_templates").DIRECTORY_SEPARATOR.$templateArquivo.'.'.Config::obter("Views.templates_extensao");
 
 			if (file_exists($arquivo)) {
 				include $arquivo;

@@ -6,7 +6,7 @@
 namespace App\Status;
 
 use App\Database\DalUsuario;
-use Config\UsuarioConfig;
+use Config\Config;
 
 class Status {
 	private $conexao;
@@ -27,7 +27,7 @@ class Status {
 	// Altera o status do usuário para offline
 	public function offline() {
 		$dal = new DalUsuario($this->conexao);
-		$this->usuario->setOnlineTimestamp($this->usuario->getOnlineTimestamp() - UsuarioConfig::PERIODO_ONLINE);
+		$this->usuario->setOnlineTimestamp($this->usuario->getOnlineTimestamp() - Config::obter("Usuarios.periodo_online_segundos"));
 		$dal->atualizarUsuario($this->usuario);
 	}
 

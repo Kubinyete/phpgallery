@@ -31,6 +31,7 @@
 		"min_caracteres_nome": 4,
 		"max_caracteres_senha": 32,
 		"min_caracteres_senha": 6,
+		"max_tamanho_descricao": 300,
 		"periodo_online_segundos": 30,
 
 		"hash_senha": "sha256",

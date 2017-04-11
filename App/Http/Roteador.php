@@ -15,6 +15,7 @@ use App\Controllers\ImagemController;
 use App\Controllers\PerfilController;
 use App\Controllers\LoginController;
 use App\Controllers\EnviarController;
+use App\Controllers\PerfilEditController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
@@ -22,6 +23,7 @@ use App\Models\ImagemModel;
 use App\Models\PerfilModel;
 use App\Models\LoginModel;
 use App\Models\EnviarModel;
+use App\Models\PerfilEditModel;
 
 class Roteador {
 	private $usuarioLogado;
@@ -77,9 +79,9 @@ class Roteador {
 					if ($logoff === "1") {
 						Sessao::setUsuario(null);
 						$this->getUsuarioLogadoStatusGerenciador()->offline();
-						Resposta::redirecionar("?v=login", true);
+						Resposta::redirecionar("/login/", true);
 					} else {
-						Resposta::redirecionar("?v=home", true);
+						Resposta::redirecionar("/", true);
 					}
 				}
 
@@ -107,7 +109,7 @@ class Roteador {
 					$retornoArray["retorno_obj"]->renderizar();
 				} else if ($retornoArray["retorno"] === "usuario") {
 					Sessao::setUsuario($retornoArray["retorno_obj"]);
-					Resposta::redirecionar("?v=home", true);
+					Resposta::redirecionar("/", true);
 				}
 				break;
 			case "enviar":
@@ -137,6 +139,12 @@ class Roteador {
 				} else if ($retornoArray["retorno"] === "imagem") {
 					Resposta::redirecionar($retornoArray["retorno_obj"]->getLink(), true);
 				}
+				break;
+			case "perfil-edit":
+				$modelo = new PerfilEditModel($this->getConexao());
+				$controlador = new PerfilEditController($modelo);
+
+				$controlador->rodar($this->getUsuarioLogado())->renderizar();
 				break;
 			case "erro":
 				$erroCodigo = Pedido::obter("i", "GET");

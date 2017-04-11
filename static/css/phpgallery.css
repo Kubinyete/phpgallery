@@ -50,14 +50,18 @@ a.link-efeito:hover {
 
 .dashed-container {
 	border-radius: 5px;
-	background-color: rgba(0,0,0, .7);
+	background-color: rgba(0,0,0, .8);
 	width: 95%;
 	border: 1px dashed #777;
 }
 
 .cfix {
 	clear: both;
-}	
+}
+
+.conteudo-centro {
+	text-align: center;
+}
 
 /**
  * Cabeçalho
@@ -791,7 +795,7 @@ article div.comentario-form-container {
 	padding: 10px 1%;
 	margin-top: 25px;
 	border-radius: 5px;
-	background-color: rgba(0,0,0, .7);
+	background-color: rgba(0,0,0, .8);
 }
 
 article div.comentario-norm-container {
@@ -934,6 +938,7 @@ article div.comentario-form-container button:hover {
  */
 
 article div.perfil-container {
+	overflow: hidden;
 	background-color: rgba(0,0,0, .75);
 	width: 100%;
 	border-radius: 10px;
@@ -1014,6 +1019,83 @@ article div.perfil-container .edit-btn:hover {
 	background-color: lightskyblue;
 	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
 }
+
+article div.perfil-container .esquerda-container {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 30%;
+	height: 256px;
+}
+
+article div.perfil-container .esquerda-container img {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	max-width: 90%;
+	max-height: 75%;
+	height: unset;
+	transform: translate(-50%);
+}
+
+
+article div.perfil-container .esquerda-container input {
+	position: absolute;
+	bottom: 0%;
+	left: 50%;
+	width: 95%;
+	border: 1px dashed #777;
+	color: rgba(255,255,255, .8);
+	background-color: rgba(0,0,0, .7);
+	transform: translate(-50%, -50%);
+}
+
+article div.perfil-container .direita-container {
+	position: relative;
+	float: right;
+	width: 70%;
+	min-height: 256px;
+}
+
+article div.perfil-container .direita-container textarea {
+	display: block;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	min-height: 256px;
+	max-height: 50vh;
+	resize: vertical;
+	font-family: Source Sans Pro, Arial, sans-serif;
+	color: rgba(255,255,255, .5);
+	border-bottom-left-radius: 10px;
+    background-color: rgba(0,0,0, .7);
+	font-size: 1.5em;
+}
+
+article div.perfil-container button.btn {
+	transition: .2s ease-in-out;
+	margin: 0;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	padding: 0;
+	border: 0;
+	color: cornflowerblue;
+	font-size: 1.4em;
+	cursor: pointer;
+	padding: .5em;
+	border-radius: 5px;
+	background-color: transparent;
+}
+
+article div.perfil-container button.btn:hover {
+	transition: .2s ease-in-out;
+	color: white;
+	padding: .5em 1em;
+	background-color: cornflowerblue;
+	box-shadow: 0px 2px 6px rgba(0,0,0, .4);
+}
+
 
 /**
  * Login

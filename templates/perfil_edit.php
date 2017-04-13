@@ -9,7 +9,7 @@
 					</div>
 					<div class="esquerda-container">
 						<img class="imagem-perfil" src="<?= $itens["usr_logado"]->getImagemUrl(); ?>" alt="A imagem de perfil do usuário" draggable="false">
-						<input name="usrim" type="file" accept="image/*">
+						<input name="usrim" type="file" accept="image/jpeg">
 					</div>
 					<div class="direita-container">
 						<textarea name="usrde" maxlength="<?= $itens["usrde_maxlength"]; ?>"><?= $itens["usr_logado"]->getDescricao(true); ?></textarea>

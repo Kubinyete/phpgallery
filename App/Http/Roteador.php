@@ -141,10 +141,13 @@ class Roteador {
 				}
 				break;
 			case "perfil-edit":
+				$imagem = Pedido::obterArquivo("usrim");
+				$descricao = Pedido::obter("usrde", "POST");
+
 				$modelo = new PerfilEditModel($this->getConexao());
 				$controlador = new PerfilEditController($modelo);
 
-				$controlador->rodar($this->getUsuarioLogado())->renderizar();
+				$controlador->rodar($this->getUsuarioLogado(), $imagem, $descricao)->renderizar();
 				break;
 			case "erro":
 				$erroCodigo = Pedido::obter("i", "GET");

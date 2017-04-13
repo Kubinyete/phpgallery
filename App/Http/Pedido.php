@@ -42,8 +42,8 @@ abstract class Pedido {
 
     // Retorna um array de informações do arquivo
     public static function obterArquivo($name) {
-        if (isset($_FILES["img"])) {
-            return $_FILES["img"];
+        if (isset($_FILES[$name])) {
+            return $_FILES[$name];
         }
     }
 }

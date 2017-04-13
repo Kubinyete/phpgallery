@@ -12,10 +12,11 @@ class PerfilEditView extends View {
 	// $templates
 	// $itens
 	
-	public function __construct($usuarioLogado) {
+	public function __construct($usuarioLogado, $erro='') {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "perfil_edit";
+		$this->itens["erro_dialogo"] = $erro;
 		$this->itens["usrde_maxlength"] = Config::obter("Usuarios.max_tamanho_descricao");
 	}
 }

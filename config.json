@@ -1,5 +1,5 @@
 {
-	"VERSAO": "2.1.1",
+	"VERSAO": "2.2.1",
 
 	"Database": {
 		"debug": false,
@@ -33,6 +33,12 @@
 		"min_caracteres_senha": 6,
 		"max_tamanho_descricao": 300,
 		"periodo_online_segundos": 30,
+
+		"imagem_perfil_min_largura": 50,
+		"imagem_perfil_max_largura": 200,
+		"imagem_perfil_min_altura": 50,
+		"imagem_perfil_max_altura": 200,
+		"imagem_limite_kilobytes": 128,
 
 		"hash_senha": "sha256",
 		"hash_nome_imagem_perfil": "md5", 
@@ -121,11 +127,27 @@
 			"Definicoes": [
 				"Ocorreu um erro ao tentar armazenar a imagem, tente novamente mais tarde.",
 				"É preciso enviar uma imagem.",
-				"A imagem excede o tamanho limite de envio (4 megabytes).",
+				"A imagem excede o tamanho limite de envio (4 mbs).",
 				"O formato da imagem enviada não é suportado.",
 				"É preciso estar logado para poder enviar imagens.",
 				"O título da imagem excede o limite de 64 carácteres.",
 				"A descrição da imagem excede o limite de 300 carácteres."
+			]
+		},
+
+		"PerfilEdit": {
+			"DESCONHECIDO": 0,
+			"IMAGEM_EXCEDE_TAMANHO_LIMITE": 1,
+			"IMAGEM_FORMATO_INVALIDO": 2,
+			"IMAGEM_DIMENSOES_INVALIDAS": 3,
+			"DESCRICAO_EXCEDE_LIMITE": 4,
+
+			"Definicoes": [
+				"Ocorreu um erro desconhecido ao tentar atualizar a imagem de perfil.",
+				"A imagem enviada excede o limite de envio (128 kbs).",
+				"O arquivo enviado não está em um formato suportado [Envie apenas imagens JPG/JPEG].",
+				"O tamanho da imagem estava inválido [Mínimo de 50x50 e máximo de 200x200].",
+				"A descrição informada excede o tamanho máximo de 300 carácteres."
 			]
 		}
 	},

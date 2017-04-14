@@ -7,18 +7,6 @@
 			<div style="background-image: url('<?= $imagem->getMiniaturaUrl(); ?>')" class="imagem"></div>
 			<div class="imagem-gradient"></div>
 		</div>
-		<span class="imagem-titulo">
-			<?= $imagem->getTitulo(true); ?>
-		</span>
-		<span class="imagem-descricao">
-			<b>
-			<?= $imagem->getExtensao(true); ?>
-			<br>
-			<?= $imagem->getLargura(); ?>x<?= $imagem->getAltura(); ?>
-			</b>
-			<br>
-			<?= $imagem->getDescricao(true); ?>
-		</span>
 	</li><!-- 
 	<?php endforeach; ?>
 --></ul>

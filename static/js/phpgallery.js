@@ -6,6 +6,15 @@ window.phpgallery = {
 		animAtivada: false
 	},
 
+	perfilEdit: {
+		atualizarImagemFundo: function(id, imagemUrl) {
+			if (id != $('#perfil-edit-form #img-fundo-id').val()) {
+				$('div.perfil-container').css('background-image', 'url('+imagemUrl+')');
+				$('#perfil-edit-form #img-fundo-id').val(id);
+			}
+		}
+	},
+
 	usuarioMenu: {
 		ativado: false,
 

@@ -1,5 +1,5 @@
 {
-	"VERSAO": "2.2.2",
+	"VERSAO": "2.2.3",
 
 	"Database": {
 		"debug": false,
@@ -141,13 +141,17 @@
 			"IMAGEM_FORMATO_INVALIDO": 2,
 			"IMAGEM_DIMENSOES_INVALIDAS": 3,
 			"DESCRICAO_EXCEDE_LIMITE": 4,
+			"IMAGEM_FUNDO_INEXISTENTE": 5,
+			"IMAGEM_FUNDO_OUTRO_AUTOR": 6,
 
 			"Definicoes": [
 				"Ocorreu um erro desconhecido ao tentar atualizar a imagem de perfil.",
 				"A imagem enviada excede o limite de envio (128 kbs).",
 				"O arquivo enviado não está em um formato suportado [Envie apenas imagens JPG/JPEG].",
 				"O tamanho da imagem estava inválido [Mínimo de 50x50 e máximo de 200x200].",
-				"A descrição informada excede o tamanho máximo de 300 carácteres."
+				"A descrição informada excede o tamanho máximo de 300 carácteres.",
+				"A imagem de fundo informada não existe.",
+				"A imagem de fundo informada não existe."
 			]
 		}
 	},

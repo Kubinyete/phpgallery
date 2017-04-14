@@ -1,9 +1,10 @@
 <main>
 	<article>
 		<section>
-			<h1>Editar perfil de</h1>
+			<h1>Editar perfil</h1>
 			<div class="perfil-container perfil-container-online" style="background-image: url('<?= $itens["usr_logado"]->getImagemFundoUrl(); ?>');">
-				<form method="POST" enctype="multipart/form-data" autocomplete="off">
+				<form id="perfil-edit-form" method="POST" enctype="multipart/form-data" autocomplete="off">
+					<input id="img-fundo-id" type="hidden" name="usrif" value="<?= $itens['usr_logado']->getImgFundo(); ?>">
 					<div class="overlay">
 						<h1 class="usuario-nome"><?= $itens["usr_logado"]->getNome(); ?></h1>
 					</div>
@@ -19,6 +20,11 @@
 					</div>
 				</form>
 			</div>
+		</section>
+		<section>
+			<h1>Imagem de fundo</h1>
+			<p>Você poderá escolher uma de suas imagens enviadas para servir como plano de fundo em seu perfil</p>
+			<?php include $itens['proc_imagens_fundo_lista']; ?>
 		</section>
 	</article>
 </main>

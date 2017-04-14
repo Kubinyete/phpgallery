@@ -10,9 +10,9 @@ use App\Controllers\Controller;
 class PerfilEditController extends Controller {
 	// $model
 	
-	public function rodar($usuarioLogado, $imagem=null, $descricao=null) {
+	public function rodar($usuarioLogado, $imagem=null, $descricao=null, $imagemFundo=null) {
 		if ($usuarioLogado !== null) {
-			return ($imagem !== null || $descricao !== null) ? $this->model->modificar($usuarioLogado, $imagem, $descricao) : $this->model->index($usuarioLogado);
+			return ($imagem !== null || $descricao !== null || $imagemFundo !== null) ? $this->model->modificar($usuarioLogado, $imagem, $descricao, $imagemFundo) : $this->model->index($usuarioLogado);
 		} else {
 			return $this->model->notFound($usuarioLogado);
 		}

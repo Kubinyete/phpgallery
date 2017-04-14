@@ -10,6 +10,7 @@ use App\Models\Model;
 use App\Views\PerfilEditView;
 use App\Views\NotFoundView;
 use App\Database\DalUsuario;
+use App\Database\DalImagem;
 use Config\Config;
 use Exception;
 
@@ -17,11 +18,14 @@ class PerfilEditModel extends Model {
 	// $conexao
 	
 	public function index($usuarioLogado, $erro='') {
-		return new PerfilEditView($usuarioLogado, $erro);
+		$dal = new DalImagem($this->conexao);
+		$imagens = $dal->listarImagensUsuario($usuarioLogado->getId());
+		return new PerfilEditView($usuarioLogado, $erro, $imagens);
 	}
 
-	public function modificar($usuarioLogado, $imagem, $descricao) {
+	public function modificar($usuarioLogado, $imagem, $descricao, $imagemFundo) {
 		$descricao = trim($descricao);
+		$imagemFundo = intval($imagemFundo);
 		$atualizar = false;
 		$imagemErro = '';
 
@@ -83,6 +87,24 @@ class PerfilEditModel extends Model {
 						throw new Exception(Config::obter('MvcErrors.PerfilEdit.EXCEDE_TAMANHO_LIMITE'));
 					} else {
 						throw new Exception(Config::obter('MvcErrors.PerfilEdit.DESCONHECIDO'));
+					}
+				}
+			}
+
+			if ($imagemFundo > 0) {
+				$dal = new DalImagem($this->conexao);
+				$localImagemFundo = $dal->obterImagem($imagemFundo);
+				
+				if ($localImagemFundo === null) {
+					throw new Exception(Config::obter('MvcErrors.PerfilEdit.IMAGEM_FUNDO_INEXISTENTE'));
+				} else if ($localImagemFundo->getUsuarioId() !== $usuarioLogado->getId()) {
+					throw new Exception(Config::obter('MvcErrors.PerfilEdit.IMAGEM_FUNDO_OUTRO_AUTOR'));
+				}
+
+				if ($usuarioLogado->getImgFundo() !== $localImagemFundo->getId()) {
+					$usuarioLogado->setImgFundo($imagemFundo);
+					if (!$atualizar) {
+						$atualizar = true;
 					}
 				}
 			}

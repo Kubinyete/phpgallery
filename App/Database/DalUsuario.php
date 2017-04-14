@@ -22,7 +22,7 @@ class DalUsuario extends Dal {
 				"usr_senha" => $usuario->getSenha(),
 				"usr_descricao" => $usuario->getDescricao(),
 				"usr_tem_imagem_perfil" => ($usuario->getTemImagemPerfil()) ? "1" : "0",
-				"usr_data_criacao" => $usuario->getDataCriacao(2),
+				"usr_data_criacao" => $usuario->getDataCriacao(),
 				"usr_online_timestamp" => $usuario->getOnlineTimestamp(),
 				"usr_admin" => ($usuario->getAdmin()) ? "1" : "0",
 				"usr_img_fundo" => ($usuario->getImgFundo() > 0) ? $usuario->getImgFundo() : null,
@@ -31,7 +31,7 @@ class DalUsuario extends Dal {
 		);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 
@@ -40,7 +40,7 @@ class DalUsuario extends Dal {
 	public function obterUsuario($utilizarId, $valor, $paraApi=false) {
 		$sql = new SqlComando();
 
-		$sql->select("TOP 1 *")->from("Usuarios");
+		$sql->select()->from("Usuarios");
 
 		if ($utilizarId) {
 			$sql->where("usr_id", "=", $valor);
@@ -48,28 +48,32 @@ class DalUsuario extends Dal {
 			$sql->where("usr_nome", "=", $valor);
 		}
 
+		$sql->limit(1);
+
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$usuario = null;
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-			$usuario = new Usuario(
-				$array["usr_id"],
-				$array["usr_data_criacao"],
-				$array["usr_nome"],
-				$array["usr_senha"],
-				false,
-				$array["usr_descricao"],
-				$array["usr_tem_imagem_perfil"],
-				$array["usr_online_timestamp"],
-				$array["usr_admin"],
-				$array["usr_img_fundo"],
-				$array["usr_rep"],
-				$paraApi
-			);
+			if (count($resultado) > 0) {
+				$usuario = new Usuario(
+					$resultado[0]["usr_id"],
+					$resultado[0]["usr_data_criacao"],
+					$resultado[0]["usr_nome"],
+					$resultado[0]["usr_senha"],
+					false,
+					$resultado[0]["usr_descricao"],
+					$resultado[0]["usr_tem_imagem_perfil"],
+					$resultado[0]["usr_online_timestamp"],
+					$resultado[0]["usr_admin"],
+					$resultado[0]["usr_img_fundo"],
+					$resultado[0]["usr_rep"],
+					$paraApi
+				);
+			}
 		}
 
 		$this->conexao->desconectar();
@@ -90,39 +94,39 @@ class DalUsuario extends Dal {
 	public function listarUsuarios($procura, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (Config::obter("Usuarios.listar_limite") > 0) {
-			$sql->select("TOP ".Config::obter("Usuarios.listar_limite")." *");
-		} else {
-			$sql->select();
-		}
+		$sql->select()->from("Usuarios")->where("usr_nome", "LIKE", "%".$procura."%")->order("usr_id", "DESC");
 
-		$sql->from("Usuarios")->where("usr_nome", "LIKE", "%".$procura."%")->order("usr_id", "DESC");
+		if (Config::obter("Usuarios.listar_limite") > 0) {
+			$sql->limit(Config::obter("Usuarios.listar_limite"));
+		}
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$usuarios = [];
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			for ($i = 0; $i < odbc_num_rows($resultado); $i++) {
-				$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-				$usuario = new Usuario(
-					$array["usr_id"],
-					$array["usr_data_criacao"],
-					$array["usr_nome"],
-					$array["usr_senha"],
-					false,
-					$array["usr_descricao"],
-					$array["usr_tem_imagem_perfil"],
-					$array["usr_online_timestamp"],
-					$array["usr_admin"],
-					$array["usr_img_fundo"],
-					$array["usr_rep"],
-					$paraApi
-				);
+			if (count($resultado) > 0) {
+				foreach ($resultado as $array) {
+					$usuario = new Usuario(
+						$array["usr_id"],
+						$array["usr_data_criacao"],
+						$array["usr_nome"],
+						$array["usr_senha"],
+						false,
+						$array["usr_descricao"],
+						$array["usr_tem_imagem_perfil"],
+						$array["usr_online_timestamp"],
+						$array["usr_admin"],
+						$array["usr_img_fundo"],
+						$array["usr_rep"],
+						$paraApi
+					);
 
-				array_push($usuarios, $usuario);
+					array_push($usuarios, $usuario);
+				}
 			}
 		}
 
@@ -147,7 +151,7 @@ class DalUsuario extends Dal {
 		)->where("usr_id", "=", $usuario->getId());
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 
@@ -158,7 +162,7 @@ class DalUsuario extends Dal {
 		$sql->delete("Usuarios")->where("usr_nome", "=", $nome);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 }

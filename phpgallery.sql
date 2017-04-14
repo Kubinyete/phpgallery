@@ -48,7 +48,7 @@ CREATE TABLE Comentarios
 	--img_id int NOT NULL FOREIGN KEY REFERENCES Imagens(img_id),
 	--usr_id int NOT NULL FOREIGN KEY REFERENCES Usuarios(usr_id),
 	cmt_conteudo nvarchar(300) NOT NULL,
-	cmt_data_criacao datetime NOT NULL,
+	cmt_data_criacao datetime NOT NULL
 );
 
 --

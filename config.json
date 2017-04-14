@@ -1,13 +1,11 @@
 {
-	"VERSAO": "2.2.3",
+	"VERSAO": "2.3.3",
 
 	"Database": {
 		"debug": false,
-		"server": "localhost\\SQLEXPRESS",
-		"database": "phpgallery",
-		"usuario": "",
+		"dsn": "mysql:host=localhost;dbname=phpgallery;charset=utf8",
+		"usuario": "root",
 		"senha": "",
-		"usar_autenticacao_windows": true,
 
 		"Erro": {
 			"requisicao": "/erro/%/",

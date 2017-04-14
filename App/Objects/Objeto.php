@@ -28,10 +28,6 @@ abstract class Objeto {
 		$modo = intval($modo);
 
 		switch ($modo) {
-			// Retorna o valor
-			case 0:
-				return $this->dataCriacao;
-				break;
 			// Retorna o valor formatado para visualização
 			case 1:
 				return substr($this->dataCriacao, 8, 2)."/".substr($this->dataCriacao, 5, 2)."/".substr($this->dataCriacao, 0, 4)." ás ".substr($this->dataCriacao, 11, 8);
@@ -42,6 +38,8 @@ abstract class Objeto {
 			case 2:
 				return str_replace("-", "", $this->dataCriacao);
 				break;
+			// Retorna o valor
+			case 0:
 			default:
 				return $this->dataCriacao;
 				break;

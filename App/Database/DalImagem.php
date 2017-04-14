@@ -20,7 +20,7 @@ class DalImagem extends Dal {
 				"usr_id" => $imagem->getUsuarioId(),
 				"img_titulo" => $imagem->getTitulo(),
 				"img_descricao" => $imagem->getDescricao(),
-				"img_data_criacao" => $imagem->getDataCriacao(2),
+				"img_data_criacao" => $imagem->getDataCriacao(),
 				"img_extensao" => $imagem->getExtensao(),
 				"img_privada" => ($imagem->getPrivada()) ? "1" : "0",
 				"img_largura" => $imagem->getLargura(),
@@ -29,17 +29,20 @@ class DalImagem extends Dal {
 		);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 
 		$sql = new SqlComando();
-		$sql->select("TOP 1 img_id")->as("id")->from("Imagens")->order("img_id", "DESC");
+		$sql->select("img_id")->as("id")->from("Imagens")->order("img_id", "DESC")->limit(1);
 
 		$resultadoId = $this->executar($sql);
 
 		$id = null;
 
-		if ($resultadoId != false && odbc_num_rows($resultadoId) >= 1) {
-			$id = intval(odbc_fetch_array($resultadoId)["id"]);
+		if ($resultadoId != false) {
+			$resultadoId = $resultadoId->fetchAll();
+			if (count($resultadoId) > 0) {
+				$id = intval($resultadoId[0]["id"]);
+			}
 		}
 
 		$this->conexao->desconectar();
@@ -53,28 +56,30 @@ class DalImagem extends Dal {
 	public function obterImagem($id, $paraApi=false) {
 		$sql = new SqlComando();
 
-		$sql->select("TOP 1 *")->from("Imagens")->where("img_id", "=", $id);
+		$sql->select()->from("Imagens")->where("img_id", "=", $id)->limit(1);
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagem = null;
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-			$imagem = new Imagem(
-				$array["img_id"],
-				$array["img_data_criacao"],
-				$array["usr_id"],
-				$array["img_titulo"],
-				$array["img_descricao"],
-				$array["img_extensao"],
-				$array["img_privada"],
-				$array["img_largura"],
-				$array["img_altura"],
-				$paraApi
-			);
+			if (count($resultado) > 0) {
+				$imagem = new Imagem(
+					$resultado[0]["img_id"],
+					$resultado[0]["img_data_criacao"],
+					$resultado[0]["usr_id"],
+					$resultado[0]["img_titulo"],
+					$resultado[0]["img_descricao"],
+					$resultado[0]["img_extensao"],
+					$resultado[0]["img_privada"],
+					$resultado[0]["img_largura"],
+					$resultado[0]["img_altura"],
+					$paraApi
+				);
+			}
 		}
 
 		$this->conexao->desconectar();
@@ -86,37 +91,37 @@ class DalImagem extends Dal {
 	public function listarImagens($procura, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (Config::obter("Imagens.listar_limite") > 0) {
-			$sql->select("TOP ".Config::obter("Imagens.listar_limite")." *");
-		} else {
-			$sql->select();
-		}
+		$sql->select()->from("Imagens")->where("img_titulo", "LIKE", "%".$procura."%")->or()->expressao("img_descricao", "LIKE", "%".$procura."%")->or()->expressao("img_id", "LIKE", "%".$procura."%")->or()->expressao("img_data_criacao", "LIKE", "%".$procura."%");
 
-		$sql->from("Imagens")->where("img_titulo", "LIKE", "%".$procura."%")->or()->expressao("img_descricao", "LIKE", "%".$procura."%")->or()->expressao("img_id", "LIKE", "%".$procura."%")->or()->expressao("img_data_criacao", "LIKE", "%".$procura."%");
+		if (Config::obter("Imagens.listar_limite") > 0) {
+			$sql->limit(Config::obter("Imagens.listar_limite"));
+		}
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			for ($i = 0; $i < odbc_num_rows($resultado); $i++) {
-				$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-				$imagem = new Imagem(
-					$array["img_id"],
-					$array["img_data_criacao"],
-					$array["usr_id"],
-					$array["img_titulo"],
-					$array["img_descricao"],
-					$array["img_extensao"],
-					$array["img_privada"],
-					$array["img_largura"],
-					$array["img_altura"],
-					$paraApi
-				);
+			if (count($resultado) > 0) {
+				foreach ($resultado as $array) {
+					$imagem = new Imagem(
+						$array["img_id"],
+						$array["img_data_criacao"],
+						$array["usr_id"],
+						$array["img_titulo"],
+						$array["img_descricao"],
+						$array["img_extensao"],
+						$array["img_privada"],
+						$array["img_largura"],
+						$array["img_altura"],
+						$paraApi
+					);
 
-				array_push($imagens, $imagem);
+					array_push($imagens, $imagem);
+				}
 			}
 		}
 
@@ -129,37 +134,37 @@ class DalImagem extends Dal {
 	public function listarImagensUsuario($usuarioId, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (Config::obter("Imagens.listar_usuarios_limite") > 0) {
-			$sql->select("TOP ".Config::obter("Imagens.listar_usuarios_limite")." *");
-		} else {
-			$sql->select();
-		}
+		$sql->select()->from("Imagens")->where("usr_id", "=", $usuarioId)->and()->expressao("img_privada", "=", "0")->order("img_id", "DESC");
 
-		$sql->from("Imagens")->where("usr_id", "=", $usuarioId)->and()->expressao("img_privada", "=", "0")->order("img_id", "DESC");
+		if (Config::obter("Imagens.listar_usuarios_limite") > 0) {
+			$sql->limit(Config::obter("Imagens.listar_usuarios_limite"));
+		}
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			for ($i = 0; $i < odbc_num_rows($resultado); $i++) {
-				$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-				$imagem = new Imagem(
-					$array["img_id"],
-					$array["img_data_criacao"],
-					$array["usr_id"],
-					$array["img_titulo"],
-					$array["img_descricao"],
-					$array["img_extensao"],
-					$array["img_privada"],
-					$array["img_largura"],
-					$array["img_altura"],
-					$paraApi
-				);
+			if (count($resultado) > 0) {
+				foreach ($resultado as $array) {
+					$imagem = new Imagem(
+						$array["img_id"],
+						$array["img_data_criacao"],
+						$array["usr_id"],
+						$array["img_titulo"],
+						$array["img_descricao"],
+						$array["img_extensao"],
+						$array["img_privada"],
+						$array["img_largura"],
+						$array["img_altura"],
+						$paraApi
+					);
 
-				array_push($imagens, $imagem);
+					array_push($imagens, $imagem);
+				}
 			}
 		}
 
@@ -172,37 +177,37 @@ class DalImagem extends Dal {
 	public function listarRecentes($paraApi=false) {
 		$sql = new SqlComando();
 
+		$sql->select()->from("Imagens")->where("img_privada", "=", "0")->order("img_id", "DESC");
+
 		if (Config::obter("Imagens.listar_recentes_limite") > 0) {
-			$sql->select("TOP ".Config::obter("Imagens.listar_recentes_limite")." *");
-		} else {
-			$sql->select();
+			$sql->limit(Config::obter("Imagens.listar_recentes_limite"));
 		}
-		
-		$sql->from("Imagens")->where("img_privada", "=", "0")->order("img_id", "DESC");
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			for($i = 0; $i < odbc_num_rows($resultado); $i++) {
-				$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-				$imagem = new Imagem(
-					$array["img_id"],
-					$array["img_data_criacao"],
-					$array["usr_id"],
-					$array["img_titulo"],
-					$array["img_descricao"],
-					$array["img_extensao"],
-					$array["img_privada"],
-					$array["img_largura"],
-					$array["img_altura"],
-					$paraApi
-				);
+			if (count($resultado) > 0) {
+				foreach ($resultado as $array) {
+					$imagem = new Imagem(
+						$array["img_id"],
+						$array["img_data_criacao"],
+						$array["usr_id"],
+						$array["img_titulo"],
+						$array["img_descricao"],
+						$array["img_extensao"],
+						$array["img_privada"],
+						$array["img_largura"],
+						$array["img_altura"],
+						$paraApi
+					);
 
-				array_push($imagens, $imagem);
+					array_push($imagens, $imagem);
+				}
 			}
 		}
 
@@ -212,14 +217,18 @@ class DalImagem extends Dal {
 	// Obtem a contagem de todas as imagens no banco de dados
 	public function contagemImagens() {
 		$sql = new SqlComando();
+
 		$sql->select("COUNT(img_id)")->as("contagem")->from("Imagens");
 
 		$resultado = $this->executar($sql);
 
 		$contagem = 0;
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			$contagem = intval(odbc_fetch_array($resultado)["contagem"]);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
+			if (count($resultado) > 0) {
+				$contagem = intval($resultado[0]["contagem"]);
+			}
 		}
 
 		return $contagem;
@@ -240,7 +249,7 @@ class DalImagem extends Dal {
 		)->where("img_id", "=", $imagem->getId());
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 
@@ -251,7 +260,7 @@ class DalImagem extends Dal {
 		$sql->delete("Imagens")->where("img_id", "=", $id);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 }

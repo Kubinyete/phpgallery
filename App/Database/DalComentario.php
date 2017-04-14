@@ -20,22 +20,25 @@ class DalComentario extends Dal {
 				"img_id" => $comentario->getImagemId(),
 				"usr_id" => $comentario->getUsuarioId(),
 				"cmt_conteudo" => $comentario->getConteudo(),
-				"cmt_data_criacao" => $comentario->getDataCriacao(2),
+				"cmt_data_criacao" => $comentario->getDataCriacao(),
 			]
 		);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 
 		$sql = new SqlComando();
-		$sql->select("TOP 1 cmt_id")->as("id")->from("Comentarios")->order("cmt_id", "DESC");
+		$sql->select("cmt_id")->as("id")->from("Comentarios")->order("cmt_id", "DESC")->limit(1);
 
 		$resultadoId = $this->executar($sql);
 
 		$id = null;
 
-		if ($resultadoId != false && odbc_num_rows($resultadoId) >= 1) {
-			$id = intval(odbc_fetch_array($resultadoId)["id"]);
+		if ($resultadoId != false) {
+			$resultadoId = $resultadoId->fetchAll();
+			if (count($resultadoId) > 0) {
+				$id = intval($resultadoId[0]["id"]);
+			}
 		}
 
 		$this->conexao->desconectar();
@@ -49,24 +52,26 @@ class DalComentario extends Dal {
 	public function obterComentario($id, $paraApi=false) {
 		$sql = new SqlComando();
 
-		$sql->select("TOP 1 *")->from("Comentarios")->where("cmt_id", "=", $id);
+		$sql->select()->from("Comentarios")->where("cmt_id", "=", $id)->limit(1);
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$comentario = null;
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-			$comentario = new Comentario(
-				$array["cmt_id"],
-				$array["cmt_data_criacao"],
-				$array["img_id"],
-				$array["usr_id"],
-				$array["cmt_conteudo"],
-				$paraApi
-			);
+			if (count($resultado) > 0) {
+				$comentario = new Comentario(
+					$resultado[0]["cmt_id"],
+					$resultado[0]["cmt_data_criacao"],
+					$resultado[0]["img_id"],
+					$resultado[0]["usr_id"],
+					$resultado[0]["cmt_conteudo"],
+					$paraApi
+				);
+			}
 		}
 
 		$this->conexao->desconectar();
@@ -78,33 +83,33 @@ class DalComentario extends Dal {
 	public function listarComentarios($imgId, $paraApi=false) {
 		$sql = new SqlComando();
 
-		if (Config::obter("Comentarios.listar_limite") > 0) {
-			$sql->select("TOP ".Config::obter("Comentarios.listar_limite")." *");
-		} else {
-			$sql->select();
-		}
+		$sql->select()->from("Comentarios")->where("img_id", "=", $imgId);
 
-		$sql->from("Comentarios")->where("img_id", "=", $imgId);
+		if (Config::obter("Comentarios.listar_limite") > 0) {
+			$sql->limit(Config::obter("Comentarios.listar_limite"));
+		}
 
 		$this->conexao->conectar();
 		$resultado = $this->executar($sql);
 
 		$comentarios = [];
 
-		if ($resultado != false && odbc_num_rows($resultado) >= 1) {
-			for ($i = 0; $i < odbc_num_rows($resultado); $i++) {
-				$array = odbc_fetch_array($resultado);
+		if ($resultado != false) {
+			$resultado = $resultado->fetchAll();
 
-				$comentario = new Comentario(
-					$array["cmt_id"],
-					$array["cmt_data_criacao"],
-					$array["img_id"],
-					$array["usr_id"],
-					$array["cmt_conteudo"],
-					$paraApi
-				);
+			if (count($resultado) > 0) {
+				foreach ($resultado as $array) {
+					$comentario = new Comentario(
+						$array["cmt_id"],
+						$array["cmt_data_criacao"],
+						$array["img_id"],
+						$array["usr_id"],
+						$array["cmt_conteudo"],
+						$paraApi
+					);
 
-				array_push($comentarios, $comentario);
+					array_push($comentarios, $comentario);
+				}
 			}
 		}
 
@@ -124,7 +129,7 @@ class DalComentario extends Dal {
 		)->where("cmt_id", "=", $comentario->getId());
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 
@@ -135,7 +140,7 @@ class DalComentario extends Dal {
 		$sql->delete("Comentarios")->where("cmt_id", "=", $id);
 
 		$this->conexao->conectar();
-		$this->executar($sql, true);
+		$this->executar($sql);
 		$this->conexao->desconectar();
 	}
 }

@@ -22,7 +22,7 @@ class SqlComando {
 
 	// Utilizado para filtrar todas as escape strings de uma string
 	public static function filtrarEscapeStringSql($string) {
-		return str_replace("'", "''", strval($string));
+		return str_replace("'", "\\'", strval($string));
 	}
 
 	// Equivalente ao comando SELECT {Atributos}
@@ -155,6 +155,12 @@ class SqlComando {
 	// Ex: nome='valor'
 	public function expressao($valor, $operador, $valor2, $filtrarValor2=true) {
 		$this->comandoString .= $valor." ".$operador." ".(($filtrarValor2) ? "'".self::filtrarEscapeStringSql($valor2)."'" : $valor2)." ";
+
+		return $this;
+	}
+
+	public function limit($numero) {
+		$this->comandoString .= 'LIMIT '.$numero.' ';
 
 		return $this;
 	}

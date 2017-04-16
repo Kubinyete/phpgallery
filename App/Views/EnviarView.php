@@ -16,6 +16,7 @@ class EnviarView extends View {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "enviar";
+		$this->itens['html_titulo'] = 'Enviar imagem';
 		$this->itens["img_titulo"] = $imagemTitulo;
 		$this->itens["img_descricao"] = $imagemDescricao;
 		$this->itens["img_privada"] = $imagemPrivada;

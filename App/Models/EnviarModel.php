@@ -92,7 +92,7 @@ class EnviarModel extends Model {
 					if ($novaImagem->getId() <= 0) {
 						throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 					} else {
-						if (!move_uploaded_file($imagem["tmp_name"], dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getImagemUrl())) {
+						if (!@move_uploaded_file($imagem["tmp_name"], dirname(dirname(__DIR__)).(($novaImagem->getImagemUrl()[0]==='/') ? '' : DIRECTORY_SEPARATOR).$novaImagem->getImagemUrl())) {
 							$dal->deletarImagem($novaImagem->getId());
 							throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 						} else {

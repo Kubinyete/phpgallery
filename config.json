@@ -1,5 +1,5 @@
 {
-	"VERSAO": "2.3.4",
+	"VERSAO": "2.3.5",
 
 	"Database": {
 		"debug": false,
@@ -8,7 +8,7 @@
 		"senha": "",
 
 		"Erro": {
-			"requisicao": "/erro/%/",
+			"requisicao": "/erro/%",
 
 			"DESCONHECIDO": 0,
 			"FALHA_CONEXAO": 1,
@@ -48,7 +48,7 @@
 		"imagem_fundo_padrao": "default-background",
 
 		"caminho_imagens_perfil": "/static/resources/profile/",
-		"link_perfil": "/perfil/%/", 
+		"link_perfil": "/perfil/%", 
 
 		"listar_limite": 100
 	},
@@ -63,8 +63,10 @@
 		"hash_nome": "md5",
 
 		"caminho_imagens": "/static/resources/image/",
-		"link_imagem": "/imagem/%/",
-		"processador_miniaturas": "/thumbnail/%/",
+		"link_imagem": "/imagem/%",
+		"link_download": "/download/%",
+		"link_editar": "/imagem-edit/%",
+		"processador_miniaturas": "/thumbnail/%",
 
 		"listar_limite": 100,
 		"listar_recentes_limite": 32,
@@ -157,6 +159,18 @@
 	"Views": {
 		"diretorio_templates": "templates",
 		"templates_extensao": "php",
+
+		"css": "/static/css/phpgallery.css",
+		"js": "/static/js/phpgallery.js",
+		"recursos": "/static/resources/",
+		"favicon": "/favicon.ico",
+
+		"href_home": "/",
+		"href_perfil": "/perfil",
+		"href_enviar": "/enviar",
+		"href_login": "/login",
+		"href_login_sair": "/login/1",
+		"href_editar_perfil": "/perfil-edit",
 
 		"html_titulo_padrao": "PHPGallery",
 		"html_descricao_padrao": "Uma aplicação web que permite o envio e a hospedagem de imagens aos usuários registrados.",

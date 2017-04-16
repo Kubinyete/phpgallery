@@ -15,6 +15,7 @@ class NotFoundView extends View {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "erro";
+		$this->itens['html_titulo'] = 'Erro';
 		$this->itens["erro_titulo"] = "Aparentemente algo deu muito errado por aqui :(";
 		$this->itens["erro_descricao"] = "A página que você está procurando não existe.";
 		$this->itens["erro_codigo"] = "HTTP 404 Not Found";

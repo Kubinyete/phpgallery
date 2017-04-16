@@ -133,6 +133,14 @@ class Imagem extends Objeto {
 	public function getLink() {
 		return str_replace("%", $this->getId(), Config::obter("Imagens.link_imagem"));
 	}
+
+	public function getDownloadLink() {
+		return str_replace('%', $this->getId(), Config::obter('Imagens.link_download'));
+	}
+
+	public function getEditarLink() {
+		return str_replace('%', $this->getId(), Config::obter('Imagens.link_editar'));
+	}
 }
 
 ?>

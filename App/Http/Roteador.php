@@ -24,6 +24,7 @@ use App\Models\PerfilModel;
 use App\Models\LoginModel;
 use App\Models\EnviarModel;
 use App\Models\PerfilEditModel;
+use Config\Config;
 
 class Roteador {
 	private $usuarioLogado;
@@ -79,9 +80,9 @@ class Roteador {
 					if ($logoff === "1") {
 						Sessao::setUsuario(null);
 						$this->getUsuarioLogadoStatusGerenciador()->offline();
-						Resposta::redirecionar("/login/", true);
+						Resposta::redirecionar(Config::obter('Views.href_login'), true);
 					} else {
-						Resposta::redirecionar("/", true);
+						Resposta::redirecionar(Config::obter('Views.href_home'), true);
 					}
 				}
 
@@ -109,7 +110,7 @@ class Roteador {
 					$retornoArray["retorno_obj"]->renderizar();
 				} else if ($retornoArray["retorno"] === "usuario") {
 					Sessao::setUsuario($retornoArray["retorno_obj"]);
-					Resposta::redirecionar("/", true);
+					Resposta::redirecionar(Config::obter('Views.href_home'), true);
 				}
 				break;
 			case "enviar":

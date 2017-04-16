@@ -24,7 +24,7 @@
 		<section>
 			<h1>Imagem de fundo</h1>
 			<p>Você poderá escolher uma de suas imagens enviadas para servir como plano de fundo em seu perfil</p>
-			<?php include $itens['proc_imagens_fundo_lista']; ?>
+			<?php ( file_exists( $itens['proc_imagens_fundo_lista'] ) ) ? : include $itens['proc_imagens_fundo_lista']; ?>
 		</section>
 	</article>
 </main>

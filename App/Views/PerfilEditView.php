@@ -16,6 +16,7 @@ class PerfilEditView extends View {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "perfil_edit";
+		$this->itens['html_titulo'] = 'Editar perfil';
 		$this->itens["imagens"] = $imagens;
 		$this->itens["proc_imagens_fundo_lista"] = "lista_imagens_fundo".'.'.Config::obter("Views.templates_extensao");
 		$this->itens["erro_dialogo"] = $erro;

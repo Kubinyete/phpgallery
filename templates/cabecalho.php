@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge, chrome=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<title><?= $itens["html_titulo"]; ?></title>
 	<!-- Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +21,8 @@
 	<link type="text/css" href="https://fonts.googleapis.com/css?family=Lato%7CRaleway%7CSource+Sans+Pro%7CUbuntu%7CUbuntu+Mono" rel="stylesheet">
 	<link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link type="text/css" href="<?= $itens["css"]; ?>" rel="stylesheet">
-	<link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
-	<link type="image/x-icon" href="/favicon.ico" rel="icon">
+	<link type="image/x-icon" href="<?= $itens['favicon']; ?>" rel="shortcut icon">
+	<link type="image/x-icon" href="<?= $itens['favicon']; ?>" rel="icon">
 	<!-- Scripts -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= $itens["js"]; ?>"></script>

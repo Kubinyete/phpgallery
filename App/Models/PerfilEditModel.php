@@ -102,7 +102,8 @@ class PerfilEditModel extends Model {
 				}
 
 				if ($usuarioLogado->getImgFundo() !== $localImagemFundo->getId()) {
-					$usuarioLogado->setImgFundo($imagemFundo);
+					$usuarioLogado->setImgFundo($localImagemFundo->getId());
+					$usuarioLogado->setImgFundoExt($localImagemFundo->getExtensao());
 					if (!$atualizar) {
 						$atualizar = true;
 					}

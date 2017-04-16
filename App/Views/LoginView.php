@@ -16,6 +16,7 @@ class LoginView extends View {
 		parent::__construct($usuarioLogado);
 
 		$this->templates["view"] = "login";
+		$this->itens['html_titulo'] = 'Área de autenticação';
 		$this->itens["login_acao"] = $acao;
 		$this->itens["login_erro_mensagem"] = $erroMensagem;
 		$this->itens["loginNome_maxlength"] = Config::obter("Usuarios.max_caracteres_nome");

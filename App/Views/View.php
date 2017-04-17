@@ -19,6 +19,7 @@ abstract class View {
 			"view" => "", // Deverá ser modificado pelas visualizações filhas desta
 			"erro_dialogo" => "erro_dialogo",
 			"visualizacao_imagem" => "", // <-- Opcional, visualização JavaScript de imagens
+			"anim_processando" => "anim_processando",
 			"temp_rodape" => "rodape"
 		];
 

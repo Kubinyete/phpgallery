@@ -1,9 +1,44 @@
 "use strict";
-// phpgallery.js
 
 window.phpgallery = {
 	cabecalho: {
 		animAtivada: false
+	},
+
+	animProcessando: {
+		crgInter: null,
+		dots_c: 1,
+		dots_ds: '',
+
+		ativar: function() {
+			if (phpgallery.animProcessando.crgInter != null) { return; }
+			$('.anim-processando-fundo').addClass('anim-processando-fundo-ativado');
+			phpgallery.animProcessando.crgInter = setInterval(
+				function() {
+					var dots_s = '';
+					
+					for (var i = 0; i < phpgallery.animProcessando.dots_c; i++) {
+						dots_s += '.';
+					}
+
+					$('#processando-string').text(phpgallery.animProcessando.dots_ds + dots_s);
+
+					if (phpgallery.animProcessando.dots_c >= 3) {
+						phpgallery.animProcessando.dots_c = 1;
+					} else {
+						phpgallery.animProcessando.dots_c++;
+					}
+				}
+			, 500);
+		},
+
+		desativar: function() {
+			if (phpgallery.animProcessando.crgInter == null) { return; }
+			$('.anim-processando-fundo').removeClass('anim-processando-fundo-ativado');
+			clearInterval(phpgallery.animProcessando.crgInter);
+			phpgallery.animProcessando.crgInter = null;
+			phpgallery.animProcessando.dots_c = 1;
+		}
 	},
 
 	perfilEdit: {

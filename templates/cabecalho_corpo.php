@@ -46,6 +46,10 @@
 			} else if (scrollVertical <= 0 && phpgallery.cabecalho.animAtivada) {
 				$("header").removeClass("ativado");
 				phpgallery.cabecalho.animAtivada = false;
+
+				if (phpgallery.usuarioMenu.ativado) {
+					phpgallery.usuarioMenu.gerenciar();
+				}
 			}
 		}
 	);

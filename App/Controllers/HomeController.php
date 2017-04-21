@@ -14,7 +14,7 @@ class HomeController extends Controller {
 		// Não precisaremos processar nenhum parâmetro
 		// para listar as imagens recentes
 		// retornará uma HomeView para que o script acima possa renderizá-la
-		return $this->model->index($usuarioLogado);
+		return $this->getModel()->index($usuarioLogado);
 	}
 }
 

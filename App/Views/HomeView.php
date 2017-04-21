@@ -15,10 +15,19 @@ class HomeView extends View {
 	public function __construct($usuarioLogado, $imagens) {
 		parent::__construct($usuarioLogado);
 
-		$this->templates["view"] = "home";
-		$this->templates["visualizacao_imagem"] = "visualizacao_imagem";
-		$this->itens["imagens"] = $imagens;
-		$this->itens["proc_imagens_lista"] = "lista_imagens".'.'.Config::obter("Views.templates_extensao");
+		$this->atualizarTemplates(
+			[
+				'view' => 'home',
+				'visualizacao_imagem' => 'visualizacao_imagem'
+			]
+		);
+
+		$this->atualizarItens(
+			[
+				'imagens' => $imagens,
+				'proc_imagens_lista' => 'lista_imagens'.'.'.Config::obter("Views.templates_extensao")
+			]
+		);
 	}
 }
 

@@ -13,6 +13,10 @@ abstract class Controller {
 		$this->model = $model;
 	}
 
+	public function getModel() {
+		return $this->model;
+	}
+
 	// Todo Controller derivado terá sua própria implementação da função rodar()
 	public abstract function rodar($usuarioLogado);
 }

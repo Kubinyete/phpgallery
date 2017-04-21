@@ -18,7 +18,7 @@ class ImagemController extends Controller {
 
 		// Se o id não for passaado ou é inválido, envie logo uma página 404
 		if ($id <= 0) {
-			return $this->model->notFound($usuarioLogado);
+			return $this->getModel()->notFound($usuarioLogado);
 		} else {
 			// Tente obter a página da imagem ou enviar um comentário
 			
@@ -41,7 +41,7 @@ class ImagemController extends Controller {
 				}
 			}
 
-			return $this->model->index($usuarioLogado, $id, $comentarioConteudo, $comentarioErros);
+			return $this->getModel()->index($usuarioLogado, $id, $comentarioConteudo, $comentarioErros);
 		}
 	}
 }

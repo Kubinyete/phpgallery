@@ -15,14 +15,14 @@ class PerfilController extends Controller {
 			// Se não recebemos nenhum nome de usuário, significa que o usuário logado está solicitando
 			// a página de perfil
 			if ($usuarioLogado !== null) {
-				return $this->model->index($usuarioLogado, $usuarioLogado->getNome());
+				return $this->getModel()->index($usuarioLogado, $usuarioLogado->getNome());
 			} else {
 				// 404 Not Found
-				return $this->model->notFound($usuarioLogado);
+				return $this->getModel()->notFound($usuarioLogado);
 			}
 		} else {
 			// Tente obter a página de perfil deste usuário
-			return $this->model->index($usuarioLogado, $usuarioNome);
+			return $this->getModel()->index($usuarioLogado, $usuarioNome);
 		}
 	}
 }

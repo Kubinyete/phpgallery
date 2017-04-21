@@ -16,7 +16,7 @@ class HomeModel extends Model {
 	// Não vamos receber nada do controlador
 	// pois mostrar as imagens recentes não precisará de um parâmetro
 	public function index($usuarioLogado) {
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagens = $dal->listarRecentes();
 		return new HomeView($usuarioLogado, $imagens);
 	}

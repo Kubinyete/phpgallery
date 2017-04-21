@@ -18,14 +18,14 @@ class ImagemModel extends Model {
 	// $conexao
 	
 	public function index($usuarioLogado, $id=0, $comentarioConteudo=null, $comentarioErros=[]) {
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagem = $dal->obterImagem($id);
 		
 		// Se a imagem foi encontrada
 		if ($imagem !== null) {
-			$dal = new DalUsuario($this->conexao);
+			$dal = new DalUsuario($this->getConexao());
 			$usuario = $dal->obterUsuario(true, $imagem->getUsuarioId());
-			$dal = new DalComentario($this->conexao);
+			$dal = new DalComentario($this->getConexao());
 
 			// Se não recebemos nenhum erro do Controller
 
@@ -54,7 +54,7 @@ class ImagemModel extends Model {
 			$comentarios = $dal->listarComentarios($imagem->getId());
 			$comentariosArray = [];
 
-			$dal = new DalUsuario($this->conexao);
+			$dal = new DalUsuario($this->getConexao());
 
 			foreach ($comentarios as $cmt) {
 				array_push($comentariosArray, [

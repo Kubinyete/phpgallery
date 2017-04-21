@@ -86,7 +86,7 @@ class EnviarModel extends Model {
 						$info[1]	// height - altura
 					);
 
-					$dal = new DalImagem($this->conexao);
+					$dal = new DalImagem($this->getConexao());
 					$dal->criarImagem($novaImagem);
 
 					if ($novaImagem->getId() <= 0) {

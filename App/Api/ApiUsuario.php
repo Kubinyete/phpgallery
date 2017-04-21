@@ -18,7 +18,7 @@ class ApiUsuario extends Api {
 			return parent::erro("É preciso informar o nome do usuário para obter suas informações.");
 		}
 
-		$dal = new DalUsuario($this->conexao);
+		$dal = new DalUsuario($this->getConexao());
 		$usuario = $dal->obterUsuario(false, $nome, true);
 		
 		$resposta = new ApiResposta($usuario);
@@ -27,7 +27,7 @@ class ApiUsuario extends Api {
 	}
 
 	public function listarUsuarios($procuraString) {
-		$dal = new DalUsuario($this->conexao);
+		$dal = new DalUsuario($this->getConexao());
 		$usuarios = $dal->listarUsuarios($procuraString, true);
 		
 		$resposta = new ApiResposta($usuarios);

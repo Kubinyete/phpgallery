@@ -8,6 +8,7 @@ namespace App\Utils;
 class Utils {
 	// Filtra todas as " & ' de uma string devolvendo \" & \'
 	public static function filtrarAspasJs($string) {
+		/*
 		$retorno = "";
 		for ($i=0; $i < strlen($string); $i++) {
 			if ($string[$i] === "'") {
@@ -18,7 +19,8 @@ class Utils {
 				$retorno .= $string[$i];
 			}
 		}
-		return $retorno;
+		*/
+		return str_replace('\'', '\\\'', $string);
 	}
 }
 

@@ -15,14 +15,23 @@ class EnviarView extends View {
 	public function __construct($usuarioLogado, $erroMensagem="", $imagem=null, $imagemTitulo="", $imagemDescricao="", $imagemPrivada=false) {
 		parent::__construct($usuarioLogado);
 
-		$this->templates["view"] = "enviar";
-		$this->itens['html_titulo'] = 'Enviar imagem';
-		$this->itens["img_titulo"] = $imagemTitulo;
-		$this->itens["img_descricao"] = $imagemDescricao;
-		$this->itens["img_privada"] = $imagemPrivada;
-		$this->itens["erro_dialogo"] = $erroMensagem;
-		$this->itens["imgti_maxlength"] = Config::obter("Imagens.max_tamanho_titulo");
-		$this->itens["imgde_maxlength"] = Config::obter("Imagens.max_tamanho_descricao");
+		$this->atualizarTemplates(
+			[
+				'view' => 'enviar'
+			]
+		);
+
+		$this->atualizarItens(
+			[
+				'html_titulo' => 'Enviar imagem',
+				'img_titulo' => $imagemTitulo,
+				'img_descricao' => $imagemDescricao,
+				'img_privada' => $imagemPrivada,
+				'erro_dialogo' => $erroMensagem,
+				'imgti_maxlength' => Config::obter("Imagens.max_tamanho_titulo"),
+				'imgde_maxlength' => Config::obter("Imagens.max_tamanho_descricao")
+			]
+		);
 	}
 }
 

@@ -18,7 +18,7 @@ class ApiComentario extends Api {
 			return parent::erro("É preciso informar corretamente o id do comentário para obter suas informações.");
 		}
 
-		$dal = new DalComentario($this->conexao);
+		$dal = new DalComentario($this->getConexao());
 		$comentario = $dal->obterComentario($id, true);
 		
 		$resposta = new ApiResposta($comentario);
@@ -31,7 +31,7 @@ class ApiComentario extends Api {
 			return parent::erro("É preciso informar corretamente o id da imagem para obter os comentários.");
 		}
 		
-		$dal = new DalComentario($this->conexao);
+		$dal = new DalComentario($this->getConexao());
 		$comentarios = $dal->listarComentarios($imgId, true);
 		
 		$resposta = new ApiResposta($comentarios);

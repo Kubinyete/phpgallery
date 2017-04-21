@@ -12,9 +12,9 @@ class PerfilEditController extends Controller {
 	
 	public function rodar($usuarioLogado, $imagem=null, $descricao=null, $imagemFundo=null) {
 		if ($usuarioLogado !== null) {
-			return ($imagem !== null || $descricao !== null || $imagemFundo !== null) ? $this->model->modificar($usuarioLogado, $imagem, $descricao, $imagemFundo) : $this->model->index($usuarioLogado);
+			return ($imagem !== null || $descricao !== null || $imagemFundo !== null) ? $this->getModel()->modificar($usuarioLogado, $imagem, $descricao, $imagemFundo) : $this->model->index($usuarioLogado);
 		} else {
-			return $this->model->notFound($usuarioLogado);
+			return $this->getModel()->notFound($usuarioLogado);
 		}
 	}
 }

@@ -11,7 +11,7 @@ class ErroController extends Controller {
 	// $model
 	
 	public function rodar($usuarioLogado, $codigo=0) {
-		return $this->model->index($usuarioLogado, $codigo);
+		return $this->getModel()->index($usuarioLogado, $codigo);
 	}
 }
 

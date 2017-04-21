@@ -14,11 +14,20 @@ class NotFoundView extends View {
 	public function __construct($usuarioLogado) {
 		parent::__construct($usuarioLogado);
 
-		$this->templates["view"] = "erro";
-		$this->itens['html_titulo'] = 'Erro';
-		$this->itens["erro_titulo"] = "Aparentemente algo deu muito errado por aqui :(";
-		$this->itens["erro_descricao"] = "A página que você está procurando não existe.";
-		$this->itens["erro_codigo"] = "HTTP 404 Not Found";
+		$this->atualizarTemplates(
+			[
+				'view' => 'erro'
+			]
+		);
+
+		$this->atualizarItens(
+			[
+				'html_titulo' => 'Erro',
+				'erro_titulo' => 'Aparentemente algo deu muito errado por aqui :(',
+				'erro_descricao' => 'A página que você está procurando não existe.',
+				'erro_codigo' => 'HTTP 404 Not Found'
+			]
+		);
 	}
 }
 

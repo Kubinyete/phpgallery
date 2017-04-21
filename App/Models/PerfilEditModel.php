@@ -18,7 +18,7 @@ class PerfilEditModel extends Model {
 	// $conexao
 	
 	public function index($usuarioLogado, $erro='') {
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagens = $dal->listarImagensUsuario($usuarioLogado->getId());
 		return new PerfilEditView($usuarioLogado, $erro, $imagens);
 	}
@@ -92,7 +92,7 @@ class PerfilEditModel extends Model {
 			}
 
 			if ($imagemFundo > 0) {
-				$dal = new DalImagem($this->conexao);
+				$dal = new DalImagem($this->getConexao());
 				$localImagemFundo = $dal->obterImagem($imagemFundo);
 				
 				if ($localImagemFundo === null) {
@@ -113,7 +113,7 @@ class PerfilEditModel extends Model {
 			$imagemErro = Config::obter('MvcErrors.PerfilEdit.Definicoes')[$e->getMessage()];
 		} finally {
 			if ($atualizar) {
-				$dal = new DalUsuario($this->conexao);
+				$dal = new DalUsuario($this->getConexao());
 				$dal->atualizarUsuario($usuarioLogado);
 			}
 

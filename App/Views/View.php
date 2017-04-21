@@ -51,12 +51,30 @@ abstract class View {
 		];
 	}
 
+	protected function atualizarTemplates($arr) {
+		if (is_array($arr)) {
+			foreach ($arr as $chave => $valor) {
+				$this->templates[$chave] = $valor;
+			}
+		}
+	}
+
+	protected function atualizarItens($arr) {
+		if (is_array($arr)) {
+			foreach ($arr as $chave => $valor) {
+				$this->itens[$chave] = $valor;
+			}
+		}
+	}
+
 	// Importa todas as templates da nossa View e passa para cada uma uma coleção de itens
 	public function renderizar() {
-		$itens = &$this->itens; 
+		$itens = &$this->itens;
+		$dirTemplates = Config::obter("Views.diretorio_templates");
+		$dirExtensao = Config::obter("Views.templates_extensao");
 		
 		foreach ($this->templates as $templateArquivo) {
-			$arquivo = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.Config::obter("Views.diretorio_templates").DIRECTORY_SEPARATOR.$templateArquivo.'.'.Config::obter("Views.templates_extensao");
+			$arquivo = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$dirTemplates.DIRECTORY_SEPARATOR.$templateArquivo.'.'.$dirExtensao;
 
 			if (file_exists($arquivo)) {
 				include $arquivo;

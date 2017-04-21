@@ -24,7 +24,7 @@ class LoginModel extends Model {
 	// Efetua login
 	public function logar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha) {
 		if (count($errosLista) <= 0) {
-			$dal = new DalUsuario($this->conexao);
+			$dal = new DalUsuario($this->getConexao());
 			$dbUsuario = $dal->obterUsuario(false, $usuarioNome);
 
 			if ($dbUsuario !== null) {
@@ -51,7 +51,7 @@ class LoginModel extends Model {
 	// Registra um usuário
 	public function registrar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha) {
 		if (count($errosLista) <= 0) {
-			$dal = new DalUsuario($this->conexao);
+			$dal = new DalUsuario($this->getConexao());
 			$dbUsuario = $dal->obterUsuario(false, $usuarioNome);
 
 			if ($dbUsuario === null) {

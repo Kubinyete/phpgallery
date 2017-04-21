@@ -15,12 +15,12 @@ class PerfilModel extends Model {
 	// $conexao
 	
 	public function index($usuarioLogado, $usuarioNome="") {
-		$dal = new DalUsuario($this->conexao);
+		$dal = new DalUsuario($this->getConexao());
 		$usuario = $dal->obterUsuario(false, $usuarioNome);
 		
 		// Se o usuário existe	
 		if ($usuario !== null) {
-			$dal = new DalImagem($this->conexao);
+			$dal = new DalImagem($this->getConexao());
 			$imagens = $dal->listarImagensUsuario($usuario->getId());
 			return new PerfilView($usuarioLogado, $usuario, $imagens);
 		} else {

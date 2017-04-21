@@ -15,14 +15,23 @@ class LoginView extends View {
 	public function __construct($usuarioLogado, $acao="i", $erroMensagem=null) {
 		parent::__construct($usuarioLogado);
 
-		$this->templates["view"] = "login";
-		$this->itens['html_titulo'] = 'Área de autenticação';
-		$this->itens["login_acao"] = $acao;
-		$this->itens["login_erro_mensagem"] = $erroMensagem;
-		$this->itens["loginNome_maxlength"] = Config::obter("Usuarios.max_caracteres_nome");
-		$this->itens["loginSenha_maxlength"] = Config::obter("Usuarios.max_caracteres_senha");
-		$this->itens["registraNome_maxlength"] = $this->itens["loginNome_maxlength"];
-		$this->itens["registraSenha_maxlength"] = $this->itens["loginSenha_maxlength"];
+		$this->atualizarTemplates(
+			[
+				'view' => 'login'
+			]
+		);
+
+		$this->atualizarItens(
+			[
+				'html_titulo' => 'Área de autenticação',
+				'login_acao' => $acao,
+				'login_erro_mensagem' => $erroMensagem,
+				'loginNome_maxlength' => Config::obter('Usuarios.max_caracteres_nome'),
+				'loginSenha_maxlength' => Config::obter('Usuarios.max_caracteres_senha'),
+				'registraNome_maxlength' => Config::obter('Usuarios.max_caracteres_nome'),
+				'registraSenha_maxlength' => Config::obter('Usuarios.max_caracteres_senha')
+			]		
+		);
 	}
 }
 

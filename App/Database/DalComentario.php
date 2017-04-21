@@ -24,7 +24,7 @@ class DalComentario extends Dal {
 			]
 		);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
 
 		$sql = new SqlComando();
@@ -41,7 +41,7 @@ class DalComentario extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		$comentario->setId($id);
 
@@ -54,7 +54,7 @@ class DalComentario extends Dal {
 
 		$sql->select()->from("Comentarios")->where("cmt_id", "=", $id)->limit(1);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$comentario = null;
@@ -74,7 +74,7 @@ class DalComentario extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $comentario;
 	}
@@ -89,7 +89,7 @@ class DalComentario extends Dal {
 			$sql->limit(Config::obter("Comentarios.listar_limite"));
 		}
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$comentarios = [];
@@ -113,7 +113,7 @@ class DalComentario extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $comentarios;
 	}
@@ -128,9 +128,9 @@ class DalComentario extends Dal {
 			]
 		)->where("cmt_id", "=", $comentario->getId());
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 
 	// Deleta um comentário do banco de dados de acordo com a id passada por argumento
@@ -139,9 +139,9 @@ class DalComentario extends Dal {
 
 		$sql->delete("Comentarios")->where("cmt_id", "=", $id);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 }
 

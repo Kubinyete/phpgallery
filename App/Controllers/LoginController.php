@@ -70,13 +70,13 @@ class LoginController extends Controller {
 
 		if ($acao === "i") {
 			// Index
-			return $this->model->index($usuarioLogado);
+			return $this->getModel()->index($usuarioLogado);
 		} else if ($acao === "r") {
 			// Registrar
-			return $this->model->registrar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
+			return $this->getModel()->registrar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
 		} else {
 			// Logar
-			return $this->model->logar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
+			return $this->getModel()->logar($usuarioLogado, $acao, $errosLista, $usuarioNome, $usuarioSenha);
 		}
 	}
 }

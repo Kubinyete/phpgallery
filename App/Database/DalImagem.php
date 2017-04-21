@@ -28,7 +28,7 @@ class DalImagem extends Dal {
 			]
 		);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
 
 		$sql = new SqlComando();
@@ -45,7 +45,7 @@ class DalImagem extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		$imagem->setId($id);
 
@@ -58,7 +58,7 @@ class DalImagem extends Dal {
 
 		$sql->select()->from("Imagens")->where("img_id", "=", $id)->limit(1);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagem = null;
@@ -82,7 +82,7 @@ class DalImagem extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $imagem;
 	}
@@ -97,7 +97,7 @@ class DalImagem extends Dal {
 			$sql->limit(Config::obter("Imagens.listar_limite"));
 		}
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
@@ -125,7 +125,7 @@ class DalImagem extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $imagens;
 	}
@@ -140,7 +140,7 @@ class DalImagem extends Dal {
 			$sql->limit(Config::obter("Imagens.listar_usuarios_limite"));
 		}
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
@@ -168,7 +168,7 @@ class DalImagem extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $imagens;
 	}
@@ -183,7 +183,7 @@ class DalImagem extends Dal {
 			$sql->limit(Config::obter("Imagens.listar_recentes_limite"));
 		}
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$imagens = [];
@@ -248,9 +248,9 @@ class DalImagem extends Dal {
 			]
 		)->where("img_id", "=", $imagem->getId());
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 
 	// Deleta uma imagem do banco de dados de acordo com a id passada por argumento
@@ -259,9 +259,9 @@ class DalImagem extends Dal {
 
 		$sql->delete("Imagens")->where("img_id", "=", $id);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 }
 

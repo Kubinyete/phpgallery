@@ -18,7 +18,7 @@ class ApiImagem extends Api {
 			return parent::erro("É preciso informar corretamente a id da imagem para obter suas informações.");
 		}
 
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagem = $dal->obterImagem($id, true);
 		
 		$resposta = new ApiResposta($imagem);
@@ -27,7 +27,7 @@ class ApiImagem extends Api {
 	}
 
 	public function listarImagens($procuraString) {
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagens = $dal->listarImagens($procuraString, true);
 		
 		$resposta = new ApiResposta($imagens);
@@ -36,7 +36,7 @@ class ApiImagem extends Api {
 	}
 
 	public function listarRecentes() {
-		$dal = new DalImagem($this->conexao);
+		$dal = new DalImagem($this->getConexao());
 		$imagens = $dal->listarRecentes(true);
 
 		$resposta = new ApiResposta($imagens);

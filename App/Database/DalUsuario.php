@@ -30,9 +30,9 @@ class DalUsuario extends Dal {
 			]
 		);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 
 	// Obtem um objeto Usuario de acordo com o id passado
@@ -50,7 +50,7 @@ class DalUsuario extends Dal {
 
 		$sql->limit(1);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$usuario = null;
@@ -76,10 +76,10 @@ class DalUsuario extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		if ($usuario !== null && $usuario->getImgFundo() > 0) {
-			$subdal = new DalImagem($this->conexao);
+			$subdal = new DalImagem($this->getConexao());
 			$imgFundo = $subdal->obterImagem($usuario->getImgFundo());
 			if ($imgFundo !== null) {
 				$usuario->setImgFundoExt($imgFundo->getExtensao());
@@ -100,7 +100,7 @@ class DalUsuario extends Dal {
 			$sql->limit(Config::obter("Usuarios.listar_limite"));
 		}
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$resultado = $this->executar($sql);
 
 		$usuarios = [];
@@ -130,7 +130,7 @@ class DalUsuario extends Dal {
 			}
 		}
 
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 
 		return $usuarios;
 	}
@@ -150,9 +150,9 @@ class DalUsuario extends Dal {
 			]
 		)->where("usr_id", "=", $usuario->getId());
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 
 	// Deleta um usuário do banco de dados de acordo com a string do nome passado por argumento
@@ -161,9 +161,9 @@ class DalUsuario extends Dal {
 
 		$sql->delete("Usuarios")->where("usr_nome", "=", $nome);
 
-		$this->conexao->conectar();
+		$this->getConexao()->conectar();
 		$this->executar($sql);
-		$this->conexao->desconectar();
+		$this->getConexao()->desconectar();
 	}
 }
 

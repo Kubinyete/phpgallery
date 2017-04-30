@@ -1,4 +1,4 @@
-<header>
+<header class="ativado">
 	<div class="centro">
 		<a href="<?= $itens['href_home']; ?>">
 			<img src="<?= $itens["recursos"]; ?>phpgallery-logo.png" alt="Logo" draggable="false">
@@ -35,6 +35,8 @@
 		</nav>
 	</div>
 </header>
+<!-- Desativado por enquanto, desnecessário -->
+<!--
 <script type="text/javascript">
 	$(window).scroll(
 		function() {
@@ -54,6 +56,7 @@
 		}
 	);
 </script>
+-->
 <?php if ($itens["usr_logado"] !== null): ?>
 <nav id="usuarioMenu">
 	<ul>

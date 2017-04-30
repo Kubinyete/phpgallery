@@ -9,7 +9,7 @@ use App\Models\Model;
 use App\Database\DalImagem;
 use App\Database\DalUsuario;
 use App\Views\PerfilView;
-use App\Views\NotFoundView;
+use App\Views\ErroView;
 
 class PerfilModel extends Model {
 	// $conexao
@@ -29,9 +29,13 @@ class PerfilModel extends Model {
 		}
 	}
 
-	// Utiliza a NotFoundView já pronta
+	// Utiliza a ErroView já pronta
 	public function notFound($usuarioLogado) {
-		return new NotFoundView($usuarioLogado);
+		return new ErroView(
+			$usuarioLogado,
+			'O usuário que você está procurando não existe.',
+			'HTTP - 404 Not Found'
+		);
 	}
 }
 

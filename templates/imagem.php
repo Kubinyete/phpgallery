@@ -19,15 +19,17 @@
 					</div>
 					<?php endif; ?>
 				</div>
-				<div class="usuario-fundo">
-					<?php if ($itens["img_autor"]->getAdmin()): ?>
-					<img class="admin-icon" draggable="false" src="<?= $itens["recursos"]; ?>admin-icon.png">
-					<?php endif; ?>
-					<a class="link-efeito" href="<?= $itens["img_autor"]->getLink(); ?>">
-						<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?= $itens["img_autor"]->getImagemUrl(); ?>" draggable="false">
-						<span class="usuario-nome"><?= $itens["img_autor"]->getNome(); ?></span>
-					</a>
-					<div class="cfix"></div>
+				<?php if ($itens["img_autor"]->getAdmin()): ?>
+				<img class="admin-icon" draggable="false" src="<?= $itens["recursos"]; ?>admin-icon.png">
+				<?php endif; ?>
+				<div class="overflow-wrapper">
+					<div class="usuario-fundo">
+						<a class="link-efeito" href="<?= $itens["img_autor"]->getLink(); ?>">
+							<img class="usuario-imagem" alt="Imagem de perfil do autor" src="<?= $itens["img_autor"]->getImagemUrl(); ?>" draggable="false">
+							<span class="usuario-nome"><?= $itens["img_autor"]->getNome(); ?></span>
+						</a>
+						<div class="cfix"></div>
+					</div>
 				</div>
 			</div>
 		</section>

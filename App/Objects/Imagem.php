@@ -126,8 +126,8 @@ class Imagem extends Objeto {
 		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getId()).$this->getExtensao(true);
 	}
 
-	public function getMiniaturaUrl() {
-		return str_replace("%", $this->getId(), Config::obter("Imagens.processador_miniaturas"));
+	public function getMiniaturaUrl($adicionarSeparador=false) {
+		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getId()).Config::obter("Imagens.miniatura_sufixo").'.'.Config::obter("Imagens.miniatura_extensao");
 	}
 
 	public function getLink() {

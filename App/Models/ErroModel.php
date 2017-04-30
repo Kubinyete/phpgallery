@@ -19,7 +19,11 @@ class ErroModel extends Model {
 			$mensagem = Config::obter("Database.Erro.Definicoes")[Config::obter("Database.Erro.DESCONHECIDO")];
 		}
 
-		return new ErroView($usuarioLogado, $mensagem);
+		return new ErroView(
+			$usuarioLogado,
+			$mensagem,
+			'DATABASE - Erro na conexão com o banco de dados.'
+		);
 	}
 }
 

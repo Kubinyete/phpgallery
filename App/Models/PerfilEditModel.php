@@ -8,7 +8,6 @@ namespace App\Models;
 
 use App\Models\Model;
 use App\Views\PerfilEditView;
-use App\Views\NotFoundView;
 use App\Database\DalUsuario;
 use App\Database\DalImagem;
 use Config\Config;
@@ -122,7 +121,11 @@ class PerfilEditModel extends Model {
 	}
 
 	public function notFound($usuarioLogado) {
-		return new NotFoundView($usuarioLogado);
+		return new ErroView(
+			$usuarioLogado,
+			'A página que você está procurando não existe.',
+			'HTTP - 404 Not Found'
+		);
 	}
 }
 

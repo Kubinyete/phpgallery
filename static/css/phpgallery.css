@@ -11,7 +11,7 @@ body {
 	/* 1 em = 10px */
 }
 
-header, nav, main, article, footer {
+header, nav, main, article, section, footer {
 	display: block;
 }
 
@@ -24,6 +24,21 @@ ul {
 
 a {
 	text-decoration: none;
+}
+
+.overflow-wrapper {
+	height: 100%;
+	overflow: hidden;
+}
+
+.overflow-x-wrapper {
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.overflow-y-wrapper {
+	height: 100%;
+	overflow-y: hidden;
 }
 
 a.link-efeito {
@@ -296,7 +311,6 @@ div.logo-showcase div.logo-showcase-gradient {
     height: 5em;
     /* Para navegadores que não suportam linear-gradient */
     background-image: url("/static/resources/gradient-150.png");
-
     background-image: linear-gradient(transparent, transparent, transparent, transparent, #efefef);
     background-repeat: repeat-x;
     background-position: bottom;
@@ -319,7 +333,7 @@ div.logo-showcase div.logo-showcase-imagem {
     filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
     filter: blur(4px);
     filter: scale(1.1);
-    animation: 30s zoomInOut ease-in-out infinite;
+    animation: 60s zoomInOut ease-in-out infinite;
 }
 
 @keyframes zoomInOut {
@@ -331,6 +345,13 @@ div.logo-showcase div.logo-showcase-imagem {
 		transform: scale(1.1) rotate(0deg);
 	}
 }
+
+@media (max-width: 1024px) {
+	div.logo-showcase {
+		font-size: 12vw;
+	}
+}
+
 
 /**
  * Main
@@ -397,11 +418,12 @@ footer {
 
 footer p {
 	text-align: center;
-	font-size: 2em;
+	font-size: 1.5em;
 	font-family: Raleway, Arial, sans-serif;
 	color: rgba(255,255,255, .8);
 	margin: 0em 0em;
-	padding: .5em 0em;
+	width: 90%;
+	padding: .5em 5%;
 }
 
 footer p:nth-child(1) {
@@ -434,8 +456,8 @@ footer ul li:hover span {
 footer ul li img {
 	transition: .1s ease-in-out;
 	border-radius: 100%;
-	max-width: 5em;
-	max-height: 5em;
+	max-width: 4em;
+	max-height: 4em;
 }
 
 footer ul li span {
@@ -648,7 +670,6 @@ article p.descricao {
 }
 
 article p.data-criacao {
-	color: cornflowerblue;
 	text-align: center;
 	font-size: 1.2em;
 	margin: 0 1em;
@@ -677,12 +698,12 @@ article div.usuario-container .usuario-fundo {
 	padding-left: 20px;
 }
 
-article div.usuario-container .usuario-fundo .admin-icon {
+article div.usuario-container .admin-icon {
 	position: absolute;
 	width: 40px;
-	top: -33px;
-	right: 50px;
-	transform: translate(50%);
+	top: -23px;
+	right: 1%;
+	transform: translateX(-30px);
 }
 
 article div.usuario-container img.usuario-imagem {
@@ -977,13 +998,14 @@ article div.perfil-container img.imagem-perfil {
 article div.perfil-container div.imagem-perfil-container {
 	position: relative;
 	background-color: rgba(0,0,0, .4);
+	padding: 2em 0;
 }
 
 article div.perfil-container img.admin-icon {
 	position: absolute;
 	width: 75px;
 	z-index: 500;
-	top: -35px;
+	top: -15px;
 	left: 50%;
 	transform: translate(-50%) translateX(100px) rotate(45deg);
 }

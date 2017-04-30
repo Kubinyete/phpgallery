@@ -5,6 +5,12 @@
 
 namespace App\Models;
 
+const MIN_MAX_LARGURA = 256;
+const MIN_MAX_ALTURA = 256;
+const MIN_UTILIZAR_RESAMPLING = true;
+const MIN_SAIDA = IMAGETYPE_JPEG;
+const MIN_SAIDA_QUALIDADE = 100;
+
 use App\Models\Model;
 use App\Views\EnviarView;
 use App\Objects\Imagem;
@@ -89,6 +95,12 @@ class EnviarModel extends Model {
 					$dal = new DalImagem($this->getConexao());
 					$dal->criarImagem($novaImagem);
 
+					/**
+					 * TODO:
+					 * Manipular isto de um maneira mais eficiente,
+					 * corremos o risco de deletar uma imagem anterior da adicionada (?)
+					 */
+
 					if ($novaImagem->getId() <= 0) {
 						throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 					} else {
@@ -96,10 +108,57 @@ class EnviarModel extends Model {
 							$dal->deletarImagem($novaImagem->getId());
 							throw new Exception(Config::obter("MvcErrors.Enviar.DESCONHECIDO"));
 						} else {
-							return [
-								"retorno" => "imagem",
-								"retorno_obj" => $novaImagem
-							];
+							// Vamos gerar a miniatura agora mesmo
+							
+							$imagemDados = file_get_contents(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getImagemUrl());
+
+							if (!$imagemDados) {
+								throw new Exception(Config::obter("MvcErrors.Enviar.MIN_IMAGEM_FONTE_NAO_ENCONTRADA"));
+							} else {
+								$imagemObj = imagecreatefromstring($imagemDados);
+
+								$largura = $info[0];
+								$altura = $info[1];
+								$novaLargura = $largura;
+								$novaAltura = $altura;
+
+								if ($novaAltura > MIN_MAX_ALTURA) {
+									$novaAltura = MIN_MAX_ALTURA;
+									$novaLargura = $largura / $altura * $novaAltura;
+								}
+								if ($novaLargura > MIN_MAX_LARGURA) {
+									$novaLargura = MIN_MAX_LARGURA;
+									$novaAltura = $novaLargura / ($largura / $altura);
+								}
+
+								$miniaturaObj = imagecreatetruecolor($novaLargura, $novaAltura);
+
+								if (MIN_UTILIZAR_RESAMPLING) {
+									imagecopyresampled($miniaturaObj, $imagemObj, 0, 0, 0, 0, $novaLargura, $novaAltura, $largura, $altura);
+								} else {
+									imagecopyresized($miniaturaObj, $imagemObj, 0, 0, 0, 0, $novaLargura, $novaAltura, $largura, $altura);
+								}
+
+								$caminhoFinal = dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getMiniaturaUrl();
+
+								switch (MIN_SAIDA) {
+									case IMAGETYPE_PNG:
+										imagepng($miniaturaObj, $caminhoFinal);
+										break;
+									case IMAGETYPE_GIF:
+										imagegif($miniaturaObj, $caminhoFinal);
+										break;
+									case IMAGETYPE_JPEG:
+									default:
+										imagejpeg($miniaturaObj, $caminhoFinal, MIN_SAIDA_QUALIDADE);
+										break;
+								}
+
+								return [
+									"retorno" => "imagem",
+									"retorno_obj" => $novaImagem
+								];
+							}
 						}
 					}
 				}

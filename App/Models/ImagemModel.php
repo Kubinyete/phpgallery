@@ -11,7 +11,6 @@ use App\Database\DalUsuario;
 use App\Database\DalComentario;
 use App\Objects\Comentario;
 use App\Views\ImagemView;
-use App\Views\NotFoundView;
 use Config\Config;
 
 class ImagemModel extends Model {
@@ -71,9 +70,13 @@ class ImagemModel extends Model {
 		}
 	}
 
-	// Utiliza nossa NotFoundView que já está pronta
+	// Utiliza nossa ErroView que já está pronta
 	public function notFound($usuarioLogado) {
-		return new NotFoundView($usuarioLogado);
+		return new ErroView(
+			$usuarioLogado,
+			'A imagem que você está procurando não existe.',
+			'HTTP - 404 Not Found'
+		);
 	}
 }
 

@@ -16,6 +16,7 @@ use App\Controllers\PerfilController;
 use App\Controllers\LoginController;
 use App\Controllers\EnviarController;
 use App\Controllers\PerfilEditController;
+use App\Controllers\ImagemEditController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
@@ -24,6 +25,7 @@ use App\Models\PerfilModel;
 use App\Models\LoginModel;
 use App\Models\EnviarModel;
 use App\Models\PerfilEditModel;
+use App\Models\ImagemEditModel;
 use Config\Config;
 
 class Roteador {
@@ -150,6 +152,14 @@ class Roteador {
 				$controlador = new PerfilEditController($modelo);
 
 				$controlador->rodar($this->getUsuarioLogado(), $imagem, $descricao, $imagemFundo)->renderizar();
+				break;
+			case 'imagem-edit':
+				$imagemId = Pedido::obter('i', 'GET');
+
+				$modelo = new ImagemEditModel($this->getConexao());
+				$controlador = new ImagemEditController($modelo);
+
+				$controlador->rodar($this->getUsuarioLogado(), $imagemId)->renderizar();
 				break;
 			case "erro":
 				$erroCodigo = Pedido::obter("i", "GET");

@@ -31,6 +31,11 @@ class DalImagem extends Dal {
 		$this->getConexao()->conectar();
 		$this->executar($sql);
 
+		/**
+		 * TODO:
+		 * Encontrar uma maneira de obter o último item adicionado sem consultar como limite 1
+		 */
+
 		$sql = new SqlComando();
 		$sql->select("img_id")->as("id")->from("Imagens")->order("img_id", "DESC")->limit(1);
 

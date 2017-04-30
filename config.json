@@ -1,5 +1,5 @@
 {
-	"VERSAO": "2.3.6",
+	"VERSAO": "2.3.7",
 
 	"Database": {
 		"debug": false,
@@ -66,7 +66,8 @@
 		"link_imagem": "/imagem/%",
 		"link_download": "/download/%",
 		"link_editar": "/imagem-edit/%",
-		"processador_miniaturas": "/thumbnail/%",
+		"miniatura_extensao": "jpg",
+		"miniatura_sufixo": "_min",
 
 		"listar_limite": 100,
 		"listar_recentes_limite": 32,
@@ -123,6 +124,7 @@
 			"NECESSITA_LOGAR": 4,
 			"TITULO_EXCEDE_LIMITE": 5,
 			"DESCRICAO_EXCEDE_LIMITE": 6,
+			"MIN_IMAGEM_FONTE_NAO_ENCONTRADA": 7,
 
 			"Definicoes": [
 				"Ocorreu um erro ao tentar armazenar a imagem, tente novamente mais tarde.",
@@ -131,7 +133,8 @@
 				"O formato da imagem enviada não é suportado.",
 				"É preciso estar logado para poder enviar imagens.",
 				"O título da imagem excede o limite de 64 carácteres.",
-				"A descrição da imagem excede o limite de 300 carácteres."
+				"A descrição da imagem excede o limite de 300 carácteres.",
+				"Não foi possível gerar a miniatura da imagem, a imagem fonte não foi encontrada."
 			]
 		},
 

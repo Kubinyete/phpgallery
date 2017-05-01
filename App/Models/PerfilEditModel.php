@@ -8,6 +8,7 @@ namespace App\Models;
 
 use App\Models\Model;
 use App\Views\PerfilEditView;
+use App\Views\ErroView;
 use App\Database\DalUsuario;
 use App\Database\DalImagem;
 use Config\Config;

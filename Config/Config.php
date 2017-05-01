@@ -8,7 +8,6 @@ namespace Config;
 use Config\Leitor;
 
 abstract class Config {
-	const OBTER_DELIMITADOR = ".";
 	private static $config;
 
 	public static function carregar($arquivo) {
@@ -18,7 +17,7 @@ abstract class Config {
 
 	public static function obter($string) {
 		$retorno = null;
-		$array = explode(self::OBTER_DELIMITADOR, $string);
+		$array = explode('.', $string);
 
 		foreach ($array as $chave) {
 			if ($retorno === null) {

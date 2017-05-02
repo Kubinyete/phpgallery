@@ -153,7 +153,7 @@ class Roteador {
 
 				$controlador->rodar($this->getUsuarioLogado(), $imagem, $descricao, $imagemFundo)->renderizar();
 				break;
-			case 'imagem-edit':
+			case "imagem-edit":
 				$imagemId = Pedido::obter('i', 'GET');
 
 				$modelo = new ImagemEditModel($this->getConexao());
@@ -164,14 +164,14 @@ class Roteador {
 			case "erro":
 				$erroCodigo = Pedido::obter("i", "GET");
 
-				$modelo = new ErroModel(null);
+				$modelo = new ErroModel($this->getConexao());
 				$controlador = new ErroController($modelo);
 
 				Resposta::status(500);
 				$controlador->rodar($this->getUsuarioLogado(), $erroCodigo)->renderizar();
 				break;
 			default:
-				$modelo = new NotFoundModel(null);
+				$modelo = new NotFoundModel($this->getConexao());
 				$controlador = new NotFoundController($modelo);
 
 				Resposta::status(404);

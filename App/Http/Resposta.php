@@ -9,27 +9,22 @@ use Config\Config;
 
 abstract class Resposta {
 	public static function header($chave, $valor) {
-		header($chave.": ".$valor);
+		header($chave.': '.$valor);
 	}
 
 	public static function conteudoTipo($conteudoTipo) {
-		self::header("Content-Type", $conteudoTipo);
+		self::header('Content-Type', $conteudoTipo);
 	}
 
 	public static function status($codigo, $pararExecucao=false) {
-		header("Status: ".$codigo, true, $codigo);
-
-		if ($pararExecucao) {
-			exit();
-		}
+		self::header('Status', $codigo);
+		if($pararExecucao) { exit(); }
 	}
 
 	public static function redirecionar($url, $pararExecucao=false) {
-		header("Location: ".$url);
+		self::header("Location", $url);
 
-		if ($pararExecucao) {
-			exit();
-		}
+		if($pararExecucao) { exit(); }
 	}
 
 	public static function erro($codigo=0, $pararExecucao=false) {

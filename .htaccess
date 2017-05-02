@@ -1,6 +1,6 @@
 RewriteEngine On
 RewriteBase /
-ErrorDocument 404 /index.php?v=
+ErrorDocument 404 /index.php?v=404
 
 RewriteCond %{REQUEST_URI} !^/static
 RewriteCond %{REQUEST_FILENAME} !-f

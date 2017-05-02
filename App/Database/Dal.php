@@ -7,6 +7,7 @@
 namespace App\Database;
 
 use App\Http\Resposta;
+use App\Utils\Utils;
 use Config\Config;
 
 abstract class Dal {
@@ -26,10 +27,7 @@ abstract class Dal {
 	protected function executar($sqlComando) {
 		if (Config::obter("Database.debug") === true) {
 			// Imprimindo o comando na tela para teste
-			echo "\n<hr>\n";
-			echo "<h1 style='color: rgba(0,0,0,.8)'>Database.debug > Executando o SqlComando...</h1>\n";
-			echo "<pre style='background-color: #ddd; color: rgba(0,0,0,.6); width: 100%; word-wrap: break-word; white-space: unset'>Dal::executar() > SqlComando::getComandoString() = ".$sqlComando->getComandoString()."</pre>\n";
-			echo "<hr>\n";
+			Utils::imprimirSqlComando($sqlComando);
 		}
 			
 		$resultados = $this->getConexao()->getConexao()->query($sqlComando->getComandoString());

@@ -1,5 +1,5 @@
 {
-	"VERSAO": "2.3.7",
+	"VERSAO": "2.3.8",
 
 	"Database": {
 		"debug": false,
@@ -30,7 +30,7 @@
 		"max_caracteres_senha": 32,
 		"min_caracteres_senha": 6,
 		"max_tamanho_descricao": 300,
-		"periodo_online_segundos": 30,
+		"periodo_online_segundos": 60,
 
 		"imagem_perfil_min_largura": 50,
 		"imagem_perfil_max_largura": 200,

@@ -4,10 +4,18 @@
  */
 
 spl_autoload_register(
-	function ($nomeClasse) {
-		$nomeClasse = str_replace("\\", DIRECTORY_SEPARATOR, $nomeClasse);
+	function ($caminhoClasse) {
+		$caminhoClasse = explode("\\", $caminhoClasse);
 
-		require_once dirname(__DIR__).DIRECTORY_SEPARATOR.$nomeClasse.".php";
+		// App\Database\Class => app\Database\Class
+		// Pois todas as pastas no diretório principal estão em lowercase
+		if (isset($caminhoClasse[0])) {
+			$caminhoClasse[0] = strtolower($caminhoClasse[0]);
+		}
+
+		$caminhoClasse = implode(DIRECTORY_SEPARATOR, $caminhoClasse);
+
+		require_once dirname(__DIR__).DIRECTORY_SEPARATOR.$caminhoClasse.".php";
 	}
 );
 

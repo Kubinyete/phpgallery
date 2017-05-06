@@ -21,7 +21,7 @@ date_default_timezone_set("America/Sao_Paulo");
 
 Resposta::conteudoTipo("text/html; charset=utf-8");
 Resposta::header("Content-Language", "pt-BR");
-Resposta::header("X-UA-Compatible", "IE=Edge");
+Resposta::header("X-UA-Compatible", "IE=Edge, chrome=1");
 
 Config::carregar(__DIR__.DIRECTORY_SEPARATOR.'config.json');
 

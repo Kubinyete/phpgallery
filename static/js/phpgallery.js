@@ -13,6 +13,7 @@ window.phpgallery = {
 		ativar: function() {
 			if (phpgallery.animProcessando.crgInter != null) { return; }
 			$('.anim-processando-fundo').addClass('anim-processando-fundo-ativado');
+			$('body').addClass('estatico');
 			phpgallery.animProcessando.crgInter = setInterval(
 				function() {
 					var dots_s = '';
@@ -35,6 +36,7 @@ window.phpgallery = {
 		desativar: function() {
 			if (phpgallery.animProcessando.crgInter == null) { return; }
 			$('.anim-processando-fundo').removeClass('anim-processando-fundo-ativado');
+			$('body').removeClass('estatico');
 			clearInterval(phpgallery.animProcessando.crgInter);
 			phpgallery.animProcessando.crgInter = null;
 			phpgallery.animProcessando.dots_c = 1;
@@ -92,10 +94,12 @@ window.phpgallery = {
 			}
 
 			$(".visualizacao-imagem-fundo").addClass("visualizacao-imagem-fundo-ativado");
+			$('body').addClass('estatico');
 		},
 
 		desativar: function() {
 			$(".visualizacao-imagem-fundo-ativado").removeClass("visualizacao-imagem-fundo-ativado");
+			$('body').removeClass('estatico');
 		},
 
 		mudarImagem: function(url, titulo, descricao, domobj) {

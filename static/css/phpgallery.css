@@ -49,6 +49,10 @@ a.link-efeito:hover {
 	color: cornflowerblue;
 }
 
+body.estatico {
+	overflow: hidden;
+}
+
 @keyframes cair {
 	from {
 		opacity: 0;
@@ -1533,6 +1537,7 @@ form.aut-formulario i.fa-warning {
  */
 
 div.anim-processando-fundo {
+	z-index: 999;
 	transition: opacity .2s ease-in-out;
 	position: fixed;
 	top: 0;
@@ -1543,7 +1548,7 @@ div.anim-processando-fundo {
 	height: 100vh;
 	visibility: hidden;
 	opacity: 0;
-	background-color: rgba(0,0,0, .8);
+	background-color: #333;
 }
 
 div.anim-processando-fundo img {

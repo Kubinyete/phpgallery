@@ -16,7 +16,7 @@
 			<span>Carregando...</span>
 		</div>
 		<div class="visualizacao-imagem-container">
-			<img src="<?= $itens["recursos"]; ?>carregando.gif" alt="Carregando...">
+			<img src="<?= $itens["recursos"]; ?>carregando.svg" alt="Carregando...">
 		</div>
 		<div class="visualizacao-imagem-descricao">
 			<span>Carregando...</span>

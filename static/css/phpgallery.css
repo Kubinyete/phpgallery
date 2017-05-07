@@ -830,6 +830,7 @@ article div.comentario-norm-container {
 	border-bottom: 1px solid rgba(0,0,0, .15) !important;
 	height: unset !important;
 	min-height: 150px !important;
+	overflow: hidden !important;
 }
 
 article div.comentario-offline-container div.esquerda-container img.cmt-usuario-imagem {

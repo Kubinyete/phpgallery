@@ -80,10 +80,12 @@ window.phpgallery = {
 	erroDialogo: {
 		ativar: function() {
 			$(".erro-dialogo-fundo").addClass("erro-dialogo-fundo-ativado");
+			$('body').addClass('estatico');
 		},
 
 		desativar: function() {
 			$(".erro-dialogo-fundo-ativado").removeClass("erro-dialogo-fundo-ativado");
+			$('body').removeClass('estatico');
 		}
 	},
 

@@ -4,7 +4,7 @@
 			<h1><?= $itens["img_imagem"]->getTitulo(true); ?></h1>
 			<img class="imagem" alt="A imagem a ser exibida" src="<?= $itens["img_imagem"]->getImagemUrl(); ?>">
 			<p class="descricao"><?= $itens["img_imagem"]->getDescricao(true); ?></p>
-			<p class="data-criacao info-detalhada">Formato <?= strtoupper($itens["img_imagem"]->getExtensao()); ?> - Dimensões: <?= $itens["img_imagem"]->getLargura(); ?>x<?= $itens["img_imagem"]->getAltura(); ?></p>
+			<p class="data-criacao info-detalhada">Formato: <?= $itens["img_imagem"]->getExtensao(); ?> / Dimensões: <?= $itens["img_imagem"]->getLargura(); ?>x<?= $itens["img_imagem"]->getAltura(); ?></p>
 			<p class="data-criacao">Adicionado em <?= $itens["img_imagem"]->getDataCriacao(1); ?></p>
 			<div class="usuario-container<?php if ($itens["img_autor"]->estaOnline()): echo " usuario-container-online"; endif; ?>" style="background-image: url('<?= $itens["img_autor"]->getImagemFundoUrl(); ?>');">
 				<div class="btns-container">
@@ -53,9 +53,6 @@
 					<li>
 						<div class="comentario-form-container comentario-norm-container <?= (!$comentario["autor"]->estaOnline()) ? "comentario-offline-container" : ""; ?>">
 							<div class="esquerda-container">
-								<?php if ($comentario["autor"]->getAdmin()): ?>
-								<img class="admin-icone" src="<?= $itens["recursos"]; ?>admin-icon.png" draggable="false" alt="<?= $comentario["autor"]->getNome(); ?> é um administrador.">
-								<?php endif; ?>
 								<a href="<?= $comentario["autor"]->getLink(); ?>">
 									<img class="cmt-usuario-imagem" src="<?= $comentario["autor"]->getImagemUrl(); ?>" alt="<?= $comentario["autor"]->getNome(); ?>"><!--
 									--><br><!--

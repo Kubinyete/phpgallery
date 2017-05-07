@@ -35,28 +35,6 @@
 		</nav>
 	</div>
 </header>
-<!-- Desativado por enquanto, desnecessário -->
-<!--
-<script type="text/javascript">
-	$(window).scroll(
-		function() {
-			var scrollVertical = $(window).scrollTop();
-
-			if (scrollVertical > 0 && !phpgallery.cabecalho.animAtivada) {
-				$("header").addClass("ativado");
-				phpgallery.cabecalho.animAtivada = true;
-			} else if (scrollVertical <= 0 && phpgallery.cabecalho.animAtivada) {
-				$("header").removeClass("ativado");
-				phpgallery.cabecalho.animAtivada = false;
-
-				if (phpgallery.usuarioMenu.ativado) {
-					phpgallery.usuarioMenu.gerenciar();
-				}
-			}
-		}
-	);
-</script>
--->
 <?php if ($itens["usr_logado"] !== null): ?>
 <nav id="usuarioMenu">
 	<ul>

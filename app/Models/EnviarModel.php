@@ -110,7 +110,7 @@ class EnviarModel extends Model {
 						} else {
 							// Vamos gerar a miniatura agora mesmo
 							
-							$imagemDados = file_get_contents(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getImagemUrl());
+							$imagemDados = @file_get_contents(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR.$novaImagem->getImagemUrl());
 
 							if (!$imagemDados) {
 								throw new Exception(Config::obter("MvcErrors.Enviar.MIN_IMAGEM_FONTE_NAO_ENCONTRADA"));

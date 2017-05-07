@@ -17,6 +17,7 @@ use App\Controllers\LoginController;
 use App\Controllers\EnviarController;
 use App\Controllers\PerfilEditController;
 use App\Controllers\ImagemEditController;
+use App\Controllers\DownloadController;
 use App\Models\HomeModel;
 use App\Models\NotFoundModel;
 use App\Models\ErroModel;
@@ -26,6 +27,7 @@ use App\Models\LoginModel;
 use App\Models\EnviarModel;
 use App\Models\PerfilEditModel;
 use App\Models\ImagemEditModel;
+use App\Models\DownloadModel;
 use Config\Config;
 
 class Roteador {
@@ -169,6 +171,26 @@ class Roteador {
 
 				Resposta::status(500);
 				$controlador->rodar($this->getUsuarioLogado(), $erroCodigo)->renderizar();
+				break;
+			case "download":
+				$id = Pedido::obter('i');
+
+				$modelo = new DownloadModel($this->getConexao());
+				$controlador = new DownloadController($modelo);
+
+				$retorno = $controlador->rodar($this->getUsuarioLogado(), $id);
+
+				if ($retorno['sucesso']) {
+					$paraMime = str_replace('jpg', 'jpeg', $retorno['imagem_tipo']);
+
+					Resposta::conteudoTipo('image/'.$paraMime);
+					Resposta::header('Content-Disposition', 'attachment; filename='.$retorno['imagem_arquivo']);
+
+					echo $retorno['conteudo'];
+				} else {
+					Resposta::status(404);
+					$retorno['conteudo']->renderizar();
+				}
 				break;
 			default:
 				$modelo = new NotFoundModel($this->getConexao());

@@ -122,12 +122,16 @@ class Imagem extends Objeto {
 		$this->altura = intval($valor);
 	}
 
+	public function getArquivoNome($adicionarExtensao=true) {
+		return hash(Config::obter("Imagens.hash_nome"), $this->getId()).( ($adicionarExtensao) ? $this->getExtensao(true) : '');
+	}
+
 	public function getImagemUrl($adicionarSeparador=false) {
-		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getId()).$this->getExtensao(true);
+		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").$this->getArquivoNome();
 	}
 
 	public function getMiniaturaUrl($adicionarSeparador=false) {
-		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").hash(Config::obter("Imagens.hash_nome"), $this->getId()).Config::obter("Imagens.miniatura_sufixo").'.'.Config::obter("Imagens.miniatura_extensao");
+		return (($adicionarSeparador) ? "/" : "").Config::obter("Imagens.caminho_imagens").$this->getArquivoNome(false).Config::obter("Imagens.miniatura_sufixo").'.'.Config::obter("Imagens.miniatura_extensao");
 	}
 
 	public function getLink() {

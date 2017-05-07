@@ -11,6 +11,7 @@ use App\Database\DalUsuario;
 use App\Database\DalComentario;
 use App\Objects\Comentario;
 use App\Views\ImagemView;
+use App\Views\ErroView;
 use Config\Config;
 
 class ImagemModel extends Model {

@@ -14,7 +14,7 @@ class Leitor {
 		if (!file_exists($arquivo)) {
 			throw new Exception('O arquivo de configurações \''.$arquivo.'\' não existe.');
 		} else {
-			$this->raw_json = file_get_contents($arquivo);
+			$this->raw_json = @file_get_contents($arquivo);
 		}
 	}
 
